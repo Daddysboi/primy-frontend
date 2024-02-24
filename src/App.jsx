@@ -13,11 +13,12 @@ import "aos/dist/aos.css"; //& its styling
 import { TailSpin as Loader } from "react-loader-spinner"; //cool spinner for loading
 
 import RootLayout from "./components/RootLayout/RootLayout";
-import Homepage from "./components/Pages/Homepage";
-import Login from "./components/Pages/Login";
-import Logout from "./components/Pages/Logout";
+import Homepage from "./Pages/Homepage";
+import Login from "./Pages/Login";
+import Logout from "./Pages/Logout";
 import Dashboard from "./components/Dashboard/Dashboard";
-import Otp from "./components/Pages/Otp";
+import Otp from "./Pages/Otp";
+import Error404 from "./Pages/Error404";
 
 export const userContext = createContext(); //this is your provider for state management
 
@@ -32,6 +33,7 @@ const router = createBrowserRouter(
       <Route path="/" element={<RootLayout />}>
         //pages Under Rootlayout with header and footer i.e Home
         <Route path="/" element={<Homepage />} />
+        <Route path="*" element={<Error404 />} />
       </Route>
     </>
   )
@@ -41,7 +43,7 @@ function App() {
   const [state, setState] = useState(""); //easiest and straignt foward way for global state management.. trust me, you can also use a useReducer instead
 
   return (
-    <userContext.Provider vallue={{ state, setState }}>
+    <userContext.Provider value={{ state, setState }}>
       <RouterProvider router={router} />
     </userContext.Provider>
   );
