@@ -1,6 +1,6 @@
 import axios from "axios";
 
-import { LOGIN, REGISTER, SEND_OTP } from "../services/CONSTANTS";
+import { LOGIN, REGISTER, SEND_OTP } from "./CONSTANTS";
 
 export const Signin = async ({ email, password }) => {
   const loginData = { email, password };
