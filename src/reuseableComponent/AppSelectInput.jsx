@@ -1,18 +1,18 @@
 import React from "react";
 import { styled } from "styled-components";
 
-const StyledSelectContainer = styled.div`
+const SelectContainer = styled.div`
   position: relative;
   margin-bottom: 12px;
 `;
 
-const StyledLabel = styled.label`
+const Label = styled.label`
   font-size: 0.65rem;
   letter-spacing: -0.01rem;
   opacity: 0.5;
 `;
 
-const StyledSelect = styled.select`
+const Select = styled.select`
   width: 100%;
   min-height: 42px;
   padding: 0.5rem;
@@ -27,7 +27,7 @@ const StyledSelect = styled.select`
     border: 1px solid rgb(194, 194, 194);
   }
 `;
-const StyledOption = styled.option`
+const Option = styled.option`
   font-size: 10px;
   color: #333;
   opacity: 0.5;
@@ -43,18 +43,18 @@ const ErrorContainer = styled.div`
 
 const AppSelectInput = ({ label, value, onChange, error, options }) => {
   return (
-    <StyledSelectContainer>
-      <StyledLabel htmlFor="role">{label}</StyledLabel>
-      <StyledSelect name="role" value={value} onChange={onChange}>
-        <StyledOption value="">Select...</StyledOption>
+    <SelectContainer>
+      <Label htmlFor="role">{label}</Label>
+      <Select name="role" value={value} onChange={onChange}>
+        <Option value="">Select...</Option>
         {options.map((option) => (
           <option key={option.value} value={option.value}>
             {option.label}
           </option>
         ))}
-      </StyledSelect>
+      </Select>
       {error && <ErrorContainer>{error}</ErrorContainer>}
-    </StyledSelectContainer>
+    </SelectContainer>
   );
 };
 

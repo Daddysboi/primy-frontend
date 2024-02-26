@@ -2,6 +2,7 @@
 export const REGISTER = "register";
 export const SEND_OTP = "send-otp";
 export const LOGIN = "signin";
+export const CONTACT_OUR_SUPPORT = "contact-our-support";
 
 export const GET_USER_BY_ID = "getUserById";
 

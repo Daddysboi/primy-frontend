@@ -13,12 +13,13 @@ import "aos/dist/aos.css"; //& its styling
 import { TailSpin as Loader } from "react-loader-spinner"; //cool spinner for loading
 
 import RootLayout from "./components/RootLayout/RootLayout";
-import Homepage from "./Pages/Homepage";
-import Login from "./Pages/Login";
-import Logout from "./Pages/Logout";
+import Homepage from "./pages/Homepage";
+import Login from "./pages/Login";
+import Logout from "./pages/Logout";
 import Dashboard from "./components/Dashboard/Dashboard";
-import Otp from "./Pages/Otp";
-import Error404 from "./Pages/Error404";
+import Otp from "./pages/Otp";
+import Contact from "./pages/Contact";
+import Error404 from "./pages/Error404";
 
 export const userContext = createContext(); //this is your provider for state management
 
@@ -31,8 +32,8 @@ const router = createBrowserRouter(
       <Route path="/login" element={<Login />} />
       <Route path="/logout" element={<Logout />} />
       <Route path="/" element={<RootLayout />}>
-        //pages Under Rootlayout with header and footer i.e Home
         <Route path="/" element={<Homepage />} />
+        <Route path="/contact" element={<Contact />} />
         <Route path="*" element={<Error404 />} />
       </Route>
     </>
