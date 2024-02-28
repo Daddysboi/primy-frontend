@@ -4,8 +4,8 @@ import * as Yup from "yup";
 import { toast } from "react-toastify";
 import styled from "styled-components";
 
-import AppInput from "../reuseableComponent/AppInput";
 import { useAppDispatch } from "../redux/hooks";
+import AppInput from "../reuseableComponent/AppInput";
 import AppButton from "../reuseableComponent/AppButton";
 
 import { contactOurSupport } from "../features/utilitySlice";
@@ -73,7 +73,7 @@ const Contact = () => {
 
   return (
     <StyledContainer id="contact">
-      <StyledHeader data-aos="fade-up">Contact Our Support</StyledHeader>
+      <StyledHeader>Contact Our Support</StyledHeader>
       <Formik
         initialValues={initialValues}
         validationSchema={validationSchema}
