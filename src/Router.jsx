@@ -19,8 +19,12 @@ import DashboardLayout from "./layout/DashboardLayout.jsx";
 import GuardLayout from "./layout/GuardLayout.jsx";
 
 // import AdminProtectedRoutes from "./pages/protectedRoute/AdminProtectedRoutes.jsx";
-// import AllTeacher from "./pages/allTeacher.jsx";
-// import AllCourses from "./pages/allCourses.jsx";
+import AllTeacher from "./pages/dashboardComponents/AllTeachers.jsx";
+import AllCourses from "./pages/dashboardComponents/AllCourses.jsx";
+import AllStudents from "./pages/dashboardComponents/AllStudents.jsx";
+import AllResults from "./pages/dashboardComponents/AllResults";
+import Settings from "./pages/dashboardComponents/Settings.jsx";
+
 // import CoursesPage from "./pages/course/index.jsx";
 
 // Assesment
@@ -29,7 +33,6 @@ import GuardLayout from "./layout/GuardLayout.jsx";
 // import AssessmentCoursePage from "./pages/assessment/course.jsx";
 // import AddQuestions from "./pages/assessment/AddQuestions.jsx";
 // import ViewQuestions from "./pages/assessment/ViewQuestions.jsx";
-// import ResultPage from "./pages/results/resultPage";
 
 // Students
 // import Students from "./pages/students/index.jsx";
@@ -102,6 +105,10 @@ export const router = createBrowserRouter([
             index: true,
             element: <Dashboard />,
           },
+          {
+            path: "settings",
+            element: <Settings />,
+          },
 
           // Admin Dashboard
           {
@@ -109,12 +116,16 @@ export const router = createBrowserRouter([
             // element: <AdminProtectedRoutes />,
             children: [
               {
+                path: "students",
+                element: <AllStudents />,
+              },
+              {
                 path: "teachers",
-                // element: <AllTeacher />,
+                element: <AllTeacher />,
               },
               {
                 path: "courses",
-                // element: <AllCourses />,
+                element: <AllCourses />,
               },
               {
                 path: "courses/assessment/:courseId",
@@ -130,8 +141,9 @@ export const router = createBrowserRouter([
               },
               {
                 path: "results",
-                // element: <ResultPage />,
+                element: <AllResults />,
               },
+
               {
                 path: "results/:assessmentId",
                 // element: <ShowResult />,

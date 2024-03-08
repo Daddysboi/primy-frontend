@@ -6,7 +6,10 @@ export const UserContext = createContext();
 export const useUser = () => useContext(UserContext);
 
 export const UserProvider = ({ children }) => {
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState({
+    role: "admin",
+    firstName: "Temi",
+  });
 
   const updateUser = (userDate) => {
     setUser(userDate);

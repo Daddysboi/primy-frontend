@@ -21,6 +21,17 @@ const initialState = {
   isLoading: false,
 };
 
+export const logout = createAsyncThunk("logout", async () => {
+  try {
+    // Perform logout logic here (e.g., clear local storage)
+    localStorage.removeItem(USER_ID);
+    localStorage.removeItem(USER_TOKEN);
+    return;
+  } catch (error) {
+    throw error; // Throw the error to let Redux Toolkit handle the rejection
+  }
+});
+
 export const loginSlice = createSlice({
   name: "login",
   initialState,
@@ -37,6 +48,18 @@ export const loginSlice = createSlice({
     builder.addCase(login.rejected, (state) => {
       state.isLoggedIn = false;
       // state.user = null;
+      state.isLoading = false;
+    });
+     // logout actions
+     builder.addCase(logout.pending, (state) => {
+      state.isLoading = true;
+    });
+    builder.addCase(logout.fulfilled, (state) => {
+      state.isLoggedIn = false;
+      state.isLoading = false;
+    });
+    builder.addCase(logout.rejected, (state) => {
+      state.isLoggedIn = false;
       state.isLoading = false;
     });
   },
