@@ -1,4 +1,4 @@
-import OtpInput from "react-otp-input"; // optional and easy for otp
+import OtpInput from "react-otp-input";
 
 const otp = () => {
   return <div>otp</div>;

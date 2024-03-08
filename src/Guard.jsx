@@ -1,9 +1,9 @@
 import { useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 
-import { getUserById, setUser } from "./features/userSlice";
+import { getUserById, setUser } from "./redux/features/userSlice";
 import { useAppDispatch } from "./redux/hooks";
-import { USER_ID } from "./services/CONSTANTS";
+import { USER_ID } from "./redux/services/CONSTANTS";
 
 //specifies users loged in access
 export const useFetchUserData = () => {
@@ -17,6 +17,7 @@ export const useFetchUserData = () => {
       dispatch(setUser(data?.user));
     } catch (error) {
       console.log(error.message);
+      throw error;
     }
   };
 
@@ -24,37 +25,37 @@ export const useFetchUserData = () => {
 };
 
 const Guard = ({ children }) => {
-  const { pathname } = useLocation();
-  const navigate = useNavigate();
-  const fetchUserData = useFetchUserData();
+  // const { pathname } = useLocation();
+  // const navigate = useNavigate();
+  // const fetchUserData = useFetchUserData();
 
-  //users are redirected to login when trying to access unauthorized routes like dashboard
-  const handleError = () => {
-    navigate("/login");
-    window.location.reload();
-  };
+  // //users are redirected to login when trying to access unauthorized routes like dashboard
+  // const handleError = () => {
+  //   navigate("/login");
+  //   window.location.reload();
+  // };
 
-  //pages that are exclused from protection
-  const getProfile = ![
-    "/login",
-    "/signup",
-    "/otp",
-    "/",
-    //{"/reset-password/*"}, //create this pages and uncomment them
-    //{"/forgot-password"},
-  ].includes(pathname);
+  // //pages that are exclused from protection
+  // const getProfile = ![
+  //   "/login",
+  //   "/signup",
+  //   "/otp",
+  //   "/",
+  //   "/reset-password/*",
+  //   "/forgot-password",
+  // ].includes(pathname);
 
-  useEffect(() => {
-    if (getProfile && localStorage?.USER_ID) {
-      fetchUserData();
-    }
-  }, [getProfile, localStorage?.USER_TOKEN]);
+  // useEffect(() => {
+  //   if (getProfile && localStorage?.USER_ID) {
+  //     fetchUserData();
+  //   }
+  // }, [getProfile, localStorage?.USER_TOKEN]);
 
-  useEffect(() => {
-    if (!localStorage?.USER_ID && getProfile) {
-      handleError();
-    }
-  }, [localStorage?.USER_ID, pathname]);
+  // useEffect(() => {
+  //   if (!localStorage?.USER_ID && getProfile) {
+  //     handleError();
+  //   }
+  // }, [localStorage?.USER_ID, pathname]);
 
   return children;
 };

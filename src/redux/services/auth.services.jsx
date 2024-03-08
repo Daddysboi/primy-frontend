@@ -33,8 +33,17 @@ export const SendOtp = async ({ email }) => {
   return response.data;
 };
 
-export const Register = async ({ email, password, role, otp }) => {
+export const Register = async ({
+  firstName,
+  lastName,
+  email,
+  password,
+  role,
+  otp,
+}) => {
   const registerData = {
+    firstName,
+    lastName,
     email,
     password,
     role,
@@ -44,6 +53,34 @@ export const Register = async ({ email, password, role, otp }) => {
   const response = await axios.post(
     `${process.env.REACT_APP_API_BASE_URL}/${REGISTER}`, //example
     registerData,
+    {
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+      },
+    }
+  );
+  return response.data;
+};
+
+export const RequestResetPassword = async ({ email, redirectUrl }) => {
+  const details = { email, redirectUrl };
+  const response = await axios.post(
+    `${process.env.REACT_APP_API_BASE_URL}/${REQUEST_PASSWORD_RESET}`,
+    details,
+    {
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+      },
+    }
+  );
+  return response.data;
+};
+
+export const ResetPassword = async ({ userId, resetString, newPassword }) => {
+  const details = { userId, resetString, newPassword };
+  const response = await axios.post(
+    `${process.env.REACT_APP_API_BASE_URL}/${RESET_PASSWORD}`,
+    details,
     {
       headers: {
         "Access-Control-Allow-Origin": "*",

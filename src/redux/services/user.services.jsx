@@ -7,6 +7,19 @@ export const GetUserById = async (userId) => {
   const id = JSON.parse(userId);
   const parsedToken = JSON.parse(token);
 
+  var url = "users";
+  switch (user.role) {
+    case "student":
+      url = "students";
+      break;
+    case "teacher":
+      url = "teachers";
+      break;
+    case "admin":
+      url = "users";
+      break;
+  }
+
   const response = await axios.get(
     `${process.env.REACT_APP_API_BASE_URL}/${GET_USER_BY_ID}/${id}`,
     {

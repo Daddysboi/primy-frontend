@@ -8,6 +8,8 @@ const initialState = {
 
 export const getUserById = createAsyncThunk("getUserById", async (userId) => {
   try {
+   
+
     const resp = await GetUserById(userId);
     return resp;
   } catch (error) {

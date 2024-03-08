@@ -61,7 +61,7 @@ const Contact = () => {
           setLoading(false);
           return;
         }
-        toast.success(resp?.payload?.message || "Successfully subscribed");
+        toast.success(resp?.payload?.message || "Message Sent Successfully");
         resetForm();
         setLoading(false);
       })
@@ -90,7 +90,7 @@ const Contact = () => {
                 placeholder="Enter Full Name"
               />
             </div>{" "}
-            <ErrorMessage name="idNumber" component={ErrorRed} />
+            <ErrorMessage name="fullName" component={ErrorRed} />
             <div>
               <Field
                 as={AppInput}
@@ -100,7 +100,7 @@ const Contact = () => {
                 placeholder="Enter your e-mail"
               />
             </div>
-            <ErrorMessage name="idNumber" component={ErrorRed} />
+            <ErrorMessage name="email" component={ErrorRed} />
             <div>
               <Field
                 as={AppInput}
@@ -109,7 +109,7 @@ const Contact = () => {
                 name="message"
                 placeholder="Message"
               />{" "}
-              <ErrorMessage name="idNumber" component={ErrorRed} />
+              <ErrorMessage name="message" component={ErrorRed} />
             </div>
             <AppButton disabled={loading}>
               {loading ? "Submitting..." : "Submit"}

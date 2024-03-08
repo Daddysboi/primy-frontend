@@ -1,0 +1,81 @@
+import axios from "axios";
+
+import { CONTACT_OUR_SUPPORT } from "./CONSTANTS";
+
+export const SaveEmailToMailingList = async ({ email }) => {
+  const data = { email };
+  const response = await axios.post(
+    `${process.env.REACT_APP_API_BASE_URL}/${MAILING_LIST}`,
+    data,
+    {
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+      },
+    }
+  );
+  return response.data;
+};
+
+export const ContactOurSupport = async ({ fullName, email, message }) => {
+  const data = { fullName, email, message };
+  const response = await axios.post(
+    `${process.env.REACT_APP_API_BASE_URL}/${CONTACT_OUR_SUPPORT}`,
+    data,
+    {
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+      },
+    }
+  );
+  return response.data;
+};
+
+export const DisputeTransaction = async ({
+  transactionId,
+  reason,
+  description,
+  userId,
+}) => {
+  const data = { transactionId, reason, description, userId };
+  const response = await axios.post(
+    `${process.env.REACT_APP_API_BASE_URL}/${DISPUTE_TRANSACTION}`,
+    data,
+    {
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+      },
+    }
+  );
+  return response.data;
+};
+
+export const UpdateTransactionStatus = async ({ transactionId, newStatus }) => {
+  const data = { transactionId, newStatus };
+  const response = await axios.patch(
+    `${process.env.REACT_APP_API_BASE_URL}/${UPDATE_TRANSACTION_STATUS}`,
+    data,
+    {
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+      },
+    }
+  );
+  return response.data;
+};
+
+export const AddLocation = async ({ location }) => {
+  try {
+    const response = await axios.post(
+      `${process.env.REACT_APP_API_BASE_URL}/your_endpoint_here`,
+      { ADD_LOCATION },
+      {
+        headers: {
+          "Access-Control-Allow-Origin": "*",
+        },
+      }
+    );
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};

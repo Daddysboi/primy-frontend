@@ -3,6 +3,11 @@ import { Register, SendOtp } from "../services/auth.services";
 
 const initialState = {};
 
+// export const sendOtp = createAsyncThunk(
+//   "sendOtp",
+//   async (payload) => useFetchSlice(SendOtp)(payload)
+// );
+
 export const sendOtp = createAsyncThunk("sendOtp", async ({ email }) => {
   try {
     const resp = await SendOtp({
@@ -38,7 +43,7 @@ export const registerSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: (builder) => {
-    // login actions
+    // register actions
     builder.addCase(register.pending, (state) => {
       state.isLoading = true;
     });
@@ -54,5 +59,6 @@ export const registerSlice = createSlice({
 });
 
 const { actions, reducer } = registerSlice;
+
 export const { setLoginPhone } = actions;
 export default reducer;

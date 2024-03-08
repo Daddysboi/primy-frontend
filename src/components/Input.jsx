@@ -1,25 +1,26 @@
 import React, { useState } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import styled from "styled-components";
+import { faEdit } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-const InputContainer = styled.div`
+const StyledInputContainer = styled.div`
   position: relative;
   margin-bottom: 12px;
 `;
 
-const Label = styled.label`
+const StyledLabel = styled.label`
   font-size: 0.65rem;
   letter-spacing: -0.01rem;
   position: relative;
   color: ${(props) => props.labelColor || "inherit"};
 `;
 
-const Input = styled.input`
+const StyledInput = styled.input`
   width: 100%;
   height: ${(props) => props.height || "42px"};
   background: ${(props) => props.backgroundColor || "transparent"};
-  border: ${(props) => props.border || "1px solid purple"};
+  border: ${(props) => props.border || "1px solid rgba(223, 140, 82, 0.3)"};
   padding: 0.5rem;
   box-sizing: border-box;
   display: block;
@@ -42,13 +43,13 @@ const PasswordContainer = styled.div`
   position: relative;
 `;
 
-const PasswordInput = styled.input`
+const StyledPasswordInput = styled.input`
   width: ${(props) => props.width || "100%"};
   height: ${(props) => props.height || "42px"};
   padding: 0.5rem;
   box-sizing: border-box;
   border-radius: 0.3rem;
-  border: 1px solid purple;
+  border: 1px solid rgba(223, 140, 82, 0.3);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -62,11 +63,11 @@ const PasswordInput = styled.input`
   }
 `;
 
-const Select = styled.select`
+const StyledSelect = styled.select`
   width: ${(props) => props.width || "100%"};
   height: ${(props) => props.height || "42px"};
   background: ${(props) => props.backgroundColor || "transparent"};
-  border: ${(props) => props.border || "1px solid purple"};
+  border: ${(props) => props.border || "1px solid rgba(223, 140, 82, 0.3)"};
   padding: 0.5rem;
   box-sizing: border-box;
   display: block;
@@ -88,12 +89,12 @@ const ErrorContainer = styled.div`
   line-height: 10px;
 `;
 
-const Textarea = styled.textarea`
+const StyledTextarea = styled.textarea`
   padding: 0.5rem;
   border: none;
   outline: none;
   border-radius: 0.3rem;
-  border: 1px solid purple;
+  border: 1px solid rgba(223, 140, 82, 0.3);
   &::placeholder {
     opacity: 0.5;
   }
@@ -104,7 +105,6 @@ const Textarea = styled.textarea`
 
 const AppInput = ({
   type,
-  accept,
   name,
   value,
   placeholder,
@@ -112,6 +112,7 @@ const AppInput = ({
   error,
   inputType,
   label,
+  accept,
   width,
   height,
   cols = "30",
@@ -122,11 +123,13 @@ const AppInput = ({
   background,
   border,
   color,
+  showEyeIcon = true,
   display,
   disabled,
   ...props
 }) => {
   const [passwordVisibility, setPasswordVisibility] = useState(false);
+  const passwordRef = useRef(null);
 
   const togglePasswordVisibility = () => {
     setPasswordVisibility((prevVisibility) => !prevVisibility);
@@ -134,12 +137,12 @@ const AppInput = ({
 
   if (inputType === "password") {
     return (
-      <InputContainer>
-        <Label style={{ color: labelColor }} htmlFor="">
+      <StyledInputContainer>
+        <StyledLabel style={{ color: labelColor }} htmlFor="">
           {label}
-        </Label>
+        </StyledLabel>
         <PasswordContainer>
-          <PasswordInput
+          <StyledPasswordInput
             type={passwordVisibility ? "text" : "password"}
             name={name}
             value={value}
@@ -149,39 +152,45 @@ const AppInput = ({
             width={width}
             height={height}
             eyeTop={eyeTop}
+            ref={passwordRef}
             {...props}
           />
-
-          <EyeIcon
-            style={{
-              position: "absolute",
-              right: "12px",
-              top: "12px",
-            }}
-            onClick={togglePasswordVisibility}
-          >
-            {passwordVisibility ? <FaEye /> : <FaEyeSlash />}
-          </EyeIcon>
-
-          <FontAwesomeIcon
-            style={{
-              position: "absolute",
-              right: "10px",
-              top: "50%",
-              transform: "translateY(-50%)",
-              cursor: "pointer",
-              color: "gray",
-            }}
-          />
+          {showEyeIcon ? (
+            <EyeIcon
+              style={{
+                position: "absolute",
+                right: "12px",
+                top: eyeTop || "12px",
+              }}
+              onClick={togglePasswordVisibility}
+            >
+              {passwordVisibility ? <FaEye /> : <FaEyeSlash />}
+            </EyeIcon>
+          ) : (
+            <FontAwesomeIcon
+              icon={faEdit}
+              onClick={() => {
+                passwordRef.current.focus();
+              }}
+              style={{
+                position: "absolute",
+                right: "10px",
+                top: "50%",
+                transform: "translateY(-50%)",
+                cursor: "pointer",
+                color: "gray",
+              }}
+            />
+          )}
         </PasswordContainer>
         {error && <ErrorContainer>{error}</ErrorContainer>}
-      </InputContainer>
+      </StyledInputContainer>
     );
   }
 
   if (type === "textarea") {
     return (
-      <InputContainer>
+      <StyledInputContainer>
         <div
           style={{
             display: "flex",
@@ -189,10 +198,10 @@ const AppInput = ({
             width: "100%",
           }}
         >
-          <Label style={{ color: labelColor }} htmlFor="">
+          <StyledLabel style={{ color: labelColor }} htmlFor="">
             {label}
-          </Label>
-          <Textarea
+          </StyledLabel>
+          <StyledTextarea
             cols={cols}
             rows={rows}
             type={type}
@@ -204,17 +213,17 @@ const AppInput = ({
           />
         </div>
         {error && <ErrorContainer>{error}</ErrorContainer>}
-      </InputContainer>
+      </StyledInputContainer>
     );
   }
 
   if (type === "select") {
     return (
-      <InputContainer>
-        <Label style={{ color: labelColor }} htmlFor={name}>
+      <StyledInputContainer>
+        <StyledLabel style={{ color: labelColor }} htmlFor={name}>
           {label}
-        </Label>
-        <Select
+        </StyledLabel>
+        <StyledSelect
           id={name}
           name={name}
           value={value}
@@ -223,29 +232,29 @@ const AppInput = ({
           {...props}
         >
           {props.children}
-        </Select>
+        </StyledSelect>
         {error && <ErrorContainer>{error}</ErrorContainer>}
-      </InputContainer>
+      </StyledInputContainer>
     );
   }
   return (
-    <InputContainer>
-      <Label style={{ color: labelColor }} htmlFor="">
+    <StyledInputContainer>
+      <StyledLabel style={{ color: labelColor }} htmlFor="">
         {label}
-      </Label>
-      <Input
+      </StyledLabel>
+      <StyledInput
         type={type}
+        accept={accept}
         name={name}
         value={value}
         placeholder={placeholder}
         onChange={onChange}
-        accept={accept}
         style={{ width, height, color, border, background, display }}
         disabled={disabled}
         {...props}
       />
       {error && <ErrorContainer>{error}</ErrorContainer>}
-    </InputContainer>
+    </StyledInputContainer>
   );
 };
 
