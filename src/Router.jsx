@@ -1,4 +1,4 @@
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { createBrowserRouter } from "react-router-dom";
 
 // Pages
 import Homepage from "./pages/Homepage.jsx";
@@ -18,11 +18,14 @@ import AuthLayout from "./layout/AuthLayout.jsx";
 import DashboardLayout from "./layout/DashboardLayout.jsx";
 import GuardLayout from "./layout/GuardLayout.jsx";
 
-// import AdminProtectedRoutes from "./pages/protectedRoute/AdminProtectedRoutes.jsx";
+// Admin routes
+import AdminProtectedRoutes from "./pages/dashboardComponents/protectedRoute/AdminProtectedRoutes.jsx";
 import AllTeacher from "./pages/dashboardComponents/AllTeachers.jsx";
 import AllCourses from "./pages/dashboardComponents/AllCourses.jsx";
 import AllStudents from "./pages/dashboardComponents/AllStudents.jsx";
 import AllResults from "./pages/dashboardComponents/AllResults";
+import Events from "./pages/dashboardComponents/Events.jsx";
+import Finance from "./pages/dashboardComponents/Finance.jsx";
 import Settings from "./pages/dashboardComponents/Settings.jsx";
 
 // import CoursesPage from "./pages/course/index.jsx";
@@ -106,6 +109,14 @@ export const router = createBrowserRouter([
             element: <Dashboard />,
           },
           {
+            path: "Events",
+            element: <Events />,
+          },
+          {
+            path: "Finance",
+            element: <Finance />,
+          },
+          {
             path: "settings",
             element: <Settings />,
           },
@@ -113,7 +124,7 @@ export const router = createBrowserRouter([
           // Admin Dashboard
           {
             path: "admin",
-            // element: <AdminProtectedRoutes />,
+            element: <AdminProtectedRoutes />,
             children: [
               {
                 path: "students",

@@ -1,5 +1,5 @@
 import { toast } from "react-toastify";
-import axiosClient from "../axios";
+import axiosClient from "../utils/axiosClient";
 
 const getTeachersRecord = async () => {
   try {

@@ -1,13 +1,13 @@
 import axios from "axios";
 
 const axiosClient = axios.create({
-  baseURL: import.meta.env.VITE_API_ENDPOINT,
+  baseURL: import.meta.env.VITE_API_BASE_URL,
 });
 
 // Add a request interceptor
 axiosClient.interceptors.request.use(
   (config) => {
-    const token = localStorage.getItem("token");
+    const token = localStorage.getItem(USER_TOKEN);
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
     }

@@ -8,7 +8,8 @@ export const useUser = () => useContext(UserContext);
 export const UserProvider = ({ children }) => {
   const [user, setUser] = useState({
     role: "admin",
-    firstName: "Temi",
+    firstName: "Davido",
+    lastName: "Ajayi",
   });
 
   const updateUser = (userDate) => {

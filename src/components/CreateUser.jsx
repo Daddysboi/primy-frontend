@@ -1,6 +1,6 @@
 import { useState } from "react";
 import PropTypes from "prop-types";
-import { Button } from "./Button";
+import AppButton from "./Button";
 import { getDateValue } from "../utils/helpers";
 
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
@@ -189,7 +189,7 @@ const CreateUser = ({
           )}
         </div>
 
-        <Button loading={mutation.isPending} text={`Save`} />
+        <AppButton loading={mutation.isPending} text={`Save`} />
       </form>
     </div>
   );

@@ -1,4 +1,4 @@
-import axios from "axios";
+import axiosClient from "../../utils/axiosClient";
 
 import {
   CREATE_TRANSACTION,
@@ -18,8 +18,8 @@ export const CreateTransaction = async ({
     formData,
     redirectUrl,
   };
-  const response = await axios.post(
-    `${process.env.REACT_APP_API_BASE_URL}/${CREATE_TRANSACTION}`,
+  const response = await axiosClient.post(
+    `${CREATE_TRANSACTION}`,
     transactionData,
     {
       headers: {
@@ -34,8 +34,8 @@ export const VerifyTransactionDetails = async ({ formData }) => {
   const transactionData = {
     formData,
   };
-  const response = await axios.post(
-    `${process.env.REACT_APP_API_BASE_URL}/${VERIFY_TRANSACTION_DETAILS}`,
+  const response = await axiosClient.post(
+    `${VERIFY_TRANSACTION_DETAILS}`,
     transactionData,
     {
       headers: {
@@ -51,8 +51,8 @@ export const VerifyTransaction = async ({ transactionId, action }) => {
     transactionId,
     action,
   };
-  const response = await axios.post(
-    `${process.env.REACT_APP_API_BASE_URL}/${VERIFY_TRANSACTION}`,
+  const response = await axiosClient.post(
+    `${VERIFY_TRANSACTION}`,
     transactionData,
     {
       headers: {

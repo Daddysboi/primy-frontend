@@ -129,7 +129,6 @@ const AppInput = ({
   ...props
 }) => {
   const [passwordVisibility, setPasswordVisibility] = useState(false);
-  const passwordRef = useRef(null);
 
   const togglePasswordVisibility = () => {
     setPasswordVisibility((prevVisibility) => !prevVisibility);

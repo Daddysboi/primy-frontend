@@ -1,18 +1,14 @@
-import axios from "axios";
+import axiosClient from "../../utils/axiosClient";
 
-import { LOGIN, REGISTER, SEND_OTP } from "./CONSTANTS";
+import { LOGIN, REGISTER, SEND_OTP, RESET_PASSWORD } from "./CONSTANTS";
 
 export const Signin = async ({ email, password }) => {
   const loginData = { email, password };
-  const resp = await axios.post(
-    `${process.env.REACT_APP_API_BASE_URL}/${LOGIN}`,
-    loginData,
-    {
-      headers: {
-        "Access-Control-Allow-Origin": "*",
-      },
-    }
-  );
+  const resp = await axiosClient.post(`${LOGIN}`, loginData, {
+    headers: {
+      "Access-Control-Allow-Origin": "*",
+    },
+  });
   const data = resp.data;
   return data;
 };
@@ -21,15 +17,11 @@ export const SendOtp = async ({ email }) => {
   const otpData = {
     email,
   };
-  const response = await axios.post(
-    `${process.env.REACT_APP_API_BASE_URL}/${SEND_OTP}`,
-    otpData,
-    {
-      headers: {
-        "Access-Control-Allow-Origin": "*",
-      },
-    }
-  );
+  const response = await axiosClient.post(`${SEND_OTP}`, otpData, {
+    headers: {
+      "Access-Control-Allow-Origin": "*",
+    },
+  });
   return response.data;
 };
 
@@ -50,8 +42,8 @@ export const Register = async ({
     otp,
   };
 
-  const response = await axios.post(
-    `${process.env.REACT_APP_API_BASE_URL}/${REGISTER}`, //example
+  const response = await axiosClient.post(
+    `${REGISTER}`, //example
     registerData,
     {
       headers: {
@@ -64,8 +56,8 @@ export const Register = async ({
 
 export const RequestResetPassword = async ({ email, redirectUrl }) => {
   const details = { email, redirectUrl };
-  const response = await axios.post(
-    `${process.env.REACT_APP_API_BASE_URL}/${REQUEST_PASSWORD_RESET}`,
+  const response = await axiosClient.post(
+    `${REQUEST_PASSWORD_RESET}`,
     details,
     {
       headers: {
@@ -78,14 +70,10 @@ export const RequestResetPassword = async ({ email, redirectUrl }) => {
 
 export const ResetPassword = async ({ userId, resetString, newPassword }) => {
   const details = { userId, resetString, newPassword };
-  const response = await axios.post(
-    `${process.env.REACT_APP_API_BASE_URL}/${RESET_PASSWORD}`,
-    details,
-    {
-      headers: {
-        "Access-Control-Allow-Origin": "*",
-      },
-    }
-  );
+  const response = await axiosClient.post(`${RESET_PASSWORD}`, details, {
+    headers: {
+      "Access-Control-Allow-Origin": "*",
+    },
+  });
   return response.data;
 };
