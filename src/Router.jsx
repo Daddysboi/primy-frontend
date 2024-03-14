@@ -21,12 +21,13 @@ import GuardLayout from "./layout/GuardLayout.jsx";
 // Admin routes
 import AdminProtectedRoutes from "./pages/dashboardComponents/protectedRoute/AdminProtectedRoutes.jsx";
 import AllTeacher from "./pages/dashboardComponents/AllTeachers.jsx";
-import AllCourses from "./pages/dashboardComponents/AllCourses.jsx";
+import AllClasses from "./pages/dashboardComponents/AllClasses.jsx";
 import AllStudents from "./pages/dashboardComponents/AllStudents.jsx";
 import AllResults from "./pages/dashboardComponents/AllResults";
 import Events from "./pages/dashboardComponents/Events.jsx";
 import Finance from "./pages/dashboardComponents/Finance.jsx";
 import Settings from "./pages/dashboardComponents/Settings.jsx";
+import AllTimetable from "./pages/dashboardComponents/AllTimetable.jsx";
 
 // import CoursesPage from "./pages/course/index.jsx";
 
@@ -135,8 +136,12 @@ export const router = createBrowserRouter([
                 element: <AllTeacher />,
               },
               {
-                path: "courses",
-                element: <AllCourses />,
+                path: "classes",
+                element: <AllClasses />,
+              },
+              {
+                path: "timetable",
+                element: <AllTimetable />,
               },
               {
                 path: "courses/assessment/:courseId",
@@ -164,7 +169,7 @@ export const router = createBrowserRouter([
 
           // Student Dashboard
           {
-            path: "students",
+            path: "student",
             children: [
               {
                 path: "grade",

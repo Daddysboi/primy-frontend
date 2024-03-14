@@ -18,12 +18,17 @@ export const studentLinks = [
   },
   {
     title: "Assessments",
-    link: "students/assessment",
+    link: "student/assessment",
     type: "link",
   },
   {
     title: "Grades",
-    link: "students/grade",
+    link: "student/grade",
+    type: "link",
+  },
+  {
+    title: "Timetable",
+    link: "student/timetable",
     type: "link",
   },
   {
@@ -45,8 +50,8 @@ export const teacherLinks = [
     type: "link",
   },
   {
-    title: "My Courses",
-    link: "teacher/courses",
+    title: "My Clases",
+    link: "teacher/classes",
     type: "link",
   },
   {
@@ -62,6 +67,11 @@ export const teacherLinks = [
   {
     title: "Results",
     link: "teacher/results",
+    type: "link",
+  },
+  {
+    title: "Timetable",
+    link: "teacher/timetable",
     type: "link",
   },
   {
@@ -102,8 +112,14 @@ export const adminLinks = [
     icon: <PiStudentBold />,
   },
   {
-    title: "Courses",
-    link: "admin/courses",
+    title: "Classes",
+    link: "admin/classes",
+    type: "link",
+    icon: <FaBookOpen />,
+  },
+  {
+    title: "Timetable",
+    link: "admin/timetable",
     type: "link",
     icon: <FaBookOpen />,
   },

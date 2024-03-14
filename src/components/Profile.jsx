@@ -1,4 +1,4 @@
-import PropTypes from "prop-types";
+import "../assets/styles.css";
 
 const Profile = ({ img = "", user }) => {
   return (

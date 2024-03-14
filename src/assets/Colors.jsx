@@ -4,5 +4,6 @@ export const primaryColors = {
   White: "#fff",
   Gray: "#F8F8F8",
   Green: "#1cd086",
+  mintGreen: "#D8F8E9",
   DashBoardBackground: "#f8f7ff",
 };

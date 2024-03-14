@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 
 import { useAppDispatch } from "../redux/hooks";
 import { logout } from "../redux/features/loginSlice";
@@ -34,6 +34,7 @@ const Logo = styled.div`
   justify-content: center;
   align-items: center;
   color: ${primaryColors.Gray};
+  margin-bottom: 2rem;
 `;
 
 const Image = styled.img`
@@ -43,20 +44,23 @@ const Aside = styled.aside`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  width: 12rem;
+  width: 10rem;
+  margin-right: 3rem;
   padding-left: 2rem;
   background-color: ${primaryColors.Purple};
-  gap: 0.5rem;
   border-radius: 0 1.5rem 0 0;
   min-height: calc(100vh - 4rem);
 `;
 
 const Button = styled.button`
   display: flex;
-  gap: 0.3rem;
+  gap: 0.5rem;
   padding: 8px;
-  border: 1px solid transparent;
+  margin-left: ${({ active }) => (active ? "0.5rem" : "")};
+
+  /* border-bottom: 1px solid transparent; */
   border-radius: 0.5rem;
+  cursor: pointer;
   border: ${({ active }) =>
     active ? `1px solid ${primaryColors.LightPurple}` : "transparent"};
   width: 7rem;
@@ -68,12 +72,20 @@ const Button = styled.button`
   font-weight: ${({ active }) => (active ? "bold" : "normal")};
 
   &:hover {
-    border: 1px solid ${primaryColors.LightPurple};
+    background-color: ${primaryColors.mintGreen};
+    color: ${primaryColors.Purple};
   }
+`;
+
+const Links = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
 `;
 
 const SideBarImg = styled.img`
   height: 8rem;
+  margin-top: 4rem;
 `;
 
 const DashBoardLayout = () => {
@@ -128,7 +140,7 @@ const DashBoardLayout = () => {
             <Image src={Img} alt="Logo" />
             <h1>Primy</h1>
           </Logo>
-          <div>
+          <Links>
             {links.map((sidebar, index) => (
               <Button
                 onClick={() => clickHandler(sidebar.link, sidebar?.type)}
@@ -140,7 +152,7 @@ const DashBoardLayout = () => {
                 {sidebar.title}
               </Button>
             ))}
-          </div>
+          </Links>
           <div>
             <SideBarImg src={library} alt="library" />
           </div>

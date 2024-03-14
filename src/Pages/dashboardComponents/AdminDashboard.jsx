@@ -3,6 +3,11 @@ import styled from "styled-components";
 import DetailCard from "../../components/DetailCard";
 import studentIcon from "../../assets/images/36006.jpg";
 import AppButton from "../../components/Button";
+import { primaryColors } from "../../assets/Colors";
+
+import DoughnutChart from "../../components/DoughnutChart";
+import LineChart from "../../components/LineChart";
+import MyCalendar from "../../components/MyCalender";
 
 const Container = styled.div`
   display: flex;
@@ -31,6 +36,64 @@ const CardWrapper = styled.div`
   gap: 1rem;
   flex-wrap: wrap;
   max-width: 30rem;
+`;
+
+const EventList = styled.div`
+  display: flex;
+  gap: 1rem;
+`;
+
+const EventWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+  margin-bottom: 1rem;
+`;
+const Date = styled.div`
+  background-color: ${({ color }) => color};
+  border-radius: 1rem;
+  width: 17.5%;
+  height: 2.3rem;
+  padding: 0.5rem;
+`;
+
+const Info = styled.div`
+  width: 60%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+`;
+
+const InfoText = styled.p`
+  font-size: 0.6rem;
+  line-height: 1rem;
+  font-weight: 500;
+  margin: 0;
+`;
+
+const DateText = styled.p`
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-align: center;
+  margin: 0;
+`;
+
+const Bar = styled.div`
+  height: 0.3rem;
+  border-radius: 0.15rem;
+  background: gray;
+  width: 90%;
+`;
+
+const Line = styled.div`
+  background: yellow;
+  height: 0.3rem;
+  width: 80%;
+`;
+
+const DaysLeft = styled.div`
+  font-size: 0.45rem;
+  opacity: 0.8;
 `;
 
 const details = [
@@ -64,6 +127,35 @@ const details = [
   },
 ];
 
+const eventList = [
+  {
+    day: "3",
+    weekday: "Wed",
+    event: "School Live Concert Charity Event 2021",
+    color: `${primaryColors.LightPurple}`,
+  },
+  {
+    day: "8",
+    weekday: "Fri",
+    event: "Interhouse Sport",
+    color: `${primaryColors.mintGreen}`,
+  },
+];
+
+// doughnut chart
+const data = [57, 43];
+
+const LineChartdata = [
+  { name: "Week 1", uv: 400, pv: 2400, amt: 2400 },
+  { name: "Week 2", uv: 800, pv: 2600, amt: 2500 },
+  { name: "Week 3", uv: 500, pv: 2300, amt: 2200 },
+  { name: "Week 4", uv: 700, pv: 2100, amt: 2500 },
+  { name: "Week 5", uv: 300, pv: 2800, amt: 2700 },
+  { name: "Week 6", uv: 400, pv: 2800, amt: 2700 },
+  { name: "Week 7", uv: 500, pv: 2800, amt: 2700 },
+  { name: "Week 8", uv: 650, pv: 2800, amt: 2700 },
+];
+
 const AdminDashboard = () => {
   return (
     <Container>
@@ -83,23 +175,73 @@ const AdminDashboard = () => {
         </CardWrapper>
 
         <DetailCard
-          value="Increase your value by learning"
+          value="Total Students by Gender"
           width="24rem"
           height="14rem"
-          subtext="We have new method to new learning process, Fater, secure and easy to use"
+          subtext={`We have ${data[0]} boys and ${data[1]}girls`}
+          h1="1rem"
+          p="0.7rem"
         >
-          <AppButton text="Button" />
+          <DoughnutChart data={data} />
         </DetailCard>
       </Top>
 
       <Mid>
-        <DetailCard width="39rem" height="14rem"></DetailCard>
-        <DetailCard width="12rem" height="14rem"></DetailCard>
-      </Mid>
+        <DetailCard
+          value="School Peformance"
+          width="39rem"
+          height="15rem"
+          h1="1rem"
+        >
+          <LineChart data={LineChartdata} width={600} height={170} />
+        </DetailCard>
+        <DetailCard
+          h1="1rem"
+          value="Upcoming events"
+          width="12rem"
+          height="15rem"
+        >
+          <EventWrapper>
+            {eventList.map(({ day, weekday, event, color }, i) => (
+              <EventList key={i}>
+                <Date color={color}>
+                  <DateText>{day}</DateText>
+                  <DateText>{weekday}</DateText>
+                </Date>
+                <Info>
+                  <InfoText>{event}</InfoText>
+                  <span>
+                    <DaysLeft> 3days Left</DaysLeft>
 
+                    <Bar>
+                      <Line></Line>
+                    </Bar>
+                  </span>
+                </Info>
+              </EventList>
+            ))}
+          </EventWrapper>
+
+          <AppButton text=" View more" />
+        </DetailCard>
+      </Mid>
       <Bottom>
-        <DetailCard width="25.5rem" height="14rem"></DetailCard>
-        <DetailCard width="25.5rem" height="14rem"></DetailCard>
+        <DetailCard
+          h1="1rem"
+          value="School Calender"
+          width="25.5rem"
+          height="15rem"
+        >
+          <MyCalendar />
+        </DetailCard>
+        <DetailCard
+          h1="1rem"
+          value="School Finance"
+          width="25.5rem"
+          height="15rem"
+        >
+          <LineChart data={LineChartdata} width={400} height={150} />
+        </DetailCard>
       </Bottom>
     </Container>
   );

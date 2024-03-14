@@ -1,0 +1,466 @@
+{
+  "Kindergarten": [
+    {
+      "value": "Playtime",
+      "label": "Playtime"
+    }
+  ],
+  "Pre Nursery": [
+    {
+      "value": "Playtime",
+      "label": "Playtime"
+    },
+    {
+      "value": "English",
+      "label": "English"
+    },
+    {
+      "value": "Mathematics",
+      "label": "Mathematics"
+    },
+    {
+      "value": "Art",
+      "label": "Art"
+    },
+    {
+      "value": "Music",
+      "label": "Music"
+    },
+    {
+      "value": "Dance",
+      "label": "Dance"
+    },
+    {
+      "value": "Physical Education",
+      "label": "Physical Education"
+    }
+  ],
+  "Nursery 1": [
+    {
+      "value": "Mathematics",
+      "label": "Mathematics"
+    },
+    {
+      "value": "English",
+      "label": "English"
+    },
+    {
+      "value": "Basic Science",
+      "label": "Basic Science"
+    },
+    {
+      "value": "Creative Arts",
+      "label": "Creative Arts"
+    },
+    {
+      "value": "Music",
+      "label": "Music"
+    },
+    {
+      "value": "Physical Education",
+      "label": "Physical Education"
+    }
+  ],
+  "Nursery 2": [
+    {
+      "value": "Mathematics",
+      "label": "Mathematics"
+    },
+    {
+      "value": "English",
+      "label": "English"
+    },
+    {
+      "value": "Basic Science",
+      "label": "Basic Science"
+    },
+    {
+      "value": "Creative Arts",
+      "label": "Creative Arts"
+    },
+    {
+      "value": "Music",
+      "label": "Music"
+    },
+    {
+      "value": "Physical Education",
+      "label": "Physical Education"
+    }
+  ],
+  "Primary 1": [
+    {
+      "value": "Mathematics",
+      "label": "Mathematics"
+    },
+    {
+      "value": "English",
+      "label": "English"
+    },
+    {
+      "value": "Basic Science",
+      "label": "Basic Science"
+    },
+    {
+      "value": "Creative Arts",
+      "label": "Creative Arts"
+    },
+    {
+      "value": "Music",
+      "label": "Music"
+    },
+    {
+      "value": "Physical Education",
+      "label": "Physical Education"
+    }
+  ],
+  "Primary 2": [
+    {
+      "value": "Mathematics",
+      "label": "Mathematics"
+    },
+    {
+      "value": "English",
+      "label": "English"
+    },
+    {
+      "value": "Basic Science",
+      "label": "Basic Science"
+    },
+    {
+      "value": "Creative Arts",
+      "label": "Creative Arts"
+    },
+    {
+      "value": "Music",
+      "label": "Music"
+    },
+    {
+      "value": "Physical Education",
+      "label": "Physical Education"
+    }
+  ],
+  "Primary 3": [
+    {
+      "value": "Mathematics",
+      "label": "Mathematics"
+    },
+    {
+      "value": "English",
+      "label": "English"
+    },
+    {
+      "value": "Basic Science",
+      "label": "Basic Science"
+    },
+    {
+      "value": "Creative Arts",
+      "label": "Creative Arts"
+    },
+    {
+      "value": "Music",
+      "label": "Music"
+    },
+    {
+      "value": "Physical Education",
+      "label": "Physical Education"
+    }
+  ],
+  "Primary 4": [
+    {
+      "value": "Mathematics",
+      "label": "Mathematics"
+    },
+    {
+      "value": "English",
+      "label": "English"
+    },
+    {
+      "value": "Basic Science",
+      "label": "Basic Science"
+    },
+    {
+      "value": "Creative Arts",
+      "label": "Creative Arts"
+    },
+    {
+      "value": "Music",
+      "label": "Music"
+    },
+    {
+      "value": "Physical Education",
+      "label": "Physical Education"
+    }
+  ],
+  "Primary 5": [
+    {
+      "value": "Mathematics",
+      "label": "Mathematics"
+    },
+    {
+      "value": "English",
+      "label": "English"
+    },
+    {
+      "value": "Basic Science",
+      "label": "Basic Science"
+    },
+    {
+      "value": "Creative Arts",
+      "label": "Creative Arts"
+    },
+    {
+      "value": "Music",
+      "label": "Music"
+    },
+    {
+      "value": "Physical Education",
+      "label": "Physical Education"
+    },
+    {
+      "value": "Social Studies",
+      "label": "Social Studies"
+    },
+    {
+      "value": "Agricultural Science",
+      "label": "Agricultural Science"
+    }
+  ],
+  "Primary 6": [
+    {
+      "value": "Mathematics",
+      "label": "Mathematics"
+    },
+    {
+      "value": "English",
+      "label": "English"
+    },
+    {
+      "value": "Basic Science",
+      "label": "Basic Science"
+    },
+    {
+      "value": "Creative Arts",
+      "label": "Creative Arts"
+    },
+    {
+      "value": "Music",
+      "label": "Music"
+    },
+    {
+      "value": "Physical Education",
+      "label": "Physical Education"
+    },
+    {
+      "value": "Social Studies",
+      "label": "Social Studies"
+    },
+    {
+      "value": "Agricultural Science",
+      "label": "Agricultural Science"
+    }
+  ],
+  "JSS 1": [
+    {
+      "value": "Mathematics",
+      "label": "Mathematics"
+    },
+    {
+      "value": "English",
+      "label": "English"
+    },
+    {
+      "value": "Basic Science",
+      "label": "Basic Science"
+    },
+    {
+      "value": "Creative Arts",
+      "label": "Creative Arts"
+    },
+    {
+      "value": "Music",
+      "label": "Music"
+    },
+    {
+      "value": "Physical Education",
+      "label": "Physical Education"
+    },
+    {
+      "value": "Social Studies",
+      "label": "Social Studies"
+    },
+    {
+      "value": "Agricultural Science",
+      "label": "Agricultural Science"
+    }
+  ],
+  "JSS 2": [
+    {
+      "value": "Mathematics",
+      "label": "Mathematics"
+    },
+    {
+      "value": "English",
+      "label": "English"
+    },
+    {
+      "value": "Basic Science",
+      "label": "Basic Science"
+    },
+    {
+      "value": "Creative Arts",
+      "label": "Creative Arts"
+    },
+    {
+      "value": "Music",
+      "label": "Music"
+    },
+    {
+      "value": "Physical Education",
+      "label": "Physical Education"
+    },
+    {
+      "value": "Social Studies",
+      "label": "Social Studies"
+    },
+    {
+      "value": "Agricultural Science",
+      "label": "Agricultural Science"
+    }
+  ],
+  "JSS 3": [
+    {
+      "value": "Mathematics",
+      "label": "Mathematics"
+    },
+    {
+      "value": "English",
+      "label": "English"
+    },
+    {
+      "value": "Basic Science",
+      "label": "Basic Science"
+    },
+    {
+      "value": "Creative Arts",
+      "label": "Creative Arts"
+    },
+    {
+      "value": "Music",
+      "label": "Music"
+    },
+    {
+      "value": "Physical Education",
+      "label": "Physical Education"
+    },
+    {
+      "value": "Social Studies",
+      "label": "Social Studies"
+    },
+    {
+      "value": "Agricultural Science",
+      "label": "Agricultural Science"
+    }
+  ],
+  "SS 1": [
+    {
+      "value": "Mathematics",
+      "label": "Mathematics"
+    },
+    {
+      "value": "English",
+      "label": "English"
+    },
+    {
+      "value": "Basic Science",
+      "label": "Basic Science"
+    },
+    {
+      "value": "Creative Arts",
+      "label": "Creative Arts"
+    },
+    {
+      "value": "Music",
+      "label": "Music"
+    },
+    {
+      "value": "Physical Education",
+      "label": "Physical Education"
+    },
+    {
+      "value": "Social Studies",
+      "label": "Social Studies"
+    },
+    {
+      "value": "Agricultural Science",
+      "label": "Agricultural Science"
+    }
+  ],
+  "SS 2": [
+    {
+      "value": "Mathematics",
+      "label": "Mathematics"
+    },
+    {
+      "value": "English",
+      "label": "English"
+    },
+    {
+      "value": "Basic Science",
+      "label": "Basic Science"
+    },
+    {
+      "value": "Creative Arts",
+      "label": "Creative Arts"
+    },
+    {
+      "value": "Music",
+      "label": "Music"
+    },
+    {
+      "value": "Physical Education",
+      "label": "Physical Education"
+    },
+    {
+      "value": "Social Studies",
+      "label": "Social Studies"
+    },
+    {
+      "value": "Agricultural Science",
+      "label": "Agricultural Science"
+    }
+  ],
+  "SS 3": [
+    {
+      "value": "Mathematics",
+      "label": "Mathematics"
+    },
+    {
+      "value": "English",
+      "label": "English"
+    },
+    {
+      "value": "Basic Science",
+      "label": "Basic Science"
+    },
+    {
+      "value": "Creative Arts",
+      "label": "Creative Arts"
+    },
+    {
+      "value": "Music",
+      "label": "Music"
+    },
+    {
+      "value": "Physical Education",
+      "label": "Physical Education"
+    },
+    {
+      "value": "Social Studies",
+      "label": "Social Studies"
+    },
+    {
+      "value": "Agricultural Science",
+      "label": "Agricultural Science"
+    }
+  ]
+}

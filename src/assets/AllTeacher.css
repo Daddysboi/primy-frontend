@@ -1,0 +1,18 @@
+.admin_teacher {
+  margin: 0.5rem 3rem;
+
+  .teachers_grid {
+    padding-inline: 0.5rem;
+    margin-top: 2rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
+    gap: 2.5rem;
+  }
+}
+
+/* MOBILE DESIGN */
+@media (max-width: 600px) {
+  .admin_teacher {
+    margin-inline: 1rem;
+  }
+}

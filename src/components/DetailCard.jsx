@@ -1,7 +1,6 @@
 import styled from "styled-components";
 
 import { primaryColors } from "../assets/Colors";
-import { Children } from "react";
 
 const Card = styled.div`
   border-radius: 5px;
@@ -26,13 +25,13 @@ const Left = styled.div`
 `;
 
 const Right = styled.div`
-  align-self: cemorenter;
+  align-self: center;
 `;
 
 const CardTxt = styled.h1`
-  font-size: 1.2rem;
   font-weight: 600;
   margin: 0.5rem 0;
+  font-size: ${(props) => props.h1 || "1.2rem"};
 `;
 
 const CardHead = styled.h5`
@@ -42,7 +41,7 @@ const CardHead = styled.h5`
 `;
 
 const CardSubHead = styled.p`
-  font-size: 0.5rem;
+  font-size: ${(props) => props.p || "0.5rem"};
   font-weight: 400;
   margin: 0;
   opacity: 0.7;
@@ -52,7 +51,7 @@ const Span = styled.span`
   color: ${primaryColors.Green};
 `;
 
-const StudentImg = styled.img`
+const Img = styled.img`
   height: 2rem;
 `;
 
@@ -68,14 +67,16 @@ const DeatailCard = ({
   width,
   height,
   children,
+  h1,
+  p,
 }) => {
   return (
     <Card height={height} width={width}>
       <Left>
         <div>
-          <CardTxt>{value}</CardTxt>
+          <CardTxt h1={h1}>{value}</CardTxt>
           <CardHead>{heading}</CardHead>
-          <CardSubHead>
+          <CardSubHead p={p}>
             <Span>{rate}</Span>
             {subtext}
           </CardSubHead>
@@ -83,7 +84,7 @@ const DeatailCard = ({
         <Child>{children}</Child>
       </Left>
       <Right>
-        <StudentImg src={image} alt="" />
+        <Img src={image} alt="" />
       </Right>
     </Card>
   );

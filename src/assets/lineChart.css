@@ -1,0 +1,19 @@
+.recharts-cartesian-axis-ticks{
+  font-size: 0.7rem;
+  font-family: poppins;
+}
+
+.recharts-cartesian-grid{
+  /* display: none; */
+}
+
+.recharts-line-curve{
+ /* fill: blue; */
+ stroke: blue;
+ stroke-width: 0.3rem;
+}
+
+.recharts-line-dot{
+  stroke: blue;
+  stroke-width: 0.1rem;
+ }

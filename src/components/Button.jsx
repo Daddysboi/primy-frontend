@@ -4,13 +4,13 @@ import styled, { css } from "styled-components";
 import { primaryColors } from "../assets/Colors";
 
 const Button = styled.button`
+  height: 2.2rem;
   background-color: ${(props) => props.theme.primaryColor}; //for theme testig
   background: ${(props) => props.backgroundColor || primaryColors.Purple};
   border: none;
   padding: ${(props) => (props.small ? "0.5rem 1rem" : "0.5rem 2rem")};
   border-radius: 0.5rem;
   color: ${(props) => props.textColor || "#fff"};
-  margin-top: 0.8rem;
   border: 1px solid ${(props) => props.borderColor || primaryColors.Purple};
   cursor: pointer;
   transition: all 0.3s ease;

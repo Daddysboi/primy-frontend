@@ -6,6 +6,9 @@ export const REQUEST_PASSWORD_RESET = "request-password-reset";
 export const RESET_PASSWORD = "password-reset";
 export const CHANGE_PASSWORD = "change-password";
 export const GET_USER_BY_ID = "getUserById";
+export const STUDENTS = "students";
+export const TEACHERS = "teachers";
+export const USERS = "users"; //could merege with register
 
 export const USER_TOKEN = "USER_TOKEN";
 export const USER_ID = "USER_ID";

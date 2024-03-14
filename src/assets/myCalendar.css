@@ -1,0 +1,66 @@
+.rbc-header{
+   /* background: blue; */
+   /* color: white; */
+   padding: 0.2rem;
+   font-size: 0.7rem;
+   height: 1.4rem;
+}
+
+.rbc-event{
+   display: 0px !important;
+border-radius: 0px !important;
+border: none !important;
+border-color: transparent !important;;
+}
+
+.rbc-time-slot{
+background-color: aliceblue;
+color: black;
+}
+
+.rbc-event-label{
+display: none !important;;
+}
+
+
+.rbc-events-container{
+   width: 100% !important;
+}
+
+.rbc-timeSlot-group{
+min-height: 120px !important;
+}
+
+.rbc-btn-group{
+width: 7rem;
+margin: 0rem;
+}
+
+.rbc-btn-group button{
+   padding: 0.2rem;
+   font-size: 0.55rem;
+   border: none;
+}
+
+.rbc-toolbar-label{
+   /* padding: 0.2rem; */
+   font-size: 0.7rem;
+   font-weight: 600;
+}
+
+.rbc-month-view{
+   border: none;
+   font-size: 0.3rem;
+}
+
+.rbc-day-bg{
+   border: none;
+   font-size: 0.5rem;
+
+}
+
+.rbc-row{
+   border: none;
+   font-size: 0.5rem;
+
+}

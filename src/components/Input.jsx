@@ -63,23 +63,6 @@ const StyledPasswordInput = styled.input`
   }
 `;
 
-const StyledSelect = styled.select`
-  width: ${(props) => props.width || "100%"};
-  height: ${(props) => props.height || "42px"};
-  background: ${(props) => props.backgroundColor || "transparent"};
-  border: ${(props) => props.border || "1px solid rgba(223, 140, 82, 0.3)"};
-  padding: 0.5rem;
-  box-sizing: border-box;
-  display: block;
-  border-radius: 0.3rem;
-  outline: none;
-  color: ${(props) => props.color || "inherit"};
-
-  &:focus {
-    border: 1px solid rgb(194, 194, 194);
-  }
-`;
-
 const ErrorContainer = styled.div`
   width: 100%;
   position: absolute;
@@ -216,26 +199,6 @@ const AppInput = ({
     );
   }
 
-  if (type === "select") {
-    return (
-      <StyledInputContainer>
-        <StyledLabel style={{ color: labelColor }} htmlFor={name}>
-          {label}
-        </StyledLabel>
-        <StyledSelect
-          id={name}
-          name={name}
-          value={value}
-          onChange={onChange}
-          style={{ width, height, color, border, background, display }}
-          {...props}
-        >
-          {props.children}
-        </StyledSelect>
-        {error && <ErrorContainer>{error}</ErrorContainer>}
-      </StyledInputContainer>
-    );
-  }
   return (
     <StyledInputContainer>
       <StyledLabel style={{ color: labelColor }} htmlFor="">

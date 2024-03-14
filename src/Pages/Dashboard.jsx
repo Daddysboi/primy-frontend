@@ -1,26 +1,25 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { MdArrowBackIos } from "react-icons/md";
 import styled from "styled-components";
 
 import { useUser } from "../contexts/userContext";
-
 import AppButton from "../components/Button";
 
 import TeacherDashboard from "./dashboardComponents/TeacherDashboard";
 import StudentDashboard from "./dashboardComponents/StudentDashboard";
 import AdminDashboard from "./dashboardComponents/AdminDashboard";
+import AppSelectInput from "../components/SelectInput";
 
 const Container = styled.div`
-  margin-left: 3rem;
-  width: 100%;
-  margin-right: 5rem;
+  /* width: 100%; */
+  /* margin-right: 5rem; */
 `;
 
 const WelcomeTab = styled.div`
   display: flex;
   justify-content: space-between;
-  align-items: flex-start;
+  align-items: center;
 `;
 
 const Heading = styled.h1`
@@ -34,7 +33,19 @@ const Subhead = styled.p`
   margin-bottom: 1.5rem;
 `;
 
+const Right = styled.div`
+  display: flex;
+  gap: 1rem;
+`;
+const options = [
+  { value: "2021/2022", label: "2021 / 2022" },
+  { value: "2022/2023", label: "2022 / 2023" },
+  { value: "2023/2024", label: "2023 / 2024" },
+  { value: "2024/2025", label: "2024 / 2025" },
+];
+
 const Dashboard = () => {
+  const [option, setOption] = useState("");
   const { user } = useUser();
 
   const navigate = useNavigate();
@@ -45,6 +56,10 @@ const Dashboard = () => {
     }
   }, [user]);
 
+  const handleSelect = (e) => {
+    setOption(e.target.value);
+  };
+
   const displayName = `${user?.lastName} ${user?.firstName}`;
   return user ? (
     <Container>
@@ -53,12 +68,20 @@ const Dashboard = () => {
           <Heading>Hey, {displayName ?? ""}</Heading>
           <Subhead>Welcome to your dashboard</Subhead>
         </div>
-        <AppButton
-          text="New Admission"
-          onClick={() => {}}
-          small
-          icon={<MdArrowBackIos />}
-        />
+
+        <Right>
+          <AppSelectInput
+            options={options}
+            height="32px"
+            onChange={handleSelect}
+          />
+          <AppButton
+            text="New Admission"
+            onClick={() => {}}
+            small
+            icon={<MdArrowBackIos />}
+          />
+        </Right>
       </WelcomeTab>
       {user.role === "student" ? (
         <StudentDashboard />
