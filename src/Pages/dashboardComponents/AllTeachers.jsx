@@ -1,27 +1,25 @@
+import { useEffect, useState } from "react";
+
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { toast } from "react-toastify";
+import { deleteTeacher, getAllTeachers } from "../../redux/features/userSlice";
 
 import AdminHeader from "../../components/AdminHeader";
-import "../../assets/AllTeacher.css";
-import { useEffect, useState } from "react";
 import CreateUser from "../../components/CreateUser";
 import Modal from "../../components/Modal";
-import { deleteTeacher, getAllTeachers } from "../../redux/features/userSlice";
 import TeacherCard from "../../components/TeacherCard";
 import Loading from "../../components/Loading";
 
 import Profile from "../../components/Profile";
-import StudentCard from "../../components/StudentCard";
-
-// import teachers from "../../data/teachers.json";
 
 const AllTeacher = () => {
   const [loading, setLoading] = useState(false);
-  const [searchValue, setSearchValue] = useState("");
   const [createModal, setCreateModal] = useState(false);
+  const [user, setUser] = useState(false);
 
   const dispatch = useAppDispatch();
   const { users: teachers } = useAppSelector((state) => state.user);
+  const searchValue = useAppSelector((state) => state.query);
 
   useEffect(() => {
     setLoading(true);
@@ -38,7 +36,7 @@ const AllTeacher = () => {
       .finally(() => {
         setLoading(false);
       });
-  }, [dispatch]);
+  }, [dispatch, teachers]);
 
   if (loading) {
     return <Loading />;
@@ -48,14 +46,20 @@ const AllTeacher = () => {
     dispatch(deleteTeacher(id));
   };
 
+  const handleEdit = (teacher) => {
+    setEditMode(true);
+    setUser(teacher);
+    setCreateModal(true);
+  };
+
   return (
     <div className="admin_teacher">
       <AdminHeader
-        btnText="Add Teacher"
+        text="Add Teacher"
         type="teachers"
-        value={searchValue}
-        onChange={(e) => setSearchValue(e.target?.value)}
-        onClick={() => setCreateModal(true)}
+        onClick={() => {
+          setCreateModal(true);
+        }}
       />
 
       <div className="teachers_grid">
@@ -76,22 +80,21 @@ const AllTeacher = () => {
             <TeacherCard
               key={index}
               teacher={teacher}
-              onClick={() => handleDelete(teacher?._id)}
+              onClick={() => handleEdit(teacher)}
+              onDelete={() => handleDelete(teacher?._id)}
             />
           ))}
       </div>
-      {!teachers && (
-        <div className="center">
-          <h3>No Assigned Course</h3>
-        </div>
-      )}
 
       <Modal
         isOpen={createModal}
-        onClose={() => setCreateModal(false)}
+        onClose={() => {
+          setCreateModal(false);
+          setEditMode(false);
+        }}
         hasCloseBtn={true}
       >
-        <CreateUser role="teacher" setIsCreating={setCreateModal} />
+        <CreateUser role="teacher" user={user} setIsCreating={setCreateModal} />
       </Modal>
     </div>
   );

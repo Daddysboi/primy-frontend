@@ -7,12 +7,12 @@ const Container = styled.div`
   /* align-items: center; */
 `;
 
-const Loading = () => {
+const Loading = ({ color = `${primaryColors.Purple}` }) => {
   return (
     <Container>
       <Loader
         type="TailSpin"
-        color={primaryColors.Purple}
+        color={color}
         height={20}
         width={20}
         style={{ margin: "auto" }}

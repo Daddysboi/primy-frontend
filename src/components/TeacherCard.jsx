@@ -6,10 +6,11 @@ const TeacherCard = ({
   img = "https://picsum.photos/200",
   teacher,
   onClick,
+  onDelete,
 }) => {
   return (
-    <div className="profile-card">
-      <div className="menu" onClick={onClick}>
+    <div>
+      <div onClick={onClick} onDelete={onDelete}>
         <FaTrash size={20} />
       </div>
       <div className="user-image">

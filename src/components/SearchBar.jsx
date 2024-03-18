@@ -1,23 +1,25 @@
-import { useState } from "react";
+import { useAppDispatch, useAppSelector } from "../redux/hooks";
+import { setQuery } from "../redux/features/querySlice";
 
-import { primaryColors } from "../assets/Colors";
 import AppInput from "./Input";
 
 const SearchBar = () => {
-  const [searchQuery, setSearchQuery] = useState("");
+  const query = useAppSelector((state) => state.query);
+  const dispatch = useAppDispatch();
 
   const handleSearch = (e) => {
-    setSearchQuery(e.target.value);
+    const newQuery = e.target.value;
+    dispatch(setQuery(newQuery));
   };
 
   return (
     <>
       <AppInput
         border="none"
-        backgroundColor={primaryColors.Gray}
+        type="search"
         width="25rem"
         height="2.5rem"
-        value={searchQuery}
+        value={query}
         onChange={handleSearch}
         placeholder={"search"}
       />

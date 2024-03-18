@@ -147,14 +147,14 @@ export const UpdatePassword = async ({ userId, oldPassword, newPassword }) => {
 export const CreateUser = async (user, editing) => {
   if (editing) {
     if (user.role == "student") {
-      const res = await axiosClient.put(`${STUDENTS}`, user, {
+      const res = await axiosClient.put(`${STUDENTS}/${user.studentId}`, user, {
         headers: {
           "Access-Control-Allow-Origin": "*",
         },
       });
       return res.data;
     } else {
-      const res = await axiosClient.put(`${TEACHERS}`, user, {
+      const res = await axiosClient.put(`${TEACHERS}/${user.teacherId}`, user, {
         headers: {
           "Access-Control-Allow-Origin": "*",
         },
@@ -162,12 +162,14 @@ export const CreateUser = async (user, editing) => {
       return res.data;
     }
   }
+  console.log(user);
 
   const res = await axiosClient.post(`${USERS}`, user, {
     headers: {
       "Access-Control-Allow-Origin": "*",
     },
   });
+
   return res.data;
 };
 

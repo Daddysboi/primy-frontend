@@ -1,20 +1,21 @@
-import { useState } from "react";
+import "../assets/styles.css";
 import PropTypes from "prop-types";
+import { useState } from "react";
 import { BsThreeDotsVertical } from "react-icons/bs";
 
-import "../assets/styles.css";
 import CreateUser from "./CreateUser";
 import Modal from "./Modal";
 import ClickOutside from "./ClickOutside";
-import { deleteStudent } from "../services/userService";
+import { deleteStudent } from "../redux/features/userSlice";
 
 const StudentCard = ({
   img = "https://picsum.photos/200",
   student,
   refetchStudents,
+  onClick,
+  onDelete,
 }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-
   const [isEditing, setIsEditing] = useState(false);
 
   const handleMenuClick = () => {
@@ -30,9 +31,8 @@ const StudentCard = ({
 
   return (
     <>
-      {" "}
-      <div className="profile-card">
-        <div className="menu">
+      <div>
+        <div>
           <BsThreeDotsVertical size={24} onClick={() => handleMenuClick()} />
         </div>
         <ClickOutside

@@ -1,197 +1,226 @@
 import { useState } from "react";
 import PropTypes from "prop-types";
-import AppButton from "./Button";
-import { getDateValue } from "../utils/helpers";
+import { Form, Formik, Field, ErrorMessage } from "formik";
+import * as Yup from "yup";
+import { toast } from "react-toastify";
+import styled from "styled-components";
 
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { createUser } from "../services/userService";
+import { useAppDispatch } from "../redux/hooks";
+import { createUser } from "../redux/features/userSlice";
+
+import AppInput from "./Input";
+import AppSelectInput from "./SelectInput";
+import Loading from "./Loading";
+import Error from "./Error";
+
+import AppButton from "./Button";
+import { classLists } from "./ClassList";
+
+const Header = styled.h1`
+  font-size: 1rem;
+`;
+
+const Button = styled(AppButton)`
+  margin-top: 1rem;
+`;
+const options = [
+  { label: "Male", value: "male" },
+  { label: "Female", value: "female" },
+];
 
 const CreateUser = ({
   role,
   setIsCreating,
   user = undefined,
   editing = false,
-  refetch = null,
 }) => {
+  const [loading, setLoading] = useState(false);
+  // const editing = !user; // user is defined, editing
+  const dispatch = useAppDispatch();
+
+  const initialValues = {
+    email: "",
+    role: role,
+    firstName: "",
+    middleName: "",
+    lastName: "",
+    gender: "",
+    password: "",
+    className: role === "student" ? "" : undefined,
+    phoneNumber: role === "teacher" ? undefined : "",
+  };
+
   if (user !== undefined) {
-    var initialState = {
-      studentId: role === "student" ? user?._id : undefined,
-      teacherId: role === "teacher" ? user?._id : undefined,
-      email: user.user?.email,
-      role: role,
-      courseId: role === "student" ? user?.course?._id : undefined,
-      firstName: user?.firstName,
-      middleName: user?.middleName,
-      lastName: user?.lastName,
-      gender: user?.gender,
-      dateOfBirth: getDateValue(user?.dateOfBirth),
-    };
-  } else {
-    initialState = {
-      email: "",
-      password: "",
-      role: role,
-      courseId: role === "student" ? "" : undefined,
-      firstName: "",
-      middleName: "",
-      lastName: "",
-      gender: "",
-      dateOfBirth: "",
-    };
+    initialValues.email = user?.email;
+    initialValues.firstName = user?.firstName;
+    initialValues.middleName = user?.middleName;
+    initialValues.lastName = user?.lastName;
+    initialValues.gender = user?.gender;
+    initialValues.studentId = role === "student" ? user?._id : undefined;
+    initialValues.teacherId = role === "teacher" ? user?._id : undefined;
+    initialValues.className =
+      role === "student" ? user?.className?._id : undefined;
   }
 
-  const [formData, setFormData] = useState(initialState);
-
-  const { data: courses } = useQuery({
-    queryKey: ["teacher-courses"],
-    queryFn: () => getTeacherCourses(),
+  const validationSchema = Yup.object().shape({
+    email: Yup.string().email(),
+    firstName: Yup.string().required("Required"),
+    lastName: Yup.string().required("Required"),
+    middleName: Yup.string(),
+    role: Yup.string().required("Required"),
+    // className: Yup.string().when("role", {
+    //   is: "student",
+    //   then: Yup.string().required("Required"),
+    //   otherwise: Yup.string(),
+    // }),
+    gender: Yup.string().required("Required"),
+    phoneNumber: Yup.string().required("Required"),
   });
 
-  const queryClient = useQueryClient();
+  const onSubmit = async (values, { resetForm }) => {
+    console.log("clicked");
+    setLoading(true);
+    let request = {
+      email: values.email || "",
+      password:
+        role === "teacher"
+          ? import.meta.VITE_TEACHER_PASSWORD
+          : import.meta.VITE_STUDENT_PASSWORD,
+      role: values.role,
+      className: values.role === "student" ? "" : undefined,
+      firstName: values.firstName,
+      middleName: values.middleName,
+      lastName: values.lastName,
+      gender: values.gender,
+      phoneNumber: values.role === "student" ? "" : undefined,
+    };
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prevData) => ({ ...prevData, [name]: value }));
-  };
-
-  const mutation = useMutation({
-    mutationFn: () => {
-      return createUser(formData, editing);
-    },
-    onSuccess: async () => {
-      await queryClient.invalidateQueries({
-        queryKey: ["students", "teachers"],
+    console.log("1");
+    dispatch(createUser(request, editing))
+      .unwrap()
+      .then((res) => {
+        toast.success(res?.payload?.message || "Successfully fetched teachers");
+        resetForm();
+      })
+      .catch((error) => {
+        toast.error(error?.message || "Something went wrong");
+      })
+      .finally(() => {
+        setLoading(false);
+        setIsCreating(false);
       });
-      setIsCreating(false);
-      setFormData(initialState);
-    },
-  });
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    mutation.mutate();
-    refetch;
   };
 
+  if (loading) {
+    return <Loading />;
+  }
   return (
-    <div className="grid-wrapper">
-      <form className="form-wrapper" onSubmit={handleSubmit}>
-        <div className="row">
-          <div className="col-12">
-            <center>
-              <h1>
-                {editing ? "Update" : "Create"} {role}
-              </h1>
-            </center>
-          </div>
-          {editing == false && (
-            <>
-              <div className="col-md-12 ">
-                <label>Email</label>
-                <input
-                  type="email"
-                  name="email"
-                  required
-                  value={formData?.email}
-                  onChange={handleChange}
-                />
-              </div>
+    <Formik
+      initialValues={initialValues}
+      onSubmit={onSubmit}
+      validationSchema={validationSchema}
+    >
+      <Form>
+        <Header>
+          {editing ? "Update" : "Create"} {role}
+        </Header>
 
-              <div className="col-md-12 ">
-                <label>Password</label>
-                <input
-                  type="text"
-                  name="password"
-                  required
-                  value={formData?.password}
-                  onChange={handleChange}
-                />
-              </div>
-            </>
-          )}
+        <>
+          <Field
+            as={AppInput}
+            type="text"
+            name="firstName"
+            label="First Name"
+            placeholder="Enter First Name"
+            height="1.5rem"
+            width="90%"
+          />
+          <ErrorMessage name="firstName" component={Error} />
+        </>
 
-          <div className="col-md-6 ">
-            <label>First Name</label>
-            <input
+        <Field
+          as={AppInput}
+          type="text"
+          name="lastName"
+          label="Last Name"
+          placeholder="Enter Last Name"
+          height="1.5rem"
+          width="90%"
+        />
+        <ErrorMessage name="lastName" component={Error} />
+
+        <>
+          <Field
+            as={AppInput}
+            type="text"
+            name="middleName"
+            label="Middle Name"
+            placeholder="Enter Middle Name"
+            height="1.5rem"
+            width="90%"
+          />
+        </>
+
+        {role === "teacher" && (
+          <>
+            <Field
+              as={AppInput}
               type="text"
-              name="firstName"
-              required
-              value={formData?.firstName}
-              onChange={handleChange}
+              name="phoneNumber"
+              label="Phone Number"
+              placeholder="Enter Phone Number"
+              height="1.5rem"
+              width="90%"
             />
-          </div>
-          <div className="col-md-6 ">
-            <label>Middle Name</label>
-            <input
-              type="text"
-              name="middleName"
-              value={formData?.middleName}
-              onChange={handleChange}
+            <ErrorMessage name="phoneNumber" component={Error} />
+          </>
+        )}
+
+        {editing == false && (
+          <>
+            <Field
+              as={AppInput}
+              type="email"
+              name="email"
+              label="Email"
+              placeholder="Enter Email"
+              height="1.5rem"
+              width="90%"
             />
-          </div>
+            <ErrorMessage name="email" component={Error} />
+          </>
+        )}
 
-          <div className="col-md-6 ">
-            <label>Last Name</label>
-            <input
-              type="text"
-              name="lastName"
-              value={formData?.lastName}
-              onChange={handleChange}
-            />
-          </div>
-          <div className="col-md-6 ">
-            <label>Gender</label>
-            <select
-              name="gender"
-              required
-              value={formData.gender}
-              onChange={handleChange}
-            >
-              <option value="">Select Gender</option>
-              <option value="Male">Male</option>
-              <option value="Female">Female</option>
-            </select>
-          </div>
+        <Field
+          as={AppSelectInput}
+          type="text"
+          name="gender"
+          label="Gender"
+          placeholder="Enter Gender"
+          height="1.5rem"
+          width="90%"
+          options={options}
+        />
+        <ErrorMessage name="gender" component={Error} />
 
-          <div className="col-md-6 ">
-            <label>Date of Birth</label>
-            <input
-              type="date"
-              required
-              name="dateOfBirth"
-              value={formData?.dateOfBirth}
-              onChange={handleChange}
-            />
-          </div>
-
-          {role === "student" && (
-            <div className="col-md-6 ">
-              <label>Course</label>
-              <select
-                name="courseId"
-                required
-                value={formData.courseId}
-                onChange={handleChange}
-              >
-                <option value="">Select Course</option>
-                {courses &&
-                  courses?.map((course) => (
-                    <option
-                      key={course?.course?._id}
-                      value={course?.course?._id}
-                    >
-                      {course.course.courseTittle} ({course?.course?.courseCode}
-                      )
-                    </option>
-                  ))}
-              </select>
-            </div>
-          )}
-        </div>
-
-        <AppButton loading={mutation.isPending} text={`Save`} />
-      </form>
-    </div>
+        {role === "student" && (
+          <>
+            {classLists && (
+              <Field
+                as={AppSelectInput}
+                selectType="category"
+                type="text"
+                name="className"
+                label="Select Class"
+                width="90%"
+                optionList={classLists}
+              />
+            )}
+          </>
+        )}
+        <Button loading={loading} text={`Save`} type="submit" />
+      </Form>
+    </Formik>
   );
 };
 

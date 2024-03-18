@@ -23,11 +23,12 @@ import AdminProtectedRoutes from "./pages/dashboardComponents/protectedRoute/Adm
 import AllTeacher from "./pages/dashboardComponents/AllTeachers.jsx";
 import AllClasses from "./pages/dashboardComponents/AllClasses.jsx";
 import AllStudents from "./pages/dashboardComponents/AllStudents.jsx";
-import AllResults from "./pages/dashboardComponents/AllResults";
 import Events from "./pages/dashboardComponents/Events.jsx";
 import Finance from "./pages/dashboardComponents/Finance.jsx";
 import Settings from "./pages/dashboardComponents/Settings.jsx";
 import AllTimetable from "./pages/dashboardComponents/AllTimetable.jsx";
+import Assessment from "./pages/dashboardComponents/Assessment.jsx";
+import Exams from "./pages/dashboardComponents/Exams.jsx";
 
 // import CoursesPage from "./pages/course/index.jsx";
 
@@ -144,25 +145,39 @@ export const router = createBrowserRouter([
                 element: <AllTimetable />,
               },
               {
-                path: "courses/assessment/:courseId",
-                // element: <AssessmentCoursePage />,
-              },
-              {
-                path: "courses/:assessmentId/add-questions",
-                // element: <AddQuestions />,
-              },
-              {
-                path: "courses/:assessmentId/view-questions",
-                // element: <ViewQuestions />,
-              },
-              {
                 path: "results",
-                element: <AllResults />,
-              },
-
-              {
-                path: "results/:assessmentId",
-                // element: <ShowResult />,
+                children: [
+                  {
+                    path: "exams/classes",
+                    element: <Exams />,
+                    children: [
+                      {
+                        path: ":className/students",
+                        // element: <Students />,
+                        children: [
+                          {
+                            path: ":id",
+                          },
+                        ],
+                      },
+                    ],
+                  },
+                  {
+                    path: "assessments/classes",
+                    element: <Assessment />,
+                    children: [
+                      {
+                        path: ":className/students",
+                        // element: <Students />,
+                        children: [
+                          {
+                            path: ":id",
+                          },
+                        ],
+                      },
+                    ],
+                  },
+                ],
               },
             ],
           },

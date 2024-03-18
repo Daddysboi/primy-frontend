@@ -15,14 +15,14 @@ const StyledLabel = styled.label`
 `;
 
 const StyledSelect = styled.select`
-  width: 100%;
+  width: ${(props) => props.width || "100%"};
   min-height: 35px;
-  height: ${(props) => props.height || "32px"};
+  height: ${(props) => props.height || "35px"};
   padding: 0.5rem;
   box-sizing: border-box;
   display: block;
   border-radius: 0.5rem;
-  border: 1px solid ${(props) => props.borderColor || primaryColors.Purple};
+  border: 1px solid ${(props) => props.borderColor || primaryColors.LightPurple};
   outline: none;
   background: transparent;
 
@@ -50,12 +50,42 @@ const AppSelectInput = ({
   onChange,
   error,
   options,
+  optionList,
   borderColor,
   height,
   name,
+  selectType,
+  width,
   select = "Select",
   required = false,
 }) => {
+  if (selectType === "category") {
+    return (
+      <StyledSelectContainer>
+        <StyledLabel htmlFor={name}>{label}</StyledLabel>
+        <StyledSelect
+          name={name}
+          value={value}
+          borderColor={borderColor}
+          height={height}
+          onChange={onChange}
+          required={required}
+          width={width}
+        >
+          <StyledOption value="">{select}</StyledOption>
+          {Object.entries(optionList).map(([category, options]) => (
+            <optgroup key={category} label={category.toUpperCase()}>
+              {options.map((option) => (
+                <StyledOption key={option} value={option}>
+                  {option}
+                </StyledOption>
+              ))}
+            </optgroup>
+          ))}
+        </StyledSelect>
+      </StyledSelectContainer>
+    );
+  }
   return (
     <StyledSelectContainer>
       <StyledLabel htmlFor={name}>{label}</StyledLabel>
@@ -66,6 +96,7 @@ const AppSelectInput = ({
         height={height}
         onChange={onChange}
         required={required}
+        width={width}
       >
         <StyledOption value="">{select}</StyledOption>
         {options.map((option) => (

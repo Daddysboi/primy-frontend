@@ -6,4 +6,7 @@ export const primaryColors = {
   Green: "#1cd086",
   mintGreen: "#D8F8E9",
   DashBoardBackground: "#f8f7ff",
+  Red: "#ff0000",
+  Blue: "#000dfd",
+  Yellow: "#ffe600",
 };

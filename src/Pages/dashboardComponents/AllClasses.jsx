@@ -28,14 +28,9 @@ const AllClasses = () => {
     queryFn: () => getAllCourses(),
   });
 
-  // if (isLoading) {
-  //   return <Loading />;
-  // }
-
-  const deleteCourseById = async (id) => {
-    await deleteCourse(id);
-    refetch();
-  };
+  if (isLoading) {
+    return <Loading />;
+  }
 
   return (
     <div className="admin_courses">
@@ -65,7 +60,7 @@ const AllClasses = () => {
               key={index}
               course={course}
               onClick={() => navigate(`assessment/${course?._id}`)}
-              onDelete={() => deleteCourseById(course?._id)}
+              onDelete={() => {}}
             />
           ))}
       </div>

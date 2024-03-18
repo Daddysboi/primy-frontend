@@ -144,9 +144,9 @@ export const updatePassword = createAsyncThunk(
 //create user
 export const createUser = createAsyncThunk(
   "createUser",
-  async (user, editing) => {
+  async (request, editing) => {
     try {
-      const resp = await CreateUser(user, editing);
+      const resp = await CreateUser(request, editing);
       return resp;
     } catch (error) {
       throw error;

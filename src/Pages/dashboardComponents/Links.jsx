@@ -125,9 +125,22 @@ export const adminLinks = [
   },
   {
     title: "Results",
-    link: "admin/results",
-    type: "link",
     icon: <PiExamBold />,
+    type: "sublinks",
+    sublinks: [
+      {
+        title: "Exam",
+        link: "admin/results/exams/classes/",
+        type: "link",
+        icon: <PiExamBold />,
+      },
+      {
+        title: "Assignment",
+        link: "admin/results/assessments/classes",
+        type: "link",
+        icon: <PiExamBold />,
+      },
+    ],
   },
   {
     title: "Events",

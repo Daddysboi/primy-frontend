@@ -1,10 +1,16 @@
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 import { useAppDispatch } from "../redux/hooks";
 import { logout } from "../redux/features/loginSlice";
 import { useUser } from "../contexts/userContext";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faChevronUp,
+  faChevronDown,
+  faPlusCircle,
+} from "@fortawesome/free-solid-svg-icons";
 
 import {
   adminLinks,
@@ -57,8 +63,6 @@ const Button = styled.button`
   gap: 0.5rem;
   padding: 8px;
   margin-left: ${({ active }) => (active ? "0.5rem" : "")};
-
-  /* border-bottom: 1px solid transparent; */
   border-radius: 0.5rem;
   cursor: pointer;
   border: ${({ active }) =>
@@ -77,6 +81,10 @@ const Button = styled.button`
   }
 `;
 
+const SubButton = styled(Button)`
+  margin: 0 0 0 1.2rem;
+`;
+
 const Links = styled.div`
   display: flex;
   flex-direction: column;
@@ -92,6 +100,7 @@ const DashBoardLayout = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const { user } = useUser();
+  const [showSublinks, setShowSublinks] = useState(false);
 
   // useEffect(() => {
   //   if (!user) {
@@ -103,15 +112,14 @@ const DashBoardLayout = () => {
     if (type === "button") {
       dispatch(logout());
       navigate("/");
-
-      return;
-    }
-    if (url === "dashboard") {
+    } else if (url === "dashboard") {
       navigate("/dashboard");
       return;
+    } else if (type === "sublinks") {
+      setShowSublinks(!showSublinks);
+    } else {
+      navigate(url);
     }
-
-    navigate(url);
   };
 
   let links;
@@ -142,15 +150,36 @@ const DashBoardLayout = () => {
           </Logo>
           <Links>
             {links.map((sidebar, index) => (
-              <Button
-                onClick={() => clickHandler(sidebar.link, sidebar?.type)}
-                key={index}
-                active={checkInLocation(sidebar.link)}
-                disabled={sidebar?.disabled}
-              >
-                {sidebar.icon}
-                {sidebar.title}
-              </Button>
+              <div key={index}>
+                <Button
+                  onClick={() => clickHandler(sidebar.link, sidebar.type)}
+                  active={checkInLocation(sidebar.link)}
+                  disabled={sidebar?.disabled}
+                >
+                  {sidebar.icon}
+                  {sidebar.title}
+                  <div>
+                    {sidebar.sublinks ? (
+                      <FontAwesomeIcon
+                        icon={showSublinks ? faChevronUp : faChevronDown}
+                      />
+                    ) : null}
+                  </div>
+                </Button>
+                {sidebar.sublinks && showSublinks && (
+                  <>
+                    {sidebar.sublinks.map((item, subIndex) => (
+                      <SubButton
+                        onClick={() => navigate(item.link)}
+                        key={subIndex}
+                      >
+                        {item.icon}
+                        {item.title}
+                      </SubButton>
+                    ))}
+                  </>
+                )}
+              </div>
             ))}
           </Links>
           <div>

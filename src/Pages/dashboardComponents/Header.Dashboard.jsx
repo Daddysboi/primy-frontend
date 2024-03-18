@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { IoSearch } from "react-icons/io5";
 
 import { useUser } from "../../contexts/userContext";
 
@@ -31,6 +32,15 @@ const Right = styled.div`
   justify-content: space-between;
   padding: 0 5rem;
   padding-top: 0.5rem;
+`;
+
+const Search = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: ${primaryColors.Gray};
+  padding-left: 1rem;
+  border-radius: 0.5rem;
 `;
 
 const Circles = styled.div`
@@ -85,11 +95,16 @@ const Header = () => {
     <MdOutlineCreditScore />,
     <RiFolder5Fill />,
   ];
+
   return (
     <Container>
       <Left></Left>
       <Right>
-        <SearchBar />
+        <Search>
+          <IoSearch className="search_icon" />
+          <SearchBar />
+        </Search>
+
         <IconsTab>
           {icons.map((icon, index) => (
             <Circles key={index}>{icon}</Circles>
