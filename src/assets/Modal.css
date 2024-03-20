@@ -1,0 +1,29 @@
+.modal::backdrop {
+  background: hsl(0 0% 0% / 50%);
+}
+
+.modal {
+  min-width: 25rem;
+  padding: 2rem;
+  border: 0;
+  border-radius: 0.5rem;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  box-shadow: hsl(0 0% 0% / 10%) 0 0 0.5rem 0.25rem;
+}
+
+.modal-close-btn {
+  cursor: pointer;
+  padding: 5px;
+  border: none;
+  border-radius: 4px;
+  background-color: red;
+  color: white;
+  font-size: 1em;
+  position: absolute;
+  top: 0.25em;
+  right: 0.25em;
+}

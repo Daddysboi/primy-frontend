@@ -1,12 +1,13 @@
-import Button from "../../../../educativ/educativ-frontend/src/components/Button.jsx";
-import PropTypes from "prop-types";
-import "../assets/css/CourseCard.css";
-import { BsThreeDotsVertical } from "react-icons/bs";
 import { useState } from "react";
-import Modal from "../../../../educativ/educativ-frontend/src/components/Modal.jsx";
+import PropTypes from "prop-types";
+import { BsThreeDotsVertical } from "react-icons/bs";
+
+import "../assets/CourseCard.css";
+import Button from "../components/Button.jsx";
+import Modal from "../components/Modal.jsx";
 import CreateCourse from "./CreateCourse.jsx";
-import ClickOutside from "../../../../educativ/educativ-frontend/src/components/ClickOutside.jsx";
-import AssignTeacherCourse from "../../../../educativ/educativ-frontend/src/components/AssignTeacherCourse.jsx";
+import ClickOutside from "./ClickOutside.jsx";
+import AssignTeacherCourse from "./AssignTeacherCourse.jsx";
 
 const CourseCard = ({ course, onClick, onDelete }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);

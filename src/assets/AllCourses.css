@@ -1,0 +1,18 @@
+.admin_courses {
+  margin: 0.5rem 3rem;
+
+  .courses_grid {
+    padding-inline: 0.5rem;
+    margin-top: 2rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
+    gap: 2.5rem;
+  }
+}
+
+/* MOBILE DESIGN */
+@media (max-width: 600px) {
+  .admin_courses {
+    margin-inline: 1rem;
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "email": "temitoperator@gmail.com",
+  "password": "123234",
+  "role": "role",
+  "courseId": "Mathematics",
+  "firstName": "Ahmed",
+  "middleName": "Temitope",
+  "lastName": "Yusuf",
+  "gender": "Male",
+  "dateOfBirth": "12/10/1234"
+}

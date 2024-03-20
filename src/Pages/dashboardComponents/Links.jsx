@@ -1,18 +1,39 @@
+import { RxDashboard } from "react-icons/rx";
+import {
+  PiChalkboardTeacherBold,
+  PiStudentBold,
+  PiExamBold,
+} from "react-icons/pi";
+import { FaBookOpen, FaHandHoldingUsd } from "react-icons/fa";
+import { MdEventAvailable } from "react-icons/md";
+import { IoMdSettings, IoIosLogOut } from "react-icons/io";
+
 // STUDENT LINKS
 export const studentLinks = [
   {
     title: "My Dashboard",
     link: "dashboard",
     type: "link",
+    icon: <RxDashboard />,
   },
   {
     title: "Assessments",
-    link: "students/assessment",
+    link: "student/assessment",
     type: "link",
   },
   {
     title: "Grades",
-    link: "students/grade",
+    link: "student/grade",
+    type: "link",
+  },
+  {
+    title: "Timetable",
+    link: "student/timetable",
+    type: "link",
+  },
+  {
+    title: "Events",
+    link: "events",
     type: "link",
   },
   {
@@ -29,8 +50,8 @@ export const teacherLinks = [
     type: "link",
   },
   {
-    title: "My Courses",
-    link: "teacher/courses",
+    title: "My Clases",
+    link: "teacher/classes",
     type: "link",
   },
   {
@@ -49,6 +70,16 @@ export const teacherLinks = [
     type: "link",
   },
   {
+    title: "Timetable",
+    link: "teacher/timetable",
+    type: "link",
+  },
+  {
+    title: "Events",
+    link: "events",
+    type: "link",
+  },
+  {
     title: "Settings",
     link: "settings",
     // disabled: true,
@@ -63,38 +94,75 @@ export const teacherLinks = [
 // ADMIN LINKS
 export const adminLinks = [
   {
-    title: "My Dashboard",
+    title: "Dashboard",
     link: "dashboard",
     type: "link",
+    icon: <RxDashboard />,
   },
   {
     title: "Teachers",
     link: "admin/teachers",
     type: "link",
+    icon: <PiChalkboardTeacherBold />,
   },
   {
     title: "Students",
     link: "admin/students",
     type: "link",
+    icon: <PiStudentBold />,
   },
   {
-    title: "Courses",
-    link: "admin/courses",
+    title: "Classes",
+    link: "admin/classes",
     type: "link",
+    icon: <FaBookOpen />,
+  },
+  {
+    title: "Timetable",
+    link: "admin/timetable",
+    type: "link",
+    icon: <FaBookOpen />,
   },
   {
     title: "Results",
-    link: "admin/results",
+    icon: <PiExamBold />,
+    type: "sublinks",
+    sublinks: [
+      {
+        title: "Exam",
+        link: "admin/results/exams/",
+        type: "link",
+        icon: <PiExamBold />,
+      },
+      {
+        title: "Assessment",
+        link: "admin/results/assessments/",
+        type: "link",
+        icon: <PiExamBold />,
+      },
+    ],
+  },
+  {
+    title: "Events",
+    link: "events",
     type: "link",
+    icon: <MdEventAvailable />,
+  },
+  {
+    title: "Finance",
+    link: "finance",
+    type: "link",
+    icon: <FaHandHoldingUsd />,
   },
   {
     title: "Settings",
     link: "settings",
-    // disabled: true,
     type: "link",
+    icon: <IoMdSettings />,
   },
   {
     title: "Log out",
     type: "button",
+    icon: <IoIosLogOut />,
   },
 ];

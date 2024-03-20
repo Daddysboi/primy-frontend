@@ -1,0 +1,70 @@
+[
+  {
+    "value": "Music",
+    "label": "Music"
+  },
+  {
+    "value": "Dance",
+    "label": "Dance"
+  },
+  {
+    "value": "Playtime",
+    "label": "Playtime"
+  },
+  {
+    "value": "English",
+    "label": "English"
+  },
+  {
+    "value": "Mathematics",
+    "label": "Mathematics"
+  },
+  {
+    "value": "Basic Science",
+    "label": "Basic Science"
+  },
+  {
+    "value": "Social Studies",
+    "label": "Social Studies"
+  },
+  {
+    "value": "Fine Art",
+    "label": "Fine Art"
+  },
+  {
+    "value": "Visual Arts",
+    "label": "Visual Arts"
+  },
+  {
+    "value": "Creative Arts",
+    "label": "Creative Arts"
+  },
+  {
+    "value": "Geography",
+    "label": "Geography"
+  },
+  {
+    "value": "Physics",
+    "label": "Physics"
+  },
+  {
+    "value": "Chemistry",
+    "label": "Chemistry"
+  },
+  {
+    "value": "Biology",
+    "label": "Biology"
+  },
+  {
+    "value": "Agricultural Science",
+    "label": "Agricultural Science"
+  },
+  {
+    "value": "Further Mathematics",
+    "label": "Further Mathematics"
+  },
+  {
+    "value": "Physical and Health Education",
+    "label": "Physical and Health Education"
+  }
+]

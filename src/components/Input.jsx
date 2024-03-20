@@ -4,9 +4,11 @@ import styled from "styled-components";
 import { faEdit } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
+import { primaryColors } from "../assets/Colors";
+
 const StyledInputContainer = styled.div`
   position: relative;
-  margin-bottom: 12px;
+  /* margin-bottom: 12px; */
 `;
 
 const StyledLabel = styled.label`
@@ -17,10 +19,11 @@ const StyledLabel = styled.label`
 `;
 
 const StyledInput = styled.input`
-  width: 100%;
+  width: ${(props) => props.width || "100%"};
   height: ${(props) => props.height || "42px"};
   background: ${(props) => props.backgroundColor || "transparent"};
-  border: ${(props) => props.border || "1px solid rgba(223, 140, 82, 0.3)"};
+  border: ${(props) =>
+    props.border || `1px solid ${primaryColors.LightPurple}`};
   padding: 0.5rem;
   box-sizing: border-box;
   display: block;
@@ -28,6 +31,8 @@ const StyledInput = styled.input`
   outline: none;
   &::placeholder {
     opacity: 0.3;
+    font-size: 0.6rem;
+    font-style: italic;
   }
   &:focus {
     border: 1px solid rgb(194, 194, 194);
@@ -49,44 +54,21 @@ const StyledPasswordInput = styled.input`
   padding: 0.5rem;
   box-sizing: border-box;
   border-radius: 0.3rem;
-  border: 1px solid rgba(223, 140, 82, 0.3);
+  border: ${(props) =>
+    props.border || `1px solid ${primaryColors.LightPurple}`};
   display: flex;
   justify-content: center;
   align-items: center;
   background: transparent;
   outline: none;
   &::placeholder {
-    opacity: 0.5;
+    opacity: 0.3;
+    font-size: 0.6rem;
+    font-style: italic;
   }
   &:focus {
     border: 1px solid rgb(194, 194, 194);
   }
-`;
-
-const StyledSelect = styled.select`
-  width: ${(props) => props.width || "100%"};
-  height: ${(props) => props.height || "42px"};
-  background: ${(props) => props.backgroundColor || "transparent"};
-  border: ${(props) => props.border || "1px solid rgba(223, 140, 82, 0.3)"};
-  padding: 0.5rem;
-  box-sizing: border-box;
-  display: block;
-  border-radius: 0.3rem;
-  outline: none;
-  color: ${(props) => props.color || "inherit"};
-
-  &:focus {
-    border: 1px solid rgb(194, 194, 194);
-  }
-`;
-
-const ErrorContainer = styled.div`
-  width: 100%;
-  position: absolute;
-  color: #ff5959;
-  font-size: 10px;
-  font-weight: 400;
-  line-height: 10px;
 `;
 
 const StyledTextarea = styled.textarea`
@@ -94,7 +76,8 @@ const StyledTextarea = styled.textarea`
   border: none;
   outline: none;
   border-radius: 0.3rem;
-  border: 1px solid rgba(223, 140, 82, 0.3);
+  border: ${(props) =>
+    props.border || `1px solid ${primaryColors.LightPurple}`};
   &::placeholder {
     opacity: 0.5;
   }
@@ -126,10 +109,10 @@ const AppInput = ({
   showEyeIcon = true,
   display,
   disabled,
+  required = false,
   ...props
 }) => {
   const [passwordVisibility, setPasswordVisibility] = useState(false);
-  const passwordRef = useRef(null);
 
   const togglePasswordVisibility = () => {
     setPasswordVisibility((prevVisibility) => !prevVisibility);
@@ -183,7 +166,6 @@ const AppInput = ({
             />
           )}
         </PasswordContainer>
-        {error && <ErrorContainer>{error}</ErrorContainer>}
       </StyledInputContainer>
     );
   }
@@ -212,31 +194,10 @@ const AppInput = ({
             onBlur={onBlur}
           />
         </div>
-        {error && <ErrorContainer>{error}</ErrorContainer>}
       </StyledInputContainer>
     );
   }
 
-  if (type === "select") {
-    return (
-      <StyledInputContainer>
-        <StyledLabel style={{ color: labelColor }} htmlFor={name}>
-          {label}
-        </StyledLabel>
-        <StyledSelect
-          id={name}
-          name={name}
-          value={value}
-          onChange={onChange}
-          style={{ width, height, color, border, background, display }}
-          {...props}
-        >
-          {props.children}
-        </StyledSelect>
-        {error && <ErrorContainer>{error}</ErrorContainer>}
-      </StyledInputContainer>
-    );
-  }
   return (
     <StyledInputContainer>
       <StyledLabel style={{ color: labelColor }} htmlFor="">
@@ -251,9 +212,9 @@ const AppInput = ({
         onChange={onChange}
         style={{ width, height, color, border, background, display }}
         disabled={disabled}
+        required={required}
         {...props}
       />
-      {error && <ErrorContainer>{error}</ErrorContainer>}
     </StyledInputContainer>
   );
 };

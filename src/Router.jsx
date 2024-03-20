@@ -1,4 +1,4 @@
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { createBrowserRouter } from "react-router-dom";
 
 // Pages
 import Homepage from "./pages/Homepage.jsx";
@@ -18,12 +18,17 @@ import AuthLayout from "./layout/AuthLayout.jsx";
 import DashboardLayout from "./layout/DashboardLayout.jsx";
 import GuardLayout from "./layout/GuardLayout.jsx";
 
-// import AdminProtectedRoutes from "./pages/protectedRoute/AdminProtectedRoutes.jsx";
+// Admin routes
+import AdminProtectedRoutes from "./pages/dashboardComponents/protectedRoute/AdminProtectedRoutes.jsx";
 import AllTeacher from "./pages/dashboardComponents/AllTeachers.jsx";
-import AllCourses from "./pages/dashboardComponents/AllCourses.jsx";
+import AllClasses from "./pages/dashboardComponents/AllClasses.jsx";
 import AllStudents from "./pages/dashboardComponents/AllStudents.jsx";
-import AllResults from "./pages/dashboardComponents/AllResults";
+import Events from "./pages/dashboardComponents/Events.jsx";
+import Finance from "./pages/dashboardComponents/Finance.jsx";
 import Settings from "./pages/dashboardComponents/Settings.jsx";
+import AllTimetable from "./pages/dashboardComponents/AllTimetable.jsx";
+import Assessment from "./pages/dashboardComponents/results/Assessment.jsx";
+import Exams from "./pages/dashboardComponents/results/Exams.jsx";
 
 // import CoursesPage from "./pages/course/index.jsx";
 
@@ -106,6 +111,14 @@ export const router = createBrowserRouter([
             element: <Dashboard />,
           },
           {
+            path: "Events",
+            element: <Events />,
+          },
+          {
+            path: "Finance",
+            element: <Finance />,
+          },
+          {
             path: "settings",
             element: <Settings />,
           },
@@ -113,7 +126,7 @@ export const router = createBrowserRouter([
           // Admin Dashboard
           {
             path: "admin",
-            // element: <AdminProtectedRoutes />,
+            element: <AdminProtectedRoutes />,
             children: [
               {
                 path: "students",
@@ -124,36 +137,32 @@ export const router = createBrowserRouter([
                 element: <AllTeacher />,
               },
               {
-                path: "courses",
-                element: <AllCourses />,
+                path: "classes",
+                element: <AllClasses />,
               },
               {
-                path: "courses/assessment/:courseId",
-                // element: <AssessmentCoursePage />,
-              },
-              {
-                path: "courses/:assessmentId/add-questions",
-                // element: <AddQuestions />,
-              },
-              {
-                path: "courses/:assessmentId/view-questions",
-                // element: <ViewQuestions />,
+                path: "timetable",
+                element: <AllTimetable />,
               },
               {
                 path: "results",
-                element: <AllResults />,
-              },
-
-              {
-                path: "results/:assessmentId",
-                // element: <ShowResult />,
+                children: [
+                  {
+                    path: "exams",
+                    element: <Exams />,
+                  },
+                  {
+                    path: "assessments",
+                    element: <Assessment />,
+                  },
+                ],
               },
             ],
           },
 
           // Student Dashboard
           {
-            path: "students",
+            path: "student",
             children: [
               {
                 path: "grade",

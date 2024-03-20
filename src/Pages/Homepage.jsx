@@ -1,7 +1,7 @@
 import Hero from "./homeComponents/Hero";
 
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
-import { Button } from "../components/Button";
+import AppButton from "../components/Button";
 
 const Homepage = () => {
   const dispatch = useAppDispatch();

@@ -1,0 +1,20 @@
+.start_card {
+  border: 2px solid var(--clr-lemon);
+  padding: 2rem 1.5rem;
+  width: 90%;
+  max-width: 35rem;
+  background: var(--clr-white);
+  border-radius: 0.5rem;
+  box-shadow: 8px 8px 5px 2px rgba(12, 171, 137, 0.318);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.8rem;
+
+  > ul {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    margin-block: 1.2rem;
+  }
+}
