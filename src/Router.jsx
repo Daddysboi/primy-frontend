@@ -27,8 +27,8 @@ import Events from "./pages/dashboardComponents/Events.jsx";
 import Finance from "./pages/dashboardComponents/Finance.jsx";
 import Settings from "./pages/dashboardComponents/Settings.jsx";
 import AllTimetable from "./pages/dashboardComponents/AllTimetable.jsx";
-import Assessment from "./pages/dashboardComponents/Assessment.jsx";
-import Exams from "./pages/dashboardComponents/Exams.jsx";
+import Assessment from "./pages/dashboardComponents/results/Assessment.jsx";
+import Exams from "./pages/dashboardComponents/results/Exams.jsx";
 
 // import CoursesPage from "./pages/course/index.jsx";
 
@@ -148,34 +148,12 @@ export const router = createBrowserRouter([
                 path: "results",
                 children: [
                   {
-                    path: "exams/classes",
+                    path: "exams",
                     element: <Exams />,
-                    children: [
-                      {
-                        path: ":className/students",
-                        // element: <Students />,
-                        children: [
-                          {
-                            path: ":id",
-                          },
-                        ],
-                      },
-                    ],
                   },
                   {
-                    path: "assessments/classes",
+                    path: "assessments",
                     element: <Assessment />,
-                    children: [
-                      {
-                        path: ":className/students",
-                        // element: <Students />,
-                        children: [
-                          {
-                            path: ":id",
-                          },
-                        ],
-                      },
-                    ],
                   },
                 ],
               },

@@ -34,8 +34,6 @@ const AllClasses = () => {
 
   return (
     <div className="admin_courses">
-      <ClassList />
-      <AssignTeacherCourse />
       <AdminHeader
         btnText="Add Course"
         type="courses"
@@ -43,7 +41,8 @@ const AllClasses = () => {
         onClick={() => setCreatingCourse(true)}
         onChange={(e) => setSearchValue(e.target?.value)}
       />
-
+      <AssignTeacherCourse />
+      <ClassList />
       <div className="courses_grid">
         {courses
           ?.filter((val) => {

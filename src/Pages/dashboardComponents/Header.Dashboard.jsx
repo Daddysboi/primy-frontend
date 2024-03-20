@@ -1,7 +1,9 @@
+import { useState } from "react";
 import styled from "styled-components";
 import { IoSearch } from "react-icons/io5";
 
 import { useUser } from "../../contexts/userContext";
+import AppSelectInput from "../../components/SelectInput";
 
 import myphoto from "../../assets/images/myphoto.jpeg";
 import { primaryColors } from "../../assets/Colors";
@@ -71,6 +73,11 @@ const UserTab = styled.div`
   font-size: 0.6rem;
 `;
 
+const SessionTab = styled.div`
+  display: flex;
+  gap: 0.5rem;
+`;
+
 const ProfilePix = styled.div`
   border-radius: 1rem;
   background: ${primaryColors.Purple};
@@ -86,8 +93,38 @@ const Img = styled.img`
   width: 1.8rem;
   border-radius: 1rem;
 `;
+
+const session = [
+  { value: "2021/2022", label: "2021 / 2022" },
+  { value: "2022/2023", label: "2022 / 2023" },
+  { value: "2023/2024", label: "2023 / 2024" },
+  { value: "2024/2025", label: "2024 / 2025" },
+];
+
+const term = [
+  { value: "1", label: "1st" },
+  { value: "2", label: "2nd" },
+  { value: "3", label: "3rd" },
+];
+
+const initialState = {
+  session: "",
+  term: "",
+};
+
 const Header = () => {
+  const [formData, setFormData] = useState(initialState);
+  const [selectedsession, setSelectedsession] = useState("");
+
   const { user } = useUser();
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({ ...prevData, [name]: value }));
+    if (name === "session") {
+      setSelectedsession(value);
+    }
+  };
 
   const icons = [
     <IoNotifications />,
@@ -110,6 +147,25 @@ const Header = () => {
             <Circles key={index}>{icon}</Circles>
           ))}
         </IconsTab>
+        <SessionTab>
+          <AppSelectInput
+            options={session}
+            name="session"
+            value={formData.session}
+            height="32px"
+            onChange={handleChange}
+          />
+
+          {selectedsession && (
+            <AppSelectInput
+              options={term}
+              value={formData.term}
+              name="term"
+              height="32px"
+              onChange={handleChange}
+            />
+          )}
+        </SessionTab>
         <UserTab>
           <ProfilePix>
             <Img src={myphoto} alt={user?.firstName} />

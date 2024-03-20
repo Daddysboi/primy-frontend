@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { MdArrowBackIos } from "react-icons/md";
 import styled from "styled-components";
@@ -37,17 +37,9 @@ const Right = styled.div`
   display: flex;
   gap: 1rem;
 `;
-const options = [
-  { value: "2021/2022", label: "2021 / 2022" },
-  { value: "2022/2023", label: "2022 / 2023" },
-  { value: "2023/2024", label: "2023 / 2024" },
-  { value: "2024/2025", label: "2024 / 2025" },
-];
 
 const Dashboard = () => {
-  const [option, setOption] = useState("");
   const { user } = useUser();
-
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -56,11 +48,8 @@ const Dashboard = () => {
     }
   }, [user]);
 
-  const handleSelect = (e) => {
-    setOption(e.target.value);
-  };
-
   const displayName = `${user?.lastName} ${user?.firstName}`;
+
   return user ? (
     <Container>
       <WelcomeTab>
@@ -70,11 +59,6 @@ const Dashboard = () => {
         </div>
 
         <Right>
-          <AppSelectInput
-            options={options}
-            height="32px"
-            onChange={handleSelect}
-          />
           <AppButton
             text="New Admission"
             onClick={() => {}}

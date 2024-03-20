@@ -24,10 +24,6 @@ const Table = styled.table`
   border-spacing: 1rem 0;
 `;
 
-const Thead = styled.thead`
-  height: 2.5rem;
-`;
-
 const Th = styled.th`
   background-color: ${primaryColors.Purple};
   border-radius: 0.5rem;
@@ -59,7 +55,7 @@ const ThFriday = styled(Th)`
 
 const days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"];
 
-const tabaleData = [
+const tableData = [
   {
     time: "8:00-8:30",
     monday: "literature",
@@ -191,7 +187,7 @@ const AllTimetable = () => {
         </thead>
 
         <tbody>
-          {tabaleData.map((data, i) => (
+          {tableData.map((data, i) => (
             <tr key={i}>
               <td>{data.time}</td>
               <td>{data.monday}</td>

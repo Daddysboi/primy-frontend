@@ -130,13 +130,13 @@ export const adminLinks = [
     sublinks: [
       {
         title: "Exam",
-        link: "admin/results/exams/classes/",
+        link: "admin/results/exams/",
         type: "link",
         icon: <PiExamBold />,
       },
       {
-        title: "Assignment",
-        link: "admin/results/assessments/classes",
+        title: "Assessment",
+        link: "admin/results/assessments/",
         type: "link",
         icon: <PiExamBold />,
       },

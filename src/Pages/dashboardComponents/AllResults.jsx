@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const Exams = () => {
+const Results = () => {
   // Sample student data
   const initialStudents = [
     { id: 1, name: "Student 1", grades: [85, 90, 75], remarks: "", status: "" },
@@ -83,4 +83,4 @@ const Exams = () => {
   );
 };
 
-export default Exams;
+export default Results;
