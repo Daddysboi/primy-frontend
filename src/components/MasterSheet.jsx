@@ -57,15 +57,9 @@ const Span = styled.span`
   font-weight: 400;
 `;
 
-const ThDropDown = styled.th`
-  padding: 0;
-  margin: 0;
-  width: 1rem;
-  /* display: flex; */
-`;
-
-const ThButton = styled.button`
-  color: black;
+const FontAwesome = styled(FontAwesomeIcon)`
+  margin-left: 1rem;
+  display: flex;
 `;
 
 const TdSScore = styled.td`
@@ -350,11 +344,13 @@ const Mastersheet = ({ resultTitle }) => {
                 <Span>{averageScores[subject]}</Span>
               </Th>
             ))}
-            <ThDropDown>
-              <ThButton onClick={handleDropDown}>
-                <FontAwesomeIcon icon={isOpen ? faChevronUp : faChevronDown} />
-              </ThButton>
-            </ThDropDown>
+            <Th>Average</Th>
+            <Th>Position</Th>
+
+            <FontAwesome
+              onClick={handleDropDown}
+              icon={isOpen ? faChevronUp : faChevronDown}
+            />
           </tr>
         </thead>
         <tbody>

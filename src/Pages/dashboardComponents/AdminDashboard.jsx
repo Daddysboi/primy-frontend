@@ -178,11 +178,11 @@ const AdminDashboard = () => {
           value="Total Students by Gender"
           width="24rem"
           height="14rem"
-          subtext={`We have ${data[0]} boys and ${data[1]}girls`}
+          subtext={`We have ${data[0]} boys and ${data[1]} girls`}
           h1="1rem"
           p="0.7rem"
         >
-          <DoughnutChart data={data} />
+          <DoughnutChart data={data} labelA="Boys" labelB="Girls" />
         </DetailCard>
       </Top>
 
@@ -240,7 +240,9 @@ const AdminDashboard = () => {
           width="25.5rem"
           height="15rem"
         >
-          <LineChart data={LineChartdata} width={400} height={150} />
+          <div>
+            <LineChart data={LineChartdata} width={400} height={150} />
+          </div>
         </DetailCard>
       </Bottom>
     </Container>

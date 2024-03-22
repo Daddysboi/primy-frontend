@@ -2,35 +2,64 @@ import React, { useState } from "react";
 import { usePapaParse } from "react-papaparse";
 
 const Exams = () => {
-  const [students, setStudents] = useState([]);
-  const [editedStudents, setEditedStudents] = useState([]);
+  const [results, setResults] = useState([]);
+  const [editedResults, setEditedResults] = useState([]);
+
+  // Using usePapaParse hook to parse the CSV file
+  const { data } = usePapaParse();
 
   const handleFileUpload = (file) => {
     console.log("File uploaded:", file);
 
-    usePapaParse(file, {
-      complete: (parsedData) => {
-        // Log the parsed data
-        console.log("Parsed CSV data:", parsedData.data);
-        // Update the state with the parsed data
-        setStudents(
-          parsedData.data.map((row, index) => ({
-            id: index + 1,
-            name: row[0], // Assuming first column contains student names
-            grades: row.slice(1).map(Number), // Assuming subsequent columns contain grades
-            remarks: "",
-            status: "",
-          }))
-        );
-      },
-      header: true, // Assuming the CSV file has a header row
-    });
+    // Create a new FileReader to read the file content
+    const reader = new FileReader();
+
+    // Set up an onload event handler to execute when the file reading is completed
+    reader.onload = (e) => {
+      // Get the string data of the file
+      const fileContent = e.target.result;
+      console.log("String data of the file:", fileContent);
+
+      // Parse the CSV content using PapaParse
+      const parsedData = Papa.parse(fileContent, { header: true }).data;
+      console.log("Parsed CSV data:", parsedData);
+
+      // Setting the parsed data to results state
+      setResults(
+        parsedData.map((row, index) => ({
+          id: index + 1,
+          name: row["Student Name"], // Assuming the header contains "Student Name"
+          grades: [
+            Number(row["English"]),
+            Number(row["Biology"]),
+            Number(row["Geography"]),
+          ], // Converting grades to numbers
+          remarks: "",
+          status: "",
+        }))
+      );
+      // Also setting the parsed data to editedResults state
+      setEditedResults(
+        parsedData.map((row, index) => ({
+          id: index + 1,
+          name: row["Student Name"],
+          grades: [
+            Number(row["English"]),
+            Number(row["Biology"]),
+            Number(row["Geography"]),
+          ],
+          remarks: "",
+          status: "",
+        }))
+      );
+    };
+
+    // Read the content of the uploaded file as text
+    reader.readAsText(file);
   };
 
-  console.log("Students state:", students);
-
   const handleChange = (e, studentId, gradeIndex) => {
-    const updatedStudents = editedStudents.map((student) => {
+    const updatedResults = results.map((student) => {
       if (student.id === studentId) {
         const updatedGrades = [...student.grades];
         updatedGrades[gradeIndex] = parseInt(e.target.value);
@@ -38,12 +67,11 @@ const Exams = () => {
       }
       return student;
     });
-    setEditedStudents(updatedStudents);
+    setResults(updatedResults);
   };
 
   const handleSubmit = () => {
-    // Send editedStudents to backend
-    console.log("Edited students data:", editedStudents);
+    console.log("Edited results data:", editedResults);
   };
 
   return (
@@ -55,6 +83,7 @@ const Exams = () => {
       />
 
       <table>
+        {/* Table header */}
         <thead>
           <tr>
             <th>Student Name</th>
@@ -67,7 +96,8 @@ const Exams = () => {
           </tr>
         </thead>
         <tbody>
-          {editedStudents.map((student) => (
+          {/* Table body */}
+          {results.map((student) => (
             <tr key={student.id}>
               <td>{student.name}</td>
               {student.grades.map((grade, index) => (
@@ -85,7 +115,7 @@ const Exams = () => {
                   type="text"
                   value={student.remarks}
                   onChange={(e) =>
-                    setEditedStudents((prev) =>
+                    setEditedResults((prev) =>
                       prev.map((s) =>
                         s.id === student.id
                           ? { ...s, remarks: e.target.value }
@@ -99,7 +129,7 @@ const Exams = () => {
                 <select
                   value={student.status}
                   onChange={(e) =>
-                    setEditedStudents((prev) =>
+                    setEditedResults((prev) =>
                       prev.map((s) =>
                         s.id === student.id
                           ? { ...s, status: e.target.value }
@@ -118,27 +148,6 @@ const Exams = () => {
         </tbody>
       </table>
       <button onClick={handleSubmit}>Submit</button>
-      <h2>Uploaded File Data</h2>
-      <table>
-        <thead>
-          <tr>
-            <th>Student Name</th>
-            <th>English</th>
-            <th>Biology</th>
-            <th>Geography</th>
-          </tr>
-        </thead>
-        <tbody>
-          {students.map((student) => (
-            <tr key={student.id}>
-              <td>{student.name}</td>
-              {student.grades.map((grade, index) => (
-                <td key={index}>{grade}</td>
-              ))}
-            </tr>
-          ))}
-        </tbody>
-      </table>
     </div>
   );
 };

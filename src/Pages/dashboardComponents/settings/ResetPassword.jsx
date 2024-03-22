@@ -69,7 +69,6 @@ const ResetPassword = ({ user, PropsContainer, Button, StyledForm, Title }) => {
                   label="Enter Old Password"
                   inputType="password"
                   placeholder="Enter Old Password"
-                  id="oldPassword"
                   name="oldPassword"
                   value={values?.oldPassword}
                   onChange={handleChange}
@@ -92,7 +91,6 @@ const ResetPassword = ({ user, PropsContainer, Button, StyledForm, Title }) => {
                   label="Enter New Password"
                   inputType="password"
                   placeholder="Enter New Password"
-                  id="newPassword"
                   name="newPassword"
                   value={values?.newPassword}
                   onChange={handleChange}
@@ -116,7 +114,6 @@ const ResetPassword = ({ user, PropsContainer, Button, StyledForm, Title }) => {
                   label="Confirm New Password"
                   inputType="password"
                   placeholder="Confirm New Password"
-                  id="confirmPassword"
                   name="confirmPassword"
                   value={values?.confirmPassword}
                   onChange={handleChange}

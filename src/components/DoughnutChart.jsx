@@ -15,9 +15,9 @@ Chart.defaults.plugins.legend.title.display = true;
 Chart.defaults.plugins.legend.title.text = "Doughnut Chart";
 Chart.defaults.plugins.legend.title.font = "Helvetica Neue";
 
-const DoughnutChart = ({ data }) => {
+const DoughnutChart = ({ data, labelA, labelB }) => {
   const chartData = {
-    labels: ["Boys", "Girls"],
+    labels: [labelA, labelB],
     datasets: [
       {
         data,

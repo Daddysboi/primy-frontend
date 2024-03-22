@@ -6,12 +6,12 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import { primaryColors } from "../assets/Colors";
 
-const StyledInputContainer = styled.div`
+const InputContainer = styled.div`
   position: relative;
   /* margin-bottom: 12px; */
 `;
 
-const StyledLabel = styled.label`
+const Label = styled.label`
   font-size: 0.65rem;
   letter-spacing: -0.01rem;
   position: relative;
@@ -48,7 +48,7 @@ const PasswordContainer = styled.div`
   position: relative;
 `;
 
-const StyledPasswordInput = styled.input`
+const PasswordInput = styled.input`
   width: ${(props) => props.width || "100%"};
   height: ${(props) => props.height || "42px"};
   padding: 0.5rem;
@@ -120,12 +120,12 @@ const AppInput = ({
 
   if (inputType === "password") {
     return (
-      <StyledInputContainer>
-        <StyledLabel style={{ color: labelColor }} htmlFor="">
+      <InputContainer>
+        <Label style={{ color: labelColor }} htmlFor="">
           {label}
-        </StyledLabel>
+        </Label>
         <PasswordContainer>
-          <StyledPasswordInput
+          <PasswordInput
             type={passwordVisibility ? "text" : "password"}
             name={name}
             value={value}
@@ -135,7 +135,7 @@ const AppInput = ({
             width={width}
             height={height}
             eyeTop={eyeTop}
-            ref={passwordRef}
+            // ref={passwordRef}
             {...props}
           />
           {showEyeIcon ? (
@@ -166,13 +166,13 @@ const AppInput = ({
             />
           )}
         </PasswordContainer>
-      </StyledInputContainer>
+      </InputContainer>
     );
   }
 
   if (type === "textarea") {
     return (
-      <StyledInputContainer>
+      <InputContainer>
         <div
           style={{
             display: "flex",
@@ -180,9 +180,9 @@ const AppInput = ({
             width: "100%",
           }}
         >
-          <StyledLabel style={{ color: labelColor }} htmlFor="">
+          <Label style={{ color: labelColor }} htmlFor="">
             {label}
-          </StyledLabel>
+          </Label>
           <StyledTextarea
             cols={cols}
             rows={rows}
@@ -194,15 +194,15 @@ const AppInput = ({
             onBlur={onBlur}
           />
         </div>
-      </StyledInputContainer>
+      </InputContainer>
     );
   }
 
   return (
-    <StyledInputContainer>
-      <StyledLabel style={{ color: labelColor }} htmlFor="">
+    <InputContainer>
+      <Label style={{ color: labelColor }} htmlFor="">
         {label}
-      </StyledLabel>
+      </Label>
       <StyledInput
         type={type}
         accept={accept}
@@ -215,7 +215,7 @@ const AppInput = ({
         required={required}
         {...props}
       />
-    </StyledInputContainer>
+    </InputContainer>
   );
 };
 

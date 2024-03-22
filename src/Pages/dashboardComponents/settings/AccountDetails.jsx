@@ -3,19 +3,14 @@ import * as Yup from "yup";
 import { toast } from "react-toastify";
 
 import AppInput from "../../../components/Input";
+import AppSelectInput from "../../../components/SelectInput";
 import Error from "../../../components/Error";
 import { useState } from "react";
 import { useAppDispatch } from "../../../redux/hooks";
 import { useFetchUserData } from "../../../Guard";
 import { updateUserBankDetails } from "../../../redux/features/userSlice";
 
-const AccountDetails = ({
-  user,
-  PropsContainer,
-  Button,
-  StyledForm,
-  Title,
-}) => {
+const AccountDetails = ({ user, PropsContainer, Button, StyledForm, s }) => {
   const initialValues = {
     bankName: user?.accountDetails?.bankName || "",
     accountName: user?.accountDetails?.accountName || "",
@@ -93,7 +88,6 @@ const AccountDetails = ({
 
   return (
     <PropsContainer>
-      <Title>Set Up Your Account</Title>
       <Formik
         initialValues={initialValues}
         onSubmit={onSubmit}

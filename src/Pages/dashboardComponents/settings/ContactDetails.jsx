@@ -29,7 +29,6 @@ const AddContact = ({
   PropsContainer,
   Button,
   StyledForm,
-  Title,
   FileInputContainer,
   StyledLabel,
   UploadButton,
@@ -95,7 +94,6 @@ const AddContact = ({
 
   return (
     <PropsContainer>
-      <Title>Add Contact</Title>
       <Formik
         initialValues={initialValues}
         onSubmit={onSubmit}
@@ -106,9 +104,8 @@ const AddContact = ({
             <div>
               <Field
                 label="Home Address"
-                placeholder="Enter your host address"
+                placeholder="Enter your home address"
                 type="text"
-                id="homeAddress"
                 name="homeAddress"
                 value={values.homeAddress}
                 onChange={handleChange}
@@ -123,9 +120,8 @@ const AddContact = ({
             <div>
               <Field
                 label="Nearest Landmark"
-                placeholder="Enter landmark near your location"
+                placeholder="Enter closest landmark to you"
                 type="text"
-                id="landmark"
                 name="landmark"
                 value={values.landmark}
                 onChange={handleChange}
@@ -142,7 +138,6 @@ const AddContact = ({
                 label="Office Address"
                 placeholder="Enter Office Address"
                 type="text"
-                id="officeAddress"
                 name="officeAddress"
                 value={values.officeAddress}
                 onChange={handleChange}
@@ -159,7 +154,6 @@ const AddContact = ({
                 label="Postal Code"
                 placeholder="Enter your postal code"
                 type="text"
-                id="postalCode"
                 name="postalCode"
                 value={values.postalCode}
                 onChange={handleChange}
