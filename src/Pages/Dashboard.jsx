@@ -9,7 +9,6 @@ import AppButton from "../components/Button";
 import TeacherDashboard from "./dashboardComponents/TeacherDashboard";
 import StudentDashboard from "./dashboardComponents/StudentDashboard";
 import AdminDashboard from "./dashboardComponents/AdminDashboard";
-import AppSelectInput from "../components/SelectInput";
 
 const Container = styled.div`
   /* width: 100%; */

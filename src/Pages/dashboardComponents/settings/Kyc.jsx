@@ -5,6 +5,7 @@ import * as Yup from "yup";
 import { toast } from "react-toastify";
 
 import AppInput from "../../../components/Input";
+import AppSelectInput from "../../../components/SelectInput";
 import Error from "../../../components/Error";
 import WebcamCapture from "../../../components/WebcamCapture";
 import { fileToDataUri } from "./ProfileSettings";
@@ -33,6 +34,12 @@ const Img = styled.img`
   height: 60px;
   border-radius: 50%;
 `;
+
+const options = [
+  { value: "nationalID", label: "National ID" },
+  { value: "driversLicense", label: "Drivers License" },
+  { value: "votersCard", label: "Voters Card" },
+];
 
 const KYC = ({
   user,
@@ -121,8 +128,6 @@ const KYC = ({
 
   return (
     <KYCContainer>
-      <Title>Know Your Customer</Title>
-
       <Formik
         initialValues={initialValues}
         onSubmit={onSubmit}
@@ -153,20 +158,15 @@ const KYC = ({
                   name="idType"
                   value={values.idType}
                   onChange={handleChange}
-                  component={AppInput}
+                  component={AppSelectInput}
                   labelColor="gray"
                   label="Select Id"
                   type="select"
                   height="2rem"
                   width="20rem"
-                  id="idType"
-                >
-                  <option value="">Select...</option>
-                  <option value="passport">International Passport</option>
-                  <option value="nationalID">National ID</option>
-                  <option value="driversLicense">Driver's License</option>
-                  <option value="votersCard">Voter's Card</option>
-                </Field>
+                  options={options}
+                />
+
                 <ErrorMessage name="idType" component={Error} />
               </div>{" "}
               <div>
@@ -174,7 +174,6 @@ const KYC = ({
                   label="ID Number"
                   placeholder="Please enter a valid ID"
                   type="text"
-                  id="idNumber"
                   name="idNumber"
                   value={values.idNumber}
                   onChange={handleChange}
@@ -208,7 +207,6 @@ const KYC = ({
                       >
                         <Field
                           type="file"
-                          id="uploadPicture"
                           name="uploadPicture"
                           onChange={(event) => {
                             setFieldValue(
@@ -253,7 +251,6 @@ const KYC = ({
                   label="Full Name"
                   placeholder="Please enter Next of kin"
                   type="text"
-                  id="fullName"
                   name="fullName"
                   value={values.fullName}
                   onChange={handleChange}
@@ -269,7 +266,6 @@ const KYC = ({
                   label="Relationship"
                   placeholder="Please enter relationship"
                   type="text"
-                  id="relationship"
                   name="relationship"
                   value={values.relationship}
                   onChange={handleChange}
@@ -285,7 +281,6 @@ const KYC = ({
                   label="Contact Number"
                   placeholder="Please enter contact number"
                   type="text"
-                  id="contactNumber"
                   name="contactNumber"
                   value={values.contactNumber}
                   onChange={handleChange}
@@ -304,7 +299,6 @@ const KYC = ({
                   label="BVN"
                   placeholder="Please enter BVN"
                   type="text"
-                  id="bvn"
                   name="bvn"
                   value={values.bvn}
                   onChange={handleChange}

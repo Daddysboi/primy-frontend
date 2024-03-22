@@ -11,8 +11,8 @@ import { useAppDispatch } from "../../../redux/hooks";
 import { useFetchUserData } from "../../../Guard";
 
 const ImgViewer = styled.div`
-  width: 60px;
-  height: 60px;
+  /* width: 60px; */
+  /* height: 60px; */
   border-radius: 50%;
   border: 1px solid black;
 `;
@@ -42,17 +42,16 @@ const ProfileSettings = ({
   PropsContainer,
   Button,
   StyledForm,
-  Title,
   FileInputContainer,
   StyledLabel,
   UploadButton,
   FaCloudUploadAlt,
 }) => {
   const initialValues = {
-    firstName: user.firstName || "",
-    lastName: user.lastName || "",
-    email: user.email || "",
-    phoneNumber: user.phoneNumber || "",
+    firstName: "",
+    lastName: "",
+    email: "",
+    phoneNumber: "",
     uploadPicture: "",
   };
   const [loading, setLoading] = useState(false);
@@ -72,7 +71,6 @@ const ProfileSettings = ({
     setLoading(true);
     dispatch(
       updateUserProfile({
-        userId: user?._id,
         firstName: values?.firstName,
         lastName: values?.lastName,
         phoneNumber: values?.phoneNumber,
@@ -111,7 +109,6 @@ const ProfileSettings = ({
 
   return (
     <PropsContainer>
-      <Title>Your Profile</Title>
       <Formik
         initialValues={initialValues}
         onSubmit={onSubmit}
@@ -155,23 +152,6 @@ const ProfileSettings = ({
                   height="2rem"
                 />
                 <ErrorMessage name="lastName" component={Error} />
-              </div>
-              <div>
-                <Field
-                  label="SettL Id"
-                  value={user?._id}
-                  type="text"
-                  id="id"
-                  name="id"
-                  component={AppInput}
-                  width="20rem"
-                  labelColor="gray"
-                  height="2rem"
-                  background="#DBDBDB"
-                  border="1px solid #DBDBDB"
-                  color="gray"
-                  disabled
-                />
               </div>
 
               <div>

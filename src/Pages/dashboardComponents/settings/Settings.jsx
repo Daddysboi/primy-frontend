@@ -3,27 +3,27 @@ import styled from "styled-components";
 import { Form } from "formik";
 import { FaCloudUploadAlt } from "react-icons/fa";
 
-import AccountDetails from "./settings/AccountDetails";
-import ProfileSettings from "./settings/ProfileSettings";
-import Kyc from "./settings/Kyc";
-import ContactDetails from "./settings/ContactDetails";
-import ResetPassword from "./settings/ResetPassword";
+import AccountDetails from "./AccountDetails";
+import ProfileSettings from "./ProfileSettings";
+import Kyc from "./Kyc";
+import ContactDetails from "./ContactDetails";
+import ResetPassword from "./ResetPassword";
 
 const Container = styled.div`
   display: flex;
-  justify-content: space-between;
-  width: 40rem;
+  /* justify-content: space-between; */
+  /* width: 40rem; */
   flex-direction: column;
 `;
 const HeaderContainer = styled.div`
   border-bottom: 0.1rem solid #dbdbdb;
   display: flex;
-  width: 100vw;
+  /* width: 100vw; */
   padding-left: 5rem;
   margin-left: -1rem;
   gap: 5rem;
-  margin-bottom: 2rem;
-  height: 2.5rem;
+  /* margin-bottom: 2rem; */
+  /* height: 2.5rem; */
 `;
 
 const TabBtn = styled.button`
@@ -40,12 +40,12 @@ const TabBtn = styled.button`
 `;
 
 const PropsContainer = styled.div`
-  width: 30rem;
+  /* width: 30rem; */
   margin-left: 4rem;
 `;
 
 const StyledForm = styled(Form)`
-  width: 20rem;
+  /* width: 20rem; */
 `;
 
 const Button = styled.button`
@@ -121,7 +121,6 @@ const Settings = ({ user }) => {
 
   return (
     <Container>
-      {/* 
       <HeaderContainer>
         <TabBtn
           onClick={() => handleSectionClick("PROFILE_SETTINGS")}
@@ -129,24 +128,24 @@ const Settings = ({ user }) => {
         >
           Profile Settings
         </TabBtn>
-        {user?.role === "seller" ? (
-          <>
-            <TabBtn
-              onClick={() => handleSectionClick("ACCOUNT_DETAILS")}
-              isActive={state.activeSection === "accountDetails"}
-            >
-              Account Details
-            </TabBtn>
-            <TabBtn
-              onClick={() => handleSectionClick("KYC")}
-              isActive={state.activeSection === "kyc"}
-            >
-              KYC
-            </TabBtn>
-          </>
-        ) : (
+        {/* {user?.role === "seller" ? ( */}
+        <>
+          <TabBtn
+            onClick={() => handleSectionClick("ACCOUNT_DETAILS")}
+            isActive={state.activeSection === "accountDetails"}
+          >
+            Account Details
+          </TabBtn>
+          <TabBtn
+            onClick={() => handleSectionClick("KYC")}
+            isActive={state.activeSection === "kyc"}
+          >
+            KYC
+          </TabBtn>
+        </>
+        {/* ) : (
           ""
-        )}
+        )}*/}
         <TabBtn
           onClick={() => handleSectionClick("CONTACT_DETAILS")}
           isActive={state.activeSection === "contactDetails"}
@@ -224,7 +223,6 @@ const Settings = ({ user }) => {
           />
         )}
       </div>
-       */}
     </Container>
   );
 };

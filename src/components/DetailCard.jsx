@@ -7,8 +7,8 @@ const Card = styled.div`
   box-shadow: 1px 1px 2px 2px rgba(0.1, 0.1, 0.1, 0.03);
   width: ${(props) => props.width || "12rem"};
   height: ${(props) => props.height || "6rem"};
-  padding: 1rem 0 0 2rem;
-  background-color: #fff;
+  padding: ${(props) => props.padding || `1rem 0 0 2rem`};
+  background-color: ${(props) => props.backgroundColor || primaryColors.White};
   display: flex;
   gap: 1rem;
   @media only screen and (min-width: 320px) and (max-width: 480px) {
@@ -69,16 +69,22 @@ const DeatailCard = ({
   children,
   h1,
   p,
+  padding,
+  backgroundColor,
 }) => {
   return (
-    <Card height={height} width={width}>
+    <Card
+      height={height}
+      width={width}
+      padding={padding}
+      backgroundColor={backgroundColor}
+    >
       <Left>
         <div>
           <CardTxt h1={h1}>{value}</CardTxt>
           <CardHead>{heading}</CardHead>
           <CardSubHead p={p}>
-            <Span>{rate}</Span>
-            {subtext}
+            <Span>{rate}</Span> {subtext}
           </CardSubHead>
         </div>
         <Child>{children}</Child>

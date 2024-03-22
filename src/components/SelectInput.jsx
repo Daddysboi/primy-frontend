@@ -3,18 +3,18 @@ import { styled } from "styled-components";
 
 import { primaryColors } from "../assets/Colors";
 
-const StyledSelectContainer = styled.div`
+const Container = styled.div`
   position: relative;
   margin-bottom: 12px;
 `;
 
-const StyledLabel = styled.label`
+const Label = styled.label`
   font-size: 0.65rem;
   letter-spacing: -0.01rem;
   opacity: 0.8;
 `;
 
-const StyledSelect = styled.select`
+const Select = styled.select`
   width: ${(props) => props.width || "100%"};
   min-height: 35px;
   height: ${(props) => props.height || "35px"};
@@ -31,7 +31,7 @@ const StyledSelect = styled.select`
   }
 `;
 
-const StyledOption = styled.option`
+const Option = styled.option`
   font-size: 13px;
   opacity: 0.5;
 `;
@@ -61,9 +61,9 @@ const AppSelectInput = ({
 }) => {
   if (selectType === "category") {
     return (
-      <StyledSelectContainer>
-        <StyledLabel htmlFor={name}>{label}</StyledLabel>
-        <StyledSelect
+      <Container>
+        <Label htmlFor={name}>{label}</Label>
+        <Select
           name={name}
           value={value}
           borderColor={borderColor}
@@ -72,24 +72,24 @@ const AppSelectInput = ({
           required={required}
           width={width}
         >
-          <StyledOption value="">{select}</StyledOption>
+          <Option value="">{select}</Option>
           {Object.entries(optionList).map(([category, options]) => (
             <optgroup key={category} label={category.toUpperCase()}>
               {options.map((option) => (
-                <StyledOption key={option} value={option}>
+                <Option key={option} value={option}>
                   {option}
-                </StyledOption>
+                </Option>
               ))}
             </optgroup>
           ))}
-        </StyledSelect>
-      </StyledSelectContainer>
+        </Select>
+      </Container>
     );
   }
   return (
-    <StyledSelectContainer>
-      <StyledLabel htmlFor={name}>{label}</StyledLabel>
-      <StyledSelect
+    <Container>
+      <Label htmlFor={name}>{label}</Label>
+      <Select
         name={name}
         value={value}
         borderColor={borderColor}
@@ -98,15 +98,15 @@ const AppSelectInput = ({
         required={required}
         width={width}
       >
-        <StyledOption value="">{select}</StyledOption>
+        <Option value="">{select}</Option>
         {options.map((option) => (
-          <StyledOption key={option.value} value={option.value}>
+          <Option key={option.value} value={option.value}>
             {option.label}
-          </StyledOption>
+          </Option>
         ))}
-      </StyledSelect>
+      </Select>
       {error && <ErrorContainer>{error}</ErrorContainer>}
-    </StyledSelectContainer>
+    </Container>
   );
 };
 

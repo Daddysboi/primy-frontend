@@ -25,7 +25,7 @@ import AllClasses from "./pages/dashboardComponents/AllClasses.jsx";
 import AllStudents from "./pages/dashboardComponents/AllStudents.jsx";
 import Events from "./pages/dashboardComponents/Events.jsx";
 import Finance from "./pages/dashboardComponents/Finance.jsx";
-import Settings from "./pages/dashboardComponents/Settings.jsx";
+import Settings from "./pages/dashboardComponents/settings/Settings.jsx";
 import AllTimetable from "./pages/dashboardComponents/AllTimetable.jsx";
 import Assessment from "./pages/dashboardComponents/results/Assessment.jsx";
 import Exams from "./pages/dashboardComponents/results/Exams.jsx";
