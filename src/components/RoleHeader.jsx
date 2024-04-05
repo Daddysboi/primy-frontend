@@ -1,7 +1,7 @@
 import { FaPlus } from "react-icons/fa6";
-import Button from "../components/Button";
+import Button from "./Button";
 
-const AdminHeader = ({ text, onClick }) => {
+const RoleHeader = ({ text, onClick }) => {
   return (
     <div>
       {text && <Button text={text} onClick={onClick} icon={<FaPlus />} />}
@@ -9,4 +9,4 @@ const AdminHeader = ({ text, onClick }) => {
   );
 };
 
-export default AdminHeader;
+export default RoleHeader;

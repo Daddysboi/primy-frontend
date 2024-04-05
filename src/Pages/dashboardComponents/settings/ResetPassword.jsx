@@ -10,7 +10,7 @@ import { updatePassword } from "../../../redux/features/userSlice";
 
 import { resetPasswordValidationSchema } from "../../ResetPassword";
 
-const ResetPassword = ({ user, PropsContainer, Button, StyledForm, Title }) => {
+const ResetPassword = ({ user, PropsContainer, Button, StyledForm }) => {
   const [loading, setLoading] = useState(false);
   const dispatch = useAppDispatch();
 
@@ -49,7 +49,6 @@ const ResetPassword = ({ user, PropsContainer, Button, StyledForm, Title }) => {
 
   return (
     <PropsContainer>
-      <Title>Change Password</Title>
       <Formik
         initialValues={initialValues}
         validationSchema={resetPasswordValidationSchema}
@@ -70,7 +69,6 @@ const ResetPassword = ({ user, PropsContainer, Button, StyledForm, Title }) => {
                   inputType="password"
                   placeholder="Enter Old Password"
                   name="oldPassword"
-                  value={values?.oldPassword}
                   onChange={handleChange}
                   component={AppInput}
                   width="20rem"
@@ -92,7 +90,6 @@ const ResetPassword = ({ user, PropsContainer, Button, StyledForm, Title }) => {
                   inputType="password"
                   placeholder="Enter New Password"
                   name="newPassword"
-                  value={values?.newPassword}
                   onChange={handleChange}
                   component={AppInput}
                   width="20rem"
@@ -115,7 +112,6 @@ const ResetPassword = ({ user, PropsContainer, Button, StyledForm, Title }) => {
                   inputType="password"
                   placeholder="Confirm New Password"
                   name="confirmPassword"
-                  value={values?.confirmPassword}
                   onChange={handleChange}
                   component={AppInput}
                   width="20rem"

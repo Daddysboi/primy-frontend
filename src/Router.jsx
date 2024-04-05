@@ -20,15 +20,15 @@ import GuardLayout from "./layout/GuardLayout.jsx";
 
 // Admin routes
 import AdminProtectedRoutes from "./pages/dashboardComponents/protectedRoute/AdminProtectedRoutes.jsx";
-import AllTeacher from "./pages/dashboardComponents/AllTeachers.jsx";
-import AllClasses from "./pages/dashboardComponents/AllClasses.jsx";
-import AllStudents from "./pages/dashboardComponents/AllStudents.jsx";
-import Events from "./pages/dashboardComponents/Events.jsx";
-import Finance from "./pages/dashboardComponents/Finance.jsx";
+import AllTeacher from "./pages/dashboardComponents/admin/AllTeachers.jsx";
+import AllClasses from "./pages/dashboardComponents/admin/AllClasses.jsx";
+import AllStudents from "./pages/dashboardComponents/admin/AllStudents.jsx";
+import Events from "./pages/dashboardComponents/admin/Events.jsx";
+import Finance from "./pages/dashboardComponents/admin/Finance.jsx";
 import Settings from "./pages/dashboardComponents/settings/Settings.jsx";
-import AllTimetable from "./pages/dashboardComponents/AllTimetable.jsx";
-import Assessment from "./pages/dashboardComponents/results/Assessment.jsx";
-import Exams from "./pages/dashboardComponents/results/Exams.jsx";
+import AllTimetable from "./pages/dashboardComponents/admin/AllTimetable.jsx";
+import Assessment from "./pages/dashboardComponents/admin/results/Assessment.jsx";
+import Exams from "./pages/dashboardComponents/admin/results/Exams.jsx";
 
 // import CoursesPage from "./pages/course/index.jsx";
 
@@ -228,8 +228,8 @@ export const router = createBrowserRouter([
   },
 ]);
 
-const Router = () => {
-  return <Router.Provider router={router} />;
-};
+// const Router = () => {
+//   return <Router.Provider router={router} />;
+// };
 
-export default Router;
+// export default Router;

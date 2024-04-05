@@ -8,11 +8,11 @@ import AppButton from "../components/Button";
 
 import TeacherDashboard from "./dashboardComponents/TeacherDashboard";
 import StudentDashboard from "./dashboardComponents/StudentDashboard";
-import AdminDashboard from "./dashboardComponents/AdminDashboard";
+import AdminDashboard from "./dashboardComponents/admin/AdminDashboard";
 
 const Container = styled.div`
   /* width: 100%; */
-  /* margin-right: 5rem; */
+  /* position: relative; */
 `;
 
 const WelcomeTab = styled.div`
@@ -56,7 +56,6 @@ const Dashboard = () => {
           <Heading>Hey, {displayName ?? ""}</Heading>
           <Subhead>Welcome to your dashboard</Subhead>
         </div>
-
         <Right>
           <AppButton
             text="New Admission"

@@ -8,22 +8,18 @@ import ProfileSettings from "./ProfileSettings";
 import Kyc from "./Kyc";
 import ContactDetails from "./ContactDetails";
 import ResetPassword from "./ResetPassword";
+import { primaryColors } from "../../../assets/Colors";
 
 const Container = styled.div`
-  display: flex;
-  /* justify-content: space-between; */
-  /* width: 40rem; */
-  flex-direction: column;
+  padding-left: 2rem;
+  margin-top: 2rem;
 `;
+
 const HeaderContainer = styled.div`
   border-bottom: 0.1rem solid #dbdbdb;
   display: flex;
-  /* width: 100vw; */
-  padding-left: 5rem;
   margin-left: -1rem;
   gap: 5rem;
-  /* margin-bottom: 2rem; */
-  /* height: 2.5rem; */
 `;
 
 const TabBtn = styled.button`
@@ -31,21 +27,24 @@ const TabBtn = styled.button`
   background: none;
   font-size: 0.8rem;
   font-weight: 400;
-  border-bottom: ${(props) => (props.isActive ? "1px solid #4db6ac" : "")};
-  color: ${(props) => (props.isActive ? "#4db6ac" : "gray")};
+  border-bottom: ${(props) =>
+    props.isActive ? `1px solid ${primaryColors.Purple}` : ""};
+  color: ${(props) => (props.isActive ? primaryColors.Purple : "gray")};
+  padding-bottom: 0.5rem;
   &:hover {
-    border-bottom: 1px solid #4db6ac;
-    color: #4db6ac;
+    border-bottom: 1px solid ${primaryColors.Purple};
+    color: ${primaryColors.Purple};
   }
 `;
 
-const PropsContainer = styled.div`
-  /* width: 30rem; */
-  margin-left: 4rem;
-`;
+const PropsContainer = styled.div``;
 
 const StyledForm = styled(Form)`
-  /* width: 20rem; */
+  margin-top: 1.5rem;
+  width: 20rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
 `;
 
 const Button = styled.button`
@@ -61,13 +60,9 @@ const Button = styled.button`
   }
 `;
 
-const Title = styled.div`
-  margin-bottom: 1.5rem;
-`;
 
 const Txt = styled.p`
   font-size: 0.55rem;
-  /* margin-top: -0.5rem; */
   color: red;
 `;
 
@@ -82,10 +77,12 @@ const UploadButton = styled.label`
   font-size: 2rem;
   height: 2rem;
 `;
-const StyledInput = styled.input`
+
+const Input = styled.input`
   display: none;
 `;
-const StyledLabel = styled.label`
+
+const Label = styled.label`
   font-size: 0.65rem;
   letter-spacing: -0.01rem;
   position: relative;
@@ -128,7 +125,7 @@ const Settings = ({ user }) => {
         >
           Profile Settings
         </TabBtn>
-        {/* {user?.role === "seller" ? ( */}
+        {/* {user?.role === "teacher" ? ( */}
         <>
           <TabBtn
             onClick={() => handleSectionClick("ACCOUNT_DETAILS")}
@@ -165,12 +162,12 @@ const Settings = ({ user }) => {
             user={user}
             PropsContainer={PropsContainer}
             Button={Button}
-            Title={Title}
+
             StyledForm={StyledForm}
             Txt={Txt}
             FileInputContainer={FileInputContainer}
-            StyledLabel={StyledLabel}
-            StyledInput={StyledInput}
+            StyledLabel={Label}
+            Input={Input}
             UploadButton={UploadButton}
             FaCloudUploadAlt={FaCloudUploadAlt}
           />
@@ -180,7 +177,7 @@ const Settings = ({ user }) => {
             user={user}
             PropsContainer={PropsContainer}
             Button={Button}
-            Title={Title}
+
             StyledForm={StyledForm}
           />
         )}
@@ -189,11 +186,11 @@ const Settings = ({ user }) => {
             user={user}
             PropsContainer={PropsContainer}
             Button={Button}
-            Title={Title}
+
             StyledForm={StyledForm}
             FileInputContainer={FileInputContainer}
-            StyledLabel={StyledLabel}
-            StyledInput={StyledInput}
+            StyledLabel={Label}
+            Input={Input}
             UploadButton={UploadButton}
             FaCloudUploadAlt={FaCloudUploadAlt}
           />
@@ -204,11 +201,11 @@ const Settings = ({ user }) => {
             PropsContainer={PropsContainer}
             Button={Button}
             StyledForm={StyledForm}
-            Title={Title}
+
             Txt={Txt}
             FileInputContainer={FileInputContainer}
-            StyledLabel={StyledLabel}
-            StyledInput={StyledInput}
+            StyledLabel={Label}
+            Input={Input}
             UploadButton={UploadButton}
             FaCloudUploadAlt={FaCloudUploadAlt}
           />
@@ -219,7 +216,7 @@ const Settings = ({ user }) => {
             PropsContainer={PropsContainer}
             Button={Button}
             StyledForm={StyledForm}
-            Title={Title}
+   
           />
         )}
       </div>

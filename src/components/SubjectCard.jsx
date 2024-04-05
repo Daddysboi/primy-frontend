@@ -3,13 +3,13 @@ import PropTypes from "prop-types";
 import { BsThreeDotsVertical } from "react-icons/bs";
 
 import "../assets/CourseCard.css";
-import Button from "../components/Button.jsx";
-import Modal from "../components/Modal.jsx";
-import CreateCourse from "./CreateCourse.jsx";
+import Button from "./Button.jsx";
+import Modal from "./Modal.jsx";
+import Createsubject from "./CreateSubject.jsx";
 import ClickOutside from "./ClickOutside.jsx";
-import AssignTeacherCourse from "./AssignTeacherCourse.jsx";
+import AssignTeacherSubject from "./AssignTeacherSubject.jsx";
 
-const CourseCard = ({ course, onClick, onDelete }) => {
+const subjectCard = ({ subject, onClick, onDelete }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
   const [isAssigning, setIsAssigning] = useState(false);
@@ -20,8 +20,8 @@ const CourseCard = ({ course, onClick, onDelete }) => {
 
   return (
     <>
-      <div className="course-card">
-        <div className="menu">
+      <div>
+        <div>
           <BsThreeDotsVertical size={20} onClick={() => handleMenuClick()} />
         </div>
 
@@ -42,8 +42,8 @@ const CourseCard = ({ course, onClick, onDelete }) => {
             </li>
           </ul>
         </ClickOutside>
-        <h3>{course?.courseTittle}</h3>
-        <p>{course?.courseCode}</p>
+        <h3>{subject?.subjectTittle}</h3>
+        <p>{subject?.subjectCode}</p>
         <Button text="View Assessments" onClick={onClick} />
       </div>
       <Modal
@@ -51,10 +51,10 @@ const CourseCard = ({ course, onClick, onDelete }) => {
         onClose={() => setIsEditing(false)}
         hasCloseBtn={true}
       >
-        <CreateCourse
+        <Createsubject
           editing={true}
           setIsCreating={setIsEditing}
-          course={course}
+          subject={subject}
         />
       </Modal>
       <Modal
@@ -62,25 +62,25 @@ const CourseCard = ({ course, onClick, onDelete }) => {
         onClose={() => setIsAssigning(false)}
         hasCloseBtn={true}
       >
-        <AssignTeacherCourse
-          courseId={course?._id}
+        <AssignTeacherSubject
+          subjectId={subject?._id}
           setIsAssigning={setIsAssigning}
-          courseName={course?.courseTittle}
+          subjectName={subject?.subjectTittle}
         />
       </Modal>
     </>
   );
 };
 
-CourseCard.propTypes = {
-  course: PropTypes.shape({
+subjectCard.propTypes = {
+  subject: PropTypes.shape({
     _id: PropTypes.string,
-    courseTittle: PropTypes.string,
-    courseCode: PropTypes.string,
-    courseStatus: PropTypes.string,
+    subjectTittle: PropTypes.string,
+    subjectCode: PropTypes.string,
+    subjectStatus: PropTypes.string,
   }),
   onClick: PropTypes.func,
   onDelete: PropTypes.func,
 };
 
-export default CourseCard;
+export default subjectCard;

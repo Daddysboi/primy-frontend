@@ -7,14 +7,14 @@ import { toast } from "react-toastify";
 import AppInput from "../../../components/Input";
 import AppSelectInput from "../../../components/SelectInput";
 import Error from "../../../components/Error";
+import { fileToDataUri } from "../../../components/FileUtils";
 import WebcamCapture from "../../../components/WebcamCapture";
-import { fileToDataUri } from "./ProfileSettings";
 import { useAppDispatch } from "../../../redux/hooks";
 import { useFetchUserData } from "../../../Guard";
 import { updateUserKycDetails } from "../../../redux/features/userSlice";
+import FileUpload from "../../../components/FileUpload";
 
 const KYCContainer = styled.div`
-  width: 30rem;
   margin: 0 auto;
 `;
 
@@ -35,6 +35,10 @@ const Img = styled.img`
   border-radius: 50%;
 `;
 
+const Title = styled.div`
+  margin-bottom: 1.5rem;
+`;
+
 const options = [
   { value: "nationalID", label: "National ID" },
   { value: "driversLicense", label: "Drivers License" },
@@ -44,7 +48,7 @@ const options = [
 const KYC = ({
   user,
   Button,
-  Title,
+
   FileInputContainer,
   StyledLabel,
   UploadButton,
@@ -55,7 +59,7 @@ const KYC = ({
   const dispatch = useAppDispatch();
   const fetchUserData = useFetchUserData();
   const [imgPlaceholder, setImgPlaceholder] = useState(true);
-  const [idPlaceholder, setIdPlaceholder] = useState(true);
+  const [headshotPlaceholder, setHeadshotPlaceholder] = useState(true);
 
   const initialValues = {
     idType: user?.identificationDetails?.idType || "",
@@ -116,7 +120,7 @@ const KYC = ({
         resetForm();
         setImageSrc("");
         setImgPlaceholder(true);
-        setIdPlaceholder(true);
+        setHeadshotPlaceholder(true);
         fetchUserData();
         setLoading(false);
       })
@@ -142,10 +146,10 @@ const KYC = ({
                 gap: "30px",
               }}
             >
-              <span onClick={() => setImgPlaceholder(false)}>
+              <span onClick={() => setHeadshotPlaceholder(false)}>
                 <WebcamCapture imageSrc={imageSrc} setImageSrc={setImageSrc} />
               </span>
-              {user?.headShot && !imageSrc && imgPlaceholder && (
+              {user?.headShot && !imageSrc && headshotPlaceholder && (
                 <ImgViewer>
                   <Img src={user?.headShot} alt="head-shot" />
                 </ImgViewer>
@@ -153,10 +157,9 @@ const KYC = ({
             </section>
             <Title>Identification</Title>
             <Section>
-              <div>
+              <>
                 <Field
                   name="idType"
-                  value={values.idType}
                   onChange={handleChange}
                   component={AppSelectInput}
                   labelColor="gray"
@@ -168,14 +171,13 @@ const KYC = ({
                 />
 
                 <ErrorMessage name="idType" component={Error} />
-              </div>{" "}
-              <div>
+              </>
+              <>
                 <Field
                   label="ID Number"
                   placeholder="Please enter a valid ID"
                   type="text"
                   name="idNumber"
-                  value={values.idNumber}
                   onChange={handleChange}
                   component={AppInput}
                   width="20rem"
@@ -183,76 +185,25 @@ const KYC = ({
                   height="2rem"
                 />
                 <ErrorMessage name="idNumber" component={Error} />
-              </div>{" "}
-              <section
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  gap: "30px",
-                }}
-              >
-                <div onClick={() => setIdPlaceholder(false)}>
-                  <FileInputContainer>
-                    <StyledLabel htmlFor="uploadPicture">
-                      Upload Valid ID (Max 2MB)
-                    </StyledLabel>
-                    <div>
-                      <UploadButton htmlFor="uploadPicture">
-                        <FaCloudUploadAlt />
-                      </UploadButton>
-                      <div
-                        style={{
-                          display: "none",
-                        }}
-                      >
-                        <Field
-                          type="file"
-                          name="uploadPicture"
-                          onChange={(event) => {
-                            setFieldValue(
-                              "uploadPicture",
-                              event.currentTarget.files[0]
-                            );
-                          }}
-                          component={AppInput}
-                          labelColor="gray"
-                          accept="image/*"
-                          border="none"
-                        />
-                      </div>
-                    </div>
-                    <ErrorMessage name="uploadPicture" component={Error} />
-                    <span
-                      style={{
-                        opacity: "0.5",
-                        fontSize: "0.6rem",
-                      }}
-                    >
-                      {values?.uploadPicture && values?.uploadPicture.name}
-                    </span>
-                  </FileInputContainer>
-                </div>
-                {user?.identificationDetails?.idCard &&
-                  !values?.uploadPicture &&
-                  idPlaceholder && (
-                    <ImgViewer>
-                      <Img
-                        src={user?.identificationDetails?.idCard}
-                        alt="id-card"
-                      />
-                    </ImgViewer>
-                  )}
-              </section>
+              </>
+              <FileUpload
+                user={user}
+                setImgPlaceholder={setImgPlaceholder}
+                setFieldValue={setFieldValue}
+                imgPlaceholder={imgPlaceholder}
+                name="uploadPicture"
+                values={values}
+                label=" Upload Valid ID (Max 2MB)"
+              />
             </Section>
             <Section>
               <Title>Next of Kin</Title>
-              <div>
+              <>
                 <Field
                   label="Full Name"
                   placeholder="Please enter Next of kin"
                   type="text"
                   name="fullName"
-                  value={values.fullName}
                   onChange={handleChange}
                   component={AppInput}
                   width="20rem"
@@ -260,14 +211,13 @@ const KYC = ({
                   height="2rem"
                 />
                 <ErrorMessage name="fullName" component={Error} />
-              </div>{" "}
-              <div>
+              </>
+              <>
                 <Field
                   label="Relationship"
                   placeholder="Please enter relationship"
                   type="text"
                   name="relationship"
-                  value={values.relationship}
                   onChange={handleChange}
                   component={AppInput}
                   width="20rem"
@@ -275,14 +225,13 @@ const KYC = ({
                   height="2rem"
                 />
                 <ErrorMessage name="relationship" component={Error} />
-              </div>{" "}
-              <div>
+              </>
+              <>
                 <Field
                   label="Contact Number"
                   placeholder="Please enter contact number"
                   type="text"
                   name="contactNumber"
-                  value={values.contactNumber}
                   onChange={handleChange}
                   component={AppInput}
                   width="20rem"
@@ -290,17 +239,16 @@ const KYC = ({
                   height="2rem"
                 />
                 <ErrorMessage name="contactNumber" component={Error} />
-              </div>{" "}
+              </>
             </Section>
             <Section>
               <Title>Bank Verification Number (BVN)</Title>
-              <div>
+              <>
                 <Field
                   label="BVN"
                   placeholder="Please enter BVN"
                   type="text"
                   name="bvn"
-                  value={values.bvn}
                   onChange={handleChange}
                   component={AppInput}
                   width="20rem"
@@ -308,7 +256,7 @@ const KYC = ({
                   height="2rem"
                 />
                 <ErrorMessage name="bvn" component={Error} />
-              </div>{" "}
+              </>
             </Section>
             <Button type="submit" disabled={loading}>
               {loading ? "Submitting..." : "Submit KYC"}

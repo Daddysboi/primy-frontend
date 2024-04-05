@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 
-import MyCalendar from "../../components/MyCalender";
-import AppInput from "../../components/Input";
-import AppButton from "../../components/Button";
-import { primaryColors } from "../../assets/Colors";
+import MyCalendar from "../../../components/MyCalender";
+import AppInput from "../../../components/Input";
+import AppButton from "../../../components/Button";
+import { primaryColors } from "../../../assets/Colors";
 
 const Wrapper = styled.div`
   width: calc(100% - 25%);

@@ -31,8 +31,8 @@ const StyledInput = styled.input`
   outline: none;
   &::placeholder {
     opacity: 0.3;
-    font-size: 0.6rem;
-    font-style: italic;
+    font-size: 0.7rem;
+    display: flex;
   }
   &:focus {
     border: 1px solid rgb(194, 194, 194);

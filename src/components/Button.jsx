@@ -15,11 +15,17 @@ const Button = styled.button`
         return primaryColors.Info;
       case "warning":
         return primaryColors.Warning;
+      case "other":
+        return "#0F0F0F";
+      case "none":
+        return "transparent";
       default:
         return primaryColors.Purple;
     }
   }};
-  height: 2.2rem;
+  height: ${(props) => props.height || "2.2rem"};
+  font-size: ${(props) => props.fontSize || "0.8rem"};
+  font-weight: ${(props) => props.fontWeight || "400"};
   border: none;
   padding: ${(props) => (props.small ? "0.5rem 1rem" : "0.5rem 2rem")};
   border-radius: 0.5rem;
@@ -73,6 +79,9 @@ const AppButton = ({
   onClick,
   icon,
   display,
+  height,
+  fontSize,
+  fontWeight,
   ...props
 }) => {
   return (
@@ -86,6 +95,10 @@ const AppButton = ({
       disabled={loading || disabled}
       type={type}
       onClick={onClick}
+      height={height}
+      fontSize={fontSize}
+      fontWeight={fontWeight}
+      display={display}
       {...props}
     >
       <Children>

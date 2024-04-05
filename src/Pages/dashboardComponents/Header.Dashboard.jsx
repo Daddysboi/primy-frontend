@@ -15,11 +15,12 @@ import { MdOutlineCreditScore } from "react-icons/md";
 const Container = styled.div`
   display: flex;
   height: 4rem;
+  margin-bottom: 1rem;
   top: 0;
   left: 0;
   right: 0;
-  /* position: fixed; */
-  /* background-color: ${primaryColors.DashBoardBackground}; */
+  position: fixed;
+  z-index: 2;
 `;
 
 const Left = styled.div`
@@ -33,16 +34,28 @@ const Right = styled.div`
   align-items: center;
   justify-content: space-between;
   padding: 0 5rem;
-  padding-top: 0.5rem;
+  box-shadow: 1px 1px 2px 2px rgba(0.1, 0.1, 0.1, 0.03);
 `;
 
-const Search = styled.div`
+const Search = styled.span`
   display: flex;
-  justify-content: center;
   align-items: center;
-  background-color: ${primaryColors.Gray};
+  margin: 1rem 2rem 1rem 1rem;
+  border-radius: 0.3rem;
   padding-left: 1rem;
-  border-radius: 0.5rem;
+  flex: 1;
+  min-width: 4rem;
+  background: ${primaryColors.Gray};
+`;
+
+const SearchIcon = styled(IoSearch)`
+  min-width: 25px;
+`;
+const Tabs = styled.div`
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  justify-content: space-between;
 `;
 
 const Circles = styled.div`
@@ -60,14 +73,14 @@ const IconsTab = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 1.5rem;
+  gap: 1rem;
 `;
 
 const UserTab = styled.div`
   width: 7rem;
   background: ${primaryColors.Gray};
   height: 2rem;
-  border-radius: 1rem 0.75rem 0.75rem 1rem;
+  border-radius: 1rem 0.5rem 0.5rem 1rem;
   display: flex;
   gap: 0.5rem;
   font-size: 0.6rem;
@@ -76,6 +89,8 @@ const UserTab = styled.div`
 const SessionTab = styled.div`
   display: flex;
   gap: 0.5rem;
+  align-items: center;
+  justify-content: space-between;
 `;
 
 const ProfilePix = styled.div`
@@ -138,40 +153,41 @@ const Header = () => {
       <Left></Left>
       <Right>
         <Search>
-          <IoSearch className="search_icon" />
+          <SearchIcon className="search_icon" />
           <SearchBar />
         </Search>
-
-        <IconsTab>
-          {icons.map((icon, index) => (
-            <Circles key={index}>{icon}</Circles>
-          ))}
-        </IconsTab>
-        <SessionTab>
-          <AppSelectInput
-            options={session}
-            name="session"
-            value={formData.session}
-            height="32px"
-            onChange={handleChange}
-          />
-
-          {selectedsession && (
+        <Tabs>
+          <IconsTab>
+            {icons.map((icon, index) => (
+              <Circles key={index}>{icon}</Circles>
+            ))}
+          </IconsTab>
+          <SessionTab>
             <AppSelectInput
-              options={term}
-              value={formData.term}
-              name="term"
+              options={session}
+              name="session"
+              value={formData.session}
               height="32px"
               onChange={handleChange}
             />
-          )}
-        </SessionTab>
-        <UserTab>
-          <ProfilePix>
-            <Img src={myphoto} alt={user?.firstName} />
-          </ProfilePix>
-          {user?.firstName} {user?.lastName}
-        </UserTab>
+
+            {selectedsession && (
+              <AppSelectInput
+                options={term}
+                value={formData.term}
+                name="term"
+                height="32px"
+                onChange={handleChange}
+              />
+            )}
+          </SessionTab>
+          <UserTab>
+            <ProfilePix>
+              <Img src={myphoto} alt={user?.firstName} />
+            </ProfilePix>
+            {user?.firstName} {user?.lastName}
+          </UserTab>
+        </Tabs>
       </Right>
     </Container>
   );

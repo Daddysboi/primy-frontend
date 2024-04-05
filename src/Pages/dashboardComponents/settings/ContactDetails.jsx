@@ -6,7 +6,7 @@ import { toast } from "react-toastify";
 
 import AppInput from "../../../components/Input";
 import Error from "../../../components/Error";
-import { fileToDataUri } from "./ProfileSettings";
+import { fileToDataUri } from "../../../components/FileUtils";
 import { useFetchUserData } from "../../../Guard";
 import { useAppDispatch } from "../../../redux/hooks";
 import { updateUserContactDetails } from "../../../redux/features/userSlice";
@@ -107,7 +107,6 @@ const AddContact = ({
                 placeholder="Enter your home address"
                 type="text"
                 name="homeAddress"
-                value={values.homeAddress}
                 onChange={handleChange}
                 component={AppInput}
                 width="20rem"
@@ -123,7 +122,6 @@ const AddContact = ({
                 placeholder="Enter closest landmark to you"
                 type="text"
                 name="landmark"
-                value={values.landmark}
                 onChange={handleChange}
                 component={AppInput}
                 width="20rem"
@@ -139,7 +137,6 @@ const AddContact = ({
                 placeholder="Enter Office Address"
                 type="text"
                 name="officeAddress"
-                value={values.officeAddress}
                 onChange={handleChange}
                 component={AppInput}
                 width="20rem"
@@ -155,7 +152,6 @@ const AddContact = ({
                 placeholder="Enter your postal code"
                 type="text"
                 name="postalCode"
-                value={values.postalCode}
                 onChange={handleChange}
                 component={AppInput}
                 width="20rem"

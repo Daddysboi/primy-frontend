@@ -1,4 +1,4 @@
-import MasterSheet from "../../../components/MasterSheet";
+import MasterSheet from "../../../../components/MasterSheet";
 
 const Assessment = () => {
   return (

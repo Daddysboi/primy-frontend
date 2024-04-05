@@ -6,11 +6,7 @@ import { useAppDispatch } from "../redux/hooks";
 import { logout } from "../redux/features/loginSlice";
 import { useUser } from "../contexts/userContext";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faChevronUp,
-  faChevronDown,
-  faPlusCircle,
-} from "@fortawesome/free-solid-svg-icons";
+import { faChevronUp, faChevronDown } from "@fortawesome/free-solid-svg-icons";
 
 import {
   adminLinks,
@@ -21,13 +17,13 @@ import { checkInLocation } from "../utils/helpers";
 import DashboardHeader from "../pages/dashboardComponents/Header.Dashboard";
 import { primaryColors } from "../assets/Colors";
 
-import Img from "../assets/Logo/primy-logo.png";
 import library from "../assets/images/library.png";
+import Logo from "../components/Logo";
 
 const Wrapper = styled.div`
   background-color: ${primaryColors.DashBoardBackground};
   height: 100%;
-  /* margin-top: 4rem; */
+  padding: 5rem 0 3rem 15rem;
 `;
 
 const Container = styled.div`
@@ -35,27 +31,23 @@ const Container = styled.div`
   flex-direction: row;
 `;
 
-const Logo = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: ${primaryColors.Gray};
-  margin-bottom: 2rem;
-`;
-
-const Image = styled.img`
-  height: 2.5rem;
-`;
 const Aside = styled.aside`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   width: 10rem;
-  margin-right: 3rem;
+  /* margin-right: 3rem; */
   padding-left: 2rem;
   background-color: ${primaryColors.Purple};
   border-radius: 0 1.5rem 0 0;
   min-height: calc(100vh - 4rem);
+  margin-top: -1rem;
+  position: fixed;
+  top: 5rem;
+  left: 0;
+  bottom: 0;
+  z-index: 2;
+  padding-bottom: 1rem;
 `;
 
 const Button = styled.button`
@@ -93,7 +85,6 @@ const Links = styled.div`
 
 const SideBarImg = styled.img`
   height: 8rem;
-  margin-top: 4rem;
 `;
 
 const DashBoardLayout = () => {
@@ -144,10 +135,7 @@ const DashBoardLayout = () => {
 
       <Container>
         <Aside>
-          <Logo>
-            <Image src={Img} alt="Logo" />
-            <h1>Primy</h1>
-          </Logo>
+          <Logo />
           <Links>
             {links.map((sidebar, index) => (
               <div key={index}>

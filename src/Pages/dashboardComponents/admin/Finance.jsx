@@ -1,11 +1,11 @@
 import styled from "styled-components";
 
-import { primaryColors } from "../../assets/Colors";
-import DeatailCard from "../../components/DetailCard";
-import AppSelectInput from "../../components/SelectInput";
-import TransactionCard from "../../components/TransactionCard";
-import LineChart from "../../components/LineChart";
-import DoughnutChart from "../../components/DoughnutChart";
+import { primaryColors } from "../../../assets/Colors";
+import DeatailCard from "../../../components/DetailCard";
+import AppSelectInput from "../../../components/SelectInput";
+import TransactionCard from "../../../components/TransactionCard";
+import LineChart from "../../../components/LineChart";
+import DoughnutChart from "../../../components/DoughnutChart";
 
 const Container = styled.div`
   width: calc(100% - 25%);
@@ -136,7 +136,7 @@ const Finance = () => {
         </Top>
         <Bottom>
           <Header>
-            <Text>Recent Transactions</Text>
+            <Text>School Fees</Text>
             <AppSelectInput options={options} />
           </Header>
           <Cards>

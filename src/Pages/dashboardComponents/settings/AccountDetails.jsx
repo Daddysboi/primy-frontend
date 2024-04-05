@@ -158,8 +158,7 @@ const AccountDetails = ({ user, PropsContainer, Button, StyledForm, s }) => {
                   inputType="password"
                   placeholder="Enter password"
                   name="password"
-                  value={values.password}
-                  onChange={handleChange}
+z                  onChange={handleChange}
                   component={AppInput}
                   width="20rem"
                   labelColor="gray"

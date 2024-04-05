@@ -5,18 +5,14 @@ const Exams = () => {
   const [results, setResults] = useState([]);
   const [editedResults, setEditedResults] = useState([]);
 
-  // Using usePapaParse hook to parse the CSV file
   const { data } = usePapaParse();
 
   const handleFileUpload = (file) => {
     console.log("File uploaded:", file);
 
-    // Create a new FileReader to read the file content
     const reader = new FileReader();
 
-    // Set up an onload event handler to execute when the file reading is completed
     reader.onload = (e) => {
-      // Get the string data of the file
       const fileContent = e.target.result;
       console.log("String data of the file:", fileContent);
 

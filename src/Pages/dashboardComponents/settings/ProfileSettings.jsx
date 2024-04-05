@@ -9,44 +9,17 @@ import Error from "../../../components/Error";
 import { updateUserProfile } from "../../../redux/features/userSlice";
 import { useAppDispatch } from "../../../redux/hooks";
 import { useFetchUserData } from "../../../Guard";
+import FileUpload from "../../../components/FileUpload";
+import { fileToDataUri } from "../../../components/FileUtils";
 
-const ImgViewer = styled.div`
-  /* width: 60px; */
-  /* height: 60px; */
-  border-radius: 50%;
-  border: 1px solid black;
+const NameInput = styled.div`
+  display: flex;
+  gap: 1rem;
+  padding: 0;
+  justify-content: space-between;
 `;
 
-const Img = styled.img`
-  width: 60px;
-  height: 60px;
-  border-radius: 50%;
-`;
-
-export const fileToDataUri = (file) => {
-  return new Promise((resolve, reject) => {
-    const reader = new FileReader();
-
-    reader.onload = () => {
-      resolve(reader.result);
-    };
-
-    reader.onerror = reject;
-
-    reader.readAsDataURL(file);
-  });
-};
-
-const ProfileSettings = ({
-  user,
-  PropsContainer,
-  Button,
-  StyledForm,
-  FileInputContainer,
-  StyledLabel,
-  UploadButton,
-  FaCloudUploadAlt,
-}) => {
+const ProfileSettings = ({ user, PropsContainer, Button, StyledForm }) => {
   const initialValues = {
     firstName: "",
     lastName: "",
@@ -104,7 +77,7 @@ const ProfileSettings = ({
     phoneNumber: Yup.string()
       .required("Phone number is required")
       .matches(/^\d{11}$/, "Phone number must be exactly 11 digits"),
-    uploadPicture: Yup.mixed().required("Required"), // Allow any file type
+    uploadPicture: Yup.mixed().required("Required"),
   });
 
   return (
@@ -117,23 +90,26 @@ const ProfileSettings = ({
         {({ values, handleChange, setFieldValue }) => (
           <StyledForm>
             <>
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "space-between",
-                }}
-              >
+              <FileUpload
+                user={user}
+                setImgPlaceholder={setImgPlaceholder}
+                setFieldValue={setFieldValue}
+                imgPlaceholder={imgPlaceholder}
+                name="uploadPicture"
+                values={values}
+                label="Upload Picture"
+              />
+
+              <NameInput>
                 <Field
                   label="First Name"
                   placeholder="Enter your first name"
                   type="text"
-                  id="firstName"
+                  width="100%"
                   name="firstName"
-                  width="95%"
-                  value={values.firstName}
                   onChange={handleChange}
                   component={AppInput}
-                  height="2rem"
+                  height="2.5rem"
                   labelColor="gray"
                 />
                 <ErrorMessage name="firstName" component={Error} />
@@ -141,114 +117,47 @@ const ProfileSettings = ({
                 <Field
                   label="Last Name"
                   type="text"
+                  width="100%"
                   placeholder="Enter your last name"
-                  id="lastName"
                   name="lastName"
-                  value={values.lastName}
                   onChange={handleChange}
+                  component={AppInput}
+                  labelColor="gray"
+                  height="2.5rem"
+                />
+                <ErrorMessage name="lastName" component={Error} />
+              </NameInput>
+
+              <>
+                <Field
+                  label="E-Mail"
+                  placeholder="Enter email address"
+                  type="email"
+                  name="email"
                   component={AppInput}
                   width="100%"
                   labelColor="gray"
-                  height="2rem"
-                />
-                <ErrorMessage name="lastName" component={Error} />
-              </div>
-
-              <div>
-                <Field
-                  label="E-Mail"
-                  placeholder=""
-                  value={user?.email}
-                  type="email"
-                  id="email"
-                  name="email"
-                  component={AppInput}
-                  width="20rem"
-                  labelColor="gray"
-                  height="2rem"
-                  disabled
+                  height="2.5rem"
                   color="gray"
-                  background="#DBDBDB"
-                  border="1px solid #DBDBDB"
                 />
                 <ErrorMessage name="email" component={Error} />
-              </div>
+              </>
 
-              <div>
+              <>
                 <Field
                   label="Phone Number"
                   placeholder="Enter Phone Number"
                   type="tel"
-                  id="phoneNumber"
-                  name="phoneNumber" // Ensure this matches the key in initialValues
-                  value={values.phoneNumber} // Set the value directly
+                  name="phoneNumber"
                   onChange={handleChange}
                   component={AppInput}
-                  width="20rem"
+                  width="100%"
                   labelColor="gray"
-                  height="2rem"
+                  height="2.5rem"
                 />
                 <ErrorMessage name="phoneNumber" component={Error} />
-              </div>
+              </>
 
-              <section
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  gap: "30px",
-                }}
-              >
-                <div onClick={() => setImgPlaceholder(false)}>
-                  <FileInputContainer>
-                    <StyledLabel htmlFor="uploadPicture">
-                      Upload Picture
-                    </StyledLabel>
-                    <div>
-                      <UploadButton htmlFor="uploadPicture">
-                        <FaCloudUploadAlt />
-                      </UploadButton>
-                      <div
-                        style={{
-                          display: "none",
-                        }}
-                      >
-                        <Field
-                          type="file"
-                          id="uploadPicture"
-                          name="uploadPicture"
-                          onChange={(event) => {
-                            setFieldValue(
-                              "uploadPicture",
-                              event.currentTarget.files[0]
-                            );
-                          }}
-                          component={AppInput}
-                          labelColor="gray"
-                          accept="image/*"
-                          border="none"
-                        />
-                      </div>
-                    </div>
-                    <ErrorMessage name="uploadPicture" component={Error} />
-                    <span
-                      style={{
-                        opacity: "0.5",
-                        fontSize: "0.6rem",
-                      }}
-                    >
-                      {values?.uploadPicture && values?.uploadPicture.name}
-                    </span>
-                  </FileInputContainer>
-                </div>
-
-                {user?.profilePicture &&
-                  !values?.uploadPicture &&
-                  imgPlaceholder && (
-                    <ImgViewer>
-                      <Img src={user?.profilePicture} alt="head-shot" />
-                    </ImgViewer>
-                  )}
-              </section>
               <Button disabled={loading} type="submit">
                 {loading ? "Updating..." : "Save Changes"}
               </Button>

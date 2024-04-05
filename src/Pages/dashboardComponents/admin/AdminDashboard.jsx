@@ -1,13 +1,13 @@
 import styled from "styled-components";
 
-import DetailCard from "../../components/DetailCard";
-import studentIcon from "../../assets/images/36006.jpg";
-import AppButton from "../../components/Button";
-import { primaryColors } from "../../assets/Colors";
+import DetailCard from "../../../components/DetailCard";
+import studentIcon from "../../../assets/images/36006.jpg";
+import AppButton from "../../../components/Button";
+import { primaryColors } from "../../../assets/Colors";
 
-import DoughnutChart from "../../components/DoughnutChart";
-import LineChart from "../../components/LineChart";
-import MyCalendar from "../../components/MyCalender";
+import DoughnutChart from "../../../components/DoughnutChart";
+import LineChart from "../../../components/LineChart";
+import MyCalendar from "../../../components/MyCalender";
 
 const Container = styled.div`
   display: flex;
