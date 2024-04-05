@@ -1,4 +1,4 @@
-import axiosClient from "../../utils/axiosClient";
+import axiosClient from "../../middleware/axiosClient";
 
 import {
   GET_USER_BY_ID,

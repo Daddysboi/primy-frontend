@@ -1,4 +1,4 @@
-import Hero from "./homeComponents/Hero";
+import Hero from "./home/Hero";
 
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import AppButton from "../components/Button";

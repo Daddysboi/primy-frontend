@@ -12,9 +12,9 @@ import {
   adminLinks,
   studentLinks,
   teacherLinks,
-} from "../pages/dashboardComponents/Links";
+} from "../pages/dashboard/Links";
 import { checkInLocation } from "../utils/helpers";
-import DashboardHeader from "../pages/dashboardComponents/Header.Dashboard";
+import DashboardHeader from "../pages/dashboard/Header.Dashboard";
 import { primaryColors } from "../assets/Colors";
 
 import library from "../assets/images/library.png";

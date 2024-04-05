@@ -6,9 +6,9 @@ import styled from "styled-components";
 import { useUser } from "../contexts/userContext";
 import AppButton from "../components/Button";
 
-import TeacherDashboard from "./dashboardComponents/TeacherDashboard";
-import StudentDashboard from "./dashboardComponents/StudentDashboard";
-import AdminDashboard from "./dashboardComponents/admin/AdminDashboard";
+import TeacherDashboard from "./dashboard/TeacherDashboard";
+import StudentDashboard from "./dashboard/StudentDashboard";
+import AdminDashboard from "./dashboard/admin/AdminDashboard";
 
 const Container = styled.div`
   /* width: 100%; */

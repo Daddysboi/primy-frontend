@@ -1,4 +1,4 @@
-import axiosClient from "../../utils/axiosClient";
+import axiosClient from "../../middleware/axiosClient";
 
 import { LOGIN, REGISTER, SEND_OTP, RESET_PASSWORD } from "./CONSTANTS";
 

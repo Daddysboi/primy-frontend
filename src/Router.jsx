@@ -19,16 +19,16 @@ import DashboardLayout from "./layout/DashboardLayout.jsx";
 import GuardLayout from "./layout/GuardLayout.jsx";
 
 // Admin routes
-import AdminProtectedRoutes from "./pages/dashboardComponents/protectedRoute/AdminProtectedRoutes.jsx";
-import AllTeacher from "./pages/dashboardComponents/admin/AllTeachers.jsx";
-import AllClasses from "./pages/dashboardComponents/admin/AllClasses.jsx";
-import AllStudents from "./pages/dashboardComponents/admin/AllStudents.jsx";
-import Events from "./pages/dashboardComponents/admin/Events.jsx";
-import Finance from "./pages/dashboardComponents/admin/Finance.jsx";
-import Settings from "./pages/dashboardComponents/settings/Settings.jsx";
-import AllTimetable from "./pages/dashboardComponents/admin/AllTimetable.jsx";
-import Assessment from "./pages/dashboardComponents/admin/results/Assessment.jsx";
-import Exams from "./pages/dashboardComponents/admin/results/Exams.jsx";
+import AdminProtectedRoutes from "./pages/protectedRoute/AdminProtectedRoutes.jsx";
+import AllTeacher from "./pages/dashboard/admin/AllTeachers.jsx";
+import AllClasses from "./pages/dashboard/admin/AllClasses.jsx";
+import AllStudents from "./pages/dashboard/admin/AllStudents.jsx";
+import Events from "./pages/dashboard/admin/Events.jsx";
+import Finance from "./pages/dashboard/admin/Finance.jsx";
+import Settings from "./pages/dashboard/settings/Settings.jsx";
+import AllTimetable from "./pages/dashboard/admin/AllTimetable.jsx";
+import Assessment from "./pages/dashboard/admin/results/Assessment.jsx";
+import Exams from "./pages/dashboard/admin/results/Exams.jsx";
 
 // import CoursesPage from "./pages/course/index.jsx";
 
