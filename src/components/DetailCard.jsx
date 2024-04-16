@@ -5,8 +5,8 @@ import { primaryColors } from "../assets/Colors";
 const Card = styled.div`
   border-radius: 5px;
   box-shadow: 1px 1px 2px 2px rgba(0.1, 0.1, 0.1, 0.03);
-  width: ${(props) => props.width || "12rem"};
-  height: ${(props) => props.height || "6rem"};
+  width: ${(props) => props.width || "14rem"};
+  height: ${(props) => props.height || "6.5rem"};
   padding: ${(props) => props.padding || `1rem 0 0 2rem`};
   background-color: ${(props) => props.backgroundColor || primaryColors.White};
   display: flex;
@@ -20,10 +20,15 @@ const Card = styled.div`
 const Left = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  /* justify-content: space-between; */
   margin-bottom: 3rem;
 `;
 
+const Top = styled.div``;
+
+const Child = styled.div`
+  padding-top: ${(props) => props.paddingTop || ""};
+`;
 const Right = styled.div`
   align-self: center;
 `;
@@ -55,9 +60,6 @@ const Img = styled.img`
   height: 2rem;
 `;
 
-const Child = styled.div`
-  /* align-self: flex-end; */
-`;
 const DeatailCard = ({
   value,
   heading,
@@ -71,6 +73,7 @@ const DeatailCard = ({
   p,
   padding,
   backgroundColor,
+  paddingTop,
 }) => {
   return (
     <Card
@@ -80,14 +83,14 @@ const DeatailCard = ({
       backgroundColor={backgroundColor}
     >
       <Left>
-        <div>
+        <Top>
           <CardTxt h1={h1}>{value}</CardTxt>
           <CardHead>{heading}</CardHead>
           <CardSubHead p={p}>
             <Span>{rate}</Span> {subtext}
           </CardSubHead>
-        </div>
-        <Child>{children}</Child>
+        </Top>
+        <Child paddingTop={paddingTop}>{children}</Child>
       </Left>
       <Right>
         <Img src={image} alt="" />

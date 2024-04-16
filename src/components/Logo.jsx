@@ -10,6 +10,9 @@ const LinkTag = styled(Link)`
   align-items: center;
   color: ${(props) => props.color || primaryColors.Gray};
   text-decoration: none;
+  font-weight: 700;
+  font-size: 2rem;
+  gap: 0.3rem;
 `;
 
 const Image = styled.img`

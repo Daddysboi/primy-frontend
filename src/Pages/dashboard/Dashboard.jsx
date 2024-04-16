@@ -3,16 +3,15 @@ import { useNavigate } from "react-router-dom";
 import { MdArrowBackIos } from "react-icons/md";
 import styled from "styled-components";
 
-import { useUser } from "../contexts/userContext";
-import AppButton from "../components/Button";
+import { useUser } from "../../contexts/userContext";
+import AppButton from "../../components/Button";
 
-import TeacherDashboard from "./dashboard/TeacherDashboard";
-import StudentDashboard from "./dashboard/StudentDashboard";
-import AdminDashboard from "./dashboard/admin/AdminDashboard";
+import TeacherDashboard from "./TeacherDashboard";
+import StudentDashboard from "./StudentDashboard";
+import AdminDashboard from "./admin/AdminDashboard";
 
 const Container = styled.div`
   /* width: 100%; */
-  /* position: relative; */
 `;
 
 const WelcomeTab = styled.div`

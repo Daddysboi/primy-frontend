@@ -1,11 +1,11 @@
+import React from "react";
 import { Navigate, Outlet } from "react-router-dom";
-
-import { getPage } from "../../../utils/helpers";
-import { useUser } from "../../../contexts/userContext";
+import { getPage } from "../../utils/helpers";
+import { useAuth } from "../../Contexts/AuthContext";
 
 const AdminProtectedRoutes = () => {
   const currentPage = getPage();
-  const { user } = useUser();
+  const { authUser: user } = useAuth();
 
   if (user?.role === "admin") {
     if (currentPage === "admin") {

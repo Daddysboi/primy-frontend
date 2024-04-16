@@ -1,4 +1,4 @@
-import axiosClient from "../../middleware/axiosClient";
+import axiosClient from "../../services/api";
 
 import {
   GET_USER_BY_ID,
@@ -10,7 +10,7 @@ import {
   TEACHERS,
   STUDENTS,
   USERS,
-} from "./CONSTANTS";
+} from "../constants";
 
 // NOTE: "Access-Control-Allow-Origin": "*". This header is related to Cross-Origin Resource Sharing (CORS) and specifies that any origin is allowed to access the resource. This header is typically set on the server-side, so including it in the request here might not be necessary unless you're explicitly trying to override CORS restrictions during development/testing.
 

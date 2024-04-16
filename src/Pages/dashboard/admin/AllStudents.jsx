@@ -21,16 +21,16 @@ const Container = styled.div`
 `;
 
 const AllStudents = () => {
-  const [loading, setLoading] = useState(false);
   const [createModal, setCreateModal] = useState(false);
   const [user, setUser] = useState(false);
 
   const dispatch = useAppDispatch();
-  const { users: students } = useAppSelector((state) => state.user);
+  const { users: students, isLoading: loading } = useAppSelector(
+    (state) => state.user
+  );
   const searchValue = useAppSelector((state) => state.query);
 
   useEffect(() => {
-    setLoading(true);
     dispatch(getAllStudents())
       .unwrap()
       .then((resp) => {
@@ -40,9 +40,6 @@ const AllStudents = () => {
       })
       .catch((error) => {
         toast.error(error?.message || "Something went wrong");
-      })
-      .finally(() => {
-        setLoading(false);
       });
   }, [dispatch, students]);
 

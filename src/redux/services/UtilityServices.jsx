@@ -1,11 +1,11 @@
-import axiosClient from "../../middleware/axiosClient";
+import axiosClient from "../../services/api";
 
 import {
   MAILING_LIST,
   CONTACT_OUR_SUPPORT,
   DISPUTE_TRANSACTION,
   UPDATE_TRANSACTION_STATUS,
-} from "./CONSTANTS";
+} from "../constants";
 
 export const SaveEmailToMailingList = async ({ email }) => {
   const data = { email };
@@ -51,3 +51,5 @@ export const UpdateTransactionStatus = async ({ transactionId, newStatus }) => {
   });
   return response.data;
 };
+
+export const AddLocation = async () => {};

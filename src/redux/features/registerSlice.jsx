@@ -1,27 +1,28 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { Register, SendOtp } from "../services/auth.services";
+import { Register, SendOtp } from "../services/AuthServices";
 
 const initialState = {};
 
-// export const sendOtp = createAsyncThunk(
-//   "sendOtp",
-//   async (payload) => useFetchSlice(SendOtp)(payload)
-// );
-
-export const sendOtp = createAsyncThunk("sendOtp", async ({ email }) => {
-  try {
-    const resp = await SendOtp({
-      email,
-    });
-    return resp;
-  } catch (error) {
-    throw error; // Throw the error to let Redux Toolkit handle the rejection
+export const sendOtp = createAsyncThunk(
+  "sendOtp",
+  async ({ email }, { rejectWithValue }) => {
+    try {
+      const resp = await SendOtp({
+        email,
+      });
+      return resp;
+    } catch (error) {
+      throw rejectWithValue(error.message);
+    }
   }
-});
+);
 
 export const register = createAsyncThunk(
   "signup",
-  async ({ firstName, lastName, email, password, role, otp }) => {
+  async (
+    { firstName, lastName, email, password, role, otp },
+    { rejectWithValue }
+  ) => {
     try {
       const resp = await Register({
         firstName,
@@ -33,7 +34,7 @@ export const register = createAsyncThunk(
       });
       return resp;
     } catch (error) {
-      throw error; // Throw the error to let Redux Toolkit handle the rejection
+      return rejectWithValue(error.message);
     }
   }
 );
@@ -44,21 +45,34 @@ export const registerSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     // register actions
-    builder.addCase(register.pending, (state) => {
-      state.isLoading = true;
-    });
-    builder.addCase(register.fulfilled, (state) => {
-      state.isLoading = false;
-    });
-    builder.addCase(register.rejected, (state) => {
-      state.isLoggedIn = false;
-      // state.user = null;
-      state.isLoading = false;
-    });
+    builder
+      .addCase(register.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(register.fulfilled, (state) => {
+        state.isLoading = false;
+      })
+      .addCase(register.rejected, (state) => {
+        state.isLoggedIn = false;
+        // state.user = null;
+        state.isLoading = false;
+      });
+
+    // send otp
+    builder
+      .addCase(sendOtp.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(sendOtp.fulfilled, (state) => {
+        state.isLoading = false;
+      })
+      .addCase(sendOtp.rejected, (state) => {
+        state.isLoggedIn = false;
+        state.isLoading = false;
+      });
   },
 });
 
-const { actions, reducer } = registerSlice;
+const { reducer } = registerSlice;
 
-export const { setLoginPhone } = actions;
 export default reducer;

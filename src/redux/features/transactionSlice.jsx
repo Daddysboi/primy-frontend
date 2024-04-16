@@ -3,7 +3,7 @@ import {
   CreateTransaction,
   VerifyTransaction,
   VerifyTransactionDetails,
-} from "../services/transactions.services";
+} from "../services/TransactionServices";
 
 const initialState = {
   transactions: [],
@@ -66,41 +66,44 @@ export const transactionSlice = createSlice({
   },
   extraReducers: (builder) => {
     // create transactions actions
-    builder.addCase(createTransaction.pending, (state) => {
-      state.isLoading = true;
-    });
-    builder.addCase(createTransaction.fulfilled, (state) => {
-      state.isLoading = false;
-    });
-    builder.addCase(createTransaction.rejected, (state) => {
-      state.isLoggedIn = false;
-      // state.user = null;
-      state.isLoading = false;
-    });
+    builder
+      .addCase(createTransaction.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(createTransaction.fulfilled, (state) => {
+        state.isLoading = false;
+      })
+      .addCase(createTransaction.rejected, (state) => {
+        state.isLoggedIn = false;
+        // state.user = null;
+        state.isLoading = false;
+      });
     // verify transactions actions
-    builder.addCase(verifyTransaction.pending, (state) => {
-      state.isLoading = true;
-    });
-    builder.addCase(verifyTransaction.fulfilled, (state) => {
-      state.isLoading = false;
-    });
-    builder.addCase(verifyTransaction.rejected, (state) => {
-      state.isLoggedIn = false;
-      // state.user = null;
-      state.isLoading = false;
-    });
+    builder
+      .addCase(verifyTransaction.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(verifyTransaction.fulfilled, (state) => {
+        state.isLoading = false;
+      })
+      .addCase(verifyTransaction.rejected, (state) => {
+        state.isLoggedIn = false;
+        // state.user = null;
+        state.isLoading = false;
+      });
     // verify transactions details actions
-    builder.addCase(verifyTransactionDetails.pending, (state) => {
-      state.isLoading = true;
-    });
-    builder.addCase(verifyTransactionDetails.fulfilled, (state) => {
-      state.isLoading = false;
-    });
-    builder.addCase(verifyTransactionDetails.rejected, (state) => {
-      state.isLoggedIn = false;
-      // state.user = null;
-      state.isLoading = false;
-    });
+    builder
+      .addCase(verifyTransactionDetails.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(verifyTransactionDetails.fulfilled, (state) => {
+        state.isLoading = false;
+      })
+      .addCase(verifyTransactionDetails.rejected, (state) => {
+        state.isLoggedIn = false;
+        // state.user = null;
+        state.isLoading = false;
+      });
   },
 });
 

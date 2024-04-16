@@ -1,6 +1,6 @@
-import axiosClient from "../../middleware/axiosClient";
+import axiosClient from "../../services/api";
 
-import { LOGIN, REGISTER, SEND_OTP, RESET_PASSWORD } from "./CONSTANTS";
+import { LOGIN, REGISTER, SEND_OTP, RESET_PASSWORD } from "../constants";
 
 export const Signin = async ({ email, password }) => {
   const loginData = { email, password };

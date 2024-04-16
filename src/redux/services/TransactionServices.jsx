@@ -1,10 +1,10 @@
-import axiosClient from "../../middleware/axiosClient";
+import axiosClient from "../../services/api";
 
 import {
   CREATE_TRANSACTION,
   VERIFY_TRANSACTION,
   VERIFY_TRANSACTION_DETAILS,
-} from "./CONSTANTS";
+} from "../constants";
 
 export const CreateTransaction = async ({
   reference,

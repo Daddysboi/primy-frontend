@@ -19,16 +19,19 @@ const Container = styled.div`
 const Top = styled.div`
   display: flex;
   gap: 2rem;
+  justify-content: space-between;
 `;
 
 const Mid = styled.div`
   display: flex;
   gap: 3rem;
+  justify-content: space-between;
 `;
 
 const Bottom = styled.div`
   display: flex;
   gap: 3rem;
+  justify-content: space-between;
 `;
 
 const CardWrapper = styled.div`
@@ -46,15 +49,17 @@ const EventList = styled.div`
 const EventWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 0.7rem;
+  gap: 2rem;
   margin-bottom: 1rem;
 `;
+
 const Date = styled.div`
   background-color: ${({ color }) => color};
   border-radius: 1rem;
   width: 17.5%;
-  height: 2.3rem;
-  padding: 0.5rem;
+  height: 3rem;
+  padding: 1rem;
+  text-align: left;
 `;
 
 const Info = styled.div`
@@ -74,7 +79,7 @@ const InfoText = styled.p`
 const DateText = styled.p`
   font-size: 0.8rem;
   font-weight: 600;
-  text-align: center;
+  /* text-align: center; */
   margin: 0;
 `;
 
@@ -176,7 +181,7 @@ const AdminDashboard = () => {
 
         <DetailCard
           value="Total Students by Gender"
-          width="24rem"
+          width="28rem"
           height="14rem"
           subtext={`We have ${data[0]} boys and ${data[1]} girls`}
           h1="1rem"
@@ -189,8 +194,8 @@ const AdminDashboard = () => {
       <Mid>
         <DetailCard
           value="School Peformance"
-          width="39rem"
-          height="15rem"
+          width="42rem"
+          height="20rem"
           h1="1rem"
         >
           <LineChart data={LineChartdata} width={600} height={170} />
@@ -198,8 +203,9 @@ const AdminDashboard = () => {
         <DetailCard
           h1="1rem"
           value="Upcoming events"
-          width="12rem"
-          height="15rem"
+          width="15rem"
+          height="20rem"
+          paddingTop="2rem"
         >
           <EventWrapper>
             {eventList.map(({ day, weekday, event, color }, i) => (
@@ -229,7 +235,7 @@ const AdminDashboard = () => {
         <DetailCard
           h1="1rem"
           value="School Calender"
-          width="25.5rem"
+          width="28rem"
           height="15rem"
         >
           <MyCalendar />
@@ -237,7 +243,7 @@ const AdminDashboard = () => {
         <DetailCard
           h1="1rem"
           value="School Finance"
-          width="25.5rem"
+          width="28rem"
           height="15rem"
         >
           <div>

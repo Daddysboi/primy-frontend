@@ -1,11 +1,11 @@
 import { createBrowserRouter } from "react-router-dom";
 
 // Pages
-import Homepage from "./pages/Homepage.jsx";
+import Homepage from "./pages/home/Homepage.jsx";
 import Login from "./pages/Login.jsx";
 import SignUp from "./pages/SignUp.jsx";
 import Otp from "./pages/Otp.jsx";
-import Dashboard from "./pages/Dashboard.jsx";
+import Dashboard from "./pages/dashboard/Dashboard.jsx";
 import TermsAndConditions from "./pages/TermsAndConditions.jsx";
 import ResetPassword from "./pages/ResetPassword.jsx";
 import ForgotPassword from "./pages/ForgotPassword.jsx";
@@ -19,7 +19,7 @@ import DashboardLayout from "./layout/DashboardLayout.jsx";
 import GuardLayout from "./layout/GuardLayout.jsx";
 
 // Admin routes
-import AdminProtectedRoutes from "./pages/protectedRoute/AdminProtectedRoutes.jsx";
+// import AdminProtectedRoutes from "./pages/protectedRoute/AdminProtectedRoutes.jsx";
 import AllTeacher from "./pages/dashboard/admin/AllTeachers.jsx";
 import AllClasses from "./pages/dashboard/admin/AllClasses.jsx";
 import AllStudents from "./pages/dashboard/admin/AllStudents.jsx";
@@ -126,7 +126,7 @@ export const router = createBrowserRouter([
           // Admin Dashboard
           {
             path: "admin",
-            element: <AdminProtectedRoutes />,
+            // element: <AdminProtectedRoutes />,
             children: [
               {
                 path: "students",

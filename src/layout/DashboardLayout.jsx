@@ -23,7 +23,7 @@ import Logo from "../components/Logo";
 const Wrapper = styled.div`
   background-color: ${primaryColors.DashBoardBackground};
   height: 100%;
-  padding: 5rem 0 3rem 15rem;
+  padding: 5rem 0 3rem 20%;
 `;
 
 const Container = styled.div`
@@ -31,14 +31,22 @@ const Container = styled.div`
   flex-direction: row;
 `;
 
+const Links = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  margin-top: 1rem;
+`;
+
 const Aside = styled.aside`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  width: 10rem;
-  /* margin-right: 3rem; */
+  width: 13rem;
+  padding-top: 1rem;
   padding-left: 2rem;
   background-color: ${primaryColors.Purple};
+  /* background-color: #000; */
   border-radius: 0 1.5rem 0 0;
   min-height: calc(100vh - 4rem);
   margin-top: -1rem;
@@ -54,12 +62,12 @@ const Button = styled.button`
   display: flex;
   gap: 0.5rem;
   padding: 8px;
-  margin-left: ${({ active }) => (active ? "0.5rem" : "")};
   border-radius: 0.5rem;
+  font-size: 0.7rem;
   cursor: pointer;
+  margin-left: ${({ active }) => (active ? "0.5rem" : "")};
   border: ${({ active }) =>
     active ? `1px solid ${primaryColors.LightPurple}` : "transparent"};
-  width: 7rem;
   transition: background-color 0.2s ease;
   background-color: ${({ active }) =>
     active ? `${primaryColors.LightPurple}` : "transparent"};
@@ -75,12 +83,6 @@ const Button = styled.button`
 
 const SubButton = styled(Button)`
   margin: 0 0 0 1.2rem;
-`;
-
-const Links = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 0.3rem;
 `;
 
 const SideBarImg = styled.img`
