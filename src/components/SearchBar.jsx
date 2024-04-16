@@ -17,7 +17,6 @@ const SearchBar = () => {
       <AppInput
         border="none"
         type="search"
-        width="25rem"
         height="2.5rem"
         value={query}
         onChange={handleSearch}

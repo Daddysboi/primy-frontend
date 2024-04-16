@@ -10,6 +10,13 @@ export const checkInLocation = (val) => {
   return new RegExp("^" + val).test(getPage());
 };
 
+// GET CURRENT YEAR
+export const getCurrentYear = () => {
+  var date = new Date();
+  var year = date.getFullYear();
+  return year;
+};
+
 // GET CURRENT DATE STRING
 export const getCurrentDate = () => {
   var date = new Date();

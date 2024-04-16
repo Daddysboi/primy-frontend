@@ -73,144 +73,285 @@ const Td = styled.td`
   background-color: #ffffff;
 `;
 
-const results = [
-  {
-    name: "John",
-    scores: {
-      english: 40,
-      biology: 65,
-      geography: 72,
-      "social studies": 68,
-      french: 30,
-      maths: 45,
-      chemistry: 70,
-      physics: 55,
-      history: 60,
-      "computer science": 75,
+const results = {
+  "primary 1": [
+    {
+      name: "John",
+      scores: {
+        english: 40,
+        biology: 65,
+        geography: 72,
+        "social studies": 68,
+        french: 30,
+        maths: 45,
+        chemistry: 70,
+        physics: 55,
+        history: 60,
+        "computer science": 75,
+      },
+      Average: "",
+      Position: "",
     },
-    Average: "",
-    Position: "",
-  },
-  {
-    name: "Emily",
-    scores: {
-      english: 85,
-      biology: 35,
-      geography: 78,
-      "social studies": 80,
-      french: 75,
-      maths: 30,
-      chemistry: 68,
-      physics: 82,
-      history: 23,
-      "computer science": 85,
+    {
+      name: "Emily",
+      scores: {
+        english: 85,
+        biology: 35,
+        geography: 78,
+        "social studies": 80,
+        french: 75,
+        maths: 30,
+        chemistry: 68,
+        physics: 82,
+        history: 23,
+        "computer science": 85,
+      },
+      Average: "",
+      Position: "",
     },
-    Average: "",
-    Position: "",
-  },
-  {
-    name: "Michael",
-    scores: {
-      english: 70,
-      biology: 65,
-      geography: 75,
-      "social studies": 72,
-      french: 80,
-      maths: 92,
-      chemistry: 78,
-      physics: 88,
-      history: 62,
-      "computer science": 80,
+    {
+      name: "Michael",
+      scores: {
+        english: 70,
+        biology: 65,
+        geography: 75,
+        "social studies": 72,
+        french: 80,
+        maths: 92,
+        chemistry: 78,
+        physics: 88,
+        history: 62,
+        "computer science": 80,
+      },
+      Average: "",
+      Position: "",
     },
-    Average: "",
-    Position: "",
-  },
-  {
-    name: "Sophia",
-    scores: {
-      english: 88,
-      biology: 50,
-      geography: 75,
-      "social studies": 70,
-      french: 85,
-      maths: 33,
-      chemistry: 82,
-      physics: 85,
-      history: 68,
-      "computer science": 92,
+    {
+      name: "Sophia",
+      scores: {
+        english: 88,
+        biology: 50,
+        geography: 75,
+        "social studies": 70,
+        french: 85,
+        maths: 33,
+        chemistry: 82,
+        physics: 85,
+        history: 68,
+        "computer science": 92,
+      },
+      Average: "",
+      Position: "",
     },
-    Average: "",
-    Position: "",
-  },
-  {
-    name: "William",
-    scores: {
-      english: 75,
-      biology: 68,
-      geography: 80,
-      "social studies": 85,
-      french: 90,
-      maths: 85,
-      chemistry: 70,
-      physics: 78,
-      history: 72,
-      "computer science": 85,
+    {
+      name: "William",
+      scores: {
+        english: 75,
+        biology: 68,
+        geography: 80,
+        "social studies": 85,
+        french: 90,
+        maths: 85,
+        chemistry: 70,
+        physics: 78,
+        history: 72,
+        "computer science": 85,
+      },
+      Average: "",
+      Position: "",
     },
-    Average: "",
-    Position: "",
-  },
-  {
-    name: "Olivia",
-    scores: {
-      english: 82,
-      biology: 75,
-      geography: 85,
-      "social studies": 82,
-      french: 85,
-      maths: 42,
-      chemistry: 80,
-      physics: 22,
-      history: 70,
-      "computer science": 90,
+    {
+      name: "Olivia",
+      scores: {
+        english: 82,
+        biology: 75,
+        geography: 85,
+        "social studies": 82,
+        french: 85,
+        maths: 42,
+        chemistry: 80,
+        physics: 22,
+        history: 70,
+        "computer science": 90,
+      },
+      Average: "",
+      Position: "",
     },
-    Average: "",
-    Position: "",
-  },
-  {
-    name: "James",
-    scores: {
-      english: 68,
-      biology: 70,
-      geography: 80,
-      "social studies": 85,
-      french: 90,
-      maths: 15,
-      chemistry: 68,
-      physics: 80,
-      history: 75,
-      "computer science": 85,
+    {
+      name: "James",
+      scores: {
+        english: 68,
+        biology: 70,
+        geography: 80,
+        "social studies": 85,
+        french: 90,
+        maths: 15,
+        chemistry: 68,
+        physics: 80,
+        history: 75,
+        "computer science": 85,
+      },
+      Average: "",
+      Position: "",
     },
-    Average: "",
-    Position: "",
-  },
-  {
-    name: "Emma",
-    scores: {
-      english: 90,
-      biology: 78,
-      geography: 70,
-      "social studies": 65,
-      french: 80,
-      maths: 85,
-      chemistry: 72,
-      physics: 80,
-      history: 68,
-      "computer science": 85,
+    {
+      name: "Emma",
+      scores: {
+        english: 90,
+        biology: 78,
+        geography: 70,
+        "social studies": 65,
+        french: 80,
+        maths: 85,
+        chemistry: 72,
+        physics: 80,
+        history: 68,
+        "computer science": 85,
+      },
+      Average: "",
+      Position: "",
     },
-    Average: "",
-    Position: "",
-  },
-];
+  ],
+  "primary 2": [
+    {
+      name: "John",
+      scores: {
+        english: 40,
+        biology: 65,
+        geography: 72,
+        "social studies": 68,
+        french: 30,
+        maths: 45,
+        chemistry: 70,
+        physics: 55,
+        history: 60,
+        "computer science": 75,
+      },
+      Average: "",
+      Position: "",
+    },
+    {
+      name: "Emily",
+      scores: {
+        english: 85,
+        biology: 35,
+        geography: 78,
+        "social studies": 80,
+        french: 75,
+        maths: 30,
+        chemistry: 68,
+        physics: 82,
+        history: 23,
+        "computer science": 85,
+      },
+      Average: "",
+      Position: "",
+    },
+    {
+      name: "Michael",
+      scores: {
+        english: 70,
+        biology: 65,
+        geography: 75,
+        "social studies": 72,
+        french: 80,
+        maths: 92,
+        chemistry: 78,
+        physics: 88,
+        history: 62,
+        "computer science": 80,
+      },
+      Average: "",
+      Position: "",
+    },
+    {
+      name: "Sophia",
+      scores: {
+        english: 88,
+        biology: 50,
+        geography: 75,
+        "social studies": 70,
+        french: 85,
+        maths: 33,
+        chemistry: 82,
+        physics: 85,
+        history: 68,
+        "computer science": 92,
+      },
+      Average: "",
+      Position: "",
+    },
+    {
+      name: "William",
+      scores: {
+        english: 75,
+        biology: 68,
+        geography: 80,
+        "social studies": 85,
+        french: 90,
+        maths: 85,
+        chemistry: 70,
+        physics: 78,
+        history: 72,
+        "computer science": 85,
+      },
+      Average: "",
+      Position: "",
+    },
+    {
+      name: "Olivia",
+      scores: {
+        english: 82,
+        biology: 75,
+        geography: 85,
+        "social studies": 82,
+        french: 85,
+        maths: 42,
+        chemistry: 80,
+        physics: 22,
+        history: 70,
+        "computer science": 90,
+      },
+      Average: "",
+      Position: "",
+    },
+    {
+      name: "James",
+      scores: {
+        english: 68,
+        biology: 70,
+        geography: 80,
+        "social studies": 85,
+        french: 90,
+        maths: 15,
+        chemistry: 68,
+        physics: 80,
+        history: 75,
+        "computer science": 85,
+      },
+      Average: "",
+      Position: "",
+    },
+    {
+      name: "Emma",
+      scores: {
+        english: 90,
+        biology: 78,
+        geography: 70,
+        "social studies": 65,
+        french: 80,
+        maths: 85,
+        chemistry: 72,
+        physics: 80,
+        history: 68,
+        "computer science": 85,
+      },
+      Average: "",
+      Position: "",
+    },
+  ],
+  "primary 3": [],
+};
 
 const classList = [
   "primary 1",
@@ -260,25 +401,16 @@ const Mastersheet = ({ resultTitle }) => {
   //classes
   const [classLevel, setClassLevel] = useState("primary 1");
 
+  const currentIndex = classList.indexOf(classLevel);
+
   const handleNext = () => {
-    const currentIndex = classList.indexOf(classLevel);
     const nextIndex = (currentIndex + 1) % classList.length;
     setClassLevel(classList[nextIndex]);
   };
   const handlePrevious = () => {
-    const previousClasses = [
-      "Primary 1",
-      "Primary 2",
-      "Primary 3",
-      "JSS1",
-      "JSS2",
-      "JSS3",
-    ].reverse();
-    const currentIndex = previousClasses.indexOf(classLevel);
-    const nextIndex = (currentIndex + 1) % previousClasses.length;
-    setClassLevel(previousClasses[nextIndex]);
+    const prevIndex = (currentIndex - 1) % classList.length;
+    setClassLevel(classList[prevIndex]);
   };
-
   //
   const getGrade = (score) => {
     const grade = gradeSystem.find(
@@ -289,10 +421,12 @@ const Mastersheet = ({ resultTitle }) => {
       : { value: "", color: "" };
   };
 
+  const currentClassStudents = results[classLevel] || [];
+  
   const calculateAverages = () => {
     const averages = {};
 
-    results.forEach((student) => {
+    currentClassStudents.forEach((student) => {
       Object.entries(student.scores).forEach(([subject, score]) => {
         if (
           subject !== "Student" &&
@@ -329,6 +463,7 @@ const Mastersheet = ({ resultTitle }) => {
           {classLevel} /{resultTitle}/Mastersheet
         </Title>
         <button onClick={handleNext}>Next</button>
+        <button onClick={handlePrevious}>Previous</button>
       </Header>
       <Table>
         <thead>
@@ -354,7 +489,7 @@ const Mastersheet = ({ resultTitle }) => {
           </tr>
         </thead>
         <tbody>
-          {results.slice(startIndex, endIndex).map((student, i) => (
+          {currentClassStudents.map((student, i) => (
             <React.Fragment key={i}>
               <tr>
                 <TdSScore>{student.name}</TdSScore>

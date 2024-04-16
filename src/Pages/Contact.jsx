@@ -4,7 +4,7 @@ import * as Yup from "yup";
 import { toast } from "react-toastify";
 import styled from "styled-components";
 
-import { useAppDispatch } from "../redux/hooks";
+import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import AppInput from "../reuseableComponent/AppInput";
 import AppButton from "../reuseableComponent/AppButton";
 
@@ -34,8 +34,8 @@ const StyledHeader = styled.h1`
 `;
 
 const Contact = () => {
-  const [loading, setLoading] = useState(false);
   const dispatch = useAppDispatch();
+  const { isLoading } = useAppSelector((state) => state.support);
 
   const initialValues = { fullName: "", email: "", message: "" };
 
@@ -55,19 +55,13 @@ const Contact = () => {
       message: values.message,
     };
     dispatch(contactOurSupport(request))
+      .unwrap()
       .then((resp) => {
-        if (resp?.payload?.status !== 201) {
-          toast.error(resp?.payload?.message || "Something went wrong");
-          setLoading(false);
-          return;
-        }
         toast.success(resp?.payload?.message || "Message Sent Successfully");
         resetForm();
-        setLoading(false);
       })
       .catch((error) => {
         toast.error(error?.message || "Something went wrong");
-        setLoading(false);
       });
   };
 
@@ -111,7 +105,7 @@ const Contact = () => {
               />{" "}
               <ErrorMessage name="message" component={ErrorRed} />
             </div>
-            <AppButton disabled={loading}>
+            <AppButton disabled={isLoading}>
               {loading ? "Submitting..." : "Submit"}
             </AppButton>
           </StyledWrapper>

@@ -3,7 +3,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 
 import { getUserById, setUser } from "./redux/features/userSlice";
 import { useAppDispatch } from "./redux/hooks";
-import { USER_ID } from "./redux/services/CONSTANTS";
+import { USER_ID } from "./redux/constants";
 
 //specifies users loged in access
 export const useFetchUserData = () => {

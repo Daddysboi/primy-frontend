@@ -1,4 +1,3 @@
-import "../assets/styles.css";
 import PropTypes from "prop-types";
 import { useState } from "react";
 import { BsThreeDotsVertical } from "react-icons/bs";
@@ -7,6 +6,8 @@ import CreateUser from "./CreateUser";
 import Modal from "./Modal";
 import ClickOutside from "./ClickOutside";
 import { deleteStudent } from "../redux/features/userSlice";
+
+import "../assets/styles.css";
 
 const StudentCard = ({
   img = "https://picsum.photos/200",

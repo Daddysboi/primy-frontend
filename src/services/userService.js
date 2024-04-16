@@ -1,5 +1,5 @@
 import { toast } from "react-toastify";
-import axiosClient from "../utils/axiosClient";
+import axiosClient from "./api";
 
 const getTeachersRecord = async () => {
   try {
@@ -22,7 +22,6 @@ const getStudentRecord = async () => {
     }
   }
 };
-
 
 //create user
 const createUser = async (user, editing) => {

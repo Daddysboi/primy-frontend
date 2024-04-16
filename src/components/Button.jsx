@@ -15,12 +15,19 @@ const Button = styled.button`
         return primaryColors.Info;
       case "warning":
         return primaryColors.Warning;
+      case "grey":
+        return primaryColors.Grey;
+      case "other":
+        return "#0F0F0F";
+      case "none":
+        return "transparent";
       default:
         return primaryColors.Purple;
     }
   }};
-  height: 2.2rem;
-  border: none;
+  /* height: ${(props) => props.height || "2.2rem"}; */
+  font-size: ${(props) => props.fontSize || "0.8rem"};
+  font-weight: ${(props) => props.fontWeight || "400"};
   padding: ${(props) => (props.small ? "0.5rem 1rem" : "0.5rem 2rem")};
   border-radius: 0.5rem;
   color: ${(props) => props.textColor || "#fff"};
@@ -29,9 +36,8 @@ const Button = styled.button`
   transition: all 0.3s ease;
 
   &:hover {
-    background: transparent;
-    color: ${(props) => props.hoverColor || primaryColors.Purple};
-    border-color: ${(props) => props.hoverColor || primaryColors.Purple};
+    /* background: transparent; */
+    background-color: ${(props) => props.hoverBg || "#4D4D4D"};
   }
 
   ${(props) =>
@@ -73,6 +79,10 @@ const AppButton = ({
   onClick,
   icon,
   display,
+  height,
+  fontSize,
+  fontWeight,
+  hoverBg,
   ...props
 }) => {
   return (
@@ -86,6 +96,11 @@ const AppButton = ({
       disabled={loading || disabled}
       type={type}
       onClick={onClick}
+      height={height}
+      fontSize={fontSize}
+      fontWeight={fontWeight}
+      display={display}
+      hoverBg={hoverBg}
       {...props}
     >
       <Children>

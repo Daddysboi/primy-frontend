@@ -5,7 +5,7 @@ import { primaryColors } from "../assets/Colors";
 
 const Container = styled.div`
   position: relative;
-  margin-bottom: 12px;
+  /* margin-bottom: 12px; */
 `;
 
 const Label = styled.label`

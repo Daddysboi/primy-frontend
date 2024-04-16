@@ -1,11 +1,11 @@
 import { createBrowserRouter } from "react-router-dom";
 
 // Pages
-import Homepage from "./pages/Homepage.jsx";
+import Homepage from "./pages/home/Homepage.jsx";
 import Login from "./pages/Login.jsx";
 import SignUp from "./pages/SignUp.jsx";
 import Otp from "./pages/Otp.jsx";
-import Dashboard from "./pages/Dashboard.jsx";
+import Dashboard from "./pages/dashboard/Dashboard.jsx";
 import TermsAndConditions from "./pages/TermsAndConditions.jsx";
 import ResetPassword from "./pages/ResetPassword.jsx";
 import ForgotPassword from "./pages/ForgotPassword.jsx";
@@ -19,16 +19,16 @@ import DashboardLayout from "./layout/DashboardLayout.jsx";
 import GuardLayout from "./layout/GuardLayout.jsx";
 
 // Admin routes
-import AdminProtectedRoutes from "./pages/dashboardComponents/protectedRoute/AdminProtectedRoutes.jsx";
-import AllTeacher from "./pages/dashboardComponents/AllTeachers.jsx";
-import AllClasses from "./pages/dashboardComponents/AllClasses.jsx";
-import AllStudents from "./pages/dashboardComponents/AllStudents.jsx";
-import Events from "./pages/dashboardComponents/Events.jsx";
-import Finance from "./pages/dashboardComponents/Finance.jsx";
-import Settings from "./pages/dashboardComponents/settings/Settings.jsx";
-import AllTimetable from "./pages/dashboardComponents/AllTimetable.jsx";
-import Assessment from "./pages/dashboardComponents/results/Assessment.jsx";
-import Exams from "./pages/dashboardComponents/results/Exams.jsx";
+// import AdminProtectedRoutes from "./pages/protectedRoute/AdminProtectedRoutes.jsx";
+import AllTeacher from "./pages/dashboard/admin/AllTeachers.jsx";
+import AllClasses from "./pages/dashboard/admin/AllClasses.jsx";
+import AllStudents from "./pages/dashboard/admin/AllStudents.jsx";
+import Events from "./pages/dashboard/admin/Events.jsx";
+import Finance from "./pages/dashboard/admin/Finance.jsx";
+import Settings from "./pages/dashboard/settings/Settings.jsx";
+import AllTimetable from "./pages/dashboard/admin/AllTimetable.jsx";
+import Assessment from "./pages/dashboard/admin/results/Assessment.jsx";
+import Exams from "./pages/dashboard/admin/results/Exams.jsx";
 
 // import CoursesPage from "./pages/course/index.jsx";
 
@@ -126,7 +126,7 @@ export const router = createBrowserRouter([
           // Admin Dashboard
           {
             path: "admin",
-            element: <AdminProtectedRoutes />,
+            // element: <AdminProtectedRoutes />,
             children: [
               {
                 path: "students",
@@ -228,8 +228,8 @@ export const router = createBrowserRouter([
   },
 ]);
 
-const Router = () => {
-  return <Router.Provider router={router} />;
-};
+// const Router = () => {
+//   return <Router.Provider router={router} />;
+// };
 
-export default Router;
+// export default Router;
