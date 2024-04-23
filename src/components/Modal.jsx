@@ -1,23 +1,16 @@
 import { useRef, useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { FaTimes } from "react-icons/fa";
-import styled, { createGlobalStyle } from "styled-components";
-
-const GlobalStyles = createGlobalStyle`
-    overflow: hidden;
-`;
+import styled from "styled-components";
 
 const Dialog = styled.dialog`
-  position: fixed;
   border: 0;
-  top: 0;
-  bottom: 0;
-  right: -80%;
+  top: -3rem;
   width: 300px;
-  height: 100%;
   background-color: white;
-  z-index: 1;
   transition: right 5s ease;
+  border-radius: 1rem;
+  padding: 1rem;
   &::backdrop {
     background: hsl(0 0% 0% / 50%);
   }
@@ -27,7 +20,6 @@ const Close = styled.div`
   position: absolute;
   top: 10px;
   right: 3rem;
-  background: #e8e8e8;
   border: none;
   padding: 0 0.25rem;
   cursor: pointer;
@@ -74,7 +66,6 @@ const Modal = ({ isOpen, hasCloseBtn = true, onClose, children }) => {
 
   return (
     <>
-      <GlobalStyles />
       <Dialog ref={modalRef} onKeyDown={handleKeyDown}>
         {hasCloseBtn && (
           <Close onClick={handleCloseModal}>

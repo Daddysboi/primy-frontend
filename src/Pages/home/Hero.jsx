@@ -126,6 +126,7 @@ const Hero = ({
       )}
       {children}
     </Container>
+    
   );
 };
 

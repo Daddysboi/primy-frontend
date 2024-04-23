@@ -71,7 +71,7 @@ const Results = () => {
                   onChange={(e) => setStudentStatus(student.id, e.target.value)}
                 >
                   <option value="">Select Status</option>
-                  <option value="promoter">Promoter</option>
+                  <option value="promoter">Promoted</option>
                   <option value="repeat">Repeat</option>
                 </select>
               </td>

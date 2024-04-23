@@ -154,12 +154,11 @@ export const updatePassword = createAsyncThunk(
 );
 
 //create user
-//check if its not the same as the existing method of creating user in the user slice above
 export const createUser = createAsyncThunk(
   "createUser",
-  async ({ request, editing }, { rejectWithValue }) => {
+  async ({ data, editing }, { rejectWithValue }) => {
     try {
-      const resp = await CreateUser({ request, editing });
+      const resp = await CreateUser({ data, editing });
       return resp;
     } catch (error) {
       return rejectWithValue(error.message);

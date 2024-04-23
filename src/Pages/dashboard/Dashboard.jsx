@@ -22,12 +22,13 @@ const WelcomeTab = styled.div`
 
 const Heading = styled.h1`
   margin-bottom: 0;
-  font-size: 1.5rem;
+  font-size: 1rem;
+  font-weight: 600;
 `;
 
 const Subhead = styled.p`
   margin: 0;
-  font-size: 0.8rem;
+  font-size: 0.7rem;
   margin-bottom: 1.5rem;
 `;
 

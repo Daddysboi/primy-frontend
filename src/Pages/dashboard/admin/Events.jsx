@@ -7,20 +7,21 @@ import AppButton from "../../../components/Button";
 import { primaryColors } from "../../../assets/Colors";
 
 const Wrapper = styled.div`
-  width: calc(100% - 25%);
+  width: 90%;
   display: flex;
   justify-content: space-between;
   margin: 3rem 0;
+  gap: 3rem;
 `;
 
 const Left = styled.div`
-  width: 27rem;
   background-color: ${primaryColors.White};
   border-radius: 1rem;
   padding: 2rem;
   display: flex;
   flex-direction: column;
   gap: 2rem;
+  flex: 1;
 `;
 
 const Container = styled.div``;
@@ -30,8 +31,9 @@ const Inputs = styled.div`
 `;
 
 const Right = styled.div`
+  flex: 1;
+
   background-color: ${primaryColors.White};
-  width: 27rem;
   border-radius: 1rem;
   display: flex;
   flex-direction: column;

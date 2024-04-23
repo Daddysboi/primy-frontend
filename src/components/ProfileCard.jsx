@@ -5,91 +5,140 @@ import photo from "../assets/images/myphoto.jpeg";
 import { FaPen, FaTrash } from "react-icons/fa";
 
 const Container = styled.div`
-  display: flex;
-  justify-content: space-between;
-  flex-direction: column;
-  border-radius: 0.5rem;
-  box-shadow: 1px 1px 2px 2px rgba(0.1, 0.1, 0.1, 0.07);
-  padding-top: 0.5rem;
-  width: 7.5rem;
-  height: 10rem;
+  border-radius: 5px;
+  box-shadow: 0px 10px 20px -10px rgba(0, 0, 0, 0.75);
+  color: #727892;
+  padding-top: 1rem;
+  position: relative;
+  width: 10rem;
+  max-width: 100%;
+  text-align: center;
   background: ${primaryColors.White};
+`;
+
+const Pro = styled.span`
+  color: #231e39;
+  background-color: #febb0b;
+  border-radius: 3px;
+  font-size: 0.6rem;
+  font-weight: bold;
+  padding: 0.2rem;
+  position: absolute;
+  top: 0.5rem;
+  left: 0.5rem;
 `;
 
 const Top = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  /* height: 60%; */
+  justify-content: center;
 `;
 
 const Img = styled.img`
-  height: 3rem;
-  width: 3rem;
-  border-radius: 1.6rem;
-  box-shadow: 1px 1px 2px 2px rgba(0.1, 0.1, 0.1, 0.05);
-  padding: 0.3rem;
+  border: 2px solid ${primaryColors.LightPurple};
+  border-radius: 50%;
+  padding: 3px;
+  height: 4rem;
+  width: 4rem;
+`;
+
+const Buttons = styled.div`
+  display: flex;
+  gap: 0.5rem;
+  padding: 0rem;
+  margin: 0rem;
+  position: absolute;
+  font-size: 0.7rem;
+  right: 1rem;
+`;
+
+const Name = styled.h1`
+  font-size: 0.8rem;
+  font-weight: 600;
 `;
 
 const Text = styled.p`
-  font-size: 0.55rem;
-  margin: 0.02rem;
+  font-size: 0.5rem;
   font-weight: 500;
 `;
 
-const IconTab = styled.div`
-  display: flex;
-  justify-content: right;
-  /* margin-top: -3rem; */
-  /* margin: 0; */
+const Skills = styled.div`
+  background: ${(props) =>
+    props.student ? primaryColors.mintGreen : primaryColors.LightPurple};
+  text-align: left;
+  padding: 1rem;
+  margin-top: 1rem;
 `;
 
-const TrashIcon = styled(FaTrash)`
-  height: 0.5rem;
-  color: #c30505;
+const Lists = styled.ul`
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+`;
+
+const List = styled.ul`
+  border: 1px solid #d8d4e7;
+  border-radius: 2px;
+  display: inline-block;
+  font-size: 0.6rem;
+  margin: 0 3px 3px 0;
+  padding: 3px;
+`;
+
+const Edit = styled(FaPen)`
   &:hover {
-    color: #f88989;
+    color: #a6aabc;
+    padding-top: 0.1rem;
   }
 `;
 
-const PenIcon = styled(FaPen)`
-  height: 0.5rem;
-  width: 0.5rem;
-
+const Delete = styled(FaTrash)`
   &:hover {
-    color: #4d4b4b;
+    color: #a6aabc;
+    padding-top: 0.1rem;
   }
 `;
 
-const Bottom = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  /* height: 40%; */
-  align-items: center;
-  padding: 0.3rem 0 0.5rem 0;
-`;
-
-const ProfileCard = ({ img = photo, user, onDelete, onClick }) => {
+const ProfileCard = ({
+  img = `${photo}`,
+  header1,
+  header2,
+  options1,
+  options2,
+  student,
+  role,
+  name,
+  onDelete,
+  onEdit,
+}) => {
   return (
     <Container>
-      <IconTab>
-        <PenIcon size={20} onClick={onClick} />
-        <TrashIcon size={20} onDelete={onDelete} />
-      </IconTab>
+      <Pro>{role}</Pro>
       <Top>
-        <Img src={img} alt="userimage" />
+        <Img src={img} alt="user" />
       </Top>
-      <Bottom>
-        <Text>
-          Name:
-          {user?.firstName} {user?.lastName}
-        </Text>
-        <Text>Role: {user?.role}</Text>
-        <Text> Type: {user?.type}</Text>
-        <Text> Class(s): {user?.class}</Text>
-        <Text>Subject: {user?.subject}</Text>
-      </Bottom>
+      <Name>{name}</Name>
+      <Buttons>
+        <Edit onClick={onEdit} />
+        <Delete onClick={onDelete} />
+      </Buttons>
+      <Skills student={student}>
+        <Lists>
+          <>
+            <Text>{header1}</Text>
+            {options1?.map((option, i) => (
+              <List key={i}>{option}</List>
+            ))}
+          </>
+          <>
+            <Text>{header2}</Text>
+            {options2?.map((option, i) => (
+              <List key={i}>{option}</List>
+            ))}
+          </>
+        </Lists>
+      </Skills>
     </Container>
   );
 };

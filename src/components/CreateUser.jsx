@@ -6,7 +6,8 @@ import { toast } from "react-toastify";
 import styled from "styled-components";
 
 import { useAppDispatch } from "../redux/hooks";
-import { createUser } from "../redux/features/userSlice";
+import { useAppSelector } from "../redux/hooks";
+import { createUser, getAllTeachers } from "../redux/features/userSlice";
 
 import AppInput from "./Input";
 import AppSelectInput from "./SelectInput";
@@ -18,6 +19,7 @@ import { classLists } from "./ClassList";
 
 const Header = styled.h1`
   font-size: 1rem;
+  padding-bottom: 2rem;
 `;
 
 const Button = styled(AppButton)`
@@ -34,9 +36,11 @@ const CreateUser = ({
   user = undefined,
   editing = false,
 }) => {
-  const [loading, setLoading] = useState(false);
-  // const editing = !user; // user is defined, editing
   const dispatch = useAppDispatch();
+
+  const { isLoading } = useAppSelector((state) => state.user);
+
+  // const editing = !user; // user is defined, editing
 
   const initialValues = {
     email: "",
@@ -58,8 +62,7 @@ const CreateUser = ({
     initialValues.gender = user?.gender;
     initialValues.studentId = role === "student" ? user?._id : undefined;
     initialValues.teacherId = role === "teacher" ? user?._id : undefined;
-    initialValues.className =
-      role === "student" ? user?.className?._id : undefined;
+    initialValues.className = role === "student" ? user?.className : undefined;
   }
 
   const validationSchema = Yup.object().shape({
@@ -78,40 +81,36 @@ const CreateUser = ({
   });
 
   const onSubmit = async (values, { resetForm }) => {
-    console.log("clicked");
-    setLoading(true);
-    let request = {
+    let data = {
+      role: values.role,
+      firstName: values.firstName,
+      middleName: values.middleName,
+      lastName: values.lastName,
       email: values.email || "",
       password:
         role === "teacher"
           ? import.meta.VITE_TEACHER_PASSWORD
           : import.meta.VITE_STUDENT_PASSWORD,
-      role: values.role,
-      className: values.role === "student" ? "" : undefined,
-      firstName: values.firstName,
-      middleName: values.middleName,
-      lastName: values.lastName,
       gender: values.gender,
-      phoneNumber: values.role === "student" ? "" : undefined,
+      phoneNumber: values.role === "student" ? "" : values.phoneNumber,
+      className: values.role === "teacher" ? "" : values.className,
     };
 
-    console.log("1");
-    dispatch(createUser(request, editing))
+    dispatch(createUser(data, editing))
       .unwrap()
       .then((res) => {
-        toast.success(res?.payload?.message || "Successfully fetched teachers");
+        toast.success(res?.payload?.message || "Successfully fetched " + role);
         resetForm();
       })
       .catch((error) => {
         toast.error(error?.message || "Something went wrong");
       })
       .finally(() => {
-        setLoading(false);
         setIsCreating(false);
       });
   };
 
-  if (loading) {
+  if (isLoading) {
     return <Loading />;
   }
   return (
@@ -218,7 +217,7 @@ const CreateUser = ({
             )}
           </>
         )}
-        <Button loading={loading} text={`Save`} type="submit" />
+        <Button loading={isLoading} text={`Save`} type="submit" />
       </Form>
     </Formik>
   );

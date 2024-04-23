@@ -5,7 +5,6 @@ import { primaryColors } from "../assets/Colors";
 
 const Container = styled.div`
   position: relative;
-  /* margin-bottom: 12px; */
 `;
 
 const Label = styled.label`
@@ -18,14 +17,14 @@ const Select = styled.select`
   width: ${(props) => props.width || "100%"};
   min-height: 35px;
   height: ${(props) => props.height || "35px"};
-  padding: 0.5rem;
+  padding: 0 0.5rem;
   box-sizing: border-box;
   display: block;
   border-radius: 0.5rem;
   border: 1px solid ${(props) => props.borderColor || primaryColors.LightPurple};
   outline: none;
   background: transparent;
-
+  font-size: 0.8rem;
   &:focus {
     border: 1px solid rgb(194, 194, 194);
   }

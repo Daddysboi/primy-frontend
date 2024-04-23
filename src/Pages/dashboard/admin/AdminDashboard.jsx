@@ -1,6 +1,9 @@
+import { useState } from "react";
 import styled from "styled-components";
 
 import DetailCard from "../../../components/DetailCard";
+import ChartCard from "../../../components/ChartCard";
+
 import studentIcon from "../../../assets/images/36006.jpg";
 import AppButton from "../../../components/Button";
 import { primaryColors } from "../../../assets/Colors";
@@ -8,6 +11,12 @@ import { primaryColors } from "../../../assets/Colors";
 import DoughnutChart from "../../../components/DoughnutChart";
 import LineChart from "../../../components/LineChart";
 import MyCalendar from "../../../components/MyCalender";
+
+// material-ui
+import { Box, Button, Grid, Stack } from "@mui/material";
+
+// project import
+import IncomeAreaChart from "../../../components/IncomeAreaChart";
 
 const Container = styled.div`
   display: flex;
@@ -34,6 +43,11 @@ const Bottom = styled.div`
   justify-content: space-between;
 `;
 
+const ChartWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
 const CardWrapper = styled.div`
   display: flex;
   gap: 1rem;
@@ -50,7 +64,7 @@ const EventWrapper = styled.div`
   display: flex;
   flex-direction: column;
   gap: 2rem;
-  margin-bottom: 1rem;
+  margin-bottom: 2rem;
 `;
 
 const Date = styled.div`
@@ -58,8 +72,15 @@ const Date = styled.div`
   border-radius: 1rem;
   width: 17.5%;
   height: 3rem;
-  padding: 1rem;
-  text-align: left;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`;
+
+const Text = styled.h1`
+  font-weight: 600;
+  font-size: 1rem;
 `;
 
 const Info = styled.div`
@@ -77,9 +98,8 @@ const InfoText = styled.p`
 `;
 
 const DateText = styled.p`
-  font-size: 0.8rem;
+  font-size: 0.6rem;
   font-weight: 600;
-  /* text-align: center; */
   margin: 0;
 `;
 
@@ -162,6 +182,8 @@ const LineChartdata = [
 ];
 
 const AdminDashboard = () => {
+  const [slot, setSlot] = useState("week");
+
   return (
     <Container>
       <Top>
@@ -190,22 +212,49 @@ const AdminDashboard = () => {
           <DoughnutChart data={data} labelA="Boys" labelB="Girls" />
         </DetailCard>
       </Top>
-
       <Mid>
-        <DetailCard
-          value="School Peformance"
-          width="42rem"
-          height="20rem"
-          h1="1rem"
-        >
-          <LineChart data={LineChartdata} width={600} height={170} />
-        </DetailCard>
+        <ChartCard width="42rem" height="20rem">
+          <ChartWrapper>
+            <Grid>
+              <Grid
+                container
+                alignItems="center"
+                justifyContent="space-between"
+              >
+                <Text>School Peformance</Text>
+                <Grid>
+                  <Stack direction="row" alignItems="center" spacing={0}>
+                    <Button
+                      size="small"
+                      onClick={() => setSlot("month")}
+                      color={slot === "month" ? "primary" : "secondary"}
+                      variant={slot === "month" ? "outlined" : "text"}
+                    >
+                      Month
+                    </Button>
+                    <Button
+                      size="small"
+                      onClick={() => setSlot("week")}
+                      color={slot === "week" ? "primary" : "secondary"}
+                      variant={slot === "week" ? "outlined" : "text"}
+                    >
+                      Week
+                    </Button>
+                  </Stack>
+                </Grid>
+              </Grid>
+              <Box sx={{ pt: 1, pr: 2 }}>
+                <IncomeAreaChart slot={slot} />
+              </Box>
+            </Grid>
+          </ChartWrapper>
+        </ChartCard>
         <DetailCard
           h1="1rem"
           value="Upcoming events"
           width="15rem"
           height="20rem"
-          paddingTop="2rem"
+          paddingTop="1rem"
         >
           <EventWrapper>
             {eventList.map(({ day, weekday, event, color }, i) => (

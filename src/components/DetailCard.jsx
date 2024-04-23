@@ -60,7 +60,7 @@ const Img = styled.img`
   height: 2rem;
 `;
 
-const DeatailCard = ({
+const DetailCard = ({
   value,
   heading,
   rate,
@@ -69,6 +69,7 @@ const DeatailCard = ({
   width,
   height,
   children,
+  chart,
   h1,
   p,
   padding,
@@ -95,8 +96,9 @@ const DeatailCard = ({
       <Right>
         <Img src={image} alt="" />
       </Right>
+      {chart && <div> {chart} </div>}
     </Card>
   );
 };
 
-export default DeatailCard;
+export default DetailCard;

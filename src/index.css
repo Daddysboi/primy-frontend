@@ -11,11 +11,11 @@ html, body {
   margin: 0;
   padding: 0;
   font-family: poppins,sans-serif;
+  font-family: poppins,sans-serif;
   overflow-y: auto;
   box-sizing: border-box;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-
   &::-webkit-scrollbar {
     width: 0;
   }
@@ -51,5 +51,7 @@ html, body {
 
  */
 
+
+ 
 
  

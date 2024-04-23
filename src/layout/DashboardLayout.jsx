@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
@@ -22,8 +22,9 @@ import Logo from "../components/Logo";
 
 const Wrapper = styled.div`
   background-color: ${primaryColors.DashBoardBackground};
-  height: 100%;
   padding: 5rem 0 3rem 20%;
+  min-height: 100vh;
+  min-width: 100vw;
 `;
 
 const Container = styled.div`

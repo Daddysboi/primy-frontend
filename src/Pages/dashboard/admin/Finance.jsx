@@ -12,33 +12,29 @@ const Container = styled.div`
   display: flex;
   justify-content: space-between;
   margin: 3rem 0;
+  gap: 2rem;
 `;
 
 const Left = styled.div`
-  width: 30rem;
   background-color: ${primaryColors.White};
   border-radius: 1rem;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   padding: 2rem;
+  gap: 2rem;
 `;
 
 const Top = styled.div`
-  flex: 1;
   display: flex;
   gap: 1rem;
-  justify-content: space-between;
 `;
 
-const Bottom = styled.div`
-  flex: 5;
-`;
+const Bottom = styled.div``;
 
 const Header = styled.div`
   display: flex;
   justify-content: space-between;
-  margin-top: 1rem;
+  margin: 1rem 0;
 `;
 
 const Text = styled.h1`

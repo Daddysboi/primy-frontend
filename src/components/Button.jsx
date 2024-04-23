@@ -25,13 +25,13 @@ const Button = styled.button`
         return primaryColors.Purple;
     }
   }};
-  /* height: ${(props) => props.height || "2.2rem"}; */
+  height: ${(props) => props.height || ""};
   font-size: ${(props) => props.fontSize || "0.8rem"};
   font-weight: ${(props) => props.fontWeight || "400"};
   padding: ${(props) => (props.small ? "0.5rem 1rem" : "0.5rem 2rem")};
   border-radius: 0.5rem;
   color: ${(props) => props.textColor || "#fff"};
-  border: 1px solid ${(props) => props.borderColor || primaryColors.Purple};
+  border: "none";
   cursor: pointer;
   transition: all 0.3s ease;
 
@@ -83,11 +83,13 @@ const AppButton = ({
   fontSize,
   fontWeight,
   hoverBg,
+  id,
   ...props
 }) => {
   return (
     <Button
       backgroundColor={backgroundColor}
+      id={id}
       textColor={textColor}
       borderColor={borderColor}
       hoverColor={hoverColor}

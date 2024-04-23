@@ -19,7 +19,6 @@ import DashboardLayout from "./layout/DashboardLayout.jsx";
 import GuardLayout from "./layout/GuardLayout.jsx";
 
 // Admin routes
-// import AdminProtectedRoutes from "./pages/protectedRoute/AdminProtectedRoutes.jsx";
 import AllTeacher from "./pages/dashboard/admin/AllTeachers.jsx";
 import AllClasses from "./pages/dashboard/admin/AllClasses.jsx";
 import AllStudents from "./pages/dashboard/admin/AllStudents.jsx";
@@ -29,6 +28,7 @@ import Settings from "./pages/dashboard/settings/Settings.jsx";
 import AllTimetable from "./pages/dashboard/admin/AllTimetable.jsx";
 import Assessment from "./pages/dashboard/admin/results/Assessment.jsx";
 import Exams from "./pages/dashboard/admin/results/Exams.jsx";
+// import AdminProtectedRoutes from "./pages/protectedRoute/AdminProtectedRoutes.jsx";
 
 // import CoursesPage from "./pages/course/index.jsx";
 

@@ -10,7 +10,7 @@ import {
 
 import RoleHeader from "../../../components/RoleHeader";
 import CreateUser from "../../../components/CreateUser";
-import Modal from "../../../components/Modal";
+import SideBar from "../../../components/SideBar";
 import Loading from "../../../components/Loading";
 import ProfileCard from "../../../components/ProfileCard";
 
@@ -20,9 +20,13 @@ const Container = styled.div`
   gap: 2rem;
 `;
 
+const subjects = ["Sciences"];
+const classes = ["Jss1"];
+
 const AllStudents = () => {
   const [createModal, setCreateModal] = useState(false);
   const [user, setUser] = useState(false);
+  const [users, setUsers] = useState(false);
 
   const dispatch = useAppDispatch();
   const { users: students, isLoading: loading } = useAppSelector(
@@ -58,6 +62,7 @@ const AllStudents = () => {
         onClick={() => {
           setCreateModal(true);
         }}
+        Users={students}
       />
 
       <>
@@ -84,18 +89,28 @@ const AllStudents = () => {
           ))}
       </>
 
-      <div>
-        <ProfileCard />
-      </div>
-      <Modal
+      <>
+        <ProfileCard
+          role="Student"
+          header1="SUBJECTS"
+          header2="CLASS"
+          options1={subjects}
+          options2={classes}
+          name="Musa Haruna"
+          student
+        />
+      </>
+
+      <SideBar
         isOpen={createModal}
         onClose={() => {
           setCreateModal(false);
+          setEditModal(false);
         }}
         hasCloseBtn={true}
       >
         <CreateUser role="student" user={user} setIsCreating={setCreateModal} />
-      </Modal>
+      </SideBar>
     </Container>
   );
 };

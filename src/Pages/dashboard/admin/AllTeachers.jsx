@@ -10,7 +10,7 @@ import {
 
 import RoleHeader from "../../../components/RoleHeader";
 import CreateUser from "../../../components/CreateUser";
-import Modal from "../../../components/Modal";
+import SideBar from "../../../components/SideBar";
 import Loading from "../../../components/Loading";
 
 import ProfileCard from "../../../components/ProfileCard";
@@ -21,17 +21,19 @@ const Container = styled.div`
   gap: 2rem;
 `;
 
+const subjects = ["Mathematics", "Biology"];
+const classes = ["Jss 1", "Jss 2"];
+
 const AllTeacher = () => {
-  const [loading, setLoading] = useState(false);
   const [createModal, setCreateModal] = useState(false);
+  const [editing, setEditing] = useState(false);
   const [user, setUser] = useState(false);
 
   const dispatch = useAppDispatch();
-  const { users: teachers } = useAppSelector((state) => state.user);
+  const { users: teachers, isLoading } = useAppSelector((state) => state.user);
   const searchValue = useAppSelector((state) => state.query);
 
   useEffect(() => {
-    setLoading(true);
     dispatch(getAllTeachers())
       .unwrap()
       .then((resp) => {
@@ -42,23 +44,31 @@ const AllTeacher = () => {
       .catch((error) => {
         toast.error(error?.message || "Something went wrong");
       })
-      .finally(() => {
-        setLoading(false);
-      });
+      .finally(() => {});
   }, [dispatch, teachers]);
 
-  if (loading) {
+  if (isLoading) {
     return <Loading />;
   }
 
-  const handleDelete = (id) => {
-    dispatch(deleteTeacher(id));
+  const handleEdit = (teacher) => {
+    setCreateModal(true);
+    setEditing(true);
+    setUser(teacher);
   };
 
-  const handleEdit = (teacher) => {
-    setEditMode(true);
-    setUser(teacher);
-    setCreateModal(true);
+  const handleDelete = (id) => {
+    dispatch(deleteTeacher(id))
+      .unwrap()
+      .then((resp) => {
+        toast.success(resp?.payload?.message || "Successfully deleted");
+      })
+      .catch((error) => {
+        toast.error(error?.message || "Something went wrong");
+      })
+      .finally(() => {
+        dispatch(getAllTeachers());
+      });
   };
 
   return (
@@ -68,45 +78,65 @@ const AllTeacher = () => {
         onClick={() => {
           setCreateModal(true);
         }}
+        Users={teachers}
       />
-
       <>
         {teachers
           ?.filter((val) => {
             let searchVal = searchValue?.toLowerCase();
-            if (
+            if (!searchVal) return true;
+            return (
               val.firstName.toLowerCase().startsWith(searchVal) ||
               val.middleName.toLowerCase().startsWith(searchVal) ||
               val.gender.toLowerCase().startsWith(searchVal) ||
               val.teacherStatus.toLowerCase().startsWith(searchVal) ||
               val.lastName.toLowerCase().startsWith(searchVal)
-            ) {
-              return val;
-            }
+            );
           })
           ?.map((teacher, index) => (
             <ProfileCard
+              role="Teacher"
+              header1="SUBJECTS"
+              header2="CLASSES"
+              options1={subjects}
+              options2={classes}
+              name={teacher.name}
               key={index}
               user={teacher}
-              onClick={() => handleEdit(teacher)}
+              onEdit={() => handleEdit(teacher)}
               onDelete={() => handleDelete(teacher?._id)}
             />
           ))}
       </>
 
-      <div>
-        <ProfileCard />
-      </div>
-      <Modal
+      <>
+        <ProfileCard
+          role="Teacher"
+          header1="SUBJECTS"
+          header2="CLASSES"
+          options1={subjects}
+          options2={classes}
+          name="Magdalene Linus"
+          users=""
+          onEdit={() => handleEdit()}
+          onDelete={() => handleDelete(id)}
+        />
+      </>
+      <SideBar
         isOpen={createModal}
         onClose={() => {
           setCreateModal(false);
-          setEditMode(false);
+          setEditing(false);
         }}
         hasCloseBtn={true}
       >
-        <CreateUser role="teacher" user={user} setIsCreating={setCreateModal} />
-      </Modal>
+        <CreateUser
+          editing={editing}
+          role="teacher"
+          user={user}
+          setIsCreating={setCreateModal}
+        />
+      </SideBar>
     </Container>
   );
 };

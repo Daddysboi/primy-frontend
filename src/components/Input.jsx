@@ -1,20 +1,18 @@
 import React, { useState } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import styled from "styled-components";
-import { faEdit } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import { primaryColors } from "../assets/Colors";
 
 const InputContainer = styled.div`
   position: relative;
-  /* margin-bottom: 12px; */
 `;
 
 const Label = styled.label`
   font-size: 0.65rem;
   letter-spacing: -0.01rem;
   position: relative;
+  opacity: 0.8;
   color: ${(props) => props.labelColor || "inherit"};
 `;
 
@@ -86,8 +84,57 @@ const StyledTextarea = styled.textarea`
   }
 `;
 
+const CheckboxAndRadioContainer = styled.label`
+  display: flex;
+  align-items: center;
+`;
+
+const CheckboxAndRadioLabel = styled.span`
+  font-weight: 400;
+  letter-spacing: -0.01rem;
+  position: relative;
+  color: ${(props) => props.labelColor || "inherit"};
+  margin-left: 0.5rem;
+`;
+
+const Checkbox = styled.input`
+  width: 100%;
+  height: ${(props) => props.height || "42px"};
+  background: ${(props) => props.backgroundColor || "transparent"};
+  border: ${(props) => props.border || "1px solid #421260"};
+  padding: 0.5rem;
+  box-sizing: border-box;
+  display: inline;
+  border-radius: 0.3rem;
+  outline: none;
+  accent-color: #9d2ce4;
+
+  /* &:checked::after {
+    content: "\u2713"; // Unicode character for checkmark
+    font-size: 1rem;
+    color: #9d2ce4;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  } */
+`;
+
+const RadioInput = styled.input`
+  width: 100%;
+  height: ${(props) => props.height || "42px"};
+  background: ${(props) => props.backgroundColor || "transparent"};
+  border: ${(props) => props.border || "1px solid #421260"};
+  padding: 0.5rem;
+  box-sizing: border-box;
+  display: inline;
+  border-radius: 0.3rem;
+  outline: none;
+  accent-color: #9d2ce4;
+`;
+
 const AppInput = ({
-  type,
+  type = "text",
   name,
   value,
   placeholder,
@@ -135,36 +182,18 @@ const AppInput = ({
             width={width}
             height={height}
             eyeTop={eyeTop}
-            // ref={passwordRef}
             {...props}
           />
-          {showEyeIcon ? (
-            <EyeIcon
-              style={{
-                position: "absolute",
-                right: "12px",
-                top: eyeTop || "12px",
-              }}
-              onClick={togglePasswordVisibility}
-            >
-              {passwordVisibility ? <FaEye /> : <FaEyeSlash />}
-            </EyeIcon>
-          ) : (
-            <FontAwesomeIcon
-              icon={faEdit}
-              onClick={() => {
-                passwordRef.current.focus();
-              }}
-              style={{
-                position: "absolute",
-                right: "10px",
-                top: "50%",
-                transform: "translateY(-50%)",
-                cursor: "pointer",
-                color: "gray",
-              }}
-            />
-          )}
+          <EyeIcon
+            style={{
+              position: "absolute",
+              right: "12px",
+              top: eyeTop || "12px",
+            }}
+            onClick={togglePasswordVisibility}
+          >
+            {passwordVisibility ? <FaEye /> : <FaEyeSlash />}
+          </EyeIcon>
         </PasswordContainer>
       </InputContainer>
     );
@@ -194,6 +223,56 @@ const AppInput = ({
             onBlur={onBlur}
           />
         </div>
+      </InputContainer>
+    );
+  }
+
+  if (type === "checkbox") {
+    return (
+      <InputContainer>
+        <CheckboxAndRadioContainer>
+          <Checkbox
+            type={type}
+            name={name}
+            value={value}
+            placeholder={placeholder}
+            onChange={onChange}
+            accept={accept}
+            style={{ width, height, color, border, background, display }}
+            disabled={disabled}
+            id={name}
+            {...props}
+          />
+          <CheckboxAndRadioLabel style={{ color: labelColor }} htmlFor={name}>
+            {label}
+          </CheckboxAndRadioLabel>
+        </CheckboxAndRadioContainer>
+        {error && <ErrorContainer>{error}</ErrorContainer>}
+      </InputContainer>
+    );
+  }
+
+  if (type === "radio") {
+    return (
+      <InputContainer>
+        <CheckboxAndRadioContainer>
+          <RadioInput
+            type={type}
+            name={name}
+            value={value}
+            placeholder={placeholder}
+            onChange={onChange}
+            accept={accept}
+            style={{ width, height, color, border, background, display }}
+            disabled={disabled}
+            id={name}
+            {...props}
+          />
+          <CheckboxAndRadioLabel style={{ color: labelColor }} htmlFor={name}>
+            {label}
+          </CheckboxAndRadioLabel>
+        </CheckboxAndRadioContainer>
+        {error && <ErrorContainer>{error}</ErrorContainer>}
       </InputContainer>
     );
   }
