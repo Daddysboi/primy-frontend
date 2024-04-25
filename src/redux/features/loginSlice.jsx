@@ -18,11 +18,6 @@ export const login = createAsyncThunk(
   }
 );
 
-const initialState = {
-  isLoggedIn: false,
-  isLoading: false,
-};
-
 export const logout = createAsyncThunk(
   "logout",
   async (_, { rejectWithValue }) => {
@@ -35,6 +30,11 @@ export const logout = createAsyncThunk(
     }
   }
 );
+
+const initialState = {
+  isLoggedIn: false,
+  isLoading: false,
+};
 
 export const loginSlice = createSlice({
   name: "login",

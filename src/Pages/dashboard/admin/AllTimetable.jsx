@@ -1,35 +1,47 @@
-import styled from "styled-components";
-import { primaryColors } from "../../../assets/Colors";
 import { useState } from "react";
+import styled from "styled-components";
+
+import { primaryColors } from "../../../assets/Colors";
+import { FaArrowCircleLeft, FaArrowCircleRight } from "react-icons/fa";
+import AppButton from "../../../components/Button";
 
 const Container = styled.div`
   display: flex;
-  align-items: center;
   justify-content: flex-start;
   flex-direction: column;
   gap: 1rem;
   margin-top: 1rem;
-  width: 100%;
-`;
-const Title = styled.h1`
-  font-size: 2.5rem;
-  margin: 0;
-  color: ${primaryColors.Purple};
+  width: 90%;
 `;
 
+const Header = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+`;
+
+const Title = styled.h1`
+  font-size: 1.5rem;
+  margin: 0;
+  color: #5e5e5e;
+  text-transform: uppercase;
+  font-weight: 600;
+`;
+
+const Pagination = styled.div``;
+
 const Table = styled.table`
-  width: 60rem;
-  height: 30rem;
-  text-align: center;
-  border-spacing: 1rem 0;
+  border-collapse: separate;
+  border-spacing: 1rem;
+  margin: -1rem;
 `;
 
 const Th = styled.th`
   background-color: ${primaryColors.Purple};
   border-radius: 0.5rem;
-  margin-left: 1rem;
   width: 2rem;
-  height: 2rem;
+  height: 2.5rem;
   color: white;
 `;
 
@@ -53,7 +65,96 @@ const ThFriday = styled(Th)`
   background-color: ${primaryColors.Red};
 `;
 
+const Tbody = styled.tbody`
+  text-transform: capitalize;
+  text-align: center;
+`;
+
+const Td = styled.td`
+  background-color: #e3f0f8;
+  border-radius: 0.3rem;
+  height: 2rem;
+`;
+
+const AllTimetable = () => {
+  const [classLevel, setClassLevel] = useState("primary 1");
+
+  const handleNext = () => {
+    const currentIndex = classList.indexOf(classLevel);
+    const nextIndex = (currentIndex + 1) % classList.length;
+    setClassLevel(classList[nextIndex]);
+  };
+
+  const handlePrevious = () => {
+    const currentIndex = classList.indexOf(classLevel);
+    const prevIndex = (currentIndex - 1) % classList.length;
+    setClassLevel(classList[prevIndex]);
+  };
+  return (
+    <Container>
+      <Header>
+        <Title>{classLevel} TIMETABLE</Title>
+        <Pagination>
+          <AppButton
+            icon={<FaArrowCircleRight />}
+            onClick={handleNext}
+            fontSize="1.51rem"
+            small
+            display="none"
+            textColor={primaryColors.Purple}
+          />
+          <AppButton
+            icon={<FaArrowCircleLeft />}
+            onClick={handlePrevious}
+            small
+            fontSize="1.5rem"
+            display="none"
+            textColor={primaryColors.Purple}
+          />
+        </Pagination>
+      </Header>
+
+      <Table>
+        <thead>
+          <tr>
+            <Th>Time</Th>
+            <ThMonday>Monday</ThMonday>
+            <ThTuesday>Tuesday</ThTuesday>
+            <ThWednesday>Wednesday</ThWednesday>
+            <ThThursday>Thursday</ThThursday>
+            <ThFriday>Friday</ThFriday>
+          </tr>
+        </thead>
+
+        <Tbody>
+          {tableData[classLevel].map((data, i) => (
+            <tr key={i}>
+              <Td>{data.time}</Td>
+              <Td>{data.monday}</Td>
+              <Td>{data.tuesday}</Td>
+              <Td>{data.wednesday}</Td>
+              <Td>{data.thursday}</Td>
+              <Td>{data.friday}</Td>
+            </tr>
+          ))}
+        </Tbody>
+      </Table>
+    </Container>
+  );
+};
+
+export default AllTimetable;
+
 const days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"];
+
+const classList = [
+  "primary 1",
+  "primary 2",
+  "primary 3",
+  "primary 4",
+  "primary 5",
+  "jss1",
+];
 
 const tableData = {
   "primary 1": [
@@ -337,63 +438,3 @@ const tableData = {
     },
   ],
 };
-
-const classList = [
-  "primary 1",
-  "primary 2",
-  "primary 3",
-  "primary 4",
-  "primary 5",
-  "jss1",
-];
-
-const AllTimetable = () => {
-  const [classLevel, setClassLevel] = useState("primary 1");
-
-  const handleNext = () => {
-    const currentIndex = classList.indexOf(classLevel);
-    const nextIndex = (currentIndex + 1) % classList.length;
-    setClassLevel(classList[nextIndex]);
-  };
-
-  const handlePrevious = () => {
-    const currentIndex = classList.indexOf(classLevel);
-    const prevIndex = (currentIndex - 1) % classList.length;
-    setClassLevel(classList[prevIndex]);
-  };
-  return (
-    <Container>
-      <button onClick={handleNext}>Next</button>
-      <button onClick={handlePrevious}>Previous</button>
-
-      <Title>{classLevel} TIMETABLE</Title>
-      <Table>
-        <thead>
-          <tr>
-            <Th>Time</Th>
-            <ThMonday>Monday</ThMonday>
-            <ThTuesday>Tuesday</ThTuesday>
-            <ThWednesday>Wednesday</ThWednesday>
-            <ThThursday>Thursday</ThThursday>
-            <ThFriday>Friday</ThFriday>
-          </tr>
-        </thead>
-
-        <tbody>
-          {tableData[classLevel].map((data, i) => (
-            <tr key={i}>
-              <td>{data.time}</td>
-              <td>{data.monday}</td>
-              <td>{data.tuesday}</td>
-              <td>{data.wednesday}</td>
-              <td>{data.thursday}</td>
-              <td>{data.friday}</td>
-            </tr>
-          ))}
-        </tbody>
-      </Table>
-    </Container>
-  );
-};
-
-export default AllTimetable;

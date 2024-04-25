@@ -4,7 +4,7 @@ import { setQuery } from "../redux/features/querySlice";
 import AppInput from "./Input";
 
 const SearchBar = () => {
-  const query = useAppSelector((state) => state.query);
+  const { query } = useAppSelector((state) => state.query);
   const dispatch = useAppDispatch();
 
   const handleSearch = (e) => {
@@ -20,7 +20,8 @@ const SearchBar = () => {
         height="2.5rem"
         value={query}
         onChange={handleSearch}
-        placeholder={"search"}
+        placeholder={"Search"}
+        width="150%"
       />
     </>
   );

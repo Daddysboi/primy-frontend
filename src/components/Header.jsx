@@ -91,9 +91,9 @@ const MobileLinks = styled.div`
 `;
 
 const links = [
-  { path: "/", page: "Customers" },
+  { path: "/", page: "About" },
   { path: "/", page: "Schools" },
-  { path: "/", page: "Product" },
+  { path: "/", page: "Products" },
   { path: "/", page: "Pricing" },
   { path: "/", page: "FAQs" },
 ];

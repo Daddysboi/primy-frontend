@@ -17,7 +17,7 @@ const Sort = ({ options, onSort }) => {
         options={options}
         onChange={handleChange}
         value={selectedOption}
-        label="Sort by"
+        select="Sort by..."
       />
     </>
   );

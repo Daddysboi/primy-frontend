@@ -7,8 +7,6 @@ import {
   AddLocation,
 } from "../services/UtilityServices";
 
-const initialState = {};
-
 export const saveEmailToMailingList = createAsyncThunk(
   "saveEmailToMailingList",
   async ({ email }, { rejectWithValue }) => {
@@ -73,6 +71,7 @@ export const disputeTransaction = createAsyncThunk(
     }
   }
 );
+
 export const addLocation = createAsyncThunk(
   "addLocation",
   async ({ location }, { rejectWithValue }) => {
@@ -86,6 +85,8 @@ export const addLocation = createAsyncThunk(
     }
   }
 );
+
+const initialState = {};
 
 export const utilitySlice = createSlice({
   name: "utility",

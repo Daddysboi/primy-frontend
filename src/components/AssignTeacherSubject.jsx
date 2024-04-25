@@ -4,7 +4,7 @@ import { Form, Formik, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import styled from "styled-components";
 
-import { assignTeacher } from "../services/courseService";
+import { assignTeacher } from "../redux/features/courseSlice";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import { deleteTeacher, getAllTeachers } from "../redux/features/userSlice";
 
@@ -22,14 +22,20 @@ const Container = styled.div`
   gap: 1rem;
 `;
 
-const Text = styled.h1`
-  font-size: 0.8rem;
-  margin: 0;
+const Heading = styled.h1`
+  font-size: 1rem;
+  font-weight: 600;
+`;
+
+const Subhead = styled.p`
+  font-size: 0.7rem;
+  margin-bottom: 1rem;
 `;
 
 const FieldSelect = styled(Field)`
   width: ${(props) => props.width || "100%"};
   min-height: 35px;
+  min-width: 5rem;
   height: ${(props) => props.height || "35px"};
   padding: 0.5rem;
   box-sizing: border-box;
@@ -38,16 +44,11 @@ const FieldSelect = styled(Field)`
   border: 1px solid ${(props) => props.borderColor || primaryColors.LightPurple};
   outline: none;
   background: transparent;
+  font-size: 0.8rem;
 
   &:focus {
     border: 1px solid rgb(194, 194, 194);
   }
-`;
-
-const Label = styled.label`
-  font-size: 0.65rem;
-  letter-spacing: -0.01rem;
-  opacity: 0.8;
 `;
 
 const Option = styled.option`
@@ -56,7 +57,7 @@ const Option = styled.option`
 `;
 
 const AssignTeacherSubject = () => {
-  var initialState = {
+  const initialState = {
     subject: "",
     class: "",
     teacherId: "",
@@ -122,13 +123,14 @@ const AssignTeacherSubject = () => {
       onSubmit={onSubmit}
     >
       <Form>
-        <Text>Hello, Assign Teacher to class or Subject </Text>
+        <div>
+          <Subhead>Please Assign Teachers to Classes and Subjects</Subhead>
+        </div>
 
         <Container>
           <Field
-            label="Class"
+            select="Class..."
             name="class"
-            type="select"
             as={AppSelectInput}
             options={classList}
             required={true}
@@ -137,19 +139,24 @@ const AssignTeacherSubject = () => {
 
           {selectedClass && isJSSorSSClass(selectedClass) && (
             <Field
-              label="Subject"
+              select="Subject"
               name="subject"
               value={formData.subject}
               options={options}
               as={AppSelectInput}
               required={true}
+              onChange={handleChange}
             />
           )}
 
           <div>
-            <Label>Teacher</Label>
-            <FieldSelect name="teacherId" as="select" required>
-              <Option value="">Select Teacher</Option>
+            <FieldSelect
+              name="teacherId"
+              as="select"
+              required
+              onChange={handleChange}
+            >
+              <Option value={formData.teacherId}>Teacher...</Option>
               {teachers &&
                 teachers.map((teacher) => (
                   <Option key={teacher?._id} value={teacher?._id}>

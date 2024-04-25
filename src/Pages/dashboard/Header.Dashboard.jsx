@@ -49,6 +49,7 @@ const Search = styled.span`
 `;
 
 const SearchIcon = styled(IoSearch)`
+  opacity: 0.3;
   min-width: 25px;
 `;
 const Tabs = styled.div`
@@ -169,6 +170,7 @@ const Header = () => {
               value={formData.session}
               height="32px"
               onChange={handleChange}
+              select="Year..."
             />
 
             {selectedsession && (
@@ -178,6 +180,7 @@ const Header = () => {
                 name="term"
                 height="32px"
                 onChange={handleChange}
+                select="Term..."
               />
             )}
           </SessionTab>

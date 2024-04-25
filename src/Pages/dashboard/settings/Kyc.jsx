@@ -4,6 +4,7 @@ import styled from "styled-components";
 import * as Yup from "yup";
 import { toast } from "react-toastify";
 
+import Loading from "../../../components/Loading";
 import AppInput from "../../../components/Input";
 import AppSelectInput from "../../../components/SelectInput";
 import Error from "../../../components/Error";
@@ -48,7 +49,6 @@ const options = [
 const KYC = ({
   user,
   Button,
-
   FileInputContainer,
   StyledLabel,
   UploadButton,
@@ -186,15 +186,64 @@ const KYC = ({
                 />
                 <ErrorMessage name="idNumber" component={Error} />
               </>
-              <FileUpload
-                user={user}
-                setImgPlaceholder={setImgPlaceholder}
-                setFieldValue={setFieldValue}
-                imgPlaceholder={imgPlaceholder}
-                name="uploadPicture"
-                values={values}
-                label=" Upload Valid ID (Max 2MB)"
-              />
+
+              <section
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "30px",
+                }}
+              >
+                <div onClick={() => setImgPlaceholder(false)}>
+                  <FileInputContainer>
+                    <StyledLabel htmlFor="uploadPicture">
+                      Upload ID (Max 2MB)
+                    </StyledLabel>
+                    <div>
+                      <UploadButton htmlFor="uploadPicture">
+                        <FaCloudUploadAlt />
+                      </UploadButton>
+                      <div
+                        style={{
+                          display: "none",
+                        }}
+                      >
+                        <Field
+                          type="file"
+                          id="uploadPicture"
+                          name="uploadPicture"
+                          onChange={(event) => {
+                            setFieldValue(
+                              "uploadPicture",
+                              event.currentTarget.files[0]
+                            );
+                          }}
+                          component={AppInput}
+                          labelColor="gray"
+                          accept="image/*"
+                          border="none"
+                        />
+                      </div>
+                    </div>
+                    <ErrorMessage name="uploadPicture" component={Error} />
+                    <span
+                      style={{
+                        opacity: "0.5",
+                        fontSize: "0.6rem",
+                      }}
+                    >
+                      {values?.uploadPicture && values?.uploadPicture.name}
+                    </span>
+                  </FileInputContainer>
+                </div>
+                {user?.kyc?.uploadPicture &&
+                  !values?.uploadPicture &&
+                  imgPlaceholder && (
+                    <ImgViewer>
+                      <Img src={user?.kyc?.uploadPicture} alt="ID" />
+                    </ImgViewer>
+                  )}
+              </section>
             </Section>
             <Section>
               <Title>Next of Kin</Title>
@@ -259,7 +308,7 @@ const KYC = ({
               </>
             </Section>
             <Button type="submit" disabled={loading}>
-              {loading ? "Submitting..." : "Submit KYC"}
+              {loading ? <Loading /> : "Submit KYC"}
             </Button>
           </Form>
         )}

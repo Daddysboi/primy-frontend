@@ -8,6 +8,7 @@ import forgotPasswordReducer from "./features/forgotPasswordSlice";
 import themeReducer from "./features/themeSlice";
 import transactionReducer from "./features/transactionSlice";
 import queryReducer from "./features/querySlice";
+import courseReducer from "./features/courseSlice";
 
 export const store = configureStore({
   reducer: {
@@ -15,9 +16,10 @@ export const store = configureStore({
     login: loginReducer,
     register: registerReducer,
     utility: utilityReducer,
-    theme: themeReducer,
     forgotPassword: forgotPasswordReducer,
     transaction: transactionReducer,
+    course: courseReducer,
+    theme: themeReducer,
     query: queryReducer,
   },
   devTools: true,

@@ -8,7 +8,7 @@ export const CHANGE_PASSWORD = "change-password";
 
 //User routes
 export const ADMIN = "admin";
-export const USERS = "users"; //could merege with register
+export const USERS = "users";
 export const TEACHERS = "teachers";
 export const STUDENTS = "students";
 export const GET_USER_BY_ID = "getUserById";
@@ -32,3 +32,10 @@ export const UPDATE_USER_PROFILE = "update-user-profile";
 export const UPDATE_USER_BANK_DETAILS = "update-user-account-details";
 export const UPDATE_USER_CONTACT_DETAILS = "update-user-contact-details";
 export const UPDATE_USER_KYC_DETAILS = "update-user-kyc-details";
+
+// Course routes
+export const TEACHER_COURSES = "teacher-courses";
+export const ASSESSMENTS = "assessments";
+export const COURSES = "course-courses";
+export const QUESTIONS = "questions";
+export const RESULT = "result";

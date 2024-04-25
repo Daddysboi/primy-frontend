@@ -75,10 +75,11 @@ const AllTeacher = () => {
     <Container>
       <RoleHeader
         text="Add Teacher"
+        users={teachers}
+        sort
         onClick={() => {
           setCreateModal(true);
         }}
-        Users={teachers}
       />
       <>
         {teachers
@@ -109,6 +110,7 @@ const AllTeacher = () => {
           ))}
       </>
 
+      {/* sample profilecard: to be remover */}
       <>
         <ProfileCard
           role="Teacher"

@@ -1,8 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { Register, SendOtp } from "../services/AuthServices";
 
-const initialState = {};
-
 export const sendOtp = createAsyncThunk(
   "sendOtp",
   async ({ email }, { rejectWithValue }) => {
@@ -38,6 +36,8 @@ export const register = createAsyncThunk(
     }
   }
 );
+
+const initialState = {};
 
 export const registerSlice = createSlice({
   name: "register",

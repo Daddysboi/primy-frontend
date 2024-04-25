@@ -25,8 +25,8 @@ const classes = ["Jss1"];
 
 const AllStudents = () => {
   const [createModal, setCreateModal] = useState(false);
+  const [editing, setEditing] = useState(false);
   const [user, setUser] = useState(false);
-  const [users, setUsers] = useState(false);
 
   const dispatch = useAppDispatch();
   const { users: students, isLoading: loading } = useAppSelector(
@@ -44,60 +44,88 @@ const AllStudents = () => {
       })
       .catch((error) => {
         toast.error(error?.message || "Something went wrong");
-      });
+      })
+      .finally(() => {});
   }, [dispatch, students]);
 
   if (loading) {
     return <Loading />;
   }
 
+  const handleEdit = (teacher) => {
+    setCreateModal(true);
+    setEditing(true);
+    setUser(teacher);
+  };
+
   const handleDelete = (id) => {
-    dispatch(deleteStudent(id));
+    dispatch(deleteTeacher(id))
+      .unwrap()
+      .then((resp) => {
+        toast.success(resp?.payload?.message || "Successfully deleted");
+      })
+      .catch((error) => {
+        toast.error(error?.message || "Something went wrong");
+      })
+      .finally(() => {
+        dispatch(getAllTeachers());
+      });
   };
 
   return (
     <Container>
       <RoleHeader
         text="Add Student"
+        users={students}
+        sort
         onClick={() => {
           setCreateModal(true);
         }}
-        Users={students}
       />
 
       <>
         {students
           ?.filter((val) => {
             let searchVal = searchValue?.toLowerCase();
-            if (
+            if (!searchVal) return true;
+            return (
               val.firstName.toLowerCase().startsWith(searchVal) ||
               val.middleName.toLowerCase().startsWith(searchVal) ||
               val.gender.toLowerCase().startsWith(searchVal) ||
               val.studentStatus.toLowerCase().startsWith(searchVal) ||
               val.lastName.toLowerCase().startsWith(searchVal)
-            ) {
-              return val;
-            }
+            );
           })
           ?.map((student, index) => (
             <ProfileCard
+              student
+              role="Student"
+              header1="SUBJECTS"
+              header2="CLASS"
+              options1={subjects}
+              options2={classes}
+              name={student.name}
               key={index}
-              student={student}
-              onClick={() => handleEdit(student)}
+              user={student}
+              onEdit={() => handleEdit(student)}
               onDelete={() => handleDelete(student?._id)}
             />
           ))}
       </>
 
+      {/* sample profilecard: to be remover */}
       <>
         <ProfileCard
-          role="Student"
-          header1="SUBJECTS"
-          header2="CLASS"
           options1={subjects}
           options2={classes}
           name="Musa Haruna"
           student
+          role="Teacher"
+          header1="SUBJECTS"
+          header2="CLASSES"
+          users=""
+          onEdit={() => handleEdit()}
+          onDelete={() => handleDelete(id)}
         />
       </>
 
@@ -109,7 +137,12 @@ const AllStudents = () => {
         }}
         hasCloseBtn={true}
       >
-        <CreateUser role="student" user={user} setIsCreating={setCreateModal} />
+        <CreateUser
+          editing={editing}
+          role="student"
+          user={user}
+          setIsCreating={setCreateModal}
+        />
       </SideBar>
     </Container>
   );

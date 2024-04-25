@@ -1,43 +1,47 @@
+"use client";
 import React, { useState } from "react";
 import Papa from "papaparse";
 import styled from "styled-components";
+import { Formik, Field, Form, ErrorMessage } from "formik";
+import { Table } from "flowbite-react";
 
 import Button from "../../../../components/Button";
 import AppInput from "../../../../components/Input";
+import { FaCloudUploadAlt } from "react-icons/fa";
 
-const Header = styled.div`
-  height: 60px;
-  width: 100%;
-  border: 1px solid #dfdfdf;
-  margin: 10px;
-  &:hover {
-    background-color: #bdc6ce;
-    color: white;
-    cursor: pointer;
+const Container = styled.div`
+  display: inline-flex;
+  gap: 2rem;
+  margin: 1rem 0;
+`;
+
+const TableHead = styled(Table.Head)`
+  text-align: left;
+`;
+
+const TableHeadCell = styled(Table.HeadCell)`
+  padding: 0.5rem;
+  background-color: transparent;
+`;
+
+const TableBody = styled(Table.Body)``;
+
+const TableRow = styled(Table.Row)`
+  &:nth-child(odd) {
+    background-color: #fff;
   }
 `;
 
-const Label = styled.label`
-  display: flex;
-  width: 100%;
-  height: 100%;
-  justify-content: center;
-  align-items: center;
-  color: #666666;
+const TableCell = styled(Table.Cell)`
+  white-space: nowrap;
+  font-weight: 500;
+  padding: 0.5rem;
 `;
 
-const Input = styled.input`
-  opacity: 0;
-  z-index: -1;
-  position: absolute;
-  &:hover {
-    color: white;
-    cursor: pointer;
-  }
-`;
-
-const Td = styled.td`
-  cursor: pointer;
+const Text = styled.div`
+  margin-top: 1rem;
+  font-size: 0.7rem;
+  color: red;
 `;
 
 const Exams = () => {
@@ -62,53 +66,75 @@ const Exams = () => {
     }
   };
 
-  const handleSubmit = () => {
-    console.log("Edited results data:", editedResults);
+  const handleSubmit = (values) => {
+    console.log("Edited results data:", values.edited);
   };
 
   return (
     <div>
-      <h2>Exam Result Sheet</h2>
-      <Header>
-        <Label htmlFor="csvFile">choose a file (csv, xls)</Label>
-        <Input
-          type="file"
-          id="csvFile"
-          accept={acceptableFileTypes}
-          onChange={handleFileUpload}
-        />
-      </Header>
-      {results.length ? (
-        <table>
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>English</th>
-              <th>Biology</th>
-              <th>Geography</th>
-            </tr>
-          </thead>
-          <tbody>
-            {results.map((row, index) => (
-              <tr key={index}>
-                <Td>{row.name}</Td>
-                <Td onClick={(e) => setEdited(row.english)}>{row.english}</Td>
-                <Td onClick={(e) => setEdited(row.biology)}>{row.biology}</Td>
-                <Td onClick={(e) => setEdited(row.geography)}>
-                  {row.geography}
-                </Td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      ) : null}
-      <AppInput
-        name="edited"
-        value={edited}
-        placeholder="edit"
-        onChange={(e) => setEdited(e.target.value)}
-      />
-      <Button onClick={handleSubmit} text="Submit" />
+      <Formik initialValues={{ edited: "" }} onSubmit={handleSubmit}>
+        <Form>
+          <h1>Please, Upload Results</h1>
+          <Container>
+            <AppInput
+              type="file"
+              id="csvFile"
+              accept={acceptableFileTypes}
+              onChange={handleFileUpload}
+              label="Choose a file (CSV or XLS)"
+              icon={<FaCloudUploadAlt />}
+            />
+
+            <Field
+              as={AppInput}
+              name="edited"
+              value={edited}
+              placeholder="edit"
+              onChange={(e) => setEdited(e.target.value)}
+            />
+            <ErrorMessage name="edited" component="div" />
+            <div>
+              <Button type="submit" text="Submit" />
+            </div>
+          </Container>
+          {results.length ? (
+            <>
+              <Table>
+                <TableHead>
+                  <TableHeadCell>Firstname</TableHeadCell>
+                  <TableHeadCell>Lastname</TableHeadCell>
+                  <TableHeadCell>English</TableHeadCell>
+                  <TableHeadCell>Biology</TableHeadCell>
+                  <TableHeadCell>Geography</TableHeadCell>
+                  <TableHeadCell></TableHeadCell>
+                </TableHead>
+                <TableBody>
+                  {results.map((row, index) => (
+                    <TableRow key={index}>
+                      <TableCell onClick={() => setEdited(row.firstname)}>
+                        {row.firstname}
+                      </TableCell>
+                      <TableCell onClick={() => setEdited(row.lastname)}>
+                        {row.lastname}
+                      </TableCell>
+                      <TableCell onClick={() => setEdited(row.english)}>
+                        {row.english}
+                      </TableCell>
+                      <TableCell onClick={() => setEdited(row.biology)}>
+                        {row.biology}
+                      </TableCell>
+                      <TableCell onClick={() => setEdited(row.geography)}>
+                        {row.geography}
+                      </TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+              <Text>Click any cell to edit </Text>
+            </>
+          ) : null}
+        </Form>
+      </Formik>
     </div>
   );
 };

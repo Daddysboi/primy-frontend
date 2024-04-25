@@ -4,7 +4,6 @@ const axiosClient = axios.create({
   baseURL: import.meta.env.VITE_API_BASE_URL,
 });
 
-// Add a request interceptor
 axiosClient.interceptors.request.use(
   (config) => {
     const token = localStorage.getItem(USER_TOKEN);
@@ -16,7 +15,6 @@ axiosClient.interceptors.request.use(
   (error) => Promise.reject(error)
 );
 
-// Add a response interceptor
 axiosClient.interceptors.response.use(
   (response) => response,
   async (error) => {

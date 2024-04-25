@@ -10,7 +10,7 @@ import { useAppDispatch } from "../../../redux/hooks";
 import { useFetchUserData } from "../../../Guard";
 import { updateUserBankDetails } from "../../../redux/features/userSlice";
 
-const AccountDetails = ({ user, PropsContainer, Button, StyledForm, s }) => {
+const AccountDetails = ({ user, Button, StyledForm }) => {
   const initialValues = {
     bankName: user?.accountDetails?.bankName || "",
     accountName: user?.accountDetails?.accountName || "",
@@ -87,95 +87,94 @@ const AccountDetails = ({ user, PropsContainer, Button, StyledForm, s }) => {
   ];
 
   return (
-    <PropsContainer>
-      <Formik
-        initialValues={initialValues}
-        onSubmit={onSubmit}
-        validationSchema={validationSchema}
-      >
-        {({ values, handleChange, setFieldValue }) => (
-          <StyledForm>
-            <>
-              <div>
-                <Field
-                  label="Account Name"
-                  type="text"
-                  placeholder="Enter Account Name"
-                  id="accountName"
-                  name="accountName"
-                  value={values.accountName}
-                  onChange={handleChange}
-                  component={AppInput}
-                  width="20rem"
-                  labelColor="gray"
-                  height="2rem"
-                />
-                <ErrorMessage name="accountName" component={Error} />
-              </div>
+    <Formik
+      initialValues={initialValues}
+      onSubmit={onSubmit}
+      validationSchema={validationSchema}
+    >
+      {({ values, handleChange, setFieldValue }) => (
+        <StyledForm>
+          <>
+            <div>
+              <Field
+                label="Account Name"
+                type="text"
+                placeholder="Enter Account Name"
+                id="accountName"
+                name="accountName"
+                value={values.accountName}
+                onChange={handleChange}
+                component={AppInput}
+                width="20rem"
+                labelColor="gray"
+                height="2rem"
+              />
+              <ErrorMessage name="accountName" component={Error} />
+            </div>
 
-              <div>
-                <Field
-                  label="Bank Name"
-                  name="bankName"
-                  value={values.bankName}
-                  onChange={(e) => setFieldValue("bankName", e.target.value)}
-                  component={AppSelectInput}
-                  width="100%"
-                  height="2rem"
-                  labelColor="gray"
-                  options={bankOptions}
-                />
-                <ErrorMessage name="bankName" component={Error} />
-              </div>
+            <div>
+              <Field
+                label="Bank Name"
+                name="bankName"
+                value={values.bankName}
+                onChange={(e) => setFieldValue("bankName", e.target.value)}
+                component={AppSelectInput}
+                width="100%"
+                height="2rem"
+                labelColor="gray"
+                options={bankOptions}
+              />
+              <ErrorMessage name="bankName" component={Error} />
+            </div>
 
-              <div>
-                <Field
-                  label="Account Number"
-                  placeholder="Enter Account Number"
-                  type="accountNumber"
-                  id="accountNumber"
-                  name="accountNumber"
-                  value={values.accountNumber}
-                  onChange={handleChange}
-                  component={AppInput}
-                  width="20rem"
-                  labelColor="gray"
-                  height="2rem"
-                />
-                <ErrorMessage name="accountNumber" component={Error} />
-              </div>
+            <div>
+              <Field
+                label="Account Number"
+                placeholder="Enter Account Number"
+                type="accountNumber"
+                id="accountNumber"
+                name="accountNumber"
+                value={values.accountNumber}
+                onChange={handleChange}
+                component={AppInput}
+                width="20rem"
+                labelColor="gray"
+                height="2rem"
+              />
+              <ErrorMessage name="accountNumber" component={Error} />
+            </div>
 
-              <div
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
 
-                  justifyContent: "space-between",
-                }}
-              >
-                <Field
-                  label="Password"
-                  inputType="password"
-                  placeholder="Enter password"
-                  name="password"
-z                  onChange={handleChange}
-                  component={AppInput}
-                  width="20rem"
-                  labelColor="gray"
-                  height="2rem"
-                  eyeTop="6px"
-                />
-                <ErrorMessage name="password" component={Error} />
-              </div>
+                justifyContent: "space-between",
+              }}
+            >
+              <Field
+                label="Password"
+                inputType="password"
+                placeholder="Enter password"
+                name="password"
+                z
+                onChange={handleChange}
+                component={AppInput}
+                width="20rem"
+                labelColor="gray"
+                height="2rem"
+                eyeTop="6px"
+              />
+              <ErrorMessage name="password" component={Error} />
+            </div>
 
-              <Button type="submit" disabled={loading}>
-                {loading ? "Updating" : "Validate & Save Changes"}
-              </Button>
-            </>
-          </StyledForm>
-        )}
-      </Formik>
-    </PropsContainer>
+            <Button type="submit" disabled={loading}>
+              {loading ? "Updating" : "Validate & Save Changes"}
+            </Button>
+          </>
+        </StyledForm>
+      )}
+    </Formik>
   );
 };
 

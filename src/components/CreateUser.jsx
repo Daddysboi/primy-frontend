@@ -19,7 +19,7 @@ import { classLists } from "./ClassList";
 
 const Header = styled.h1`
   font-size: 1rem;
-  padding-bottom: 2rem;
+  padding-bottom: 1rem;
 `;
 
 const Button = styled(AppButton)`
@@ -37,7 +37,6 @@ const CreateUser = ({
   editing = false,
 }) => {
   const dispatch = useAppDispatch();
-
   const { isLoading } = useAppSelector((state) => state.user);
 
   // const editing = !user; // user is defined, editing
@@ -131,7 +130,7 @@ const CreateUser = ({
             name="firstName"
             label="First Name"
             placeholder="Enter First Name"
-            height="1.5rem"
+            height="2rem"
             width="90%"
           />
           <ErrorMessage name="firstName" component={Error} />
@@ -143,7 +142,7 @@ const CreateUser = ({
           name="lastName"
           label="Last Name"
           placeholder="Enter Last Name"
-          height="1.5rem"
+          height="2rem"
           width="90%"
         />
         <ErrorMessage name="lastName" component={Error} />
@@ -155,7 +154,7 @@ const CreateUser = ({
             name="middleName"
             label="Middle Name"
             placeholder="Enter Middle Name"
-            height="1.5rem"
+            height="2rem"
             width="90%"
           />
         </>
@@ -168,7 +167,7 @@ const CreateUser = ({
               name="phoneNumber"
               label="Phone Number"
               placeholder="Enter Phone Number"
-              height="1.5rem"
+              height="2rem"
               width="90%"
             />
             <ErrorMessage name="phoneNumber" component={Error} />
@@ -183,7 +182,7 @@ const CreateUser = ({
               name="email"
               label="Email"
               placeholder="Enter Email"
-              height="1.5rem"
+              height="2rem"
               width="90%"
             />
             <ErrorMessage name="email" component={Error} />
@@ -196,7 +195,7 @@ const CreateUser = ({
           name="gender"
           label="Gender"
           placeholder="Enter Gender"
-          height="1.5rem"
+          height="2rem"
           width="90%"
           options={options}
         />

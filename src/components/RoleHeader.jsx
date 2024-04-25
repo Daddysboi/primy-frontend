@@ -1,25 +1,38 @@
-import { useState, useEffect } from "react";
-import { FaPlus } from "react-icons/fa6";
 import styled from "styled-components";
+import { FaPlus, FaPen, FaTrash } from "react-icons/fa6";
+
+import { useAppDispatch } from "../redux/hooks";
+import { setUsers } from "../redux/features/userSlice";
 
 import Sort from "./Sort";
 import Button from "./Button";
 
 const Container = styled.div`
   display: flex;
-  justify-content: space-between;
+  /* justify-content: space-between; */
   align-items: flex-end;
   width: 70vw;
+  gap: 1rem;
 `;
 
-const RoleHeader = ({ text, onClick, Users }) => {
-  const [users, setUsers] = useState([]);
-
-  useEffect(() => {
-    if (Users) {
-      setUsers(Users);
-    }
-  }, [Users]);
+const options = [
+  { value: "class", label: "Class" },
+  { value: "type", label: "Type" },
+  { value: "subject", label: "Subject" },
+  { value: "name", label: "Name" },
+  // text === "students" && { value: "grade", label: "Grade" }, //check this
+];
+const RoleHeader = ({
+  text,
+  onClick,
+  users,
+  sort,
+  edit,
+  canDelete,
+  onEdit,
+  onDelete,
+}) => {
+  const dispatch = useAppDispatch();
 
   const sortUsers = (options) => {
     if (!users) return;
@@ -40,25 +53,20 @@ const RoleHeader = ({ text, onClick, Users }) => {
           return 0;
       }
     });
-    setUsers(sortedUsers);
+    dispatch(setUsers(sortedUsers));
   };
-
-  const options = [
-    { value: "class", label: "Class" },
-    { value: "type", label: "Type" },
-    { value: "subject", label: "Subject" },
-    { value: "name", label: "Name" },
-    text === "students" && { value: "grade", label: "Grade" }, //check this
-  ];
 
   return (
     <Container>
-      {text && (
-        <>
-          <Button text={text} onClick={onClick} icon={<FaPlus />} />
-          <Sort options={options} onSort={sortUsers} />
-        </>
+      {text && <Button text={text} onClick={onClick} icon={<FaPlus />} />}
+
+      {edit && <Button text={edit} onClick={onEdit} icon={<FaPen />} />}
+
+      {canDelete && (
+        <Button text={canDelete} onClick={onDelete} icon={<FaTrash />} />
       )}
+
+      {sort && <Sort options={options} onSort={sortUsers} />}
     </Container>
   );
 };

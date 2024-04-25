@@ -11,14 +11,12 @@ import ResetPassword from "./ResetPassword";
 import { primaryColors } from "../../../assets/Colors";
 
 const Container = styled.div`
-  padding-left: 2rem;
   margin-top: 2rem;
 `;
 
 const HeaderContainer = styled.div`
-  border-bottom: 0.1rem solid #dbdbdb;
+  border-bottom: 0.01rem solid #dbdbdb;
   display: flex;
-  margin-left: -1rem;
   gap: 5rem;
 `;
 
@@ -59,7 +57,6 @@ const Button = styled.button`
     background: green;
   }
 `;
-
 
 const Txt = styled.p`
   font-size: 0.55rem;
@@ -162,7 +159,6 @@ const Settings = ({ user }) => {
             user={user}
             PropsContainer={PropsContainer}
             Button={Button}
-
             StyledForm={StyledForm}
             Txt={Txt}
             FileInputContainer={FileInputContainer}
@@ -177,7 +173,6 @@ const Settings = ({ user }) => {
             user={user}
             PropsContainer={PropsContainer}
             Button={Button}
-
             StyledForm={StyledForm}
           />
         )}
@@ -186,7 +181,6 @@ const Settings = ({ user }) => {
             user={user}
             PropsContainer={PropsContainer}
             Button={Button}
-
             StyledForm={StyledForm}
             FileInputContainer={FileInputContainer}
             StyledLabel={Label}
@@ -201,7 +195,6 @@ const Settings = ({ user }) => {
             PropsContainer={PropsContainer}
             Button={Button}
             StyledForm={StyledForm}
-
             Txt={Txt}
             FileInputContainer={FileInputContainer}
             StyledLabel={Label}
@@ -216,7 +209,6 @@ const Settings = ({ user }) => {
             PropsContainer={PropsContainer}
             Button={Button}
             StyledForm={StyledForm}
-   
           />
         )}
       </div>

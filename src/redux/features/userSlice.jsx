@@ -15,11 +15,6 @@ import {
   DeleteStudent,
 } from "../services/UserServices";
 
-const initialState = {
-  user: {},
-  users: [],
-};
-
 //Get User BY ID
 export const getUserById = createAsyncThunk("getUserById", async (userId) => {
   try {
@@ -244,12 +239,16 @@ export const deleteStudent = createAsyncThunk(
   }
 );
 
+const initialState = {
+  user: {},
+  users: [],
+};
+
 // USER SLICE
 export const userSlice = createSlice({
   name: "user",
   initialState,
   reducers: {
-    //functions to set user state by calling the dispatch function after login or getusers with the payload
     setUser: (state, action) => {
       const { payload } = action;
       state.user = payload;

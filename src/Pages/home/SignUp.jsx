@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-import { SignupForm } from "../../components/aceternity/Form";
+import { SignupForm } from "../../components/third-party/Form";
 import femaleStudent from "../../assets/images/friends.jpg";
 
 const Container = styled.div`

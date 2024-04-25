@@ -16,6 +16,7 @@ const Label = styled.label`
 const Select = styled.select`
   width: ${(props) => props.width || "100%"};
   min-height: 35px;
+  min-width: 5rem;
   height: ${(props) => props.height || "35px"};
   padding: 0 0.5rem;
   box-sizing: border-box;

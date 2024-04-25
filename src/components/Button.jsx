@@ -31,7 +31,7 @@ const Button = styled.button`
   padding: ${(props) => (props.small ? "0.5rem 1rem" : "0.5rem 2rem")};
   border-radius: 0.5rem;
   color: ${(props) => props.textColor || "#fff"};
-  border: "none";
+  border: ${(props) => props.border || ""};
   cursor: pointer;
   transition: all 0.3s ease;
 
@@ -69,7 +69,7 @@ const AppButton = ({
   text,
   backgroundColor,
   textColor,
-  borderColor,
+  border,
   hoverColor,
   small,
   outline,
@@ -91,7 +91,7 @@ const AppButton = ({
       backgroundColor={backgroundColor}
       id={id}
       textColor={textColor}
-      borderColor={borderColor}
+      border={border}
       hoverColor={hoverColor}
       small={small}
       outline={outline}
