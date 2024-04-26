@@ -1,5 +1,5 @@
-"use client";
 import React, { useState } from "react";
+import { useParams } from "react-router-dom";
 import Papa from "papaparse";
 import styled from "styled-components";
 import { Formik, Field, Form, ErrorMessage } from "formik";
@@ -15,6 +15,9 @@ const Container = styled.div`
   margin: 1rem 0;
 `;
 
+const Header = styled.h1`
+  text-transform: capitalize;
+`;
 const TableHead = styled(Table.Head)`
   text-align: left;
 `;
@@ -70,11 +73,13 @@ const Exams = () => {
     console.log("Edited results data:", values.edited);
   };
 
+  const { type } = useParams();
+
   return (
     <div>
       <Formik initialValues={{ edited: "" }} onSubmit={handleSubmit}>
         <Form>
-          <h1>Please, Upload Results</h1>
+          <Header>Please, Upload exams</Header>
           <Container>
             <AppInput
               type="file"

@@ -4,9 +4,12 @@ import styled from "styled-components";
 
 import { useAppDispatch } from "../redux/hooks";
 import { logout } from "../redux/features/loginSlice";
-import { useUser } from "../contexts/userContext";
+import { useAppSelector } from "../redux/hooks";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faChevronUp, faChevronDown } from "@fortawesome/free-solid-svg-icons";
+import {
+  faChevronDown,
+  faChevronRight,
+} from "@fortawesome/free-solid-svg-icons";
 
 import {
   adminLinks,
@@ -19,6 +22,7 @@ import { primaryColors } from "../assets/Colors";
 
 import library from "../assets/images/library.png";
 import Logo from "../components/Logo";
+import { FaChevronRight } from "react-icons/fa";
 
 const Wrapper = styled.div`
   background-color: ${primaryColors.DashBoardBackground};
@@ -91,10 +95,12 @@ const SideBarImg = styled.img`
 `;
 
 const DashBoardLayout = () => {
-  const navigate = useNavigate();
-  const dispatch = useAppDispatch();
-  const { user } = useUser();
   const [showSublinks, setShowSublinks] = useState(false);
+
+  const { user } = useAppSelector((state) => state.user);
+  const dispatch = useAppDispatch();
+
+  const navigate = useNavigate();
 
   // useEffect(() => {
   //   if (!user) {
@@ -104,8 +110,13 @@ const DashBoardLayout = () => {
 
   const clickHandler = (url, type) => {
     if (type === "button") {
-      dispatch(logout());
-      navigate("/");
+      dispatch(logout())
+        .then(() => {
+          navigate("/");
+        })
+        .catch((err) => {
+          alert("Logout failed. Please try again.");
+        });
     } else if (url === "dashboard") {
       navigate("/dashboard");
       return;
@@ -137,7 +148,9 @@ const DashBoardLayout = () => {
       <DashboardHeader />
 
       <Container>
-        <Aside>
+        <Aside
+          className={" relative dark:bg-grid-white/[0.2] bg-grid-white/[0.03]"}
+        >
           <Logo />
           <Links>
             {links.map((sidebar, index) => (
@@ -149,13 +162,13 @@ const DashBoardLayout = () => {
                 >
                   {sidebar.icon}
                   {sidebar.title}
-                  <div>
+                  <span>
                     {sidebar.sublinks ? (
                       <FontAwesomeIcon
-                        icon={showSublinks ? faChevronUp : faChevronDown}
+                        icon={showSublinks ? faChevronRight : faChevronDown}
                       />
                     ) : null}
-                  </div>
+                  </span>
                 </Button>
                 {sidebar.sublinks && showSublinks && (
                   <>

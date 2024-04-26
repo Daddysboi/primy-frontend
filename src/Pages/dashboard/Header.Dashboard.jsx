@@ -105,8 +105,8 @@ const ProfilePix = styled.div`
 `;
 
 const Img = styled.img`
-  height: 1.8rem;
-  width: 1.8rem;
+  height: 1.85rem;
+  width: 1.85rem;
   border-radius: 1rem;
 `;
 

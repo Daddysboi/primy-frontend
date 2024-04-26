@@ -9,6 +9,7 @@ import themeReducer from "./features/themeSlice";
 import transactionReducer from "./features/transactionSlice";
 import queryReducer from "./features/querySlice";
 import courseReducer from "./features/courseSlice";
+import modalReducer from "./features/modalSlice";
 
 export const store = configureStore({
   reducer: {
@@ -21,6 +22,7 @@ export const store = configureStore({
     course: courseReducer,
     theme: themeReducer,
     query: queryReducer,
+    modal: modalReducer,
   },
   devTools: true,
   middleware: (getDefaultMiddleware) =>

@@ -1,11 +1,11 @@
 import React from "react";
 import { Navigate, Outlet } from "react-router-dom";
 import { getPage } from "../../utils/helpers";
-import { useAuth } from "../../Contexts/AuthContext";
+import { useAppSelector } from "../../redux/hooks";
 
 const TeacherProtectedRoute = () => {
   const currentPage = getPage();
-  const { authUser: user } = useAuth();
+  const { user } = useAppSelector((state) => state.user);
 
   if (user?.role === "teacher") {
     if (currentPage === "teacher") {

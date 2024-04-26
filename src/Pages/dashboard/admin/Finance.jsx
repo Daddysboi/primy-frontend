@@ -4,7 +4,7 @@ import styled from "styled-components";
 import { primaryColors } from "../../../assets/Colors";
 import DeatailCard from "../../../components/DetailCard";
 import TransactionCard from "../../../components/TransactionCard";
-import LineChart from "../../../components/LineChart";
+import LineChart from "../../../components/unused/LineChart";
 import DoughnutChart from "../../../components/DoughnutChart";
 import Sort from "../../../components/Sort";
 

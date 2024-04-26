@@ -16,17 +16,19 @@ const Container = styled.section`
 `;
 const Homepage = () => {
   return (
-    <Container>
+    <>
       <Hero isHero hasCTA paddingTop="8rem" />
-      <SignUp />
-      <Powerful />
-      <Pricing />
-      <Support />
-      <Compliance />
-      <Loved />
-      <Backed />
-      <GrowYourSchool />
-    </Container>
+      <Container>
+        <SignUp />
+        <Powerful />
+        <Pricing />
+        <Support />
+        <Compliance />
+        <Loved />
+        <Backed />
+        <GrowYourSchool />
+      </Container>
+    </>
   );
 };
 

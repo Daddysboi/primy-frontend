@@ -45,30 +45,31 @@ export const studentLinks = [
 // TEACHERS LINKS
 export const teacherLinks = [
   {
-    title: "My Dashboard",
+    title: "Dashboard",
     link: "dashboard",
     type: "link",
   },
   {
-    title: "My Clases",
+    title: "Clases",
     link: "teacher/classes",
     type: "link",
   },
   {
-    title: "My Assessments",
-    link: "teacher/assessment",
+    title: "Assessments",
+    link: "teacher/assessments",
     type: "link",
   },
   {
-    title: "My Students",
+    title: "Exams",
+    link: "teacher/exams",
+    type: "link",
+  },
+  {
+    title: "Students",
     link: "teacher/students",
     type: "link",
   },
-  {
-    title: "Results",
-    link: "teacher/results",
-    type: "link",
-  },
+
   {
     title: "Timetable",
     link: "teacher/timetable",
@@ -130,13 +131,13 @@ export const adminLinks = [
     sublinks: [
       {
         title: "Exam",
-        link: "admin/results/exams/",
+        link: "teacher/results/exams/",
         type: "link",
         icon: <PiExamBold />,
       },
       {
         title: "Assessment",
-        link: "admin/results/assessments/",
+        link: "teacher/results/assessments/",
         type: "link",
         icon: <PiExamBold />,
       },

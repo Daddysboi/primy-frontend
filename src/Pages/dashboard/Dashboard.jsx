@@ -2,8 +2,9 @@ import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
-import { useUser } from "../../contexts/userContext";
 import AppButton from "../../components/Button";
+import { useAppDispatch, useAppSelector } from "../../redux/hooks";
+import { setCreateModal } from "../../redux/features/modalSlice";
 
 import TeacherDashboard from "./TeacherDashboard";
 import StudentDashboard from "./StudentDashboard";
@@ -31,8 +32,15 @@ const Subhead = styled.p`
 `;
 
 const Dashboard = () => {
-  const { user } = useUser();
   const navigate = useNavigate();
+
+  const { user } = useAppSelector((state) => state.user);
+  const dispatch = useAppDispatch();
+  const handleAdmission = () => {
+    navigate("/dashboard/admin/students").then(() => {
+      dispatch(setCreateModal(true));
+    });
+  };
 
   useEffect(() => {
     if (!user) {
@@ -49,13 +57,14 @@ const Dashboard = () => {
           <Heading>Hey, {displayName ?? ""}</Heading>
           <Subhead>Welcome to your dashboard</Subhead>
         </div>
-
-        <AppButton
-          text="New Admission"
-          onClick={() => {}}
-          small
-          icon={<FaPlus />}
-        />
+        {user?.role === "admin" && (
+          <AppButton
+            text="New Admission"
+            onClick={handleAdmission}
+            small
+            icon={<FaPlus />}
+          />
+        )}
       </WelcomeTab>
 
       {user.role === "student" ? (

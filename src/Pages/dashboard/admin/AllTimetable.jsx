@@ -1,9 +1,8 @@
 import { useState } from "react";
 import styled from "styled-components";
 
+import Pagination from "../../../components/Pagination";
 import { primaryColors } from "../../../assets/Colors";
-import { FaArrowCircleLeft, FaArrowCircleRight } from "react-icons/fa";
-import AppButton from "../../../components/Button";
 
 const Container = styled.div`
   display: flex;
@@ -16,20 +15,18 @@ const Container = styled.div`
 
 const Header = styled.div`
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   justify-content: space-between;
   gap: 2rem;
 `;
 
 const Title = styled.h1`
-  font-size: 1.5rem;
+  font-size: 0.8rem;
   margin: 0;
-  color: #5e5e5e;
-  text-transform: uppercase;
-  font-weight: 600;
+  text-transform: capitalize;
+  font-weight: bold;
+  font-size: 1.5rem;
 `;
-
-const Pagination = styled.div``;
 
 const Table = styled.table`
   border-collapse: separate;
@@ -93,25 +90,8 @@ const AllTimetable = () => {
   return (
     <Container>
       <Header>
-        <Title>{classLevel} TIMETABLE</Title>
-        <Pagination>
-          <AppButton
-            icon={<FaArrowCircleRight />}
-            onClick={handleNext}
-            fontSize="1.51rem"
-            small
-            display="none"
-            textColor={primaryColors.Purple}
-          />
-          <AppButton
-            icon={<FaArrowCircleLeft />}
-            onClick={handlePrevious}
-            small
-            fontSize="1.5rem"
-            display="none"
-            textColor={primaryColors.Purple}
-          />
-        </Pagination>
+        <Title>{classLevel}</Title>
+        <Pagination onNext={handleNext} onPrevious={handlePrevious} />
       </Header>
 
       <Table>

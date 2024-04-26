@@ -12,8 +12,8 @@ export const UserProvider = ({ children }) => {
     lastName: "Ajayi",
   });
 
-  const updateUser = (userDate) => {
-    setUser(userDate);
+  const updateUser = (userData) => {
+    setUser(userData);
   };
 
   return (

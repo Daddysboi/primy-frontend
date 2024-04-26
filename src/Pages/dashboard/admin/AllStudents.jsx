@@ -7,6 +7,7 @@ import {
   deleteStudent,
   getAllStudents,
 } from "../../../redux/features/userSlice";
+import { setCreateModal } from "../../../redux/features/modalSlice";
 
 import RoleHeader from "../../../components/RoleHeader";
 import CreateUser from "../../../components/CreateUser";
@@ -24,7 +25,6 @@ const subjects = ["Sciences"];
 const classes = ["Jss1"];
 
 const AllStudents = () => {
-  const [createModal, setCreateModal] = useState(false);
   const [editing, setEditing] = useState(false);
   const [user, setUser] = useState(false);
 
@@ -33,6 +33,7 @@ const AllStudents = () => {
     (state) => state.user
   );
   const searchValue = useAppSelector((state) => state.query);
+  const { createModal } = useAppSelector((state) => state.modal);
 
   useEffect(() => {
     dispatch(getAllStudents())
@@ -53,7 +54,7 @@ const AllStudents = () => {
   }
 
   const handleEdit = (teacher) => {
-    setCreateModal(true);
+    dispatch(setCreateModal(true));
     setEditing(true);
     setUser(teacher);
   };
@@ -79,7 +80,7 @@ const AllStudents = () => {
         users={students}
         sort
         onClick={() => {
-          setCreateModal(true);
+          dispatch(setCreateModal(true));
         }}
       />
 
@@ -113,14 +114,14 @@ const AllStudents = () => {
           ))}
       </>
 
-      {/* sample profilecard: to be remover */}
+      {/* sample profilecard: to be removed*/}
       <>
         <ProfileCard
           options1={subjects}
           options2={classes}
           name="Musa Haruna"
           student
-          role="Teacher"
+          role="Student"
           header1="SUBJECTS"
           header2="CLASSES"
           users=""
@@ -132,7 +133,7 @@ const AllStudents = () => {
       <SideBar
         isOpen={createModal}
         onClose={() => {
-          setCreateModal(false);
+          dispatch(setCreateModal(false));
           setEditModal(false);
         }}
         hasCloseBtn={true}
@@ -141,7 +142,7 @@ const AllStudents = () => {
           editing={editing}
           role="student"
           user={user}
-          setIsCreating={setCreateModal}
+          setIsCreating={createModal}
         />
       </SideBar>
     </Container>

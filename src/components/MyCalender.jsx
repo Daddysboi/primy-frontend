@@ -8,7 +8,6 @@ import "../assets/myCalendar.css";
 const localizer = momentLocalizer(moment);
 
 const MyCalendar = ({ events, setSelectedSlot, setSelectedEventId }) => {
-
   const handleSelectSlot = ({ start, end }) => {
     setSelectedSlot({ start, end });
     setSelectedEventId(null);
@@ -23,7 +22,7 @@ const MyCalendar = ({ events, setSelectedSlot, setSelectedEventId }) => {
         endAccessor="end"
         selectable
         onSelectSlot={handleSelectSlot}
-        style={{ height: 200 }}
+        style={{ height: 230, width: 380 }}
       />
     </>
   );

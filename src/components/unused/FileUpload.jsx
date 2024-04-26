@@ -2,8 +2,8 @@ import React from "react";
 import styled from "styled-components";
 import { FaCloudUploadAlt } from "react-icons/fa";
 import { Formik, Field, ErrorMessage } from "formik";
-import AppInput from "./Input";
-import ErrorRed from "./Error";
+import AppInput from "../Input";
+import ErrorRed from "../Error";
 
 const Wrapper = styled.div`
   display: "flex";

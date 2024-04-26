@@ -4,19 +4,25 @@ import styled from "styled-components";
 import * as Yup from "yup";
 import { toast } from "react-toastify";
 
+import { useAppDispatch } from "../../../redux/hooks";
+import { updateUserKycDetails } from "../../../redux/features/userSlice";
+
 import Loading from "../../../components/Loading";
 import AppInput from "../../../components/Input";
 import AppSelectInput from "../../../components/SelectInput";
 import Error from "../../../components/Error";
 import { fileToDataUri } from "../../../components/FileUtils";
 import WebcamCapture from "../../../components/WebcamCapture";
-import { useAppDispatch } from "../../../redux/hooks";
 import { useFetchUserData } from "../../../Guard";
-import { updateUserKycDetails } from "../../../redux/features/userSlice";
-import FileUpload from "../../../components/FileUpload";
 
 const KYCContainer = styled.div`
   margin: 0 auto;
+`;
+
+const StyledForm = styled(Form)`
+  display: "flex";
+  align-items: "center";
+  gap: "30px";
 `;
 
 const Section = styled.div`
@@ -56,10 +62,11 @@ const KYC = ({
 }) => {
   const [imageSrc, setImageSrc] = useState("");
   const [loading, setLoading] = useState(false);
-  const dispatch = useAppDispatch();
-  const fetchUserData = useFetchUserData();
   const [imgPlaceholder, setImgPlaceholder] = useState(true);
   const [headshotPlaceholder, setHeadshotPlaceholder] = useState(true);
+
+  const dispatch = useAppDispatch();
+  const fetchUserData = useFetchUserData();
 
   const initialValues = {
     idType: user?.identificationDetails?.idType || "",
@@ -138,23 +145,15 @@ const KYC = ({
         validationSchema={validationSchema}
       >
         {({ values, handleChange, setFieldValue }) => (
-          <Form>
-            <section
-              style={{
-                display: "flex",
-                alignItems: "center",
-                gap: "30px",
-              }}
-            >
-              <span onClick={() => setHeadshotPlaceholder(false)}>
-                <WebcamCapture imageSrc={imageSrc} setImageSrc={setImageSrc} />
-              </span>
-              {user?.headShot && !imageSrc && headshotPlaceholder && (
-                <ImgViewer>
-                  <Img src={user?.headShot} alt="head-shot" />
-                </ImgViewer>
-              )}
-            </section>
+          <StyledForm>
+            {/* <span onClick={() => setHeadshotPlaceholder(false)}> */}
+            <WebcamCapture imageSrc={imageSrc} setImageSrc={setImageSrc} />
+            {/* </span> */}
+            {user?.headShot && !imageSrc && headshotPlaceholder && (
+              <ImgViewer>
+                <Img src={user?.headShot} alt="head-shot" />
+              </ImgViewer>
+            )}
             <Title>Identification</Title>
             <Section>
               <>
@@ -187,63 +186,55 @@ const KYC = ({
                 <ErrorMessage name="idNumber" component={Error} />
               </>
 
-              <section
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  gap: "30px",
-                }}
-              >
-                <div onClick={() => setImgPlaceholder(false)}>
-                  <FileInputContainer>
-                    <StyledLabel htmlFor="uploadPicture">
-                      Upload ID (Max 2MB)
-                    </StyledLabel>
-                    <div>
-                      <UploadButton htmlFor="uploadPicture">
-                        <FaCloudUploadAlt />
-                      </UploadButton>
-                      <div
-                        style={{
-                          display: "none",
-                        }}
-                      >
-                        <Field
-                          type="file"
-                          id="uploadPicture"
-                          name="uploadPicture"
-                          onChange={(event) => {
-                            setFieldValue(
-                              "uploadPicture",
-                              event.currentTarget.files[0]
-                            );
-                          }}
-                          component={AppInput}
-                          labelColor="gray"
-                          accept="image/*"
-                          border="none"
-                        />
-                      </div>
-                    </div>
-                    <ErrorMessage name="uploadPicture" component={Error} />
-                    <span
+              <div onClick={() => setImgPlaceholder(false)}>
+                <FileInputContainer>
+                  <StyledLabel htmlFor="uploadPicture">
+                    Upload ID (Max 2MB)
+                  </StyledLabel>
+                  <div>
+                    <UploadButton htmlFor="uploadPicture">
+                      <FaCloudUploadAlt />
+                    </UploadButton>
+                    <div
                       style={{
-                        opacity: "0.5",
-                        fontSize: "0.6rem",
+                        display: "none",
                       }}
                     >
-                      {values?.uploadPicture && values?.uploadPicture.name}
-                    </span>
-                  </FileInputContainer>
-                </div>
-                {user?.kyc?.uploadPicture &&
-                  !values?.uploadPicture &&
-                  imgPlaceholder && (
-                    <ImgViewer>
-                      <Img src={user?.kyc?.uploadPicture} alt="ID" />
-                    </ImgViewer>
-                  )}
-              </section>
+                      <Field
+                        type="file"
+                        id="uploadPicture"
+                        name="uploadPicture"
+                        onChange={(event) => {
+                          setFieldValue(
+                            "uploadPicture",
+                            event.currentTarget.files[0]
+                          );
+                        }}
+                        component={AppInput}
+                        labelColor="gray"
+                        accept="image/*"
+                        border="none"
+                      />
+                    </div>
+                  </div>
+                  <ErrorMessage name="uploadPicture" component={Error} />
+                  <span
+                    style={{
+                      opacity: "0.5",
+                      fontSize: "0.6rem",
+                    }}
+                  >
+                    {values?.uploadPicture && values?.uploadPicture.name}
+                  </span>
+                </FileInputContainer>
+              </div>
+              {user?.kyc?.uploadPicture &&
+                !values?.uploadPicture &&
+                imgPlaceholder && (
+                  <ImgViewer>
+                    <Img src={user?.kyc?.uploadPicture} alt="ID" />
+                  </ImgViewer>
+                )}
             </Section>
             <Section>
               <Title>Next of Kin</Title>
@@ -310,7 +301,7 @@ const KYC = ({
             <Button type="submit" disabled={loading}>
               {loading ? <Loading /> : "Submit KYC"}
             </Button>
-          </Form>
+          </StyledForm>
         )}
       </Formik>
     </KYCContainer>

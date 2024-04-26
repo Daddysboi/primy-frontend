@@ -18,6 +18,11 @@ import AuthLayout from "./layout/AuthLayout.jsx";
 import DashboardLayout from "./layout/DashboardLayout.jsx";
 import GuardLayout from "./layout/GuardLayout.jsx";
 
+//Protected Routes
+import AdminProtectedRoutes from "./layout/protectedRoute/AdminProtectedRoutes.jsx";
+import TeacherProtectedRoutes from "./layout/protectedRoute/TeacherProtectedRoutes.jsx";
+import StudentProtectedRoutes from "./layout/protectedRoute/StudentProtectedRoutes.jsx";
+
 // Admin routes
 import AllTeacher from "./pages/dashboard/admin/AllTeachers.jsx";
 import AllClasses from "./pages/dashboard/admin/AllClasses.jsx";
@@ -28,7 +33,13 @@ import Settings from "./pages/dashboard/settings/Settings.jsx";
 import AllTimetable from "./pages/dashboard/admin/AllTimetable.jsx";
 import Assessment from "./pages/dashboard/admin/results/Assessment.jsx";
 import Exams from "./pages/dashboard/admin/results/Exams.jsx";
-// import AdminProtectedRoutes from "./pages/protectedRoute/AdminProtectedRoutes.jsx";
+
+//Teacher Routes
+import MyClass from "./pages/dashboard/teacher/MyClasses.jsx";
+import MyAssessments from "./pages/dashboard/teacher/MyAssessments.jsx";
+import MyStudents from "./pages/dashboard/teacher/MyStudents.jsx";
+import MyTimetables from "./pages/dashboard/teacher/MyTimetables.jsx";
+import MyExams from "./pages/dashboard/teacher/MyExams.jsx";
 
 // import CoursesPage from "./pages/course/index.jsx";
 
@@ -45,7 +56,6 @@ import Exams from "./pages/dashboard/admin/results/Exams.jsx";
 // import StudentTestPage from "./pages/students/StudentTestPage.jsx";
 // import StudentGradePage from "./pages/students/StudentGradePage.jsx";
 // import ShowResult from "./pages/results/ShowResult.jsx";
-// import TeacherProtectedRoute from "./pages/protectedRoute/TeacherProtectedRoute.jsx";
 
 export const router = createBrowserRouter([
   {
@@ -126,7 +136,7 @@ export const router = createBrowserRouter([
           // Admin Dashboard
           {
             path: "admin",
-            // element: <AdminProtectedRoutes />,
+            element: <AdminProtectedRoutes />,
             children: [
               {
                 path: "students",
@@ -148,10 +158,12 @@ export const router = createBrowserRouter([
                 path: "results",
                 children: [
                   {
+                    exact: true,
                     path: "exams",
                     element: <Exams />,
                   },
                   {
+                    exact: true,
                     path: "assessments",
                     element: <Assessment />,
                   },
@@ -163,6 +175,7 @@ export const router = createBrowserRouter([
           // Student Dashboard
           {
             path: "student",
+            element: <StudentProtectedRoutes />,
             children: [
               {
                 path: "grade",
@@ -182,24 +195,30 @@ export const router = createBrowserRouter([
           // Teacher Dashboard
           {
             path: "teacher",
-            // element: <TeacherProtectedRoute />,
+            element: <TeacherProtectedRoutes />,
             children: [
               {
-                path: "courses",
-                // element: <CoursesPage />,
+                path: "classes",
+                element: <MyClass />,
               },
-              {
-                path: "assessment",
-                // element: <AssessmentPage />,
-              },
+
               {
                 path: "students",
-                // element: <Students />,
+                element: <MyStudents />,
               },
               {
-                path: "results",
-                // element: <ResultPage />,
+                path: "timetable",
+                element: <MyTimetables />,
               },
+              {
+                path: "exams",
+                element: <MyExams />,
+              },
+              {
+                path: "assessments",
+                element: <MyAssessments />,
+              },
+
               {
                 path: "results/:assessmentId",
                 // element: <ShowResult />,
@@ -227,9 +246,3 @@ export const router = createBrowserRouter([
     ],
   },
 ]);
-
-// const Router = () => {
-//   return <Router.Provider router={router} />;
-// };
-
-// export default Router;

@@ -9,7 +9,6 @@ import Error from "../../../components/Error";
 import { updateUserProfile } from "../../../redux/features/userSlice";
 import { useAppDispatch } from "../../../redux/hooks";
 import { useFetchUserData } from "../../../Guard";
-import FileUpload from "../../../components/FileUpload";
 import { fileToDataUri } from "../../../components/FileUtils";
 
 const NameInput = styled.div`
@@ -19,7 +18,16 @@ const NameInput = styled.div`
   justify-content: space-between;
 `;
 
-const ProfileSettings = ({ user, PropsContainer, Button, StyledForm }) => {
+const ProfileSettings = ({
+  user,
+  PropsContainer,
+  Button,
+  StyledForm,
+  FileInputContainer,
+  StyledLabel,
+  UploadButton,
+  FaCloudUploadAlt,
+}) => {
   const initialValues = {
     firstName: "",
     lastName: "",
@@ -90,15 +98,66 @@ const ProfileSettings = ({ user, PropsContainer, Button, StyledForm }) => {
         {({ values, handleChange, setFieldValue }) => (
           <StyledForm>
             <>
-              <FileUpload
-                user={user}
-                setImgPlaceholder={setImgPlaceholder}
-                setFieldValue={setFieldValue}
-                imgPlaceholder={imgPlaceholder}
-                name="uploadPicture"
-                values={values}
-                label="Upload Picture"
-              />
+              <section
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "30px",
+                }}
+              >
+                <div onClick={() => setImgPlaceholder(false)}>
+                  <FileInputContainer>
+                    <StyledLabel htmlFor="uploadPicture">
+                      Upload Profile Picture (Max 2MB)
+                    </StyledLabel>
+                    <div>
+                      <UploadButton htmlFor="uploadPicture">
+                        <FaCloudUploadAlt />
+                      </UploadButton>
+                      <div
+                        style={{
+                          display: "none",
+                        }}
+                      >
+                        <Field
+                          type="file"
+                          id="uploadPicture"
+                          name="uploadPicture"
+                          onChange={(event) => {
+                            setFieldValue(
+                              "uploadPicture",
+                              event.currentTarget.files[0]
+                            );
+                          }}
+                          component={AppInput}
+                          labelColor="gray"
+                          accept="image/*"
+                          border="none"
+                        />
+                      </div>
+                    </div>
+                    <ErrorMessage name="uploadPicture" component={Error} />
+                    <span
+                      style={{
+                        opacity: "0.5",
+                        fontSize: "0.6rem",
+                      }}
+                    >
+                      {values?.uploadPicture && values?.uploadPicture.name}
+                    </span>
+                  </FileInputContainer>
+                </div>
+                {user?.profileSettings?.uploadPicture &&
+                  !values?.uploadPicture &&
+                  imgPlaceholder && (
+                    <ImgViewer>
+                      <Img
+                        src={user?.profileSettings?.uploadPicture}
+                        alt="ID"
+                      />
+                    </ImgViewer>
+                  )}
+              </section>
 
               <NameInput>
                 <Field

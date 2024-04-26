@@ -28,11 +28,12 @@ const Container = styled.div``;
 
 const Inputs = styled.div`
   margin-bottom: 1rem;
+  display: flex;
+  gap: 2rem;
 `;
 
 const Right = styled.div`
   flex: 1;
-
   background-color: ${primaryColors.White};
   border-radius: 1rem;
   display: flex;
@@ -109,13 +110,11 @@ const Events = () => {
               value={title}
               onChange={(e) => setTitle(e.target.value)}
               height="30px"
-              width="50%"
             />
             <AppInput
               label="Event Description:"
               type="text"
               height="30px"
-              width="50%"
               value={description}
               onChange={(e) => setDescription(e.target.value)}
             />

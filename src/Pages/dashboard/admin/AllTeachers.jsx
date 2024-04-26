@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
+import { toast } from "react-toastify";
 
 import { useAppDispatch, useAppSelector } from "../../../redux/hooks";
-import { toast } from "react-toastify";
 import {
   deleteTeacher,
   getAllTeachers,
@@ -136,7 +136,7 @@ const AllTeacher = () => {
           editing={editing}
           role="teacher"
           user={user}
-          setIsCreating={setCreateModal}
+          setIsCreating={createModal}
         />
       </SideBar>
     </Container>
