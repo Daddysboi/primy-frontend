@@ -6,19 +6,19 @@ import styled from "styled-components";
 
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import AppInput from "../reuseableComponent/AppInput";
-import AppButton from "../reuseableComponent/AppButton";
+import Button from "../reuseableComponent/Button";
 
 import { contactOurSupport } from "../features/utilitySlice";
 import ErrorRed from "../reuseableComponent/ErrorRed";
 
-const StyledContainer = styled.div`
+const Container = styled.div`
   display: flex;
   flex-direction: column;
   background-size: cover;
   padding: 20px;
 `;
 
-const StyledWrapper = styled.div`
+const Wrapper = styled.div`
   margin: 0 auto;
   width: 100%;
   @media (min-width: 480px) {
@@ -26,7 +26,7 @@ const StyledWrapper = styled.div`
   }
 `;
 
-const StyledHeader = styled.h1`
+const Header = styled.h1`
   color: #183153;
   font-size: 2rem;
   margin-bottom: 3rem;
@@ -48,7 +48,6 @@ const Contact = () => {
   });
 
   const onSubmit = async (values, { resetForm }) => {
-    setLoading(true);
     let request = {
       fullName: values.fullName,
       email: values.email?.toLowerCase(),
@@ -66,15 +65,15 @@ const Contact = () => {
   };
 
   return (
-    <StyledContainer id="contact">
-      <StyledHeader>Contact Our Support</StyledHeader>
+    <Container id="contact">
+      <Header>Contact Our Support</Header>
       <Formik
         initialValues={initialValues}
         validationSchema={validationSchema}
         onSubmit={onSubmit}
       >
         <Form>
-          <StyledWrapper>
+          <Wrapper>
             <div>
               <Field
                 as={AppInput}
@@ -105,13 +104,13 @@ const Contact = () => {
               />{" "}
               <ErrorMessage name="message" component={ErrorRed} />
             </div>
-            <AppButton disabled={isLoading}>
-              {loading ? "Submitting..." : "Submit"}
-            </AppButton>
-          </StyledWrapper>
+            <Button disabled={isLoading}>
+              {isLoading ? "Submitting..." : "Submit"}
+            </Button>
+          </Wrapper>
         </Form>
       </Formik>
-    </StyledContainer>
+    </Container>
   );
 };
 

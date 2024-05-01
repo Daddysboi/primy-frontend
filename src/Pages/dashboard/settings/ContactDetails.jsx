@@ -202,9 +202,11 @@ const AddContact = ({
               )}
           </section>
 
-          <Button type="submit" disabled={loading}>
-            {loading ? "Adding..." : "Add Contact"}
-          </Button>
+          <Button
+            type="submit"
+            disabled={loading}
+            text={loading ? "Adding..." : "Add Contact"}
+          />
         </StyledForm>
       )}
     </Formik>

@@ -1,5 +1,4 @@
 import axiosClient from "../../services/api";
-
 import {
   GET_USER_BY_ID,
   UPDATE_USER_PROFILE,
@@ -10,6 +9,7 @@ import {
   TEACHERS,
   STUDENTS,
   USERS,
+  RECORDS,
 } from "../constants";
 
 export const GetUserById = async (userId) => {
@@ -140,6 +140,16 @@ export const GetStudentById = async (id) => {
   return res.data;
 };
 
+export const GetTeacherRecords = async () => {
+  const res = await axiosClient.get(`${TEACHERS}/${RECORDS}`);
+  return res.data;
+};
+
+export const GetStudentRecords = async () => {
+  const res = await axiosClient.get(`${STUDENTS}/${RECORDS}`);
+  return res.data;
+};
+
 export const GetAllTeachers = async () => {
   const res = await axiosClient.get(`${TEACHERS}/`);
   return res.data;
@@ -147,6 +157,11 @@ export const GetAllTeachers = async () => {
 
 export const GetAllStudents = async () => {
   const res = await axiosClient.get(`${STUDENTS}/`);
+  return res.data;
+};
+
+export const GetStudentsByGrade = async (subjectId) => {
+  const res = await axiosClient.get(`${STUDENTS}/${subjectId}`);
   return res.data;
 };
 

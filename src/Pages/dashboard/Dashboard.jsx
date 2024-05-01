@@ -6,8 +6,8 @@ import AppButton from "../../components/Button";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { setCreateModal } from "../../redux/features/modalSlice";
 
-import TeacherDashboard from "./TeacherDashboard";
-import StudentDashboard from "./StudentDashboard";
+import TeacherDashboard from "./teacher/TeacherDashboard";
+import StudentDashboard from "./student/StudentDashboard";
 import AdminDashboard from "./admin/AdminDashboard";
 import { FaPlus } from "react-icons/fa6";
 
@@ -29,13 +29,39 @@ const Heading = styled.h1`
 
 const Subhead = styled.p`
   font-size: 0.7rem;
+  text-transform: capitalize;
+`;
+
+const Top = styled.div`
+  display: flex;
+  gap: 2rem;
+  justify-content: space-between;
+`;
+
+const CardWrapper = styled.div`
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  max-width: 30rem;
+`;
+
+const Mid = styled.div`
+  display: flex;
+  gap: 3rem;
+  justify-content: space-between;
+`;
+
+const Bottom = styled.div`
+  display: flex;
+  gap: 3rem;
+  justify-content: space-between;
 `;
 
 const Dashboard = () => {
   const navigate = useNavigate();
-
-  const { user } = useAppSelector((state) => state.user);
   const dispatch = useAppDispatch();
+  const { user } = useAppSelector((state) => state.user);
+
   const handleAdmission = () => {
     navigate("/dashboard/admin/students").then(() => {
       dispatch(setCreateModal(true));
@@ -50,30 +76,42 @@ const Dashboard = () => {
 
   const displayName = `${user?.lastName} ${user?.firstName}`;
 
+  const data = [57, 43];
+
+  const action = {
+    admin: { text: "New Admission", func: handleAdmission },
+  };
+
+  const DashboardComponent =
+    user?.role === "student"
+      ? AdminDashboard
+      : user?.role === "teacher"
+      ? TeacherDashboard
+      : StudentDashboard;
+
   return user ? (
     <Container>
       <WelcomeTab>
         <div>
           <Heading>Hey, {displayName ?? ""}</Heading>
-          <Subhead>Welcome to your dashboard</Subhead>
+          <Subhead>{user?.role}</Subhead>
         </div>
-        {user?.role === "admin" && (
+        {action[user?.role]?.text && (
           <AppButton
-            text="New Admission"
-            onClick={handleAdmission}
+            text={action[user?.role].text}
+            onClick={action[user?.role].func}
             small
             icon={<FaPlus />}
           />
         )}
       </WelcomeTab>
-
-      {user.role === "student" ? (
-        <StudentDashboard />
-      ) : user.role === "teacher" ? (
-        <TeacherDashboard />
-      ) : (
-        <AdminDashboard />
-      )}
+      <DashboardComponent
+        Top={Top}
+        CardWrapper={CardWrapper}
+        Mid={Mid}
+        Bottom={Bottom}
+        data={data}
+      />
     </Container>
   ) : (
     <></>

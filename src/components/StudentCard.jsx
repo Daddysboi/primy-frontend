@@ -2,6 +2,8 @@ import PropTypes from "prop-types";
 import { useState } from "react";
 import { BsThreeDotsVertical } from "react-icons/bs";
 
+import { useAppDispatch, useAppSelector } from "../redux/hooks";
+
 import CreateUser from "./CreateUser";
 import Modal from "./Modal";
 import ClickOutside from "./ClickOutside";
@@ -12,22 +14,18 @@ import "../assets/styles.css";
 const StudentCard = ({
   img = "https://picsum.photos/200",
   student,
-  refetchStudents,
   onClick,
   onDelete,
 }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
-
-  const handleMenuClick = () => {
-    setIsMenuOpen(!isMenuOpen);
-  };
+  const dispatch = useAppDispatch();
 
   const handleDelete = async () => {
-    const res = await deleteStudent(student?._id);
-    if (res) {
-      refetchStudents();
-    }
+    const res = await dispatch(deleteStudent(student?._id));
+    student = res?.payload;
+    console.log("dats:", student);
+    // Todo: Remember to get the student out of the response shape, get the user and store as student
   };
 
   return (

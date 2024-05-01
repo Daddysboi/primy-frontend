@@ -1,7 +1,8 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 import { FaBars, FaTimes } from "react-icons/fa";
+import { Link } from "react-scroll";
 
 import Logo from "./Logo";
 import Button from "./Button";
@@ -33,7 +34,7 @@ const PcLinks = styled.div`
   }
 `;
 
-const StyledLink = styled(Link)`
+const StyledLink = styled(NavLink)`
   display: flex;
   gap: 1rem;
   text-decoration: none;
@@ -92,7 +93,7 @@ const MobileLinks = styled.div`
 
 const links = [
   { path: "/", page: "About" },
-  { path: "/", page: "Schools" },
+  { path: "/", page: "Contact Us" },
   { path: "/", page: "Products" },
   { path: "/", page: "Pricing" },
   { path: "/", page: "FAQs" },
@@ -165,24 +166,44 @@ const Header = () => {
       <>
         <NavIcons>{toggleSrc}</NavIcons>
         <CTA>
-          <Button
-            height="2.5rem"
-            fontSize="1rem"
-            text="Sign in"
-            display="none"
-            borderColor="transparent"
-            textColor="#0F0F0F"
-            hoverBg="#dbdbdb"
-            small
-          />
-          <Button
-            height="2.5rem"
-            fontSize="1rem"
-            display="other"
-            text="Start for free"
-            borderColor="#0F0F0F"
-            small
-          />
+          {/* <Link
+            to="login"
+            activeClass="active"
+            spy={true}
+            smooth={true}
+            offset={-150}
+            duration={2000}
+            onClick={() => {}}
+          >
+            <Button
+              height="2.5rem"
+              fontSize="1rem"
+              text="Sign in"
+              display="none"
+              borderColor="transparent"
+              textColor="#0F0F0F"
+              hoverBg="#dbdbdb"
+              small
+            />
+          </Link> */}
+          <Link
+            to="Sign Up"
+            activeClass="active"
+            spy={true}
+            smooth={true}
+            offset={-150}
+            duration={2000}
+            onClick={() => {}}
+          >
+            <Button
+              height="2.5rem"
+              fontSize="1rem"
+              display="other"
+              text="Start for free"
+              borderColor="#0F0F0F"
+              small
+            />
+          </Link>
         </CTA>
       </>
     </Container>

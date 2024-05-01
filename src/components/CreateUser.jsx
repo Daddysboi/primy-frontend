@@ -1,20 +1,19 @@
-import { useState } from "react";
 import PropTypes from "prop-types";
 import { Form, Formik, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { toast } from "react-toastify";
 import styled from "styled-components";
 
-import { useAppDispatch } from "../redux/hooks";
-import { useAppSelector } from "../redux/hooks";
-import { createUser, getAllTeachers } from "../redux/features/userSlice";
+import { useAppDispatch, useAppSelector } from "../redux/hooks";
+import { createUser } from "../redux/features/userSlice";
 
 import AppInput from "./Input";
 import AppSelectInput from "./SelectInput";
 import Loading from "./Loading";
 import Error from "./Error";
-
 import AppButton from "./Button";
+import { getDateValue } from "../utils/helpers";
+
 import { classLists } from "./ClassList";
 
 const Header = styled.h1`
@@ -62,6 +61,7 @@ const CreateUser = ({
     initialValues.studentId = role === "student" ? user?._id : undefined;
     initialValues.teacherId = role === "teacher" ? user?._id : undefined;
     initialValues.className = role === "student" ? user?.className : undefined;
+    initialValues.dateOfBirth = getDateValue(user?.dateOfBirth);
   }
 
   const validationSchema = Yup.object().shape({
@@ -93,6 +93,7 @@ const CreateUser = ({
       gender: values.gender,
       phoneNumber: values.role === "student" ? "" : values.phoneNumber,
       className: values.role === "teacher" ? "" : values.className,
+      dateOfBirth: values.dateOfBirth,
     };
 
     dispatch(createUser(data, editing))
@@ -191,7 +192,6 @@ const CreateUser = ({
 
         <Field
           as={AppSelectInput}
-          type="text"
           name="gender"
           label="Gender"
           placeholder="Enter Gender"
@@ -201,13 +201,23 @@ const CreateUser = ({
         />
         <ErrorMessage name="gender" component={Error} />
 
+        <Field
+          as={AppInput}
+          type="text"
+          name="dateOfBirth"
+          label="Date of Birth"
+          placeholder="Date of Birth"
+          height="2rem"
+          width="90%"
+        />
+        <ErrorMessage name="dateOfBirth" component={Error} />
+
         {role === "student" && (
           <>
             {classLists && (
               <Field
                 as={AppSelectInput}
                 selectType="category"
-                type="text"
                 name="className"
                 label="Select Class"
                 width="90%"

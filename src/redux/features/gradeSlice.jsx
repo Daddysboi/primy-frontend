@@ -1,31 +1,31 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import {
-  GetTeacherCourses,
-  CreateAssessment,
-  GetTeacherAssessmentByCourse,
-  GetAssessmentByCourse,
-  CreateQuestion,
-  GetQuestionsByAssessment,
-  UpdateQuestion,
-  UpdateAssessment,
-  GetAllCourses,
-  CreateEditCourse,
   AssignTeacher,
-  StartAssessment,
-  NextAssessment,
+  CreateAssessment,
+  CreateQuestion,
+  CreateEditSubject,
+  GetTeacherAssessmentByGrade,
+  GetTeacherGrades,
+  GetAssessmentByGrade,
+  GetQuestionsByAssessment,
+  GetAllGrades,
+  DeleteAllSubjects,
   DeleteAssessment,
-  GetStudentResult,
+  DeleteSubject,
   DeleteQuestion,
-  DeleteAllCourses,
-  DeleteCourse,
-} from "../services/CourseServices";
+  NextAssessment,
+  GetStudentResult,
+  StartAssessment,
+  UpdateAssessment,
+  UpdateQuestion,
+} from "../services/GradeServices";
 
-//Get Teacher Courses
-export const getAllCourses = createAsyncThunk(
-  "getAllCourses",
+//Get All Grades
+export const getAllGrades = createAsyncThunk(
+  "getAllGrades",
   async (_, { rejectWithValue }) => {
     try {
-      const resp = await GetAllCourses();
+      const resp = await GetAllGrades();
       return resp;
     } catch (error) {
       return rejectWithValue(error.message);
@@ -33,12 +33,12 @@ export const getAllCourses = createAsyncThunk(
   }
 );
 
-//Get Teacher Courses
-export const getTeacherCourses = createAsyncThunk(
-  "getTeacherCourses",
+//Get Teacher Grades
+export const getTeacherGrades = createAsyncThunk(
+  "getTeacherGrades",
   async (id, { rejectWithValue }) => {
     try {
-      const resp = await GetTeacherCourses(id);
+      const resp = await GetTeacherGrades(id);
       return resp;
     } catch (error) {
       return rejectWithValue(error.message);
@@ -73,11 +73,11 @@ export const assignTeacher = createAsyncThunk(
 );
 
 //Create/Edit Course
-export const createEditCourse = createAsyncThunk(
-  "createEditCourse",
+export const createEditSubject = createAsyncThunk(
+  "createEditSubject",
   async (data, editing, { rejectWithValue }) => {
     try {
-      const resp = await CreateEditCourse(data, editing);
+      const resp = await CreateEditSubject(data, editing);
       return resp;
     } catch (error) {
       return rejectWithValue(error.message);
@@ -87,7 +87,7 @@ export const createEditCourse = createAsyncThunk(
 
 //Create Question
 export const createQuestion = createAsyncThunk(
-  "CreateQuestion",
+  "createQuestion",
   async (rows, { rejectWithValue }) => {
     try {
       const resp = await CreateQuestion(rows);
@@ -99,14 +99,11 @@ export const createQuestion = createAsyncThunk(
 );
 
 //Get Teacher Assessment By Course
-export const getTeacherAssessmentByCourse = createAsyncThunk(
-  "getTeacherAssessmentByCourse",
+export const getTeacherAssessmentByGrade = createAsyncThunk(
+  "getTeacherAssessmentByGrade",
   async (courseId, role = "user", { rejectWithValue }) => {
     try {
-      const resp = await GetTeacherAssessmentByCourse(
-        courseId,
-        (role = "user")
-      );
+      const resp = await GetTeacherAssessmentByGrade(courseId, (role = "user"));
       return resp;
     } catch (error) {
       return rejectWithValue(error.message);
@@ -115,11 +112,11 @@ export const getTeacherAssessmentByCourse = createAsyncThunk(
 );
 
 //Get Assessment By Course
-export const getAssessmentByCourse = createAsyncThunk(
-  "getAssessmentByCourse",
-  async (courseId, { rejectWithValue }) => {
+export const getAssessmentByGrade = createAsyncThunk(
+  "getAssessmentByGrade",
+  async (grade, { rejectWithValue }) => {
     try {
-      const resp = await GetAssessmentByCourse(courseId);
+      const resp = await GetAssessmentByGrade(grade);
       return resp;
     } catch (error) {
       return rejectWithValue(error.message);
@@ -218,12 +215,12 @@ export const deleteQuestion = createAsyncThunk(
   }
 );
 
-//Delete Course
-export const deleteCourse = createAsyncThunk(
-  "deleteCourse",
-  async (courseId, { rejectWithValue }) => {
+//Delete grade
+export const deleteSubject = createAsyncThunk(
+  "deleteSubject",
+  async (subjectId, { rejectWithValue }) => {
     try {
-      const resp = await DeleteCourse(courseId);
+      const resp = await DeleteSubject(subjectId);
       return resp;
     } catch (error) {
       return rejectWithValue(error.message);
@@ -232,11 +229,11 @@ export const deleteCourse = createAsyncThunk(
 );
 
 //Delete All Courses
-export const deletetAllCourses = createAsyncThunk(
-  "deletetAllCourses",
+export const deleteAllSubjects = createAsyncThunk(
+  "deletetAllSubjects",
   async (_, { rejectWithValue }) => {
     try {
-      const resp = await DeleteAllCourses();
+      const resp = await DeleteAllSubjects();
       return resp;
     } catch (error) {
       return rejectWithValue(error.message);
@@ -258,42 +255,47 @@ export const getStudentResult = createAsyncThunk(
 );
 
 const initialState = {
-  course: {},
-  courses: [],
+  grade: {},
+  grades: [],
+  isLoading: false,
+  isSuccess: false,
+  isError: false,
 };
 
 // Course SLICE
-export const courseSlice = createSlice({
+export const gradeSlice = createSlice({
   name: "courses",
   initialState,
   reducers: {},
   extraReducers: (builder) => {
     //Get All Courses
     builder
-      .addCase(getAllCourses.pending, (state) => {
+      .addCase(getAllGrades.pending, (state) => {
         state.isLoading = true;
       })
-      .addCase(getAllCourses.fulfilled, (state) => {
+      .addCase(getAllGrades.fulfilled, (state) => {
         state.isLoading = false;
+        state.isSuccess = true;
       })
-      .addCase(getAllCourses.rejected, (state) => {
-        state.isLoggedIn = false;
-        // state.user = null;
+      .addCase(getAllGrades.rejected, (state) => {
         state.isLoading = false;
+        state.isSuccess = false;
+        state.isError = true;
       });
 
     // Get Teacher Courses
     builder
-      .addCase(getTeacherCourses.pending, (state) => {
+      .addCase(getTeacherGrades.pending, (state) => {
         state.isLoading = true;
       })
-      .addCase(getTeacherCourses.fulfilled, (state) => {
+      .addCase(getTeacherGrades.fulfilled, (state) => {
         state.isLoading = false;
+        state.isSuccess = true;
       })
-      .addCase(getTeacherCourses.rejected, (state) => {
-        state.isLoggedIn = false;
-        // state.user = null;
+      .addCase(getTeacherGrades.rejected, (state) => {
         state.isLoading = false;
+        state.isSuccess = false;
+        state.isError = true;
       });
 
     // Create Assessment
@@ -303,11 +305,13 @@ export const courseSlice = createSlice({
       })
       .addCase(createAssessment.fulfilled, (state) => {
         state.isLoading = false;
+        state.isSuccess = false;
       })
       .addCase(createAssessment.rejected, (state) => {
         state.isLoggedIn = false;
         // state.user = null;
         state.isLoading = false;
+        state.isSuccess = false;
       });
 
     // Assign Teacher
@@ -317,25 +321,29 @@ export const courseSlice = createSlice({
       })
       .addCase(assignTeacher.fulfilled, (state) => {
         state.isLoading = false;
+        state.isSuccess = false;
       })
       .addCase(assignTeacher.rejected, (state) => {
         state.isLoggedIn = false;
         // state.user = null;
         state.isLoading = false;
+        state.isSuccess = false;
       });
 
     // Create/Edit Course
     builder
-      .addCase(createEditCourse.pending, (state) => {
+      .addCase(createEditSubject.pending, (state) => {
         state.isLoading = true;
       })
-      .addCase(createEditCourse.fulfilled, (state) => {
+      .addCase(createEditSubject.fulfilled, (state) => {
         state.isLoading = false;
+        state.isSuccess = false;
       })
-      .addCase(createEditCourse.rejected, (state) => {
+      .addCase(createEditSubject.rejected, (state) => {
         state.isLoggedIn = false;
         // state.user = null;
         state.isLoading = false;
+        state.isSuccess = false;
       });
 
     // Create Question
@@ -345,36 +353,42 @@ export const courseSlice = createSlice({
       })
       .addCase(createQuestion.fulfilled, (state) => {
         state.isLoading = false;
+        state.isSuccess = false;
       })
       .addCase(createQuestion.rejected, (state) => {
-        state.isLoggedIn = false;
         state.isLoading = false;
+        state.isSuccess = false;
+        state.isError = true;
       });
 
     // Get Teacher Assessment By Course
     builder
-      .addCase(getTeacherAssessmentByCourse.pending, (state) => {
+      .addCase(getTeacherAssessmentByGrade.pending, (state) => {
         state.isLoading = true;
       })
-      .addCase(getTeacherAssessmentByCourse.fulfilled, (state) => {
+      .addCase(getTeacherAssessmentByGrade.fulfilled, (state) => {
         state.isLoading = false;
+        state.isSuccess = false;
       })
-      .addCase(getTeacherAssessmentByCourse.rejected, (state) => {
-        state.isLoggedIn = false;
+      .addCase(getTeacherAssessmentByGrade.rejected, (state) => {
         state.isLoading = false;
+        state.isSuccess = false;
+        state.isError = true;
       });
 
     //Get Assessment By Course
     builder
-      .addCase(getAssessmentByCourse.pending, (state) => {
+      .addCase(getAssessmentByGrade.pending, (state) => {
         state.isLoading = true;
       })
-      .addCase(getAssessmentByCourse.fulfilled, (state) => {
+      .addCase(getAssessmentByGrade.fulfilled, (state) => {
         state.isLoading = false;
+        state.isSuccess = false;
       })
-      .addCase(getAssessmentByCourse.rejected, (state) => {
-        state.isLoggedIn = false;
+      .addCase(getAssessmentByGrade.rejected, (state) => {
         state.isLoading = false;
+        state.isSuccess = false;
+        state.isError = true;
       });
 
     //Get Questions By Assessment
@@ -384,10 +398,12 @@ export const courseSlice = createSlice({
       })
       .addCase(getQuestionsByAssessment.fulfilled, (state) => {
         state.isLoading = false;
+        state.isSuccess = false;
       })
       .addCase(getQuestionsByAssessment.rejected, (state) => {
-        state.isLoggedIn = false;
         state.isLoading = false;
+        state.isSuccess = false;
+        state.isError = true;
       });
 
     //Start Assessment
@@ -397,10 +413,12 @@ export const courseSlice = createSlice({
       })
       .addCase(startAssessment.fulfilled, (state) => {
         state.isLoading = false;
+        state.isSuccess = false;
       })
       .addCase(startAssessment.rejected, (state) => {
-        state.isLoggedIn = false;
         state.isLoading = false;
+        state.isSuccess = false;
+        state.isError = true;
       });
 
     //Next Assessment
@@ -410,10 +428,12 @@ export const courseSlice = createSlice({
       })
       .addCase(nextAssessment.fulfilled, (state) => {
         state.isLoading = false;
+        state.isSuccess = false;
       })
       .addCase(nextAssessment.rejected, (state) => {
-        state.isLoggedIn = false;
         state.isLoading = false;
+        state.isSuccess = false;
+        state.isError = true;
       });
 
     //Update Question
@@ -423,10 +443,12 @@ export const courseSlice = createSlice({
       })
       .addCase(updateQuestion.fulfilled, (state) => {
         state.isLoading = false;
+        state.isSuccess = false;
       })
       .addCase(updateQuestion.rejected, (state) => {
-        state.isLoggedIn = false;
         state.isLoading = false;
+        state.isSuccess = false;
+        state.isError = true;
       });
 
     //Update Assessment
@@ -436,10 +458,12 @@ export const courseSlice = createSlice({
       })
       .addCase(updateAssessment.fulfilled, (state) => {
         state.isLoading = false;
+        state.isSuccess = false;
       })
       .addCase(updateAssessment.rejected, (state) => {
-        state.isLoggedIn = false;
         state.isLoading = false;
+        state.isSuccess = false;
+        state.isError = true;
       });
 
     //Delete Assessment
@@ -449,10 +473,12 @@ export const courseSlice = createSlice({
       })
       .addCase(deleteAssessment.fulfilled, (state) => {
         state.isLoading = false;
+        state.isSuccess = false;
       })
       .addCase(deleteAssessment.rejected, (state) => {
-        state.isLoggedIn = false;
         state.isLoading = false;
+        state.isSuccess = false;
+        state.isError = true;
       });
 
     //Delete Question
@@ -462,36 +488,42 @@ export const courseSlice = createSlice({
       })
       .addCase(deleteQuestion.fulfilled, (state) => {
         state.isLoading = false;
+        state.isSuccess = false;
       })
       .addCase(deleteQuestion.rejected, (state) => {
-        state.isLoggedIn = false;
         state.isLoading = false;
+        state.isSuccess = false;
+        state.isError = true;
       });
 
     // Delete Course
     builder
-      .addCase(deleteCourse.pending, (state) => {
+      .addCase(deleteSubject.pending, (state) => {
         state.isLoading = true;
       })
-      .addCase(deleteCourse.fulfilled, (state) => {
+      .addCase(deleteSubject.fulfilled, (state) => {
         state.isLoading = false;
+        state.isSuccess = false;
       })
-      .addCase(deleteCourse.rejected, (state) => {
-        state.isLoggedIn = false;
+      .addCase(deleteSubject.rejected, (state) => {
         state.isLoading = false;
+        state.isSuccess = false;
+        state.isError = true;
       });
 
     // Delete All Courses
     builder
-      .addCase(deletetAllCourses.pending, (state) => {
+      .addCase(deleteAllSubjects.pending, (state) => {
         state.isLoading = true;
       })
-      .addCase(deletetAllCourses.fulfilled, (state) => {
+      .addCase(deleteAllSubjects.fulfilled, (state) => {
         state.isLoading = false;
+        state.isSuccess = false;
+        state.isError = true;
       })
-      .addCase(deletetAllCourses.rejected, (state) => {
-        state.isLoggedIn = false;
+      .addCase(deleteAllSubjects.rejected, (state) => {
         state.isLoading = false;
+        state.isSuccess = false;
       });
 
     // Get Student Result
@@ -501,14 +533,16 @@ export const courseSlice = createSlice({
       })
       .addCase(getStudentResult.fulfilled, (state) => {
         state.isLoading = false;
+        state.isSuccess = false;
       })
       .addCase(getStudentResult.rejected, (state) => {
-        state.isLoggedIn = false;
         state.isLoading = false;
+        state.isSuccess = false;
+        state.isError = true;
       });
   },
 });
 
-const { reducer } = courseSlice;
+const { reducer } = gradeSlice;
 
 export default reducer;

@@ -34,8 +34,10 @@ export const UPDATE_USER_CONTACT_DETAILS = "update-user-contact-details";
 export const UPDATE_USER_KYC_DETAILS = "update-user-kyc-details";
 
 // Course routes
-export const TEACHER_COURSES = "teacher-courses";
+export const TEACHER_GRADES = "teacher-grades";
 export const ASSESSMENTS = "assessments";
-export const COURSES = "course-courses";
+export const COURSES = "grades";
+export const GRADES = "grades";
 export const QUESTIONS = "questions";
 export const RESULT = "result";
+export const RECORDS = "records";

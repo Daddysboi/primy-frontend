@@ -3,18 +3,17 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 import { useAppDispatch, useAppSelector } from "../../../redux/hooks";
-import Loading from "../../../components/Loading";
-import RoleHeader from "../../../components/RoleHeader";
-import SideBar from "../../../components/SideBar";
-import CreateSubject from "../../../components/CreateSubject";
 import {
-  deleteCourse,
-  getAllCourses,
-} from "../../../redux/features/courseSlice";
+  deleteSubject,
+  getAllGrades,
+} from "../../../redux/features/gradeSlice";
 
+import CreateSubject from "../../../components/CreateSubject";
+import RoleHeader from "../../../components/RoleHeader";
+import Loading from "../../../components/Loading";
+import SideBar from "../../../components/SideBar";
 import ClassList from "../../../components/ClassList";
 import AssignTeacherSubject from "../../../components/AssignTeacherSubject";
-import AppButton from "../../../components/Button";
 
 const Container = styled.div`
   display: flex;
@@ -30,25 +29,25 @@ const Header = styled.div`
 `;
 const AllClasses = () => {
   const [searchValue, setSearchValue] = useState("");
-  const [creatingCourse, setCreatingCourse] = useState(false);
+  const [creatingSubject, setCreatingSubject] = useState(false);
   const [editing, setEditing] = useState(false);
 
   const navigate = useNavigate();
 
   const dispatch = useAppDispatch();
-  const { courses, isLoading } = useAppSelector((state) => state.course);
+  const { grades, isLoading } = useAppSelector((state) => state.grade);
 
   if (isLoading) {
     // return <Loading />;
   }
 
-  const handleEdit = (course) => {
-    setCreatingCourse(true);
+  const handleEdit = (subjectId) => {
+    setCreatingSubject(true);
     setEditing(true);
   };
 
-  const handleDelete = (course) => {
-    dispatch(deleteCourse(course))
+  const handleDelete = (subjectId) => {
+    dispatch(deleteSubject(subjectId))
       .unwrap()
       .then((resp) => {
         toast.success(resp?.payload?.message || "Successfully deleted");
@@ -57,7 +56,7 @@ const AllClasses = () => {
         toast.error(error?.message || "Something went wrong");
       })
       .finally(() => {
-        dispatch(getAllCourses());
+        dispatch(getAllGrades());
       });
   };
 
@@ -81,11 +80,11 @@ const AllClasses = () => {
       <ClassList />
 
       <SideBar
-        isOpen={creatingCourse}
+        isOpen={creatingSubject}
         hasCloseBtn
-        onClose={() => setCreatingCourse(false)}
+        onClose={() => setCreatingSubject(false)}
       >
-        <CreateSubject editing={editing} setIsCreating={setCreatingCourse} />
+        <CreateSubject editing={editing} setIsCreating={setCreatingSubject} />
       </SideBar>
     </Container>
   );

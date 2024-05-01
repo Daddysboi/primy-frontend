@@ -4,7 +4,7 @@ import * as Yup from "yup";
 import styled from "styled-components";
 
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
-import { createEditCourse } from "../redux/features/courseSlice";
+import { createEditSubject } from "../redux/features/gradeSlice";
 
 import Button from "./Button";
 import AppInput from "./Input";
@@ -46,7 +46,7 @@ const CreateSubject = ({
   course = undefined,
 }) => {
   const dispatch = useAppDispatch();
-  const { isLoading } = useAppSelector((state) => state.course);
+  const { isLoading } = useAppSelector((state) => state.grade);
 
   const initialValues = {
     subjectTitle: "",
@@ -72,7 +72,7 @@ const CreateSubject = ({
       classes: values.classes,
     };
 
-    dispatch(createEditCourse(data, editing))
+    dispatch(createEditSubject(data, editing))
       .unwrap()
       .then((res) => {
         toast.success(res?.payload?.message || "Successfull " + course);

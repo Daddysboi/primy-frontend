@@ -1,15 +1,15 @@
 import { useState } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
 import styled from "styled-components";
-
-import { useAppDispatch } from "../redux/hooks";
-import { logout } from "../redux/features/loginSlice";
-import { useAppSelector } from "../redux/hooks";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faChevronDown,
   faChevronRight,
 } from "@fortawesome/free-solid-svg-icons";
+
+import { useAppDispatch } from "../redux/hooks";
+import { logout } from "../redux/features/loginSlice";
+import { useAppSelector } from "../redux/hooks";
 
 import {
   adminLinks,
@@ -19,10 +19,10 @@ import {
 import { checkInLocation } from "../utils/helpers";
 import DashboardHeader from "../pages/dashboard/Header.Dashboard";
 import { primaryColors } from "../assets/Colors";
+import { BottomGradient } from "../components/third-party/Form";
 
 import library from "../assets/images/library.png";
 import Logo from "../components/Logo";
-import { FaChevronRight } from "react-icons/fa";
 
 const Wrapper = styled.div`
   background-color: ${primaryColors.DashBoardBackground};
@@ -71,18 +71,18 @@ const Button = styled.button`
   font-size: 0.7rem;
   cursor: pointer;
   margin-left: ${({ active }) => (active ? "0.5rem" : "")};
-  border: ${({ active }) =>
-    active ? `1px solid ${primaryColors.LightPurple}` : "transparent"};
   transition: background-color 0.2s ease;
   background-color: ${({ active }) =>
     active ? `${primaryColors.LightPurple}` : "transparent"};
   color: ${({ active }) =>
     active ? `${primaryColors.Purple}` : `${primaryColors.LightPurple}`};
   font-weight: ${({ active }) => (active ? "bold" : "normal")};
-
+  position: relative;
+  width: 7rem;
   &:hover {
-    background-color: ${primaryColors.mintGreen};
-    color: ${primaryColors.Purple};
+    background-color: #925aed;
+    color: ${primaryColors.LightPurple};
+    width: 7rem;
   }
 `;
 
@@ -148,14 +148,13 @@ const DashBoardLayout = () => {
       <DashboardHeader />
 
       <Container>
-        <Aside
-          className={" relative dark:bg-grid-white/[0.2] bg-grid-white/[0.03]"}
-        >
+        <Aside>
           <Logo />
           <Links>
             {links.map((sidebar, index) => (
               <div key={index}>
                 <Button
+                  className={"relative group/btn "}
                   onClick={() => clickHandler(sidebar.link, sidebar.type)}
                   active={checkInLocation(sidebar.link)}
                   disabled={sidebar?.disabled}
@@ -169,6 +168,7 @@ const DashBoardLayout = () => {
                       />
                     ) : null}
                   </span>
+                  <BottomGradient />
                 </Button>
                 {sidebar.sublinks && showSublinks && (
                   <>

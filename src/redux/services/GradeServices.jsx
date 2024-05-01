@@ -1,20 +1,21 @@
 import axiosClient from "../../services/api";
 
 import {
-  TEACHER_COURSES,
+  TEACHER_GRADES,
   ASSESSMENTS,
   COURSES,
   QUESTIONS,
   RESULT,
+  GRADES,
 } from "../constants";
 
-export const GetAllCourses = async () => {
-  const res = await axiosClient.get(`${COURSES}`);
+export const GetAllGrades = async () => {
+  const res = await axiosClient.get(`${GRADES}`);
   return res.data;
 };
 
-export const GetTeacherCourses = async (id) => {
-  const res = await axiosClient.get(`${TEACHER_COURSES}/${id}`);
+export const GetTeacherGrades = async (id) => {
+  const res = await axiosClient.get(`${TEACHER_GRADES}/${id}`);
   return res.data;
 };
 
@@ -28,12 +29,12 @@ export const AssignTeacher = async (data) => {
   return res.data;
 };
 
-export const CreateEditCourse = async (data, editing) => {
+export const CreateEditSubject = async (data, editing) => {
   if (editing) {
-    const res = await axiosClient.put(`${COURSES}`, data);
+    const res = await axiosClient.put(`${GRADES}`, data);
     return res.data;
   }
-  const res = await axiosClient.post(`${COURSES}`, data);
+  const res = await axiosClient.post(`${GRADES}`, data);
   return res.data;
 };
 
@@ -42,13 +43,13 @@ export const CreateQuestion = async (rows) => {
   return res.data;
 };
 
-export const GetTeacherAssessmentByCourse = async (courseId, role = "user") => {
+export const GetTeacherAssessmentByGrade = async (courseId, role = "user") => {
   const res = await axiosClient.get(`${ASSESSMENTS}/${role}/${courseId}`);
   return res.data;
 };
 
-export const GetAssessmentByCourse = async (courseId) => {
-  const res = await axiosClient.get(`${ASSESSMENTS}/${COURSES}/${courseId}`);
+export const GetAssessmentByGrade = async (grade) => {
+  const res = await axiosClient.get(`${ASSESSMENTS}/${GRADES}/${grade}`);
   return res.data;
 };
 
@@ -92,17 +93,24 @@ export const DeleteQuestion = async (questId) => {
   return res.data;
 };
 
-export const DeleteCourse = async (courseId) => {
-  const res = await axiosClient.delete(`${COURSES}/${courseId}`);
+export const DeleteSubject = async (subjectId) => {
+  const res = await axiosClient.delete(`${COURSES}/${subjectId}`);
   return res.data;
 };
 
-export const DeleteAllCourses = async () => {
-  const res = await axiosClient.delete(`${COURSES}`);
+export const DeleteAllSubjects = async () => {
+  const res = await axiosClient.delete(`${SUBJECTS}`);
   return res.data;
 };
 
 export const GetStudentResult = async (assId) => {
   const res = await axiosClient.get(`${ASSESSMENTS}/${assId}/${RESULT}`);
+  return res.data;
+};
+
+export const GetResultsByAssessment = async (assId) => {
+  const res = await axiosClient.get(
+    `${ASSESSMENTS}/${assId}/${RESULT}/getResult`
+  );
   return res.data;
 };

@@ -168,9 +168,11 @@ const AccountDetails = ({ user, Button, StyledForm }) => {
               <ErrorMessage name="password" component={Error} />
             </div>
 
-            <Button type="submit" disabled={loading}>
-              {loading ? "Updating" : "Validate & Save Changes"}
-            </Button>
+            <Button
+              type="submit"
+              disabled={loading}
+              text={loading ? "Updating" : "Validate & Save Changes"}
+            />
           </>
         </StyledForm>
       )}

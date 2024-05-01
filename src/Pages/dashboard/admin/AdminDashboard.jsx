@@ -18,31 +18,6 @@ const Container = styled.div`
   padding-bottom: 3rem;
 `;
 
-const Top = styled.div`
-  display: flex;
-  gap: 2rem;
-  justify-content: space-between;
-`;
-
-const Mid = styled.div`
-  display: flex;
-  gap: 3rem;
-  justify-content: space-between;
-`;
-
-const Bottom = styled.div`
-  display: flex;
-  gap: 3rem;
-  justify-content: space-between;
-`;
-
-const CardWrapper = styled.div`
-  display: flex;
-  gap: 1rem;
-  flex-wrap: wrap;
-  max-width: 30rem;
-`;
-
 const EventList = styled.div`
   display: flex;
   gap: 1rem;
@@ -151,9 +126,8 @@ const eventList = [
 ];
 
 // doughnut chart
-const data = [57, 43];
 
-const AdminDashboard = () => {
+const AdminDashboard = ({ Top, CardWrapper, Mid, Bottom, data }) => {
   const [slot, setSlot] = useState("week");
 
   return (

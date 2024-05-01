@@ -49,8 +49,9 @@ export const teacherLinks = [
     link: "dashboard",
     type: "link",
   },
+
   {
-    title: "Clases",
+    title: "Classes",
     link: "teacher/classes",
     type: "link",
   },
@@ -69,11 +70,30 @@ export const teacherLinks = [
     link: "teacher/students",
     type: "link",
   },
-
   {
     title: "Timetable",
     link: "teacher/timetable",
     type: "link",
+  },
+
+  {
+    title: "Results",
+    icon: <PiExamBold />,
+    type: "sublinks",
+    sublinks: [
+      {
+        title: "Exam",
+        link: "teacher/results/exams",
+        type: "link",
+        icon: <PiExamBold />,
+      },
+      {
+        title: "Assessment",
+        link: "teacher/results/assessment",
+        type: "link",
+        icon: <PiExamBold />,
+      },
+    ],
   },
   {
     title: "Events",
@@ -83,7 +103,6 @@ export const teacherLinks = [
   {
     title: "Settings",
     link: "settings",
-    // disabled: true,
     type: "link",
   },
   {
@@ -131,13 +150,13 @@ export const adminLinks = [
     sublinks: [
       {
         title: "Exam",
-        link: "teacher/results/exams/",
+        link: "teacher/results/exams",
         type: "link",
         icon: <PiExamBold />,
       },
       {
         title: "Assessment",
-        link: "teacher/results/assessments/",
+        link: "teacher/results/assessments",
         type: "link",
         icon: <PiExamBold />,
       },

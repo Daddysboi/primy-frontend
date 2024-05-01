@@ -14,21 +14,21 @@ const Container = styled.div`
 `;
 
 const Img = styled.img`
-  width: 90%;
   border-radius: 1.5rem;
 `;
 
 const Form = styled.div`
   position: absolute;
-  top: 4rem;
-  right: 8rem;
+  top: 5rem;
+  right: 5rem;
+  width: 28rem;
 `;
 
 const SignUp = () => {
   return (
     <Container>
       <Img src={femaleStudent} alt="student" />
-      <Form>
+      <Form id="signup">
         <SignupForm />
       </Form>
     </Container>

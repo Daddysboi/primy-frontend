@@ -8,8 +8,9 @@ import forgotPasswordReducer from "./features/forgotPasswordSlice";
 import themeReducer from "./features/themeSlice";
 import transactionReducer from "./features/transactionSlice";
 import queryReducer from "./features/querySlice";
-import courseReducer from "./features/courseSlice";
+import gradeReducer from "./features/gradeSlice";
 import modalReducer from "./features/modalSlice";
+import assessmentReducer from "./features/assessmentSlice";
 
 export const store = configureStore({
   reducer: {
@@ -19,10 +20,11 @@ export const store = configureStore({
     utility: utilityReducer,
     forgotPassword: forgotPasswordReducer,
     transaction: transactionReducer,
-    course: courseReducer,
+    grade: gradeReducer,
     theme: themeReducer,
     query: queryReducer,
     modal: modalReducer,
+    assessment: assessmentReducer,
   },
   devTools: true,
   middleware: (getDefaultMiddleware) =>

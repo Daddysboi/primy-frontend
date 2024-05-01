@@ -11,8 +11,11 @@ import {
   CreateUser,
   GetAllTeachers,
   GetAllStudents,
+  GetStudentsByGrade,
   DeleteTeacher,
   DeleteStudent,
+  GetTeacherRecords,
+  GetStudentRecords,
 } from "../services/UserServices";
 
 //Get User BY ID
@@ -148,6 +151,32 @@ export const updatePassword = createAsyncThunk(
   }
 );
 
+//Get Teachers Record
+export const getTeachersRecord = createAsyncThunk(
+  "getTeachersRecord",
+  async (_, { rejectWithValue }) => {
+    try {
+      const resp = await GetTeacherRecords();
+      return resp;
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
+
+//Get Students Record
+export const getStudentsRecord = createAsyncThunk(
+  "getStudentsRecord",
+  async (_, { rejectWithValue }) => {
+    try {
+      const resp = await GetStudentRecords();
+      return resp;
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
+
 //create user
 export const createUser = createAsyncThunk(
   "createUser",
@@ -213,6 +242,19 @@ export const getAllStudents = createAsyncThunk(
   }
 );
 
+//Get Students By Course
+export const getStudentsByGrade = createAsyncThunk(
+  "getStudentsByGrade",
+  async (courseId, { rejectWithValue }) => {
+    try {
+      const resp = await GetStudentsByGrade(courseId);
+      return resp;
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
+
 //Delete Teacher
 export const deleteTeacher = createAsyncThunk(
   "deleteTeacher",
@@ -241,7 +283,7 @@ export const deleteStudent = createAsyncThunk(
 
 const initialState = {
   user: {
-    role: "teacher",
+    role: "admin",
     firstName: "Davido",
     lastName: "Ajayi",
   },

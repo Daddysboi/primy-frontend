@@ -18,7 +18,7 @@ const Button = styled.button`
       case "grey":
         return primaryColors.Grey;
       case "other":
-        return "#0F0F0F";
+        return primaryColors.black;
       case "none":
         return "transparent";
       default:

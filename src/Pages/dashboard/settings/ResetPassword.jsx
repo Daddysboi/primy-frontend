@@ -122,9 +122,11 @@ const ResetPassword = ({ user, PropsContainer, Button, StyledForm }) => {
                 <ErrorMessage name="confirmPassword" component={Error} />
               </div>
 
-              <Button type="submit" disabled={loading}>
-                {loading ? "Saving..." : "Save Changes"}
-              </Button>
+              <Button
+                type="submit"
+                disabled={loading}
+                text={loading ? "Saving..." : "Save Changes"}
+              />
             </>
           </StyledForm>
         )}

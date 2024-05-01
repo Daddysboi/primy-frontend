@@ -12,18 +12,18 @@ import ForgotPassword from "./pages/ForgotPassword.jsx";
 import PrivacyPolicy from "./pages/PrivacyPolicy.jsx";
 import Error404 from "./pages/Error404.jsx";
 
-//Layouts
+// Layouts
 import RootLayout from "./layout/RootLayout.jsx";
 import AuthLayout from "./layout/AuthLayout.jsx";
 import DashboardLayout from "./layout/DashboardLayout.jsx";
 import GuardLayout from "./layout/GuardLayout.jsx";
 
-//Protected Routes
+// User Protected Routes
 import AdminProtectedRoutes from "./layout/protectedRoute/AdminProtectedRoutes.jsx";
 import TeacherProtectedRoutes from "./layout/protectedRoute/TeacherProtectedRoutes.jsx";
 import StudentProtectedRoutes from "./layout/protectedRoute/StudentProtectedRoutes.jsx";
 
-// Admin routes
+// Admin Routes
 import AllTeacher from "./pages/dashboard/admin/AllTeachers.jsx";
 import AllClasses from "./pages/dashboard/admin/AllClasses.jsx";
 import AllStudents from "./pages/dashboard/admin/AllStudents.jsx";
@@ -34,23 +34,21 @@ import AllTimetable from "./pages/dashboard/admin/AllTimetable.jsx";
 import Assessment from "./pages/dashboard/admin/results/Assessment.jsx";
 import Exams from "./pages/dashboard/admin/results/Exams.jsx";
 
-//Teacher Routes
-import MyClass from "./pages/dashboard/teacher/MyClasses.jsx";
+// Teacher Routes
 import MyAssessments from "./pages/dashboard/teacher/MyAssessments.jsx";
-import MyStudents from "./pages/dashboard/teacher/MyStudents.jsx";
 import MyTimetables from "./pages/dashboard/teacher/MyTimetables.jsx";
 import MyExams from "./pages/dashboard/teacher/MyExams.jsx";
+import CoursesPage from "./pages/dashboard/teacher/Class/index.jsx";
+import AssessmentPage from "./pages/dashboard/teacher/Assessment/index.jsx";
+import AssessmentCreate from "./pages/dashboard/teacher/Assessment/create.jsx";
+import AssessmentCoursePage from "./pages/dashboard/teacher/Assessment/course.jsx";
+import Students from "./pages/dashboard/teacher/Students/index.jsx";
+import ResultPage from "./pages/dashboard/teacher/Results/ResultPage";
+import ShowResult from "./pages/dashboard/teacher/Results/ShowResult.jsx";
+import AddQuestions from "./pages/dashboard/teacher/Assessment/AddQuestions.jsx";
+import ViewQuestions from "./pages/dashboard/teacher/Assessment/ViewQuestions.jsx";
 
-// import CoursesPage from "./pages/course/index.jsx";
-
-// Assesment
-// import AssessmentPage from "./pages/assessment/index.jsx";
-// import AssessmentCreate from "./pages/assessment/create.jsx";
-// import AssessmentCoursePage from "./pages/assessment/course.jsx";
-// import AddQuestions from "./pages/assessment/AddQuestions.jsx";
-// import ViewQuestions from "./pages/assessment/ViewQuestions.jsx";
-
-// Students
+// Student Routes
 // import Students from "./pages/students/index.jsx";
 // import StudentAssessment from "./pages/students/StudentAssessment.jsx";
 // import StudentTestPage from "./pages/students/StudentTestPage.jsx";
@@ -198,15 +196,6 @@ export const router = createBrowserRouter([
             element: <TeacherProtectedRoutes />,
             children: [
               {
-                path: "classes",
-                element: <MyClass />,
-              },
-
-              {
-                path: "students",
-                element: <MyStudents />,
-              },
-              {
                 path: "timetable",
                 element: <MyTimetables />,
               },
@@ -220,24 +209,40 @@ export const router = createBrowserRouter([
               },
 
               {
+                path: "classes",
+                element: <CoursesPage />,
+              },
+              {
+                path: "students",
+                element: <Students />,
+              },
+              {
+                path: "results/assessment",
+                element: <AssessmentPage />,
+              },
+              {
+                path: "results/exams",
+                element: <ShowResult />,
+              },
+              {
                 path: "results/:assessmentId",
-                // element: <ShowResult />,
+                element: <ResultPage />,
               },
               {
                 path: "assessment/create",
-                // element: <AssessmentCreate />,
+                element: <AssessmentCreate />,
               },
               {
                 path: "assessment/:courseId",
-                // element: <AssessmentCoursePage />,
+                element: <AssessmentCoursePage />,
               },
               {
                 path: "assessment/:assessmentId/add-questions",
-                // element: <AddQuestions />,
+                element: <AddQuestions />,
               },
               {
                 path: "assessment/:assessmentId/view-questions",
-                // element: <ViewQuestions />,
+                element: <ViewQuestions />,
               },
             ],
           },

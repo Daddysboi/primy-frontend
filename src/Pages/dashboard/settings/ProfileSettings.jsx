@@ -217,9 +217,11 @@ const ProfileSettings = ({
                 <ErrorMessage name="phoneNumber" component={Error} />
               </>
 
-              <Button disabled={loading} type="submit">
-                {loading ? "Updating..." : "Save Changes"}
-              </Button>
+              <Button
+                disabled={loading}
+                type="submit"
+                text={loading ? "Updating..." : "Save Changes"}
+              />
             </>
           </StyledForm>
         )}

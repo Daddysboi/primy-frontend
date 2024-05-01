@@ -1,16 +1,16 @@
 import { useState } from "react";
 import styled from "styled-components";
-import { IoSearch } from "react-icons/io5";
+import { IoNotifications, IoGift } from "react-icons/io5";
+import { RiFolder5Fill } from "react-icons/ri";
+import { MdOutlineCreditScore } from "react-icons/md";
 
-import { useUser } from "../../contexts/userContext";
+import { useAppSelector } from "../../redux/hooks";
+
 import AppSelectInput from "../../components/SelectInput";
 
 import myphoto from "../../assets/images/myphoto.jpeg";
 import { primaryColors } from "../../assets/Colors";
 import SearchBar from "../../components/SearchBar";
-import { IoNotifications, IoGift } from "react-icons/io5";
-import { RiFolder5Fill } from "react-icons/ri";
-import { MdOutlineCreditScore } from "react-icons/md";
 
 const Container = styled.div`
   display: flex;
@@ -42,16 +42,12 @@ const Search = styled.span`
   align-items: center;
   margin: 1rem 2rem 1rem 1rem;
   border-radius: 0.3rem;
-  padding-left: 1rem;
   flex: 1;
   min-width: 4rem;
   background: ${primaryColors.Gray};
+  position: relative;
 `;
 
-const SearchIcon = styled(IoSearch)`
-  opacity: 0.3;
-  min-width: 25px;
-`;
 const Tabs = styled.div`
   display: flex;
   gap: 1rem;
@@ -132,7 +128,7 @@ const Header = () => {
   const [formData, setFormData] = useState(initialState);
   const [selectedsession, setSelectedsession] = useState("");
 
-  const { user } = useUser();
+  const { user } = useAppSelector((state) => state.user);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -154,7 +150,6 @@ const Header = () => {
       <Left></Left>
       <Right>
         <Search>
-          <SearchIcon className="search_icon" />
           <SearchBar />
         </Search>
         <Tabs>

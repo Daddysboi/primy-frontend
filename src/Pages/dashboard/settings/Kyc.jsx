@@ -26,7 +26,7 @@ const StyledForm = styled(Form)`
 `;
 
 const Section = styled.div`
-  margin-bottom: 1.5rem;
+  margin-bottom: 2rem;
 `;
 
 const ImgViewer = styled.div`
@@ -42,8 +42,8 @@ const Img = styled.img`
   border-radius: 50%;
 `;
 
-const Title = styled.div`
-  margin-bottom: 1.5rem;
+const Title = styled.h1`
+  font-weight: 500;
 `;
 
 const options = [
@@ -154,8 +154,9 @@ const KYC = ({
                 <Img src={user?.headShot} alt="head-shot" />
               </ImgViewer>
             )}
-            <Title>Identification</Title>
+
             <Section>
+              <Title>Identification</Title>
               <>
                 <Field
                   name="idType"
@@ -236,6 +237,7 @@ const KYC = ({
                   </ImgViewer>
                 )}
             </Section>
+
             <Section>
               <Title>Next of Kin</Title>
               <>
@@ -281,6 +283,7 @@ const KYC = ({
                 <ErrorMessage name="contactNumber" component={Error} />
               </>
             </Section>
+
             <Section>
               <Title>Bank Verification Number (BVN)</Title>
               <>
@@ -298,9 +301,11 @@ const KYC = ({
                 <ErrorMessage name="bvn" component={Error} />
               </>
             </Section>
-            <Button type="submit" disabled={loading}>
-              {loading ? <Loading /> : "Submit KYC"}
-            </Button>
+            <Button
+              type="submit"
+              disabled={loading}
+              text={loading ? <Loading /> : "Submit KYC"}
+            />
           </StyledForm>
         )}
       </Formik>
