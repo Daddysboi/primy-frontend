@@ -9,7 +9,7 @@ const Sidebar = styled.div`
   top: 4rem;
   height: calc(100vh - 4rem);
   width: 22%;
-  padding: 5% 3%;
+  padding: 2rem 3%;
   background-color: white;
   /* border: 1px solid #ededed; */
   display: ${({ isOpen }) => (isOpen ? "block" : "none")};
@@ -29,7 +29,7 @@ const Sidebar = styled.div`
 const Close = styled.div`
   position: absolute;
   top: 2rem;
-  right: 3rem;
+  right: 2rem;
   border: none;
   padding: 0 0.25rem;
   cursor: pointer;

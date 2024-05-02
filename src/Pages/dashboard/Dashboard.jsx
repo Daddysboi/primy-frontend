@@ -12,13 +12,13 @@ import AdminDashboard from "./admin/AdminDashboard";
 import { FaPlus } from "react-icons/fa6";
 
 const Container = styled.div`
-  /* width: 100%; */
+  overflow: hidden;
 `;
 
 const WelcomeTab = styled.div`
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  /* align-items: center; */
   margin-bottom: 1rem;
 `;
 
@@ -69,7 +69,9 @@ const Dashboard = () => {
   };
 
   useEffect(() => {
-    if (!user) {
+    const roles = ["admin", "teacher", "student"];
+    if (user && user.role && roles.includes(user.role)) {
+    } else {
       navigate("/login");
     }
   }, [user]);
@@ -83,7 +85,7 @@ const Dashboard = () => {
   };
 
   const DashboardComponent =
-    user?.role === "student"
+    user?.role === "admin"
       ? AdminDashboard
       : user?.role === "teacher"
       ? TeacherDashboard

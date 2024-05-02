@@ -61,7 +61,8 @@ const CreateUser = ({
     initialValues.studentId = role === "student" ? user?._id : undefined;
     initialValues.teacherId = role === "teacher" ? user?._id : undefined;
     initialValues.className = role === "student" ? user?.className : undefined;
-    initialValues.dateOfBirth = getDateValue(user?.dateOfBirth);
+    // initialValues.dateOfBirth = getDateValue(user?.dateOfBirth);
+    //Todo
   }
 
   const validationSchema = Yup.object().shape({

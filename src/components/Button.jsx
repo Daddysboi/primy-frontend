@@ -26,9 +26,11 @@ const Button = styled.button`
     }
   }};
   height: ${(props) => props.height || ""};
+  width: ${(props) => props.width || ""};
   font-size: ${(props) => props.fontSize || "0.8rem"};
   font-weight: ${(props) => props.fontWeight || "400"};
-  padding: ${(props) => (props.small ? "0.5rem 1rem" : "0.5rem 2rem")};
+  padding: ${(props) =>
+    props.small ? "0.5rem 1rem" : props.noPaddng ? "0" : "0.5rem 2rem"};
   border-radius: 0.5rem;
   color: ${(props) => props.textColor || "#fff"};
   border: ${(props) => props.border || ""};
@@ -72,6 +74,7 @@ const AppButton = ({
   border,
   hoverColor,
   small,
+  noPaddng,
   outline,
   disabled = false,
   type,
@@ -80,25 +83,31 @@ const AppButton = ({
   icon,
   display,
   height,
+  width,
   fontSize,
   fontWeight,
   hoverBg,
   id,
+  className,
+  children,
   ...props
 }) => {
   return (
     <Button
+      className={className}
       backgroundColor={backgroundColor}
       id={id}
       textColor={textColor}
       border={border}
       hoverColor={hoverColor}
       small={small}
+      noPaddng={noPaddng}
       outline={outline}
       disabled={loading || disabled}
       type={type}
       onClick={onClick}
       height={height}
+      width={width}
       fontSize={fontSize}
       fontWeight={fontWeight}
       display={display}
@@ -108,6 +117,7 @@ const AppButton = ({
       <Children>
         {icon && icon}
         {!loading ? text : <Loading color={primaryColors.White} />}
+        {children}
       </Children>
     </Button>
   );

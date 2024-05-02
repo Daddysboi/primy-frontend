@@ -158,7 +158,7 @@ const FileLabel = styled.label`
 `;
 
 const FileIcon = styled.span`
-  color: green;
+  color: ${primaryColors.Purple};
   font-size: 2rem;
   position: absolute;
 `;

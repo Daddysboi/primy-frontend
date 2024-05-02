@@ -73,8 +73,6 @@ const Exams = () => {
     console.log("Edited results data:", values.edited);
   };
 
-  const { type } = useParams();
-
   return (
     <div>
       <Formik initialValues={{ edited: "" }} onSubmit={handleSubmit}>

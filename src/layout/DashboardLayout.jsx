@@ -77,7 +77,6 @@ const Button = styled.button`
   color: ${({ active }) =>
     active ? `${primaryColors.Purple}` : `${primaryColors.LightPurple}`};
   font-weight: ${({ active }) => (active ? "bold" : "normal")};
-  position: relative;
   width: 7rem;
   &:hover {
     background-color: #925aed;

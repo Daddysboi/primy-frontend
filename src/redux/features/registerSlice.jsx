@@ -18,7 +18,7 @@ export const sendOtp = createAsyncThunk(
 export const register = createAsyncThunk(
   "signup",
   async (
-    { firstName, lastName, email, password, role, otp },
+    { firstName, lastName, email, password, otp },
     { rejectWithValue }
   ) => {
     try {
@@ -27,7 +27,6 @@ export const register = createAsyncThunk(
         lastName,
         email,
         password,
-        role,
         otp,
       });
       return resp;

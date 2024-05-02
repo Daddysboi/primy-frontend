@@ -19,8 +19,8 @@ const Img = styled.img`
 
 const Form = styled.div`
   position: absolute;
-  top: 5rem;
-  right: 5rem;
+  top: 2rem;
+  right: 10rem;
   width: 28rem;
 `;
 
@@ -28,7 +28,7 @@ const SignUp = () => {
   return (
     <Container>
       <Img src={femaleStudent} alt="student" />
-      <Form id="signup">
+      <Form>
         <SignupForm />
       </Form>
     </Container>

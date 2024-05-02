@@ -4,6 +4,8 @@ import styled from "styled-components";
 import { FaBars, FaTimes } from "react-icons/fa";
 import { Link } from "react-scroll";
 
+import { useScroll } from "../layout/RootLayout";
+
 import Logo from "./Logo";
 import Button from "./Button";
 import { primaryColors } from "../assets/Colors";
@@ -101,6 +103,7 @@ const links = [
 
 const Header = () => {
   const [open, setOpen] = useState(false);
+  const { setAction } = useScroll();
 
   const handleToggle = () => {
     setOpen((prev) => !prev);
@@ -129,29 +132,46 @@ const Header = () => {
             </StyledLink>
           ))}
           <div>
-            <Button
-              height="2.5rem"
-              fontSize="1rem"
-              text="Sign in"
-              display="none"
-              borderColor="transparent"
-              textColor="#0F0F0F"
-              small
-              onClick={() => {
+            <ScrollTo
+              to="Login"
+              onclick={() => {
+                setAction("Login");
                 setOpen(!open);
               }}
-            />
-            <Button
-              height="2.5rem"
-              fontSize="1rem"
-              display="other"
-              text="Start for free"
-              borderColor="#0F0F0F"
-              small
-              onClick={() => {
+            >
+              <Button
+                height="2.5rem"
+                fontSize="1rem"
+                text="Sign in"
+                display="none"
+                borderColor="transparent"
+                textColor="#0F0F0F"
+                small
+                onClick={() => {
+                  // setOpen(!open);
+                }}
+              />
+            </ScrollTo>
+
+            <ScrollTo
+              to="Sign Up"
+              onclick={() => {
+                setAction("Sign Up");
                 setOpen(!open);
               }}
-            />
+            >
+              <Button
+                height="2.5rem"
+                fontSize="1rem"
+                display="other"
+                text="Start for free"
+                borderColor="#0F0F0F"
+                small
+                onClick={() => {
+                  // setOpen(!open);
+                }}
+              />
+            </ScrollTo>
           </div>
         </MobileLinks>
       ) : (
@@ -166,14 +186,11 @@ const Header = () => {
       <>
         <NavIcons>{toggleSrc}</NavIcons>
         <CTA>
-          {/* <Link
-            to="login"
-            activeClass="active"
-            spy={true}
-            smooth={true}
-            offset={-150}
-            duration={2000}
-            onClick={() => {}}
+          <ScrollTo
+            to="Login"
+            onclick={() => {
+              setAction("Login");
+            }}
           >
             <Button
               height="2.5rem"
@@ -185,15 +202,12 @@ const Header = () => {
               hoverBg="#dbdbdb"
               small
             />
-          </Link> */}
-          <Link
+          </ScrollTo>
+          <ScrollTo
             to="Sign Up"
-            activeClass="active"
-            spy={true}
-            smooth={true}
-            offset={-150}
-            duration={2000}
-            onClick={() => {}}
+            onclick={() => {
+              setAction("Sign Up");
+            }}
           >
             <Button
               height="2.5rem"
@@ -203,7 +217,7 @@ const Header = () => {
               borderColor="#0F0F0F"
               small
             />
-          </Link>
+          </ScrollTo>
         </CTA>
       </>
     </Container>
@@ -211,3 +225,19 @@ const Header = () => {
 };
 
 export default Header;
+
+export const ScrollTo = ({ children, to, onclick }) => {
+  return (
+    <Link
+      to={to}
+      activeClass="active"
+      spy={true}
+      smooth={true}
+      offset={-150}
+      duration={2000}
+      onClick={onclick}
+    >
+      {children}
+    </Link>
+  );
+};
