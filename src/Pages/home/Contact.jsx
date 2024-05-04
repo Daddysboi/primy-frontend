@@ -52,7 +52,7 @@ const Contact = () => {
   };
 
   return (
-    <Container id="contact">
+    <Container>
       <Formik
         initialValues={initialValues}
         validationSchema={contactFormSchema}
@@ -61,40 +61,37 @@ const Contact = () => {
         <Form>
           <Wrapper>
             <div>
-              <div>
-                <Field
-                  as={Input}
-                  label="Full Name"
-                  type="text"
-                  name="fullName"
-                  placeholder="Enter Full Name"
-                />
-              </div>{" "}
-              <ErrorMessage name="fullName" component={ErrorRed} />
-              <div>
-                <Field
-                  as={Input}
-                  label="Email"
-                  type="text"
-                  name="email"
-                  placeholder="Enter your e-mail"
-                />
-              </div>
-              <ErrorMessage name="email" component={ErrorRed} />
-              <div>
-                <Field
-                  as={textArea}
-                  label="Message"
-                  name="message"
-                  placeholder="Message"
-                  cols="30"
-                  rows="10"
-                />{" "}
-                <ErrorMessage name="message" component={ErrorRed} />
-              </div>
-              {isLoading && <Loading />}
+              <Field
+                as={Input}
+                label="Full Name"
+                type="text"
+                name="fullName"
+                placeholder="Enter Full Name"
+              />
+            </div>{" "}
+            <ErrorMessage name="fullName" component={ErrorRed} />
+            <div>
+              <Field
+                as={Input}
+                label="Email"
+                type="text"
+                name="email"
+                placeholder="Enter your e-mail"
+              />
             </div>
-
+            <ErrorMessage name="email" component={ErrorRed} />
+            <div>
+              <Field
+                as={textArea}
+                label="Message"
+                name="message"
+                placeholder="Message"
+                cols="30"
+                rows="10"
+              />{" "}
+              <ErrorMessage name="message" component={ErrorRed} />
+            </div>
+            {isLoading && <Loading />}
             <Button
               disabled={isLoading}
               display="other"

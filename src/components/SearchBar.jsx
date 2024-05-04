@@ -1,9 +1,7 @@
-import React, { useState } from "react";
-import { Input } from "../components/third-party/input";
-import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import { setQuery } from "../redux/features/querySlice";
+import { useAppDispatch, useAppSelector } from "../redux/hooks";
 
-import AppInput from "./Input";
+import { Input } from "../components/third-party/input";
 
 const SearchBar = () => {
   const { query } = useAppSelector((state) => state.query);
@@ -17,13 +15,12 @@ const SearchBar = () => {
   return (
     <div style={{ width: "100%" }}>
       <Input
-        className="shadow-none  focus-visible:ring-neutral-100  w-full"
+        className="shadow-none  focus-visible:ring-neutral-100 mb-0"
         id="email"
         placeholder="   Search"
         type="email"
         onChange={handleSearch}
         value={query}
-        style={{ outline: "none !important" }}
       />
     </div>
   );

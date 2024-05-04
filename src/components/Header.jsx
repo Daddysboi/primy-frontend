@@ -4,7 +4,7 @@ import styled from "styled-components";
 import { FaBars, FaTimes } from "react-icons/fa";
 import { Link } from "react-scroll";
 
-import { useScroll } from "../layout/RootLayout";
+import { useScroll } from "../App";
 
 import Logo from "./Logo";
 import Button from "./Button";
@@ -94,10 +94,10 @@ const MobileLinks = styled.div`
 `;
 
 const links = [
-  { path: "/", page: "About" },
-  { path: "/", page: "Contact Us" },
-  { path: "/", page: "Products" },
-  { path: "/", page: "Pricing" },
+  { path: "/", page: "About", id: "about" },
+  { path: "/", page: "Pricing", id: "pricing" },
+  { path: "/", page: "Products", id: "product" },
+  { path: "/", page: "Contact Us", id: "contact" },
   { path: "/", page: "FAQs" },
 ];
 
@@ -176,10 +176,12 @@ const Header = () => {
         </MobileLinks>
       ) : (
         <PcLinks>
-          {links?.map(({ path, page }, i) => (
-            <StyledLink key={i} to={path}>
-              {page}
-            </StyledLink>
+          {links?.map(({ path, page, id }, i) => (
+            <ScrollTo to={id}>
+              <StyledLink key={i} to={path}>
+                {page}
+              </StyledLink>
+            </ScrollTo>
           ))}
         </PcLinks>
       )}

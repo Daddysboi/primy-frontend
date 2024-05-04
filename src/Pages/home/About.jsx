@@ -63,9 +63,9 @@ const details = [
       "Tailor your enterprise connections as you need – with support for multiple connections and organization discovery",
   },
 ];
-const Powerful = () => {
+const About = () => {
   return (
-    <>
+    <div id="about">
       <Hero
         Header1="Nigeria's most robust "
         Header2="school management system"
@@ -91,8 +91,8 @@ const Powerful = () => {
           </div>
         ))}
       </Grid>
-    </>
+    </div>
   );
 };
 
-export default Powerful;
+export default About;

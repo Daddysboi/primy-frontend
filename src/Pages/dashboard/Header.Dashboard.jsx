@@ -7,10 +7,10 @@ import { MdOutlineCreditScore } from "react-icons/md";
 import { useAppSelector } from "../../redux/hooks";
 
 import AppSelectInput from "../../components/SelectInput";
+import SearchBar from "../../components/SearchBar";
 
 import myphoto from "../../assets/images/myphoto.jpeg";
 import { primaryColors } from "../../assets/Colors";
-import SearchBar from "../../components/SearchBar";
 
 const Container = styled.div`
   display: flex;
@@ -33,19 +33,9 @@ const Right = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 1rem;
   padding: 0 5rem;
   box-shadow: 1px 1px 2px 2px rgba(0.1, 0.1, 0.1, 0.03);
-`;
-
-const Search = styled.span`
-  display: flex;
-  align-items: center;
-  margin: 1rem 2rem 1rem 1rem;
-  border-radius: 0.3rem;
-  flex: 1;
-  min-width: 4rem;
-  background: ${primaryColors.Gray};
-  position: relative;
 `;
 
 const Tabs = styled.div`
@@ -149,9 +139,8 @@ const Header = () => {
     <Container>
       <Left></Left>
       <Right>
-        <Search>
-          <SearchBar />
-        </Search>
+        <SearchBar />
+
         <Tabs>
           <IconsTab>
             {icons.map((icon, index) => (

@@ -9,6 +9,7 @@ import "./index.css";
 
 import App from "./App.jsx";
 import { store } from "./redux/store";
+import ErrorBoundary from "./ErrorBoundary.jsx";
 
 import { primaryColors } from "./assets/Colors.jsx";
 
@@ -24,13 +25,15 @@ const queryClient = new QueryClient();
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <Provider store={store}>
-      <QueryClientProvider client={queryClient}>
-        <StyledApp>
-          <App />
-        </StyledApp>
-        <ToastContainer />
-      </QueryClientProvider>
-    </Provider>
+    <ErrorBoundary>
+      <Provider store={store}>
+        <QueryClientProvider client={queryClient}>
+          <StyledApp>
+            <App />
+          </StyledApp>
+          <ToastContainer />
+        </QueryClientProvider>
+      </Provider>
+    </ErrorBoundary>
   </React.StrictMode>
 );

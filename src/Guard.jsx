@@ -1,22 +1,21 @@
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import { jwtDecode } from "jwt-decode";
 
-import { getUserById, setUser } from "./redux/features/userSlice";
-import { useAppDispatch } from "./redux/hooks";
-import { USER_ID } from "./redux/constants";
+import { setUser, getUserById } from "./redux/features/userSlice";
+import { useAppDispatch, useAppSelector } from "./redux/hooks";
 
-//specifies users loged in access
 export const useFetchUserData = () => {
-  const userId = localStorage.getItem(USER_ID);
+  const token = localStorage.getItem("jwt");
   const dispatch = useAppDispatch();
 
   const handleGetUser = async () => {
     try {
+      const { userId } = jwtDecode(token);
       const resp = await dispatch(getUserById(userId));
       const { data } = resp.payload;
       dispatch(setUser(data?.user));
     } catch (error) {
-      console.log(error.message);
       throw error;
     }
   };
@@ -25,37 +24,53 @@ export const useFetchUserData = () => {
 };
 
 const Guard = ({ children }) => {
-  // const { pathname } = useLocation();
-  // const navigate = useNavigate();
-  // const fetchUserData = useFetchUserData();
+  const { pathname } = useLocation();
+  const navigate = useNavigate();
+  const fetchUserData = useFetchUserData();
+  const token = localStorage.getItem("jwt");
+  const { user } = useAppSelector((state) => state.user);
 
-  // //users are redirected to login when trying to access unauthorized routes like dashboard
-  // const handleError = () => {
-  //   navigate("/login");
-  //   window.location.reload();
-  // };
+  const handleError = () => {
+    navigate("/login");
+    window.location.reload();
+  };
 
-  // //pages that are exclused from protection
-  // const getProfile = ![
-  //   "/login",
-  //   "/signup",
-  //   "/otp",
-  //   "/",
-  //   "/reset-password/*",
-  //   "/forgot-password",
-  // ].includes(pathname);
+  const shouldGetProfile = ![
+    "/login",
+    "/signup",
+    "/otp",
+    "/",
+    "/reset-password/*",
+    "/forgot-password",
+  ].includes(pathname);
 
   // useEffect(() => {
-  //   if (getProfile && localStorage?.USER_ID) {
+  //   if (shouldGetProfile && user?.id) {
   //     fetchUserData();
   //   }
-  // }, [getProfile, localStorage?.USER_TOKEN]);
+  // }, [shouldGetProfile, user?.id]);
 
   // useEffect(() => {
-  //   if (!localStorage?.USER_ID && getProfile) {
+  //   if (!user?.id && shouldGetProfile) {
   //     handleError();
   //   }
-  // }, [localStorage?.USER_ID, pathname]);
+  // }, [shouldGetProfile, user?.id]);
+
+  useEffect(() => {
+    if (shouldGetProfile) {
+      if (user) {
+        const shouldGetRole = !["admin", "teacher", "student"].includes(
+          user.role
+        );
+
+        if (shouldGetRole) {
+          handleError();
+        }
+      } else {
+        handleError();
+      }
+    }
+  }, [shouldGetProfile, user]);
 
   return children;
 };

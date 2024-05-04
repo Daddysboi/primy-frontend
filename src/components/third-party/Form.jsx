@@ -4,7 +4,7 @@ import { IconBrandGoogle } from "@tabler/icons-react";
 import { Link } from "react-router-dom";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 
-import { useScroll } from "../../layout/RootLayout";
+import { useScroll } from "../../App";
 import { sendOtp } from "../../redux/features/registerSlice";
 
 import { Input } from "./input";
@@ -23,6 +23,12 @@ const Header = styled.div`
   display: flex;
   gap: 2rem;
   margin-bottom: 2rem;
+`;
+
+const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
 `;
 
 const NameInput = styled.div`
@@ -68,8 +74,8 @@ export function SignupForm() {
     <Container>
       <Header>
         <Button
-          id="Sign Up"
           className={"relative group/btn "}
+          id="Sign Up"
           text="Sign Up"
           fontSize="1.2rem"
           display="none"
@@ -86,6 +92,7 @@ export function SignupForm() {
 
         <Button
           className={"relative group/btn "}
+          id="Login"
           text="Login"
           fontSize="1.2rem"
           display="none"
@@ -107,66 +114,69 @@ export function SignupForm() {
         validationSchema={action === "Login" ? loginSchema : signUpSchema}
       >
         <Form>
-          {action === "Sign Up" && (
-            <NameInput>
-              <Field
-                as={Input}
-                label="First Name"
-                name="firstname"
-                id="firstname"
-                placeholder="Tyler"
-                type="text"
-              />
-              <Field
-                as={Input}
-                label="Last Name"
-                id="lastname"
-                name="lastname"
-                placeholder="Durden"
-                type="text"
-              />
-            </NameInput>
-          )}
+          <Wrapper>
+            {action === "Sign Up" && (
+              <NameInput>
+                <Field
+                  as={Input}
+                  label="First Name"
+                  name="firstname"
+                  id="firstname"
+                  placeholder="Tyler"
+                  type="text"
+                />
+                <Field
+                  as={Input}
+                  label="Last Name"
+                  id="lastname"
+                  name="lastname"
+                  placeholder="Durden"
+                  type="text"
+                />
+              </NameInput>
+            )}
 
-          <Field
-            as={Input}
-            label="Email Address"
-            id="email"
-            name="email"
-            placeholder="projectmayhem@fc.com"
-            type="email"
-          />
-          <Field
-            as={Input}
-            label="Password"
-            name="password"
-            id="password"
-            placeholder="••••••••"
-            type="password"
-          />
-
-          {action === "Sign Up" && (
             <Field
               as={Input}
+              label="Email Address"
+              id="email"
+              name="email"
+              placeholder="projectmayhem@fc.com"
+              type="email"
+            />
+            <Field
+              as={Input}
+              label="Password"
+              name="password"
               id="password"
-              label="Confirm password"
               placeholder="••••••••"
               type="password"
             />
-          )}
-          <div>
-            <Button
-              className={"relative group/btn "}
-              type="submit"
-              onClick={() => {}}
-              fontSize="1rem"
-              display="other"
-              width="100%"
-            >
-              {action} &rarr;
-              <BottomGradient />
-            </Button>
-          </div>
+
+            {action === "Sign Up" && (
+              <Field
+                as={Input}
+                id="password"
+                label="Confirm password"
+                placeholder="••••••••"
+                type="password"
+              />
+            )}
+
+            <div>
+              <Button
+                className={"relative group/btn "}
+                type="submit"
+                onClick={() => {}}
+                fontSize="1rem"
+                display="other"
+                width="100%"
+              >
+                {action} &rarr;
+                <BottomGradient />
+              </Button>
+            </div>
+          </Wrapper>
 
           {action === "Login" && (
             <Text>

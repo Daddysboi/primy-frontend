@@ -147,7 +147,7 @@ const Pricing = () => {
   };
 
   return (
-    <>
+    <div id="pricing">
       <Hero
         Header1="Pricing designed "
         Header2="for your scale"
@@ -196,7 +196,7 @@ const Pricing = () => {
       </Container>
       <Grid>
         {details.map(({ heading, subtext }, i) => (
-          <div>
+          <div id="product">
             <SimpleCard key={i} heading={heading} subtext={subtext} />
           </div>
         ))}
@@ -228,7 +228,7 @@ const Pricing = () => {
           </CTA>
         </HeroChild>
       </Hero>
-    </>
+    </div>
   );
 };
 

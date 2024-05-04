@@ -34,7 +34,7 @@ const Header = styled.h1`
 `;
 const Support = () => {
   return (
-    <div>
+    <div id="contact">
       <Hero
         Header1="High touch support"
         Header2="at every stage"

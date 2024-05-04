@@ -4,7 +4,7 @@ import Hero from "./Hero";
 import SignUp from "./SignUp";
 import Pricing from "./Pricing";
 import GrowYourSchool from "./GrowYourSchool";
-import Powerful from "./Powerful";
+import About from "./About";
 import Loved from "./Loved";
 import Backed from "./Backed";
 import Support from "./Support";
@@ -20,7 +20,7 @@ const Homepage = () => {
       <Hero isHero hasCTA paddingTop="8rem" />
       <Container>
         <SignUp />
-        <Powerful />
+        <About />
         <Pricing />
         <Support />
         <Compliance />

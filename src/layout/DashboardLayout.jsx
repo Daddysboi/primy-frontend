@@ -95,17 +95,10 @@ const SideBarImg = styled.img`
 
 const DashBoardLayout = () => {
   const [showSublinks, setShowSublinks] = useState(false);
-
-  const { user } = useAppSelector((state) => state.user);
+  const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
-  const navigate = useNavigate();
-
-  // useEffect(() => {
-  //   if (!user) {
-  //     navigate("/login");
-  //   }
-  // }, [user]);
+  const { user } = useAppSelector((state) => state.user);
 
   const clickHandler = (url, type) => {
     if (type === "button") {

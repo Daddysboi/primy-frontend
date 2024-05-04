@@ -63,18 +63,8 @@ const Dashboard = () => {
   const { user } = useAppSelector((state) => state.user);
 
   const handleAdmission = () => {
-    navigate("/dashboard/admin/students").then(() => {
-      dispatch(setCreateModal(true));
-    });
+    dispatch(setCreateModal(true)).then(navigate("/dashboard/admin/students"));
   };
-
-  useEffect(() => {
-    const roles = ["admin", "teacher", "student"];
-    if (user && user.role && roles.includes(user.role)) {
-    } else {
-      navigate("/login");
-    }
-  }, [user]);
 
   const displayName = `${user?.lastName} ${user?.firstName}`;
 
@@ -89,7 +79,9 @@ const Dashboard = () => {
       ? AdminDashboard
       : user?.role === "teacher"
       ? TeacherDashboard
-      : StudentDashboard;
+      : user?.role === "student"
+      ? StudentDashboard
+      : null;
 
   return user ? (
     <Container>
@@ -107,13 +99,18 @@ const Dashboard = () => {
           />
         )}
       </WelcomeTab>
-      <DashboardComponent
-        Top={Top}
-        CardWrapper={CardWrapper}
-        Mid={Mid}
-        Bottom={Bottom}
-        data={data}
-      />
+      {DashboardComponent ? (
+        <DashboardComponent
+          Top={Top}
+          CardWrapper={CardWrapper}
+          Mid={Mid}
+          Bottom={Bottom}
+          data={data}
+        />
+      ) : (
+        <div>No dashboard available for this user.</div>
+        //Todo
+      )}
     </Container>
   ) : (
     <></>
