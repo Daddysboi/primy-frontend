@@ -7,10 +7,16 @@ const Grid = styled.div`
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   color: #000;
+  @media only screen and (min-width: 320px) and (max-width: 699px) {
+    grid-template-columns: repeat(1, 1fr);
+    row-gap: 0rem;
+    padding-left: 2rem;
+  }
 `;
 
 const P = styled.p`
   font-size: 0.8rem;
+  margin: 2rem 2rem 0 2rem;
 `;
 
 const details = [
@@ -21,8 +27,7 @@ const details = [
   },
   {
     heading: "SOC 2",
-    subtext:
-      "Choose the region where Kinde stores your customer and business information. Meet data-compliance wherever you are – whether it’s the United States, Europe, Australia, or the UK.",
+    subtext: "Choose the region where Kinde stores your cK.",
   },
   {
     heading: "HIPAA",
@@ -54,7 +59,13 @@ const Compliance = () => {
       <Grid>
         {details.map(({ heading, subtext }, i) => (
           <div>
-            <SimpleCard hasLogo key={i} heading={heading} subtext={subtext} />
+            <SimpleCard
+              hasLogo
+              key={i}
+              heading={heading}
+              subtext={subtext}
+              minHeight="8rem"
+            />
           </div>
         ))}
       </Grid>

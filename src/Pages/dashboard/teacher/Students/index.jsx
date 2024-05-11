@@ -130,7 +130,11 @@ const Students = () => {
           onClose={() => setCreateModal(false)}
           hasCloseBtn={true}
         >
-          <CreateUser role="student" setIsCreating={setCreateModal} />
+          <CreateUser
+            role="student"
+            setIsCreating={setCreateModal}
+            refetch={fetchData}
+          />
         </Modal>
       </div>
     </div>

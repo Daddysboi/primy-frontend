@@ -126,11 +126,11 @@ const AllTeacher = () => {
       </>
       <SideBar
         isOpen={createModal}
+        hasCloseBtn={true}
         onClose={() => {
           setCreateModal(false);
           setEditing(false);
         }}
-        hasCloseBtn={true}
       >
         <CreateUser
           editing={editing}

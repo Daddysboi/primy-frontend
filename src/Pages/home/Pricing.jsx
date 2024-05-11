@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 import Hero from "./Hero";
 import SimpleCard from "../../components/SimpleCard";
 import Button from "../../components/Button";
-import { Link } from "react-router-dom";
 
-const Container = styled.div`
+const Container = styled.section`
   background-color: #dbdbdb;
   display: flex;
   padding: 4rem;
@@ -46,7 +46,7 @@ const Mid = styled.span`
   flex-direction: column;
   align-items: right;
   text-align: right;
-  /* margin-right: 7rem; */
+  margin-right: 7rem;
 `;
 
 const PriceWrapper = styled.span`
@@ -74,17 +74,33 @@ const Grid = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   row-gap: 1rem;
-  color: #000;
+  @media only screen and (min-width: 320px) and (max-width: 699px) {
+    grid-template-columns: repeat(1, 1fr);
+    row-gap: 0rem;
+  }
 `;
 
 const HeroChild = styled.div`
   display: flex;
   gap: 3rem;
-  margin-inline: 7rem;
+  margin-inline: auto;
+  @media only screen and (min-width: 320px) and (max-width: 699px) {
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    padding-inline: 1rem;
+    flex-direction: column;
+    text-align: left;
+    gap: 1rem;
+  }
 `;
+
 const Text = styled.span`
   flex: 1.5;
   font-size: 1.5rem;
+  @media only screen and (min-width: 320px) and (max-width: 699px) {
+    font-size: 1rem;
+  }
 `;
 
 const CTA = styled.span`
@@ -92,12 +108,19 @@ const CTA = styled.span`
   flex-direction: column;
   gap: 1rem;
   flex: 1;
+  @media only screen and (min-width: 320px) and (max-width: 699px) {
+    align-items: center;
+    gap: 0.5rem;
+  }
 `;
 
 const CTALink = styled(Link)`
   font-size: 1.2rem;
   &:hover {
     text-decoration: underline;
+  }
+  @media only screen and (min-width: 320px) and (max-width: 699px) {
+    font-size: 0.8rem;
   }
 `;
 
@@ -108,12 +131,12 @@ const details = [
       "Tailor your enterprise connections as you need – with support for multiple connections and organization discovery.",
   },
   {
-    heading: "Sigle School",
+    heading: "Network of Schools",
     subtext:
-      "Choose the region where Kinde stores your customer and business information. Meet data-compliance wherever you are – whether it’s the United States, Europe, Australia, or the UK.",
+      "Choose the region where Kinde stores your customer and business information. Meet data-compliance wherever you are – whether it&apos;s the United States, Europe, Australia, or the UK.",
   },
   {
-    heading: "Sigle School",
+    heading: "Limited Edition",
     subtext:
       "Tailor your enterprise connections as you need – with support for multiple connections and organization discovery.",
   },
@@ -129,6 +152,14 @@ const types = [
   },
   {
     name: "Network of schools",
+    plans: [
+      { schools: 2, states: 7, name: "Pro", price: 40000 },
+      { schools: 4, states: 5, name: "Standard", price: 30000 },
+      { schools: 7, states: 7, name: "Starter", price: 20000 },
+    ],
+  },
+  {
+    name: "Limited Edition",
     plans: [
       { schools: 2, states: 7, name: "Pro", price: 40000 },
       { schools: 4, states: 5, name: "Standard", price: 30000 },

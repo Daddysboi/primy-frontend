@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+
 import { getCurrentYear } from "../utils/helpers";
 import Divider from "./Divider";
 
@@ -10,6 +11,9 @@ const Section = styled.footer`
   flex-wrap: wrap;
   background-color: #f5f5f5;
   padding-top: 4rem;
+  @media only screen and (min-width: 320px) and (max-width: 700px) {
+    padding: 1rem 1rem;
+  }
 `;
 
 const FooterColumnContainer = styled.div`
@@ -23,6 +27,7 @@ const FooterColumnContainer = styled.div`
   @media only screen and (min-width: 320px) and (max-width: 699px) {
     grid-template-columns: repeat(2, 1fr);
     padding: 0 1.5rem;
+    gap: 1rem;
   }
 
   @media only screen and (min-width: 700px) and (max-width: 900px) {
@@ -39,6 +44,9 @@ const Column = styled.div`
 const Head = styled.h4`
   font-weight: 400;
   margin-bottom: 1rem;
+  @media only screen and (min-width: 320px) and (max-width: 480px) {
+    font-size: 0.8rem;
+  }
 `;
 
 const Ul = styled.ul`
@@ -49,7 +57,8 @@ const Ul = styled.ul`
   font-size: 0.85rem;
   padding-bottom: 1rem;
   @media only screen and (min-width: 320px) and (max-width: 480px) {
-    font-size: 0.85rem;
+    font-size: 0.6rem;
+    padding-bottom: 0rem;
   }
 `;
 
@@ -60,6 +69,9 @@ const Bottom = styled.span`
   align-items: flex-start;
   color: #000;
   gap: 0.3rem;
+  @media only screen and (min-width: 320px) and (max-width: 480px) {
+    margin: 0 1rem;
+  }
 `;
 
 const FooterCopyWright = styled.span`
@@ -67,6 +79,12 @@ const FooterCopyWright = styled.span`
   align-items: center;
   color: #000;
   gap: 0.3rem;
+`;
+
+const Text = styled.span`
+  @media only screen and (min-width: 320px) and (max-width: 480px) {
+    font-size: 0.7rem;
+  }
 `;
 
 export const footerLinks = [
@@ -149,9 +167,7 @@ const Footer = () => {
               strokeLinecap="round"
             />
           </svg>
-          <p className="lato text-sm leading-[1.5rem]">
-            {getCurrentYear()} Primy. All rights reserved
-          </p>
+          <Text>{getCurrentYear()} Primy. All rights reserved</Text>
         </FooterCopyWright>
         <FooterColumn links={privacy.links} />
       </Bottom>

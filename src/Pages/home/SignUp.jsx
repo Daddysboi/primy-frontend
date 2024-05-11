@@ -3,31 +3,44 @@ import styled from "styled-components";
 import { SignupForm } from "../../components/third-party/Form";
 import femaleStudent from "../../assets/images/friends.jpg";
 
-const Container = styled.div`
-  background-color: #f5f5f5;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 3rem;
+const Container = styled.section`
+  /* display: flex; */
+  /* justify-content: center; */
+  /* align-items: center; */
+  /* position: relative; */
+  /* flex-direction: column; */
+  /* border-radius: 1.5rem; */
   border-radius: 1.5rem;
-  position: relative;
-`;
-
-const Img = styled.img`
+  min-height: 45rem;
+  width: 100%;
+  background: url(${femaleStudent});
+  background-size: cover;
   border-radius: 1.5rem;
+  padding-top: 4rem;
+  @media only screen and (min-width: 320px) and (max-width: 700px) {
+    padding-top: 0rem;
+    min-height: 40rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  @media only screen and (min-width: 320px) and (max-width: 480px) {
+    display: none;
+  }
 `;
 
 const Form = styled.div`
-  position: absolute;
-  top: 2rem;
-  right: 10rem;
+  right: 8rem;
   width: 28rem;
+
+  @media only screen and (min-width: 701px) {
+    position: absolute;
+  }
 `;
 
 const SignUp = () => {
   return (
     <Container>
-      <Img src={femaleStudent} alt="student" />
       <Form>
         <SignupForm />
       </Form>

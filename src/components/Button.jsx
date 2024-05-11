@@ -58,6 +58,10 @@ const Button = styled.button`
     opacity: 0.5;
     cursor: not-allowed;
   }
+
+  @media only screen and (min-width: 320px) and (max-width: 580px) {
+    font-size: ${(props) => "0.75rem"};
+  }
 `;
 
 const Children = styled.span`

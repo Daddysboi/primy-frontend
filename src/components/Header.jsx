@@ -22,6 +22,9 @@ const Container = styled.header`
   top: 0;
   left: 0;
   right: 0;
+  @media only screen and (max-width: 820px) {
+    height: 4rem;
+  }
 `;
 
 const PcLinks = styled.div`
@@ -31,7 +34,10 @@ const PcLinks = styled.div`
   @media only screen and (max-width: 820px) {
     display: none;
   }
-  @media only screen and (min-width: 821px) and (max-width: 1024px) {
+  @media only screen and (min-width: 800px) and (max-width: 1000px) {
+    gap: 0rem;
+  }
+  @media only screen and (min-width: 1000px) and (max-width: 1024px) {
     gap: 1rem;
   }
 `;
@@ -39,12 +45,19 @@ const PcLinks = styled.div`
 const StyledLink = styled(NavLink)`
   display: flex;
   gap: 1rem;
-  text-decoration: none;
-  color: #0f0f0f;
+  /* text-decoration: none; */
   padding: 0.7rem 1rem;
+
   &:hover {
     background-color: #dbdbdb;
     border-radius: 0.5rem;
+  }
+  @media only screen and (min-width: 800px) and (max-width: 1000px) {
+    padding: 0.5rem;
+    font-size: 0.8rem;
+  }
+  @media only screen and (min-width: 821px) and (max-width: 1024px) {
+    gap: 0rem;
   }
 `;
 
@@ -65,6 +78,7 @@ const NavIcons = styled.span`
   display: none;
   @media only screen and (min-width: 320px) and (max-width: 820px) {
     display: block;
+    font-size: 1rem;
   }
 `;
 

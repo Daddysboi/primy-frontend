@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 
-import MyCalendar from "../../../components/MyCalender";
-import AppInput from "../../../components/Input";
-import AppButton from "../../../components/Button";
-import { primaryColors } from "../../../assets/Colors";
+import MyCalendar from "../../components/MyCalender";
+import AppInput from "../../components/Input";
+import AppButton from "../../components/Button";
+import { primaryColors } from "../../assets/Colors";
 
 const Wrapper = styled.div`
   width: 90%;
@@ -73,12 +73,15 @@ const Events = () => {
 
   const handleEditEvent = (id) => {
     setSelectedEventId(id);
-    const selectedEvent = events.find((event) => event.id === id);
+  };
+
+  useEffect(() => {
+    const selectedEvent = events.find((event) => event.id === selectedEventId);
     if (selectedEvent) {
       setTitle(selectedEvent.title);
       setDescription(selectedEvent.description);
     }
-  };
+  }, [selectedEventId, events]);
 
   const handleUpdateEvent = () => {
     if (!selectedEventId) return;
@@ -93,6 +96,7 @@ const Events = () => {
     setDescription("");
     setSelectedEventId(null);
   };
+
   return (
     <Wrapper>
       <Left>
@@ -100,6 +104,7 @@ const Events = () => {
           events={events}
           setSelectedSlot={setSelectedSlot}
           setSelectedEventId={setSelectedEventId}
+          selectedEventId={selectedEventId}
         />
 
         <Container>

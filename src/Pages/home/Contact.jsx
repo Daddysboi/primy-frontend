@@ -13,7 +13,7 @@ import ErrorRed from "../../components/Error";
 import { Input } from "../../components/third-party/input";
 import { textArea } from "../../components/third-party/textArea";
 
-const Container = styled.div`
+const Container = styled.section`
   display: flex;
   flex-direction: column;
 `;

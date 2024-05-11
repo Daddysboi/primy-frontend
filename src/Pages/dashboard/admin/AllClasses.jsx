@@ -21,6 +21,7 @@ const Container = styled.div`
   gap: 2rem;
   overflow: hidden;
 `;
+
 const Header = styled.div`
   display: flex;
   justify-content: space-between;
@@ -29,12 +30,13 @@ const Header = styled.div`
 `;
 const AllClasses = () => {
   const [searchValue, setSearchValue] = useState("");
-  const [creatingSubject, setCreatingSubject] = useState(false);
   const [editing, setEditing] = useState(false);
+  const [creatingSubject, setCreatingSubject] = useState(false);
 
   const navigate = useNavigate();
 
   const dispatch = useAppDispatch();
+  const { user } = useAppSelector((state) => state.user);
   const { grades, isLoading } = useAppSelector((state) => state.grade);
 
   if (isLoading) {
@@ -68,7 +70,10 @@ const AllClasses = () => {
           text="Add Subject"
           type="subjects"
           value={searchValue}
-          onClick={() => setCreatingCourse(true)}
+          onClick={() => {
+            setCreatingSubject(true);
+            setEditing(false);
+          }}
           onChange={(e) => setSearchValue(e.target?.value)}
           edit="Edit"
           onEdit={() => handleEdit()}
@@ -84,7 +89,11 @@ const AllClasses = () => {
         hasCloseBtn
         onClose={() => setCreatingSubject(false)}
       >
-        <CreateSubject editing={editing} setIsCreating={setCreatingSubject} />
+        <CreateSubject
+          editing={editing}
+          user={user}
+          setIsCreating={setCreatingSubject}
+        />
       </SideBar>
     </Container>
   );

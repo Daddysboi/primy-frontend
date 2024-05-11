@@ -11,8 +11,7 @@ import { Input } from "./input";
 import Button from "../Button";
 import { loginSchema, signUpSchema } from "../../schema/validationSchema";
 
-const Container = styled.div`
-  margin: 4rem;
+const Container = styled.section`
   background-color: #fff;
   border-radius: 1rem;
   padding: 2rem;

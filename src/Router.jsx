@@ -2,23 +2,23 @@ import { createBrowserRouter } from "react-router-dom";
 
 // Pages
 import Homepage from "./pages/home/Homepage.jsx";
+import Dashboard from "./pages/dashboard/Dashboard.jsx";
 import Login from "./pages/Login.jsx";
 import SignUp from "./pages/SignUp.jsx";
 import Otp from "./pages/Otp.jsx";
-import Dashboard from "./pages/dashboard/Dashboard.jsx";
-import TermsAndConditions from "./pages/TermsAndConditions.jsx";
 import ResetPassword from "./pages/ResetPassword.jsx";
 import ForgotPassword from "./pages/ForgotPassword.jsx";
 import PrivacyPolicy from "./pages/PrivacyPolicy.jsx";
+import TermsAndConditions from "./pages/TermsAndConditions.jsx";
 import Error404 from "./pages/Error404.jsx";
 
-// Layouts
+// Layouts & User Protected Layout
 import RootLayout from "./layout/RootLayout.jsx";
 import AuthLayout from "./layout/AuthLayout.jsx";
 import DashboardLayout from "./layout/DashboardLayout.jsx";
 import GuardLayout from "./layout/GuardLayout.jsx";
 
-// User Protected Routes
+// Role Based Protected Routes
 import AdminProtectedRoutes from "./layout/protectedRoute/AdminProtectedRoutes.jsx";
 import TeacherProtectedRoutes from "./layout/protectedRoute/TeacherProtectedRoutes.jsx";
 import StudentProtectedRoutes from "./layout/protectedRoute/StudentProtectedRoutes.jsx";
@@ -27,9 +27,7 @@ import StudentProtectedRoutes from "./layout/protectedRoute/StudentProtectedRout
 import AllTeacher from "./pages/dashboard/admin/AllTeachers.jsx";
 import AllClasses from "./pages/dashboard/admin/AllClasses.jsx";
 import AllStudents from "./pages/dashboard/admin/AllStudents.jsx";
-import Events from "./pages/dashboard/admin/Events.jsx";
 import Finance from "./pages/dashboard/admin/Finance.jsx";
-import Settings from "./pages/dashboard/settings/Settings.jsx";
 import AllTimetable from "./pages/dashboard/admin/AllTimetable.jsx";
 import Assessment from "./pages/dashboard/admin/results/Assessment.jsx";
 import Exams from "./pages/dashboard/admin/results/Exams.jsx";
@@ -54,6 +52,10 @@ import ViewQuestions from "./pages/dashboard/teacher/Assessment/ViewQuestions.js
 // import StudentTestPage from "./pages/students/StudentTestPage.jsx";
 // import StudentGradePage from "./pages/students/StudentGradePage.jsx";
 // import ShowResult from "./pages/results/ShowResult.jsx";
+
+// Routes for all roles (Teacher, Student, Administrator)
+import Events from "./pages/dashboard/Events.jsx";
+import Settings from "./pages/dashboard/settings/Settings.jsx";
 
 export const router = createBrowserRouter([
   {

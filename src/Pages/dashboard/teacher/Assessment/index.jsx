@@ -32,7 +32,7 @@ const Index = () => {
     try {
       await dispatch(getTeacherGrades());
     } catch (error) {
-      console.error(error);
+      console.error("Error fetching teacher grades:", error);
     }
   };
 
@@ -42,23 +42,21 @@ const Index = () => {
 
   useEffect(() => {
     if (selectedSubject !== "") {
-      fetchData(selectedSubject);
+      fetchAssessments();
     }
   }, [selectedSubject]);
 
   const fetchAssessments = async () => {
-    if (selectedSubject !== "") {
-      try {
-        await dispatch(getTeacherAssessmentByGrade(selectedSubject));
-      } catch (error) {
-        console.error(error);
-      }
+    try {
+      await dispatch(getTeacherAssessmentByGrade(selectedSubject));
+    } catch (error) {
+      console.error("Error fetching assessments:", error);
     }
   };
 
   useEffect(() => {
     fetchAssessments();
-  }, [selectedSubject]);
+  }, []);
 
   useEffect(() => {
     if (user) {

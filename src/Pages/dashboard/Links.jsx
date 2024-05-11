@@ -1,12 +1,12 @@
 import { RxDashboard } from "react-icons/rx";
+import { FaBookOpen, FaHandHoldingUsd } from "react-icons/fa";
+import { MdEventAvailable } from "react-icons/md";
+import { IoMdSettings, IoIosLogOut } from "react-icons/io";
 import {
   PiChalkboardTeacherBold,
   PiStudentBold,
   PiExamBold,
 } from "react-icons/pi";
-import { FaBookOpen, FaHandHoldingUsd } from "react-icons/fa";
-import { MdEventAvailable } from "react-icons/md";
-import { IoMdSettings, IoIosLogOut } from "react-icons/io";
 
 // STUDENT LINKS
 export const studentLinks = [

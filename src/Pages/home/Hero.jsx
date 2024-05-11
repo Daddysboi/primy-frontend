@@ -23,6 +23,11 @@ const Container = styled.section`
   justify-content: center;
   align-items: center;
   gap: 2rem;
+  @media only screen and (max-width: 800px) {
+    padding-bottom: 1rem;
+    margin-bottom: 1rem;
+    /* padding-top: ${(props) => props.mobilePaddingTop || "3rem"}; */
+  }
 `;
 
 const HeaderContainer = styled.div`
@@ -37,36 +42,94 @@ const Header = styled.div`
   line-height: ${(props) => props.lineHeight || "6rem"};
   margin-bottom: ${(props) => props.marginBottom || ""};
   padding: 3rem 0 1rem 0;
+  margin: 0 auto;
+
+  @media only screen and (min-width: 320px) and (max-width: 580px) {
+    font-size: 1.5rem;
+    line-height: 2rem;
+    max-width: 90%;
+    padding: 0rem 0 0.5rem 0;
+  }
+
+  @media only screen and (min-width: 581px) and (max-width: 1024px) {
+    font-size: ${(props) => props.fontSize || "3.5rem"};
+    line-height: ${(props) => props.lineHeight || "4rem"};
+    max-width: 90%;
+  }
+`;
+
+const BrHead = styled.br`
+  // Desktops, large screens
+  @media only screen and (max-width: 1025px) {
+    display: none;
+  }
 `;
 
 const SubHead = styled.div`
   font-weight: 500;
   font-size: 1.2rem;
   line-height: ${(props) => props.lineHeightSub || "1rem"};
+  max-width: 60rem;
+  margin: 0 auto;
+
+  @media only screen and (min-width: 320px) and (max-width: 580px) {
+    font-size: 0.8rem;
+    line-height: 1.2rem;
+    max-width: 80%;
+  }
+
+  @media only screen and (min-width: 581px) and (max-width: 760px) {
+    font-size: 1rem;
+    line-height: ${(props) => props.lineHeightSub || "1.5rem"};
+    max-width: 80%;
+  }
+
+  @media only screen and (min-width: 761px) and (max-width: 1024px) {
+    font-size: 1rem;
+    line-height: ${(props) => props.lineHeightSub || "1rem"};
+    max-width: 80%;
+  }
+`;
+
+const BrSubHead = styled.br`
+  /* display: none; */
+
+  // Desktops, large screens
+  @media only screen and (max-width: 760px) {
+    display: none;
+  }
 `;
 const Tagline = styled.span`
   color: ${primaryColors.Purple};
 `;
 
 const Testimonycard = styled.div`
-  position: absolute;
-  top: 20rem;
+  top: 25rem;
   right: 2rem;
   transform: translateX(10%);
+
+  @media only screen and (min-width: 800px) and (max-width: 875px) {
+    right: 0rem;
+    top: 30rem;
+    position: absolute;
+  }
+  @media only screen and (min-width: 876px) {
+    position: absolute;
+  }
 `;
 
 const CTA = styled.div`
   text-align: center;
   display: flex;
   gap: 1rem;
-  @media only screen and (max-width: 820px) {
-    display: none;
-  }
 `;
 
 const ImageContainer = styled.div`
   display: inline-flex;
   margin: 0;
+  @media only screen and (max-width: 800px) {
+    display: none;
+  }
 `;
 
 const Image = styled.img`
@@ -81,8 +144,8 @@ const Hero = ({
   Header1 = "Management system",
   Header2 = "for",
   Header3 = "schools",
-  topText = "We transform the way schools ",
   tagline = "modern ",
+  topText = "We transform the way schools ",
   midText = "",
   bottomText = "manage thier students, grow and receive payment",
   fontSize,
@@ -91,6 +154,7 @@ const Hero = ({
   fontWeight,
   paddingTop,
   paddingBottom,
+  mobilePaddingTop,
   isHero,
   hasCTA,
   lineHeightSub,
@@ -107,6 +171,7 @@ const Hero = ({
       data-aos-offset="400"
       paddingTop={paddingTop}
       paddingBottom={paddingBottom}
+      mobilePaddingTop={mobilePaddingTop}
       className={
         isHero && " relative dark:bg-grid-white/[0.2] bg-grid-black/[0.025]"
       }
@@ -127,24 +192,20 @@ const Hero = ({
         >
           {isHero && <Tagline>AI </Tagline>}
           {Header1}
-          <br /> {Header2}
+          <BrHead /> {Header2}
           <Tagline> {tagline}</Tagline>
           {Header3}
         </Header>
         <SubHead lineHeightSub={lineHeightSub}>
           {topText}
-          <br />
+          <BrSubHead />
           {midText}
 
-          <br />
+          <BrSubHead />
           {bottomText}
         </SubHead>
       </HeaderContainer>
-      {isHero && (
-        <Testimonycard>
-          <Testimony />
-        </Testimonycard>
-      )}
+
       {hasCTA && (
         <CTA>
           <Button
@@ -184,6 +245,11 @@ const Hero = ({
         <ImageContainer>
           <Image src={AwardImg} alt="AwardImg" />
         </ImageContainer>
+      )}
+      {isHero && (
+        <Testimonycard>
+          <Testimony />
+        </Testimonycard>
       )}
     </Container>
   );

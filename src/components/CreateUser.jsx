@@ -34,6 +34,7 @@ const CreateUser = ({
   setIsCreating,
   user = undefined,
   editing = false,
+  refetch = null,
 }) => {
   const dispatch = useAppDispatch();
   const { isLoading } = useAppSelector((state) => state.user);
@@ -109,6 +110,7 @@ const CreateUser = ({
       .finally(() => {
         setIsCreating(false);
       });
+    refetch;
   };
 
   if (isLoading) {

@@ -13,10 +13,16 @@ const LinkTag = styled(Link)`
   font-weight: 700;
   font-size: 2rem;
   gap: 0.3rem;
+  @media only screen and (max-width: 820px) {
+    font-size: 1.2rem;
+  }
 `;
 
 const Image = styled.img`
   height: 2.5rem;
+  @media only screen and (max-width: 820px) {
+    height: 2rem;
+  }
 `;
 
 const Logo = ({ color }) => {
