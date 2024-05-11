@@ -1,12 +1,12 @@
 import { RxDashboard } from "react-icons/rx";
+import { FaBookOpen, FaHandHoldingUsd } from "react-icons/fa";
+import { MdEventAvailable } from "react-icons/md";
+import { IoMdSettings, IoIosLogOut } from "react-icons/io";
 import {
   PiChalkboardTeacherBold,
   PiStudentBold,
   PiExamBold,
 } from "react-icons/pi";
-import { FaBookOpen, FaHandHoldingUsd } from "react-icons/fa";
-import { MdEventAvailable } from "react-icons/md";
-import { IoMdSettings, IoIosLogOut } from "react-icons/io";
 
 // STUDENT LINKS
 export const studentLinks = [
@@ -45,34 +45,55 @@ export const studentLinks = [
 // TEACHERS LINKS
 export const teacherLinks = [
   {
-    title: "My Dashboard",
+    title: "Dashboard",
     link: "dashboard",
     type: "link",
   },
+
   {
-    title: "My Clases",
+    title: "Classes",
     link: "teacher/classes",
     type: "link",
   },
   {
-    title: "My Assessments",
-    link: "teacher/assessment",
+    title: "Assessments",
+    link: "teacher/assessments",
     type: "link",
   },
   {
-    title: "My Students",
+    title: "Exams",
+    link: "teacher/exams",
+    type: "link",
+  },
+  {
+    title: "Students",
     link: "teacher/students",
-    type: "link",
-  },
-  {
-    title: "Results",
-    link: "teacher/results",
     type: "link",
   },
   {
     title: "Timetable",
     link: "teacher/timetable",
     type: "link",
+  },
+
+  {
+    title: "Results",
+    icon: <PiExamBold />,
+    type: "sublinks",
+    sublinks: [
+      {
+        title: "Exam",
+        link: "teacher/results/exams",
+        type: "link",
+        icon: <PiExamBold />,
+      },
+      {
+        title: "Assessment",
+        link: "teacher/results/assessment",
+        type: "link",
+        icon: <PiExamBold />,
+      },
+    ],
   },
   {
     title: "Events",
@@ -82,7 +103,6 @@ export const teacherLinks = [
   {
     title: "Settings",
     link: "settings",
-    // disabled: true,
     type: "link",
   },
   {
@@ -130,13 +150,13 @@ export const adminLinks = [
     sublinks: [
       {
         title: "Exam",
-        link: "admin/results/exams/",
+        link: "admin/results/exams",
         type: "link",
         icon: <PiExamBold />,
       },
       {
         title: "Assessment",
-        link: "admin/results/assessments/",
+        link: "admin/results/assessments",
         type: "link",
         icon: <PiExamBold />,
       },

@@ -20,12 +20,7 @@ export const CreateTransaction = async ({
   };
   const response = await axiosClient.post(
     `${CREATE_TRANSACTION}`,
-    transactionData,
-    {
-      headers: {
-        "Access-Control-Allow-Origin": "*",
-      },
-    }
+    transactionData
   );
   return response.data;
 };
@@ -36,12 +31,7 @@ export const VerifyTransactionDetails = async ({ formData }) => {
   };
   const response = await axiosClient.post(
     `${VERIFY_TRANSACTION_DETAILS}`,
-    transactionData,
-    {
-      headers: {
-        "Access-Control-Allow-Origin": "*",
-      },
-    }
+    transactionData
   );
   return response.data;
 };
@@ -51,14 +41,6 @@ export const VerifyTransaction = async ({ transactionId, action }) => {
     transactionId,
     action,
   };
-  const response = await axiosClient.post(
-    `${VERIFY_TRANSACTION}`,
-    transactionData,
-    {
-      headers: {
-        "Access-Control-Allow-Origin": "*",
-      },
-    }
-  );
+  const response = await axiosClient.post(`${VERIFY_TRANSACTION}`);
   return response.data;
 };

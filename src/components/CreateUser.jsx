@@ -1,23 +1,24 @@
-import { useState } from "react";
 import PropTypes from "prop-types";
 import { Form, Formik, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { toast } from "react-toastify";
 import styled from "styled-components";
 
-import { useAppDispatch } from "../redux/hooks";
+import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import { createUser } from "../redux/features/userSlice";
 
 import AppInput from "./Input";
 import AppSelectInput from "./SelectInput";
 import Loading from "./Loading";
 import Error from "./Error";
-
 import AppButton from "./Button";
+import { getDateValue } from "../utils/helpers";
+
 import { classLists } from "./ClassList";
 
 const Header = styled.h1`
   font-size: 1rem;
+  padding-bottom: 1rem;
 `;
 
 const Button = styled(AppButton)`
@@ -33,10 +34,12 @@ const CreateUser = ({
   setIsCreating,
   user = undefined,
   editing = false,
+  refetch = null,
 }) => {
-  const [loading, setLoading] = useState(false);
-  // const editing = !user; // user is defined, editing
   const dispatch = useAppDispatch();
+  const { isLoading } = useAppSelector((state) => state.user);
+
+  // const editing = !user; // user is defined, editing
 
   const initialValues = {
     email: "",
@@ -58,8 +61,9 @@ const CreateUser = ({
     initialValues.gender = user?.gender;
     initialValues.studentId = role === "student" ? user?._id : undefined;
     initialValues.teacherId = role === "teacher" ? user?._id : undefined;
-    initialValues.className =
-      role === "student" ? user?.className?._id : undefined;
+    initialValues.className = role === "student" ? user?.className : undefined;
+    // initialValues.dateOfBirth = getDateValue(user?.dateOfBirth);
+    //Todo
   }
 
   const validationSchema = Yup.object().shape({
@@ -78,40 +82,38 @@ const CreateUser = ({
   });
 
   const onSubmit = async (values, { resetForm }) => {
-    console.log("clicked");
-    setLoading(true);
-    let request = {
+    let data = {
+      role: values.role,
+      firstName: values.firstName,
+      middleName: values.middleName,
+      lastName: values.lastName,
       email: values.email || "",
       password:
         role === "teacher"
           ? import.meta.VITE_TEACHER_PASSWORD
           : import.meta.VITE_STUDENT_PASSWORD,
-      role: values.role,
-      className: values.role === "student" ? "" : undefined,
-      firstName: values.firstName,
-      middleName: values.middleName,
-      lastName: values.lastName,
       gender: values.gender,
-      phoneNumber: values.role === "student" ? "" : undefined,
+      phoneNumber: values.role === "student" ? "" : values.phoneNumber,
+      className: values.role === "teacher" ? "" : values.className,
+      dateOfBirth: values.dateOfBirth,
     };
 
-    console.log("1");
-    dispatch(createUser(request, editing))
+    dispatch(createUser(data, editing))
       .unwrap()
       .then((res) => {
-        toast.success(res?.payload?.message || "Successfully fetched teachers");
+        toast.success(res?.payload?.message || "Successfully fetched " + role);
         resetForm();
       })
       .catch((error) => {
         toast.error(error?.message || "Something went wrong");
       })
       .finally(() => {
-        setLoading(false);
         setIsCreating(false);
       });
+    refetch;
   };
 
-  if (loading) {
+  if (isLoading) {
     return <Loading />;
   }
   return (
@@ -132,7 +134,7 @@ const CreateUser = ({
             name="firstName"
             label="First Name"
             placeholder="Enter First Name"
-            height="1.5rem"
+            height="2rem"
             width="90%"
           />
           <ErrorMessage name="firstName" component={Error} />
@@ -144,7 +146,7 @@ const CreateUser = ({
           name="lastName"
           label="Last Name"
           placeholder="Enter Last Name"
-          height="1.5rem"
+          height="2rem"
           width="90%"
         />
         <ErrorMessage name="lastName" component={Error} />
@@ -156,7 +158,7 @@ const CreateUser = ({
             name="middleName"
             label="Middle Name"
             placeholder="Enter Middle Name"
-            height="1.5rem"
+            height="2rem"
             width="90%"
           />
         </>
@@ -169,7 +171,7 @@ const CreateUser = ({
               name="phoneNumber"
               label="Phone Number"
               placeholder="Enter Phone Number"
-              height="1.5rem"
+              height="2rem"
               width="90%"
             />
             <ErrorMessage name="phoneNumber" component={Error} />
@@ -184,7 +186,7 @@ const CreateUser = ({
               name="email"
               label="Email"
               placeholder="Enter Email"
-              height="1.5rem"
+              height="2rem"
               width="90%"
             />
             <ErrorMessage name="email" component={Error} />
@@ -193,15 +195,25 @@ const CreateUser = ({
 
         <Field
           as={AppSelectInput}
-          type="text"
           name="gender"
           label="Gender"
           placeholder="Enter Gender"
-          height="1.5rem"
+          height="2rem"
           width="90%"
           options={options}
         />
         <ErrorMessage name="gender" component={Error} />
+
+        <Field
+          as={AppInput}
+          type="text"
+          name="dateOfBirth"
+          label="Date of Birth"
+          placeholder="Date of Birth"
+          height="2rem"
+          width="90%"
+        />
+        <ErrorMessage name="dateOfBirth" component={Error} />
 
         {role === "student" && (
           <>
@@ -209,7 +221,6 @@ const CreateUser = ({
               <Field
                 as={AppSelectInput}
                 selectType="category"
-                type="text"
                 name="className"
                 label="Select Class"
                 width="90%"
@@ -218,7 +229,7 @@ const CreateUser = ({
             )}
           </>
         )}
-        <Button loading={loading} text={`Save`} type="submit" />
+        <Button loading={isLoading} text={`Save`} type="submit" />
       </Form>
     </Formik>
   );

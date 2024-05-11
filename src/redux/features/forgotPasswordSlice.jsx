@@ -1,11 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { RequestResetPassword, ResetPassword } from "../services/AuthServices";
 
-const initialState = {
-  isLoggedIn: false,
-  isLoading: false,
-};
-
 export const requestResetPassword = createAsyncThunk(
   "requestResetPassword",
   async ({ email, redirectUrl }, { rejectWithValue }) => {
@@ -29,6 +24,11 @@ export const resetPassword = createAsyncThunk(
     }
   }
 );
+
+const initialState = {
+  isLoggedIn: false,
+  isLoading: false,
+};
 
 export const forgotPasswordSlice = createSlice({
   name: "forgotPassword",

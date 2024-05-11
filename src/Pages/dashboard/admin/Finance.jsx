@@ -1,44 +1,41 @@
+import { useState } from "react";
 import styled from "styled-components";
 
 import { primaryColors } from "../../../assets/Colors";
 import DeatailCard from "../../../components/DetailCard";
-import AppSelectInput from "../../../components/SelectInput";
 import TransactionCard from "../../../components/TransactionCard";
-import LineChart from "../../../components/LineChart";
+import LineChart from "../../../components/unused/LineChart";
 import DoughnutChart from "../../../components/DoughnutChart";
+import Sort from "../../../components/Sort";
 
 const Container = styled.div`
   width: calc(100% - 25%);
   display: flex;
   justify-content: space-between;
   margin: 3rem 0;
+  gap: 2rem;
 `;
 
 const Left = styled.div`
-  width: 30rem;
   background-color: ${primaryColors.White};
   border-radius: 1rem;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   padding: 2rem;
+  gap: 2rem;
 `;
 
 const Top = styled.div`
-  flex: 1;
   display: flex;
   gap: 1rem;
-  justify-content: space-between;
 `;
 
-const Bottom = styled.div`
-  flex: 5;
-`;
+const Bottom = styled.div``;
 
 const Header = styled.div`
   display: flex;
   justify-content: space-between;
-  margin-top: 1rem;
+  margin: 1rem 0;
 `;
 
 const Text = styled.h1`
@@ -59,6 +56,7 @@ const Right = styled.div`
   justify-content: flex-start;
   gap: 2rem;
 `;
+
 const Upper = styled.div`
   background-color: ${primaryColors.White};
   border-radius: 1rem;
@@ -72,11 +70,6 @@ const Lower = styled.div`
   height: 18rem;
   padding: 1rem 0;
 `;
-
-const options = [
-  { value: "date", label: "Date" },
-  { value: "class", label: "Class" },
-];
 
 const LineChartdata = [
   { name: "Kindergerten", uv: 400, pv: 2400, amt: 2400 },
@@ -99,7 +92,30 @@ const LineChartdata = [
 // doughnut chart
 const data = [57, 43];
 
+const options = [
+  { value: "date", label: "Date" },
+  { value: "class", label: "Class" },
+];
+
 const Finance = () => {
+  const [users, setUsers] = useState([]);
+
+  const sortUsers = (options) => {
+    if (!users) return;
+
+    const sortedUsers = [...users].sort((a, b) => {
+      switch (options.value) {
+        case "class":
+          return a.class.localeCompare(b.class);
+        case "date":
+          return a.type.localeCompare(b.type);
+        default:
+          return 0;
+      }
+    });
+    setUsers(sortedUsers);
+  };
+
   return (
     <Container>
       <Left>
@@ -137,7 +153,7 @@ const Finance = () => {
         <Bottom>
           <Header>
             <Text>School Fees</Text>
-            <AppSelectInput options={options} />
+            <Sort options={options} onSort={sortUsers} />
           </Header>
           <Cards>
             <TransactionCard

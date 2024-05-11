@@ -1,44 +1,21 @@
+import { useState } from "react";
 import styled from "styled-components";
 
 import DetailCard from "../../../components/DetailCard";
-import studentIcon from "../../../assets/images/36006.jpg";
+import ChartCard from "../../../components/ChartCard";
 import AppButton from "../../../components/Button";
-import { primaryColors } from "../../../assets/Colors";
-
 import DoughnutChart from "../../../components/DoughnutChart";
-import LineChart from "../../../components/LineChart";
 import MyCalendar from "../../../components/MyCalender";
+import AreaChart from "../../../components/AreaChart";
+
+import studentIcon from "../../../assets/images/36006.jpg";
+import { primaryColors } from "../../../assets/Colors";
 
 const Container = styled.div`
   display: flex;
   gap: 3rem;
   flex-direction: column;
   padding-bottom: 3rem;
-`;
-
-const Top = styled.div`
-  display: flex;
-  gap: 2rem;
-  justify-content: space-between;
-`;
-
-const Mid = styled.div`
-  display: flex;
-  gap: 3rem;
-  justify-content: space-between;
-`;
-
-const Bottom = styled.div`
-  display: flex;
-  gap: 3rem;
-  justify-content: space-between;
-`;
-
-const CardWrapper = styled.div`
-  display: flex;
-  gap: 1rem;
-  flex-wrap: wrap;
-  max-width: 30rem;
 `;
 
 const EventList = styled.div`
@@ -50,7 +27,7 @@ const EventWrapper = styled.div`
   display: flex;
   flex-direction: column;
   gap: 2rem;
-  margin-bottom: 1rem;
+  margin-bottom: 2rem;
 `;
 
 const Date = styled.div`
@@ -58,8 +35,10 @@ const Date = styled.div`
   border-radius: 1rem;
   width: 17.5%;
   height: 3rem;
-  padding: 1rem;
-  text-align: left;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 `;
 
 const Info = styled.div`
@@ -77,9 +56,8 @@ const InfoText = styled.p`
 `;
 
 const DateText = styled.p`
-  font-size: 0.8rem;
+  font-size: 0.6rem;
   font-weight: 600;
-  /* text-align: center; */
   margin: 0;
 `;
 
@@ -148,22 +126,13 @@ const eventList = [
 ];
 
 // doughnut chart
-const data = [57, 43];
 
-const LineChartdata = [
-  { name: "Week 1", uv: 400, pv: 2400, amt: 2400 },
-  { name: "Week 2", uv: 800, pv: 2600, amt: 2500 },
-  { name: "Week 3", uv: 500, pv: 2300, amt: 2200 },
-  { name: "Week 4", uv: 700, pv: 2100, amt: 2500 },
-  { name: "Week 5", uv: 300, pv: 2800, amt: 2700 },
-  { name: "Week 6", uv: 400, pv: 2800, amt: 2700 },
-  { name: "Week 7", uv: 500, pv: 2800, amt: 2700 },
-  { name: "Week 8", uv: 650, pv: 2800, amt: 2700 },
-];
+const AdminDashboard = ({ Top, CardWrapper, Mid, Bottom, data }) => {
+  const [slot, setSlot] = useState("week");
 
-const AdminDashboard = () => {
   return (
     <Container>
+      {/* Top */}
       <Top>
         <CardWrapper>
           {details.map(({ value, heading, rate, subtext, img }, i) => (
@@ -191,21 +160,21 @@ const AdminDashboard = () => {
         </DetailCard>
       </Top>
 
+      {/* Mid */}
       <Mid>
-        <DetailCard
-          value="School Peformance"
-          width="42rem"
-          height="20rem"
-          h1="1rem"
-        >
-          <LineChart data={LineChartdata} width={600} height={170} />
-        </DetailCard>
+        <ChartCard width="42rem" height="20rem">
+          <AreaChart
+            Heading="School Peformance"
+            slot={slot}
+            setSlot={setSlot}
+          />
+        </ChartCard>
         <DetailCard
           h1="1rem"
           value="Upcoming events"
           width="15rem"
           height="20rem"
-          paddingTop="2rem"
+          paddingTop="1rem"
         >
           <EventWrapper>
             {eventList.map(({ day, weekday, event, color }, i) => (
@@ -231,25 +200,15 @@ const AdminDashboard = () => {
           <AppButton text=" View more" />
         </DetailCard>
       </Mid>
+
+      {/* Bottom */}
       <Bottom>
-        <DetailCard
-          h1="1rem"
-          value="School Calender"
-          width="28rem"
-          height="15rem"
-        >
+        <DetailCard h1="1rem" value="Calender" width="28rem" height="20rem">
           <MyCalendar />
         </DetailCard>
-        <DetailCard
-          h1="1rem"
-          value="School Finance"
-          width="28rem"
-          height="15rem"
-        >
-          <div>
-            <LineChart data={LineChartdata} width={400} height={150} />
-          </div>
-        </DetailCard>
+        <ChartCard width="28rem" height="20rem">
+          <AreaChart Heading="Finance" slot={slot} setSlot={setSlot} />
+        </ChartCard>
       </Bottom>
     </Container>
   );

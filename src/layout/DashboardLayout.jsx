@@ -1,12 +1,15 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faChevronDown,
+  faChevronRight,
+} from "@fortawesome/free-solid-svg-icons";
 
 import { useAppDispatch } from "../redux/hooks";
 import { logout } from "../redux/features/loginSlice";
-import { useUser } from "../contexts/userContext";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faChevronUp, faChevronDown } from "@fortawesome/free-solid-svg-icons";
+import { useAppSelector } from "../redux/hooks";
 
 import {
   adminLinks,
@@ -16,14 +19,16 @@ import {
 import { checkInLocation } from "../utils/helpers";
 import DashboardHeader from "../pages/dashboard/Header.Dashboard";
 import { primaryColors } from "../assets/Colors";
+import { BottomGradient } from "../components/third-party/Form";
 
 import library from "../assets/images/library.png";
 import Logo from "../components/Logo";
 
 const Wrapper = styled.div`
   background-color: ${primaryColors.DashBoardBackground};
-  height: 100%;
   padding: 5rem 0 3rem 20%;
+  min-height: 100vh;
+  min-width: 100vw;
 `;
 
 const Container = styled.div`
@@ -66,18 +71,17 @@ const Button = styled.button`
   font-size: 0.7rem;
   cursor: pointer;
   margin-left: ${({ active }) => (active ? "0.5rem" : "")};
-  border: ${({ active }) =>
-    active ? `1px solid ${primaryColors.LightPurple}` : "transparent"};
   transition: background-color 0.2s ease;
   background-color: ${({ active }) =>
     active ? `${primaryColors.LightPurple}` : "transparent"};
   color: ${({ active }) =>
     active ? `${primaryColors.Purple}` : `${primaryColors.LightPurple}`};
   font-weight: ${({ active }) => (active ? "bold" : "normal")};
-
+  width: 7rem;
   &:hover {
-    background-color: ${primaryColors.mintGreen};
-    color: ${primaryColors.Purple};
+    background-color: #925aed;
+    color: ${primaryColors.LightPurple};
+    width: 7rem;
   }
 `;
 
@@ -90,21 +94,21 @@ const SideBarImg = styled.img`
 `;
 
 const DashBoardLayout = () => {
+  const [showSublinks, setShowSublinks] = useState(false);
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const { user } = useUser();
-  const [showSublinks, setShowSublinks] = useState(false);
 
-  // useEffect(() => {
-  //   if (!user) {
-  //     navigate("/login");
-  //   }
-  // }, [user]);
+  const { user } = useAppSelector((state) => state.user);
 
   const clickHandler = (url, type) => {
     if (type === "button") {
-      dispatch(logout());
-      navigate("/");
+      dispatch(logout())
+        .then(() => {
+          navigate("/");
+        })
+        .catch((err) => {
+          alert("Logout failed. Please try again.");
+        });
     } else if (url === "dashboard") {
       navigate("/dashboard");
       return;
@@ -142,19 +146,21 @@ const DashBoardLayout = () => {
             {links.map((sidebar, index) => (
               <div key={index}>
                 <Button
+                  className={"relative group/btn "}
                   onClick={() => clickHandler(sidebar.link, sidebar.type)}
                   active={checkInLocation(sidebar.link)}
                   disabled={sidebar?.disabled}
                 >
                   {sidebar.icon}
                   {sidebar.title}
-                  <div>
+                  <span>
                     {sidebar.sublinks ? (
                       <FontAwesomeIcon
-                        icon={showSublinks ? faChevronUp : faChevronDown}
+                        icon={showSublinks ? faChevronRight : faChevronDown}
                       />
                     ) : null}
-                  </div>
+                  </span>
+                  <BottomGradient />
                 </Button>
                 {sidebar.sublinks && showSublinks && (
                   <>

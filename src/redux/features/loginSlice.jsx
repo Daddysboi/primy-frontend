@@ -18,23 +18,25 @@ export const login = createAsyncThunk(
   }
 );
 
-const initialState = {
-  isLoggedIn: false,
-  isLoading: false,
-};
-
 export const logout = createAsyncThunk(
   "logout",
   async (_, { rejectWithValue }) => {
     try {
+      console.log("1");
       localStorage.removeItem(USER_ID);
       localStorage.removeItem(USER_TOKEN);
+      console.log("2");
       return null;
     } catch (error) {
       return rejectWithValue(error.message);
     }
   }
 );
+
+const initialState = {
+  isLoggedIn: false,
+  isLoading: false,
+};
 
 export const loginSlice = createSlice({
   name: "login",

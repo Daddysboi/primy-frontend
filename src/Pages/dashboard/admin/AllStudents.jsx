@@ -7,10 +7,11 @@ import {
   deleteStudent,
   getAllStudents,
 } from "../../../redux/features/userSlice";
+import { setCreateModal } from "../../../redux/features/modalSlice";
 
 import RoleHeader from "../../../components/RoleHeader";
 import CreateUser from "../../../components/CreateUser";
-import Modal from "../../../components/Modal";
+import SideBar from "../../../components/SideBar";
 import Loading from "../../../components/Loading";
 import ProfileCard from "../../../components/ProfileCard";
 
@@ -20,8 +21,11 @@ const Container = styled.div`
   gap: 2rem;
 `;
 
+const subjects = ["Sciences"];
+const classes = ["Jss1"];
+
 const AllStudents = () => {
-  const [createModal, setCreateModal] = useState(false);
+  const [editing, setEditing] = useState(false);
   const [user, setUser] = useState(false);
 
   const dispatch = useAppDispatch();
@@ -29,6 +33,7 @@ const AllStudents = () => {
     (state) => state.user
   );
   const searchValue = useAppSelector((state) => state.query);
+  const { createModal } = useAppSelector((state) => state.modal);
 
   useEffect(() => {
     dispatch(getAllStudents())
@@ -40,23 +45,42 @@ const AllStudents = () => {
       })
       .catch((error) => {
         toast.error(error?.message || "Something went wrong");
-      });
+      })
+      .finally(() => {});
   }, [dispatch, students]);
 
   if (loading) {
     return <Loading />;
   }
 
+  const handleEdit = (teacher) => {
+    dispatch(setCreateModal(true));
+    setEditing(true);
+    setUser(teacher);
+  };
+
   const handleDelete = (id) => {
-    dispatch(deleteStudent(id));
+    dispatch(deleteTeacher(id))
+      .unwrap()
+      .then((resp) => {
+        toast.success(resp?.payload?.message || "Successfully deleted");
+      })
+      .catch((error) => {
+        toast.error(error?.message || "Something went wrong");
+      })
+      .finally(() => {
+        dispatch(getAllTeachers());
+      });
   };
 
   return (
     <Container>
       <RoleHeader
         text="Add Student"
+        users={students}
+        sort
         onClick={() => {
-          setCreateModal(true);
+          dispatch(setCreateModal(true));
         }}
       />
 
@@ -64,38 +88,63 @@ const AllStudents = () => {
         {students
           ?.filter((val) => {
             let searchVal = searchValue?.toLowerCase();
-            if (
+            if (!searchVal) return true;
+            return (
               val.firstName.toLowerCase().startsWith(searchVal) ||
               val.middleName.toLowerCase().startsWith(searchVal) ||
               val.gender.toLowerCase().startsWith(searchVal) ||
               val.studentStatus.toLowerCase().startsWith(searchVal) ||
               val.lastName.toLowerCase().startsWith(searchVal)
-            ) {
-              return val;
-            }
+            );
           })
           ?.map((student, index) => (
             <ProfileCard
+              student
+              role="Student"
+              header1="SUBJECTS"
+              header2="CLASS"
+              options1={subjects}
+              options2={classes}
+              name={student.name}
               key={index}
-              student={student}
-              onClick={() => handleEdit(student)}
+              user={student}
+              onEdit={() => handleEdit(student)}
               onDelete={() => handleDelete(student?._id)}
             />
           ))}
       </>
 
-      <div>
-        <ProfileCard />
-      </div>
-      <Modal
+      {/* sample profilecard: to be removed*/}
+      <>
+        <ProfileCard
+          options1={subjects}
+          options2={classes}
+          name="Musa Haruna"
+          student
+          role="Student"
+          header1="SUBJECTS"
+          header2="CLASSES"
+          users=""
+          onEdit={() => handleEdit()}
+          onDelete={() => handleDelete(id)}
+        />
+      </>
+
+      <SideBar
         isOpen={createModal}
         onClose={() => {
-          setCreateModal(false);
+          dispatch(setCreateModal(false));
+          setEditModal(false);
         }}
         hasCloseBtn={true}
       >
-        <CreateUser role="student" user={user} setIsCreating={setCreateModal} />
-      </Modal>
+        <CreateUser
+          editing={editing}
+          role="student"
+          user={user}
+          setIsCreating={createModal}
+        />
+      </SideBar>
     </Container>
   );
 };

@@ -11,14 +11,12 @@ import {
   CreateUser,
   GetAllTeachers,
   GetAllStudents,
+  GetStudentsByGrade,
   DeleteTeacher,
   DeleteStudent,
+  GetTeacherRecords,
+  GetStudentRecords,
 } from "../services/UserServices";
-
-const initialState = {
-  user: {},
-  users: [],
-};
 
 //Get User BY ID
 export const getUserById = createAsyncThunk("getUserById", async (userId) => {
@@ -153,13 +151,38 @@ export const updatePassword = createAsyncThunk(
   }
 );
 
+//Get Teachers Record
+export const getTeachersRecord = createAsyncThunk(
+  "getTeachersRecord",
+  async (_, { rejectWithValue }) => {
+    try {
+      const resp = await GetTeacherRecords();
+      return resp;
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
+
+//Get Students Record
+export const getStudentsRecord = createAsyncThunk(
+  "getStudentsRecord",
+  async (_, { rejectWithValue }) => {
+    try {
+      const resp = await GetStudentRecords();
+      return resp;
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
+
 //create user
-//check if its not the same as the existing method of creating user in the user slice above
 export const createUser = createAsyncThunk(
   "createUser",
-  async ({ request, editing }, { rejectWithValue }) => {
+  async ({ data, editing }, { rejectWithValue }) => {
     try {
-      const resp = await CreateUser({ request, editing });
+      const resp = await CreateUser({ data, editing });
       return resp;
     } catch (error) {
       return rejectWithValue(error.message);
@@ -219,6 +242,19 @@ export const getAllStudents = createAsyncThunk(
   }
 );
 
+//Get Students By Course
+export const getStudentsByGrade = createAsyncThunk(
+  "getStudentsByGrade",
+  async (courseId, { rejectWithValue }) => {
+    try {
+      const resp = await GetStudentsByGrade(courseId);
+      return resp;
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
+
 //Delete Teacher
 export const deleteTeacher = createAsyncThunk(
   "deleteTeacher",
@@ -245,12 +281,20 @@ export const deleteStudent = createAsyncThunk(
   }
 );
 
+const initialState = {
+  user: {
+    role: "teacher",
+    firstName: "Davido",
+    lastName: "Ajayi",
+  },
+  users: [],
+};
+
 // USER SLICE
 export const userSlice = createSlice({
   name: "user",
   initialState,
   reducers: {
-    //functions to set user state by calling the dispatch function after login or getusers with the payload
     setUser: (state, action) => {
       const { payload } = action;
       state.user = payload;

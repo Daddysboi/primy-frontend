@@ -1,75 +1,115 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { MdArrowBackIos } from "react-icons/md";
 import styled from "styled-components";
 
-import { useUser } from "../../contexts/userContext";
 import AppButton from "../../components/Button";
+import { useAppDispatch, useAppSelector } from "../../redux/hooks";
+import { setCreateModal } from "../../redux/features/modalSlice";
 
-import TeacherDashboard from "./TeacherDashboard";
-import StudentDashboard from "./StudentDashboard";
+import TeacherDashboard from "./teacher/TeacherDashboard";
+import StudentDashboard from "./student/StudentDashboard";
 import AdminDashboard from "./admin/AdminDashboard";
+import { FaPlus } from "react-icons/fa6";
 
 const Container = styled.div`
-  /* width: 100%; */
+  overflow: hidden;
 `;
 
 const WelcomeTab = styled.div`
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  /* align-items: center; */
+  margin-bottom: 1rem;
 `;
 
 const Heading = styled.h1`
-  margin-bottom: 0;
-  font-size: 1.5rem;
+  font-size: 1rem;
+  font-weight: 600;
 `;
 
 const Subhead = styled.p`
-  margin: 0;
-  font-size: 0.8rem;
-  margin-bottom: 1.5rem;
+  font-size: 0.7rem;
+  text-transform: capitalize;
 `;
 
-const Right = styled.div`
+const Top = styled.div`
+  display: flex;
+  gap: 2rem;
+  justify-content: space-between;
+`;
+
+const CardWrapper = styled.div`
   display: flex;
   gap: 1rem;
+  flex-wrap: wrap;
+  max-width: 30rem;
+`;
+
+const Mid = styled.div`
+  display: flex;
+  gap: 3rem;
+  justify-content: space-between;
+`;
+
+const Bottom = styled.div`
+  display: flex;
+  gap: 3rem;
+  justify-content: space-between;
 `;
 
 const Dashboard = () => {
-  const { user } = useUser();
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
+  const { user } = useAppSelector((state) => state.user);
 
-  useEffect(() => {
-    if (!user) {
-      navigate("/login");
-    }
-  }, [user]);
+  const handleAdmission = () => {
+    dispatch(setCreateModal(true)).then(navigate("/dashboard/admin/students"));
+  };
 
   const displayName = `${user?.lastName} ${user?.firstName}`;
+
+  const data = [57, 43];
+
+  const action = {
+    admin: { text: "New Admission", func: handleAdmission },
+  };
+
+  const DashboardComponent =
+    user?.role === "admin"
+      ? AdminDashboard
+      : user?.role === "teacher"
+      ? TeacherDashboard
+      : user?.role === "student"
+      ? StudentDashboard
+      : null;
 
   return user ? (
     <Container>
       <WelcomeTab>
         <div>
           <Heading>Hey, {displayName ?? ""}</Heading>
-          <Subhead>Welcome to your dashboard</Subhead>
+          <Subhead>{user?.role}</Subhead>
         </div>
-        <Right>
+        {action[user?.role]?.text && (
           <AppButton
-            text="New Admission"
-            onClick={() => {}}
+            text={action[user?.role].text}
+            onClick={action[user?.role].func}
             small
-            icon={<MdArrowBackIos />}
+            icon={<FaPlus />}
           />
-        </Right>
+        )}
       </WelcomeTab>
-      {user.role === "student" ? (
-        <StudentDashboard />
-      ) : user.role === "teacher" ? (
-        <TeacherDashboard />
+      {DashboardComponent ? (
+        <DashboardComponent
+          Top={Top}
+          CardWrapper={CardWrapper}
+          Mid={Mid}
+          Bottom={Bottom}
+          data={data}
+        />
       ) : (
-        <AdminDashboard />
+        <div>No dashboard available for this user.</div>
+        //Todo
       )}
     </Container>
   ) : (

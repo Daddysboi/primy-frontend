@@ -1,0 +1,29 @@
+.result-cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.result-card {
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  width: 300px;
+  margin: 20px 0px;
+}
+
+@media (max-width: 600px) {
+    .result-card{
+        width: 100%;
+    }
+}
+
+.result-card h3 {
+  margin-bottom: 10px;
+}
+
+.result-card p {
+  margin: 0;
+  padding: 5px 0;
+}

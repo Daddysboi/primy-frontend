@@ -1,48 +1,66 @@
 import { useState } from "react";
-import { useQuery } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
-import Loading from "../../../components/Loading";
-import RoleHeader from "../../../components/RoleHeader";
-import CourseCard from "../../../components/SubjectCard";
-import Modal from "../../../components/Modal";
-import CreateSubject from "../../../components/CreateSubject";
+import { useAppDispatch, useAppSelector } from "../../../redux/hooks";
+import {
+  deleteSubject,
+  getAllGrades,
+} from "../../../redux/features/gradeSlice";
 
+import CreateSubject from "../../../components/CreateSubject";
+import RoleHeader from "../../../components/RoleHeader";
+import Loading from "../../../components/Loading";
+import SideBar from "../../../components/SideBar";
 import ClassList from "../../../components/ClassList";
 import AssignTeacherSubject from "../../../components/AssignTeacherSubject";
-
-import { deleteCourse, getAllCourses } from "../../../services/courseService";
 
 const Container = styled.div`
   display: flex;
   flex-direction: column;
   gap: 2rem;
-  width: 90%;
+  overflow: hidden;
 `;
+
 const Header = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
+  gap: 2rem;
 `;
 const AllClasses = () => {
   const [searchValue, setSearchValue] = useState("");
-  const [creatingCourse, setCreatingCourse] = useState(false);
+  const [editing, setEditing] = useState(false);
+  const [creatingSubject, setCreatingSubject] = useState(false);
 
   const navigate = useNavigate();
 
-  const {
-    data: subject,
-    isLoading,
-    refetch,
-  } = useQuery({
-    queryKey: ["courses"],
-    queryFn: () => getAllCourses(),
-  });
+  const dispatch = useAppDispatch();
+  const { user } = useAppSelector((state) => state.user);
+  const { grades, isLoading } = useAppSelector((state) => state.grade);
 
   if (isLoading) {
     // return <Loading />;
   }
+
+  const handleEdit = (subjectId) => {
+    setCreatingSubject(true);
+    setEditing(true);
+  };
+
+  const handleDelete = (subjectId) => {
+    dispatch(deleteSubject(subjectId))
+      .unwrap()
+      .then((resp) => {
+        toast.success(resp?.payload?.message || "Successfully deleted");
+      })
+      .catch((error) => {
+        toast.error(error?.message || "Something went wrong");
+      })
+      .finally(() => {
+        dispatch(getAllGrades());
+      });
+  };
 
   return (
     <Container>
@@ -52,36 +70,31 @@ const AllClasses = () => {
           text="Add Subject"
           type="subjects"
           value={searchValue}
-          onClick={() => setCreatingCourse(true)}
+          onClick={() => {
+            setCreatingSubject(true);
+            setEditing(false);
+          }}
           onChange={(e) => setSearchValue(e.target?.value)}
+          edit="Edit"
+          onEdit={() => handleEdit()}
+          onDelete={() => handleDelete()}
+          canDelete="Delete"
         />
+        {/* Todo: HandleEdit and HandleDelete */}
       </Header>
       <ClassList />
 
-      <>
-        {subject
-          ?.filter((val) => {
-            let searchVal = searchValue.toLowerCase();
-            if (val.subject.toLowerCase().startsWith(searchVal)) {
-              return val;
-            }
-          })
-          ?.map((subject, index) => (
-            <CourseCard
-              key={index}
-              subject={subject}
-              onClick={() => navigate(`assessment/classes/${subject}`)}
-              onDelete={() => {}}
-            />
-          ))}
-      </>
-      <Modal
-        isOpen={creatingCourse}
+      <SideBar
+        isOpen={creatingSubject}
         hasCloseBtn
-        onClose={() => setCreatingCourse(false)}
+        onClose={() => setCreatingSubject(false)}
       >
-        <CreateSubject setIsCreating={setCreatingCourse} />
-      </Modal>
+        <CreateSubject
+          editing={editing}
+          user={user}
+          setIsCreating={setCreatingSubject}
+        />
+      </SideBar>
     </Container>
   );
 };

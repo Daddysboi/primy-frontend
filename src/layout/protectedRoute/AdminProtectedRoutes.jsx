@@ -1,11 +1,11 @@
-import React from "react";
 import { Navigate, Outlet } from "react-router-dom";
+
+import { useAppSelector } from "../../redux/hooks";
 import { getPage } from "../../utils/helpers";
-import { useAuth } from "../../Contexts/AuthContext";
 
 const AdminProtectedRoutes = () => {
   const currentPage = getPage();
-  const { authUser: user } = useAuth();
+  const { user } = useAppSelector((state) => state.user);
 
   if (user?.role === "admin") {
     if (currentPage === "admin") {

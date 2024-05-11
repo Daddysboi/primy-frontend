@@ -8,21 +8,36 @@ const Card = styled.div`
   padding: ${(props) => props.padding || `1rem 0 0 2rem`};
 
   @media only screen and (min-width: 320px) and (max-width: 480px) {
-    width: 5rem;
-    padding-bottom: 0.5rem;
+    padding: 1rem 2rem 0 2rem;
+  }
+  @media only screen and (max-width: 1100px) {
+    padding: 1rem 1rem 0 1rem;
   }
 `;
 
 const Details = styled.div`
   min-height: ${(props) => props.minHeight || "15rem"};
   display: flex;
-  gap: 2rem;
+  gap: 1rem;
+  @media only screen and (min-width: 320px) and (max-width: 699px) {
+    min-height: 0;
+  }
+`;
+
+const Left = styled.span`
+  flex: 5;
+`;
+const Right = styled.span`
+  flex: 1;
 `;
 
 const CardHead = styled.h5`
   font-size: 1.5rem;
   font-weight: 500;
   margin: 0;
+  @media only screen and (min-width: 320px) and (max-width: 480px) {
+    font-size: 1rem;
+  }
 `;
 
 const CardSubHead = styled.p`
@@ -31,6 +46,9 @@ const CardSubHead = styled.p`
   margin: 0;
   opacity: 0.7;
   padding-top: 1rem;
+  @media only screen and (min-width: 320px) and (max-width: 580px) {
+    font-size: 0.9rem;
+  }
 `;
 
 const SimpleCard = ({
@@ -44,21 +62,16 @@ const SimpleCard = ({
   hasLogo,
 }) => {
   return (
-    <Card
-      minHeight={minHeight}
-      width={width}
-      padding={padding}
-      backgroundColor={backgroundColor}
-    >
-      <Details>
-        <span>
+    <Card width={width} padding={padding} backgroundColor={backgroundColor}>
+      <Details minHeight={minHeight}>
+        <Left>
           <CardHead>{heading}</CardHead>
           <CardSubHead>{subtext}</CardSubHead>
-        </span>
+        </Left>
         {hasLogo && (
-          <span>
+          <Right>
             <img src={Logo} alt="" />
-          </span>
+          </Right>
         )}
       </Details>
       {hasDivider && <Divider marginRight="3rem" />}

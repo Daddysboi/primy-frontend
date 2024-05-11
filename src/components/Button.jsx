@@ -18,20 +18,22 @@ const Button = styled.button`
       case "grey":
         return primaryColors.Grey;
       case "other":
-        return "#0F0F0F";
+        return primaryColors.black;
       case "none":
         return "transparent";
       default:
         return primaryColors.Purple;
     }
   }};
-  /* height: ${(props) => props.height || "2.2rem"}; */
+  height: ${(props) => props.height || ""};
+  width: ${(props) => props.width || ""};
   font-size: ${(props) => props.fontSize || "0.8rem"};
   font-weight: ${(props) => props.fontWeight || "400"};
-  padding: ${(props) => (props.small ? "0.5rem 1rem" : "0.5rem 2rem")};
+  padding: ${(props) =>
+    props.small ? "0.5rem 1rem" : props.noPaddng ? "0" : "0.5rem 2rem"};
   border-radius: 0.5rem;
   color: ${(props) => props.textColor || "#fff"};
-  border: 1px solid ${(props) => props.borderColor || primaryColors.Purple};
+  border: ${(props) => props.border || ""};
   cursor: pointer;
   transition: all 0.3s ease;
 
@@ -56,6 +58,10 @@ const Button = styled.button`
     opacity: 0.5;
     cursor: not-allowed;
   }
+
+  @media only screen and (min-width: 320px) and (max-width: 580px) {
+    font-size: ${(props) => "0.75rem"};
+  }
 `;
 
 const Children = styled.span`
@@ -69,9 +75,10 @@ const AppButton = ({
   text,
   backgroundColor,
   textColor,
-  borderColor,
+  border,
   hoverColor,
   small,
+  noPaddng,
   outline,
   disabled = false,
   type,
@@ -80,23 +87,31 @@ const AppButton = ({
   icon,
   display,
   height,
+  width,
   fontSize,
   fontWeight,
   hoverBg,
+  id,
+  className,
+  children,
   ...props
 }) => {
   return (
     <Button
+      className={className}
       backgroundColor={backgroundColor}
+      id={id}
       textColor={textColor}
-      borderColor={borderColor}
+      border={border}
       hoverColor={hoverColor}
       small={small}
+      noPaddng={noPaddng}
       outline={outline}
       disabled={loading || disabled}
       type={type}
       onClick={onClick}
       height={height}
+      width={width}
       fontSize={fontSize}
       fontWeight={fontWeight}
       display={display}
@@ -106,6 +121,7 @@ const AppButton = ({
       <Children>
         {icon && icon}
         {!loading ? text : <Loading color={primaryColors.White} />}
+        {children}
       </Children>
     </Button>
   );

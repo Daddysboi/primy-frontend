@@ -36,7 +36,7 @@ const Deatils = styled.p`
   background-color: ${primaryColors.LightPurple};
   margin: 0.6rem 0;
   padding: 0.5rem 1rem;
-  border-radius: 0 0.5rem 0.5rem 0;
+  /* border-radius: 0 0.2rem 0.2rem 0; */
   color: #8a8a8a;
   display: flex;
   justify-content: center;
@@ -53,10 +53,12 @@ const SubText = styled.p`
   text-align: left;
   background-color: ${primaryColors.White};
   box-shadow: 1px 1px 2px 2px rgba(0.1, 0.1, 0.1, 0.05);
+  /* border-radius: 0.5rem; */
 `;
 
 const Stars = styled.span`
   display: inline-flex;
+  color: black;
 `;
 
 const TestimonyCard = ({ img, review, testifier, role, rating }) => {

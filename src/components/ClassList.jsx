@@ -1,48 +1,39 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
+import { Table } from "flowbite-react";
 
-import { primaryColors } from "../assets/Colors";
+const Container = styled.div`
+  width: 90%;
+`;
 
-const Table = styled.table`
-  width: 100%;
+const TableHead = styled(Table.Head)`
   text-align: left;
 `;
 
-const Tr = styled.tr`
-  display: flex;
-  justify-content: start;
+const TableHeadCell = styled(Table.HeadCell)`
+  padding: 0.5rem;
+  background-color: transparent;
 `;
 
-const Th = styled.th`
-  flex: 1;
-  text-align: left;
+const TableBody = styled(Table.Body)``;
+
+const TableRow = styled(Table.Row)`
+  &:nth-child(odd) {
+    background-color: #fff;
+  }
 `;
 
-const Th2 = styled.th`
-  flex: 3;
-  text-align: left;
-`;
-
-const Td = styled.td`
-  border-bottom: 1px solid #ccc;
-`;
-
-const Header = styled.h1`
-  font-size: 1rem;
-`;
-
-const Optgroup = styled.optgroup`
-  font-size: 0.5rem;
-  color: #ccc;
-  margin-top: 1rem;
-`;
-
-const Li = styled.li`
-  font-size: 0.8rem;
-  color: #000;
-  padding-top: 0.3rem;
-  height: 1.5rem;
+const TableCell = styled(Table.Cell)`
+  white-space: nowrap;
+  font-weight: 500;
+  padding: 0.5rem;
+  &:nth-child(1) &:nth-child(2) {
+    width: 10rem;
+  }
+  &:nth-child(3) {
+    width: 40rem;
+  }
 `;
 
 export const classLists = {
@@ -59,7 +50,7 @@ export const classLists = {
   "Senior secondary": ["SS1", "SS2", "SS3"],
 };
 
-const ClassSelection = ({ onSelectClass }) => {
+const ClassList = ({ onSelectClass }) => {
   const [selectedClass, setSelectedClass] = useState("");
 
   const handleClassSelect = (e) => {
@@ -69,35 +60,35 @@ const ClassSelection = ({ onSelectClass }) => {
   };
 
   return (
-    <div>
+    <Container>
       <Table>
-        <thead>
-          <tr>
-            <th>Class</th>
-            <th>Class Teacher</th>
-            <th>Subject Teachers</th>
-          </tr>
-        </thead>
-        <tbody>
+        <TableHead>
+          <TableHeadCell>Class</TableHeadCell>
+          <TableHeadCell>Class Teacher</TableHeadCell>
+          <TableHeadCell>Subject Teachers</TableHeadCell>
+        </TableHead>
+        <TableBody>
           {Object.entries(classLists)?.map(([category, classes]) => (
             <React.Fragment key={category}>
               {classes.map((className) => (
-                <tr key={className} onClick={handleClassSelect}>
-                  <td>{className}</td>
-                  <td>{className?.classTeacher || "class"}</td>
-                  <td>{className?.subjectTeacher || "subject"}</td>
-                </tr>
+                <TableRow key={className} onClick={handleClassSelect}>
+                  <TableCell>{className}</TableCell>
+                  <TableCell>{className?.classTeacher || "class"}</TableCell>
+                  <TableCell>
+                    {className?.subjectTeacher || "subject"}
+                  </TableCell>
+                </TableRow>
               ))}
             </React.Fragment>
           ))}
-        </tbody>
+        </TableBody>
       </Table>
-    </div>
+    </Container>
   );
 };
 
-ClassSelection.propTypes = {
+ClassList.propTypes = {
   onSelectClass: PropTypes.func.isRequired,
 };
 
-export default ClassSelection;
+export default ClassList;

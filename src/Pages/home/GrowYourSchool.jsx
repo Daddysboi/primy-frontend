@@ -7,6 +7,10 @@ import { Link } from "react-router-dom";
 const Text = styled.div`
   font-size: 0.8rem;
   margin-bottom: 2rem;
+  padding-left: 2rem;
+  @media only screen and (min-width: 320px) and (max-width: 699px) {
+    font-size: 0.7rem;
+  }
 `;
 
 const Links = styled.span`

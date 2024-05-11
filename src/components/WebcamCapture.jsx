@@ -2,8 +2,16 @@ import React, { useRef, useState } from "react";
 import Webcam from "react-webcam";
 import styled from "styled-components";
 
+import AppButton from "./Button";
+
+const Text = styled.h1`
+  margin-top: 1rem;
+  color: gray;
+  font-size: 0.7rem;
+`;
+
 const InputContainer = styled.div`
-  margin-bottom: 1rem;
+  margin: 1rem 0;
 `;
 
 const WebcamContainer = styled.div`
@@ -26,18 +34,6 @@ const CapturedImageContainer = styled.div`
   overflow: hidden;
 `;
 
-const Button = styled.button`
-  margin-top: 2rem;
-  background: #3bb75e;
-  border: none;
-  border-radius: 0.2rem;
-  padding: 0.5rem;
-  color: #fff;
-  width: 8rem;
-  &:hover {
-    background: green;
-  }
-`;
 const WebcamCapture = ({ setImageSrc, imageSrc }) => {
   const [webcamActive, setWebcamActive] = useState(false);
   const webcamRef = useRef(null);
@@ -62,13 +58,13 @@ const WebcamCapture = ({ setImageSrc, imageSrc }) => {
       stopWebcam();
     } catch (error) {
       console.error("Error capturing image:", error);
-      // Handle error gracefully (e.g., display an error message to the user)
+      return error;
     }
   };
 
   return (
     <section>
-      <div style={{ color: "gray", fontSize: "0.7rem" }}>Take a Headshot</div>
+      <Text>Take a Headshot</Text>
       <InputContainer>
         {webcamActive && (
           <WebcamContainer>
@@ -83,14 +79,15 @@ const WebcamCapture = ({ setImageSrc, imageSrc }) => {
         {imageSrc ? (
           <div>
             <CapturedImageContainer>
-              <img src={imageSrc} alt="Captured" style={{ width: "100%" }} />
+              <img src={imageSrc} alt="Captured" />
             </CapturedImageContainer>
-            <Button onClick={recapture}>Recapture</Button>
+            <AppButton onClick={recapture} text="Recapture" />
           </div>
         ) : (
-          <Button onClick={webcamActive ? Capture : startWebcam}>
-            {webcamActive ? "Capture Photo" : "Start Webcam"}
-          </Button>
+          <AppButton
+            onClick={webcamActive ? Capture : startWebcam}
+            text={webcamActive ? "Capture Photo" : "Start Webcam"}
+          />
         )}
       </InputContainer>
     </section>

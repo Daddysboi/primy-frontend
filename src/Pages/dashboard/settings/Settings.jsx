@@ -3,22 +3,24 @@ import styled from "styled-components";
 import { Form } from "formik";
 import { FaCloudUploadAlt } from "react-icons/fa";
 
+import { useAppSelector } from "../../../redux/hooks";
+
 import AccountDetails from "./AccountDetails";
 import ProfileSettings from "./ProfileSettings";
 import Kyc from "./Kyc";
 import ContactDetails from "./ContactDetails";
 import ResetPassword from "./ResetPassword";
+
+import Button from "../../../components/Button";
 import { primaryColors } from "../../../assets/Colors";
 
 const Container = styled.div`
-  padding-left: 2rem;
   margin-top: 2rem;
 `;
 
 const HeaderContainer = styled.div`
-  border-bottom: 0.1rem solid #dbdbdb;
+  border-bottom: 0.01rem solid #dbdbdb;
   display: flex;
-  margin-left: -1rem;
   gap: 5rem;
 `;
 
@@ -47,20 +49,6 @@ const StyledForm = styled(Form)`
   gap: 1rem;
 `;
 
-const Button = styled.button`
-  margin-top: 2rem;
-  background: #3bb75e;
-  border: none;
-  border-radius: 0.2rem;
-  padding: 0.5rem;
-  color: #fff;
-  width: 20rem;
-  &:hover {
-    background: green;
-  }
-`;
-
-
 const Txt = styled.p`
   font-size: 0.55rem;
   color: red;
@@ -71,7 +59,7 @@ const FileInputContainer = styled.div`
 `;
 const UploadButton = styled.label`
   display: inline-block;
-  color: green;
+  color: ${primaryColors.Purple};
   border-radius: 5px;
   cursor: pointer;
   font-size: 2rem;
@@ -104,13 +92,14 @@ const reducer = (state = initialState, action) => {
       return { ...state, activeSection: "contactDetails" };
     case "PASSWORD_RESET":
       return { ...state, activeSection: "resetPassword" };
-
     default:
       return state;
   }
 };
-const Settings = ({ user }) => {
+
+const Settings = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
+  const { user } = useAppSelector((state) => state.user);
 
   const handleSectionClick = (section) => {
     dispatch({ type: section });
@@ -125,24 +114,22 @@ const Settings = ({ user }) => {
         >
           Profile Settings
         </TabBtn>
-        {/* {user?.role === "teacher" ? ( */}
-        <>
-          <TabBtn
-            onClick={() => handleSectionClick("ACCOUNT_DETAILS")}
-            isActive={state.activeSection === "accountDetails"}
-          >
-            Account Details
-          </TabBtn>
-          <TabBtn
-            onClick={() => handleSectionClick("KYC")}
-            isActive={state.activeSection === "kyc"}
-          >
-            KYC
-          </TabBtn>
-        </>
-        {/* ) : (
-          ""
-        )}*/}
+        {user?.role === "teacher" && (
+          <>
+            <TabBtn
+              onClick={() => handleSectionClick("ACCOUNT_DETAILS")}
+              isActive={state.activeSection === "accountDetails"}
+            >
+              Account Details
+            </TabBtn>
+            <TabBtn
+              onClick={() => handleSectionClick("KYC")}
+              isActive={state.activeSection === "kyc"}
+            >
+              KYC
+            </TabBtn>
+          </>
+        )}
         <TabBtn
           onClick={() => handleSectionClick("CONTACT_DETAILS")}
           isActive={state.activeSection === "contactDetails"}
@@ -162,7 +149,6 @@ const Settings = ({ user }) => {
             user={user}
             PropsContainer={PropsContainer}
             Button={Button}
-
             StyledForm={StyledForm}
             Txt={Txt}
             FileInputContainer={FileInputContainer}
@@ -177,7 +163,6 @@ const Settings = ({ user }) => {
             user={user}
             PropsContainer={PropsContainer}
             Button={Button}
-
             StyledForm={StyledForm}
           />
         )}
@@ -186,7 +171,6 @@ const Settings = ({ user }) => {
             user={user}
             PropsContainer={PropsContainer}
             Button={Button}
-
             StyledForm={StyledForm}
             FileInputContainer={FileInputContainer}
             StyledLabel={Label}
@@ -201,7 +185,6 @@ const Settings = ({ user }) => {
             PropsContainer={PropsContainer}
             Button={Button}
             StyledForm={StyledForm}
-
             Txt={Txt}
             FileInputContainer={FileInputContainer}
             StyledLabel={Label}
@@ -216,7 +199,6 @@ const Settings = ({ user }) => {
             PropsContainer={PropsContainer}
             Button={Button}
             StyledForm={StyledForm}
-   
           />
         )}
       </div>

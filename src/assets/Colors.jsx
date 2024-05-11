@@ -1,6 +1,9 @@
 export const primaryColors = {
   LightPurple: "#dfdbff",
   Purple: "#8a4bf2",
+  // Purple: "#60A5FA",
+  // Purple: "#fff",
+  black: "#000",
   White: "#fff",
   Gray: "#F8F8F8",
   Green: "#1cd086",

@@ -1,16 +1,16 @@
 import { useState } from "react";
 import styled from "styled-components";
-import { IoSearch } from "react-icons/io5";
-
-import { useUser } from "../../contexts/userContext";
-import AppSelectInput from "../../components/SelectInput";
-
-import myphoto from "../../assets/images/myphoto.jpeg";
-import { primaryColors } from "../../assets/Colors";
-import SearchBar from "../../components/SearchBar";
 import { IoNotifications, IoGift } from "react-icons/io5";
 import { RiFolder5Fill } from "react-icons/ri";
 import { MdOutlineCreditScore } from "react-icons/md";
+
+import { useAppSelector } from "../../redux/hooks";
+
+import AppSelectInput from "../../components/SelectInput";
+import SearchBar from "../../components/SearchBar";
+
+import myphoto from "../../assets/images/myphoto.jpeg";
+import { primaryColors } from "../../assets/Colors";
 
 const Container = styled.div`
   display: flex;
@@ -33,24 +33,11 @@ const Right = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 1rem;
   padding: 0 5rem;
   box-shadow: 1px 1px 2px 2px rgba(0.1, 0.1, 0.1, 0.03);
 `;
 
-const Search = styled.span`
-  display: flex;
-  align-items: center;
-  margin: 1rem 2rem 1rem 1rem;
-  border-radius: 0.3rem;
-  padding-left: 1rem;
-  flex: 1;
-  min-width: 4rem;
-  background: ${primaryColors.Gray};
-`;
-
-const SearchIcon = styled(IoSearch)`
-  min-width: 25px;
-`;
 const Tabs = styled.div`
   display: flex;
   gap: 1rem;
@@ -104,8 +91,8 @@ const ProfilePix = styled.div`
 `;
 
 const Img = styled.img`
-  height: 1.8rem;
-  width: 1.8rem;
+  height: 1.85rem;
+  width: 1.85rem;
   border-radius: 1rem;
 `;
 
@@ -131,7 +118,7 @@ const Header = () => {
   const [formData, setFormData] = useState(initialState);
   const [selectedsession, setSelectedsession] = useState("");
 
-  const { user } = useUser();
+  const { user } = useAppSelector((state) => state.user);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -152,10 +139,8 @@ const Header = () => {
     <Container>
       <Left></Left>
       <Right>
-        <Search>
-          <SearchIcon className="search_icon" />
-          <SearchBar />
-        </Search>
+        <SearchBar />
+
         <Tabs>
           <IconsTab>
             {icons.map((icon, index) => (
@@ -169,6 +154,7 @@ const Header = () => {
               value={formData.session}
               height="32px"
               onChange={handleChange}
+              select="Year..."
             />
 
             {selectedsession && (
@@ -178,6 +164,7 @@ const Header = () => {
                 name="term"
                 height="32px"
                 onChange={handleChange}
+                select="Term..."
               />
             )}
           </SessionTab>
