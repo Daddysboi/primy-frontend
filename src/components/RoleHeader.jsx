@@ -37,14 +37,15 @@ const RoleHeader = ({
   const sortUsers = (options) => {
     if (!users) return;
 
+    // TODO: just testing.... not fully implemented
     const sortedUsers = [...users].sort((a, b) => {
-      switch (options.value) {
+      switch (options) {
         case "class":
           return a.class.localeCompare(b.class);
         case "type":
-          return a.type.localeCompare(b.type);
+          return a.first_name.localeCompare(b.first_name);
         case "subject":
-          return a.subject.localeCompare(b.subject);
+          return a.last_name.localeCompare(b.last_name);
         case "name":
           return a.name.localeCompare(b.name);
         case "grade":

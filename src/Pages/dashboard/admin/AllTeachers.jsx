@@ -31,7 +31,7 @@ const AllTeacher = () => {
 
   const dispatch = useAppDispatch();
   const { users: teachers, isLoading } = useAppSelector((state) => state.user);
-  const searchValue = useAppSelector((state) => state.query);
+  const { query: searchValue } = useAppSelector((state) => state.query);
 
   useEffect(() => {
     dispatch(getAllTeachers())
@@ -87,11 +87,11 @@ const AllTeacher = () => {
             let searchVal = searchValue?.toLowerCase();
             if (!searchVal) return true;
             return (
-              val.firstName.toLowerCase().startsWith(searchVal) ||
-              val.middleName.toLowerCase().startsWith(searchVal) ||
-              val.gender.toLowerCase().startsWith(searchVal) ||
-              val.teacherStatus.toLowerCase().startsWith(searchVal) ||
-              val.lastName.toLowerCase().startsWith(searchVal)
+              val.first_name?.toLowerCase().startsWith(searchVal) ||
+              val.middle_name?.toLowerCase().startsWith(searchVal) ||
+              val.lastName?.toLowerCase().startsWith(searchVal) ||
+              val.gender?.toLowerCase().startsWith(searchVal) ||
+              val.studentStatus?.toLowerCase().startsWith(searchVal)
             );
           })
           ?.map((teacher, index) => (
