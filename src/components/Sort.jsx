@@ -31,7 +31,6 @@ Sort.propTypes = {
     })
   ).isRequired,
   onSort: PropTypes.func.isRequired,
-  onChange: PropTypes.func.isRequired,
 };
 
 export default Sort;

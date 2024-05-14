@@ -32,7 +32,7 @@ const AllStudents = () => {
   const { users: students, isLoading: loading } = useAppSelector(
     (state) => state.user
   );
-  const searchValue = useAppSelector((state) => state.query);
+  const { query: searchValue } = useAppSelector((state) => state.query);
   const { createModal } = useAppSelector((state) => state.modal);
 
   useEffect(() => {
@@ -90,11 +90,11 @@ const AllStudents = () => {
             let searchVal = searchValue?.toLowerCase();
             if (!searchVal) return true;
             return (
-              val.firstName.toLowerCase().startsWith(searchVal) ||
-              val.middleName.toLowerCase().startsWith(searchVal) ||
-              val.gender.toLowerCase().startsWith(searchVal) ||
-              val.studentStatus.toLowerCase().startsWith(searchVal) ||
-              val.lastName.toLowerCase().startsWith(searchVal)
+              val.first_name?.toLowerCase().startsWith(searchVal) ||
+              val.middle_name?.toLowerCase().startsWith(searchVal) ||
+              val.lastName?.toLowerCase().startsWith(searchVal) ||
+              val.gender?.toLowerCase().startsWith(searchVal) ||
+              val.studentStatus?.toLowerCase().startsWith(searchVal)
             );
           })
           ?.map((student, index) => (
