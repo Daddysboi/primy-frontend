@@ -283,7 +283,7 @@ export const deleteStudent = createAsyncThunk(
 
 const initialState = {
   user: {
-    role: "teacher",
+    role: "admin",
     firstName: "Davido",
     lastName: "Ajayi",
   },
