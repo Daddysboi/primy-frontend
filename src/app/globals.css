@@ -1,0 +1,9 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.hero {
+  background: #80808015;
+  clip-path: ellipse(100% 55% at 48% 44%);
+  overflow: hidden;
+}
