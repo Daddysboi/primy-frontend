@@ -1,0 +1,22 @@
+# Next.js build output
+.next/
+out/
+
+# Dependencies
+node_modules/
+
+# dotenv environment variables
+.env
+.env*.local
+
+# local development tools
+.idea/
+.vscode/
+
+# misc
+*.log
+*.backup
+.DS_Store
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
